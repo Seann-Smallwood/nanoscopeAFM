@@ -7,17 +7,7 @@
 #
 #########################
 
-Sys.setlocale('LC_ALL','en_US')
 
-
-# define the path and search for AFM files
-##########################################
-# source.path = './data'
-# dir(source.path)
-# my.pattern = '.*nid$'
-# file.list = dir(source.path, pattern=my.pattern, recursive=TRUE)
-# print(paste("Found",length(file.list),"AFM files."))
-#
 #
 # # Nanosurf image data format (NID format)
 # # from easyscan AFM
@@ -27,40 +17,32 @@ Sys.setlocale('LC_ALL','en_US')
 # # seems header file ends with "" (empty) or
 # # with #!F
 # ######################################
-#
-# f = file.path(source.path, file.list[1])
-#
 
 #' loads header of AFM NID file
 #'
 #' @param filename filename including path
 #' @return data frame with header
 #' @examples
-#' d = read.afm.NID('example.nid')
+#' d = read.NID_header('example.nid')
 #' @export
-read.afm.NID <- function(filename) {
-  dlen.header = 0
-  fname = filename
-  first_line = ''
-  header = c()
+read.NID_header <- function(filename) {
+  Sys.setlocale('LC_ALL','en_US')
   con <- file(fname,"rb")
+  rline = ''
   i=0
-  #while(substr(first_line,1,3) != "#!F" ) {
-  while(i<2 || first_line != "") {
-    first_line <- readLines(con,n=1)
-    header=c(header, first_line)
-    i=i+1
-    # include \n as +1
-    first_line = gsub('\xb5','mu',first_line)
-    first_line = gsub('\xb0','o',first_line)
-    dlen.header = dlen.header + nchar(first_line) + 2
+  while(substr(rline,1,2) != "#!" ) {
+    rline = readLines(con,n=1)
+    i = i+1
   }
+  close(con)
+  con <- file(fname,"rb")
+  header = readLines(con, n=(i-1))
+  close(con)
 
-  #print(paste('header lines:',i))
   header
 }
 
-# header = read.afm.NID(f)
+
 
 
 

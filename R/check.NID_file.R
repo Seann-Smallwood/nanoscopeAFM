@@ -1,13 +1,13 @@
 #' checks AFM NID file length
 #'
 #' @param filename filename including path
-#' @return true or false
+#' @return mismatch in image size + header with file size (should be 0)
 #' @examples
 #' d = check.NID_file('example.nid')
 #' @export
 check.NID_file <- function(filename) {
   # does file exist?
-  if (!file.exists(filename)) FALSE
+  if (!file.exists(filename)) return -1
   # length of file in bytes
   file.len = file.info(filename)$size
 

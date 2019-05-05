@@ -10,7 +10,7 @@ check.NID_file(filename)
 \item{filename}{filename including path}
 }
 \value{
-true or false
+mismatch in image size + header with file size (should be 0)
 }
 \description{
 checks AFM NID file length

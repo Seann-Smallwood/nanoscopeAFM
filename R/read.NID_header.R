@@ -87,10 +87,13 @@ read.NID_file <- function(filename) {
     bin.header <- readBin(con, integer(),  n = header.length, size=1, endian = "little")
     bin.ID = readBin(con, integer(),  n = 2, size=1, endian = "little")
     r = list(bin.header, bin.ID)
-    if(length(q)>0) {
-      for(i in 1:length(q)) {
-        bin.data <- readBin(con, integer(),  n = q[i]*q[i], size=2, endian = "little")
-        r = c(r, bin.data)
+
+    if (sum(bin.ID) == sum(c(35,33))) {
+      if(length(q)>0) {
+        for(i in 1:length(q)) {
+          bin.data <- readBin(con, integer(),  n = q[i]*q[i], size=2, endian = "little")
+          r = c(r, bin.data)
+        }
       }
     }
     close(con)

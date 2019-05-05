@@ -16,5 +16,5 @@ images
 loads images of AFM NID file
 }
 \examples{
-d = read.NID_header('example.nid')
+d = read.NID_file('example.nid')
 }

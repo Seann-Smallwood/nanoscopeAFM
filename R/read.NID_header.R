@@ -70,5 +70,28 @@ read.NID_header <- function(filename) {
 #
 
 
+#' loads images of AFM NID file
+#'
+#' @param filename filename including path
+#' @return images
+#' @examples
+#' d = read.NID_header('example.nid')
+#' @export
+read.NID_file <- function(filename) {
+  if (check.NID_file(filename) == 0) {
+    h = read.NID_header(filename)
+    q = get.NID_imageInfo(h)
 
-
+    header.length = h[[1]]
+    con <- file(fname,"rb")
+    bin.header <- readBin(con, integer(),  n = header.length, size=1, endian = "little")
+    bin.ID = readBin(con, integer(),  n = 2, size=1, endian = "little")
+    r = list(bin.header, bin.ID)
+    for(i in 1:length(q)) {
+      bin.data <- readBin(con, integer(),  n = q[i]*q[i], size=2, endian = "little")
+      r = c(r, bin.data)
+    }
+    close(con)
+  }
+  r
+}

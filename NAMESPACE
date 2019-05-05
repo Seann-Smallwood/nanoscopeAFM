@@ -2,4 +2,5 @@
 
 export(check.NID_file)
 export(get.NID_imageInfo)
+export(read.NID_file)
 export(read.NID_header)

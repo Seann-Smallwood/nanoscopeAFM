@@ -15,4 +15,6 @@ devtools::install_github("thomasgredig/nanoscopeAFM")
 
 ```R
 library(nanoscopeAFM)
+fname = dir(pattern='nid$', recursive = TRUE)
+d <- read.NID_file(fname[1])
 ```

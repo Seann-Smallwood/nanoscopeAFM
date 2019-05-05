@@ -75,21 +75,23 @@ read.NID_header <- function(filename) {
 #' @param filename filename including path
 #' @return images
 #' @examples
-#' d = read.NID_header('example.nid')
+#' d = read.NID_file('example.nid')
 #' @export
 read.NID_file <- function(filename) {
   if (check.NID_file(filename) == 0) {
     h = read.NID_header(filename)
-    q = get.NID_imageInfo(h)
+    q = get.NID_imageInfo(h[[2]])
 
     header.length = h[[1]]
     con <- file(fname,"rb")
     bin.header <- readBin(con, integer(),  n = header.length, size=1, endian = "little")
     bin.ID = readBin(con, integer(),  n = 2, size=1, endian = "little")
     r = list(bin.header, bin.ID)
-    for(i in 1:length(q)) {
-      bin.data <- readBin(con, integer(),  n = q[i]*q[i], size=2, endian = "little")
-      r = c(r, bin.data)
+    if(length(q)>0) {
+      for(i in 1:length(q)) {
+        bin.data <- readBin(con, integer(),  n = q[i]*q[i], size=2, endian = "little")
+        r = c(r, bin.data)
+      }
     }
     close(con)
   }

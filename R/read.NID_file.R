@@ -1,7 +1,7 @@
 #' loads images of AFM NID file
 #'
 #' @param filename filename including path
-#' @return images
+#' @return list with header, file ID, and images
 #' @examples
 #' d = read.NID_file('example.nid')
 #' @export
@@ -11,7 +11,7 @@ read.NID_file <- function(filename) {
     q = get.NID_imageInfo(h[[2]])
 
     header.length = h[[1]]
-    con <- file(fname,"rb")
+    con <- file(filename,"rb")
     bin.header <- readBin(con, integer(),  n = header.length, size=1, endian = "little")
     bin.ID = readBin(con, integer(),  n = 2, size=1, endian = "little")
     r = list(header = bin.header,

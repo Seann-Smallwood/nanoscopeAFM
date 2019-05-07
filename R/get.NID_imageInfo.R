@@ -3,7 +3,9 @@
 #' @param header.string header string of NID file (use read.NID_header)
 #' @return vector with line numbers for each image
 #' @examples
-#' lines = check.NID_file(header.string)
+#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' hdr = read.NID_header(filename)
+#' get.NID_imageInfo(hdr[[2]])
 #' @export
 get.NID_imageInfo <- function(header.string) {
   # split data sets

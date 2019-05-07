@@ -15,14 +15,18 @@
 # # with #!F
 # ######################################
 
+empty.header = list(header.len = 0, header = c(''))
+
 #' loads header of AFM NID file
 #'
 #' @param filename filename including path
 #' @return list with length in bytes and header as text
 #' @examples
-#' d = read.NID_header('example.nid')
+#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' read.NID_header(filename)
 #' @export
 read.NID_header <- function(filename) {
+  if (!file.exists(filename)) { return(empty.header) }
   Sys.setlocale('LC_ALL','en_US')
   con <- file(filename,"rb")
   rline = ''
@@ -41,32 +45,6 @@ read.NID_header <- function(filename) {
   close(con)
 
   list(header.len = dlen.header, header = header)
-
-  # dlen.header
-  # sum(nchar(header, type='bytes')) + 2*length(header)
-  #
-  #
-  # # read header, followed by image
-  #
-  # dlen.header=dlen.header+2
-  # con <- file(fname,"rb")
-  # bin.header <- readBin(con, integer(),  n = dlen.header, size=1, endian = "little")
-  # bin.data   <- readBin(con, integer(),  n = 256*256, size=2, endian = "little")
-  # close(con)
-  # as.hexmode(bin.header[1:4])
-  # # make a graph of the image
-  # library(raster)
-  # m1 = matrix(bin.data[1:(128*128)], ncol=128)
-  # str(m1)
-  # r1 = raster(t(m1))
-  # plot(r1)
 }
-
-# read header, followed by image
-# con <- file(fname,"rb")
-# bin.header <- readBin(con, integer(),  n = dlen.header, size=1, endian = "little")
-# bin.data   <- readBin(con, integer(),  n = 256*256, size=2, endian = "little")
-# close(con)
-#
 
 

@@ -3,7 +3,8 @@
 #' @param filename filename including path
 #' @return list with header, file ID, and images
 #' @examples
-#' d = read.NID_file('example.nid')
+#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' d = read.NID_file(filename)
 #' @export
 read.NID_file <- function(filename) {
   if (check.NID_file(filename) == 0) {

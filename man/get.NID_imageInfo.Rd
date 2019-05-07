@@ -16,5 +16,7 @@ vector with line numbers for each image
 returns number of lines for each image
 }
 \examples{
-lines = check.NID_file(header.string)
+filename = dir(pattern='nid$', recursive=TRUE)[1]
+hdr = read.NID_header(filename)
+get.NID_imageInfo(hdr[[2]])
 }

@@ -10,11 +10,12 @@ read.NID_file(filename)
 \item{filename}{filename including path}
 }
 \value{
-images
+list with header, file ID, and images
 }
 \description{
 loads images of AFM NID file
 }
 \examples{
-d = read.NID_file('example.nid')
+filename = dir(pattern='nid$', recursive=TRUE)[1]
+d = read.NID_file(filename)
 }

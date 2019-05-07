@@ -3,7 +3,8 @@
 #' @param filename filename including path
 #' @return mismatch in image size + header with file size (should be 0)
 #' @examples
-#' d = check.NID_file('example.nid')
+#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' d = check.NID_file(filename)
 #' @export
 check.NID_file <- function(filename) {
   # does file exist?

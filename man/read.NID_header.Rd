@@ -16,5 +16,6 @@ list with length in bytes and header as text
 loads header of AFM NID file
 }
 \examples{
-d = read.NID_header('example.nid')
+filename = dir(pattern='nid$', recursive=TRUE)[1]
+read.NID_header(filename)
 }

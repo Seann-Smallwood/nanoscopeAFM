@@ -1,11 +1,16 @@
 context("NID check")
 
-fname = dir(pattern='nid$', recursive = TRUE)
-expect_equal(length(fname), 1)
-expect_equal(check.NID_file(fname[1]) , 0)
+test_that("Testing NID file header length is correctly detected.", {
+  fname =dir(system.file(package = "nanoscopeAFM"),
+             pattern='nid$', recursive = TRUE)[1]
+  expect_equal(sqrt(2) ^ 2, 2)
+  expect_equal(length(fname), 1)
+})
 
-# read.NID_file(fname[1]) -> r1
-#
-# library(raster)
-# m1 = matrix(r1[[3]], nrow = 128)
-# plot(raster(m1))
+test_that("Read NID header correctly.", {
+  filename = dir(system.file(package = "nanoscopeAFM"),
+                 pattern='nid$', recursive = TRUE)[1]
+  expect_equal(1,1)
+})
+
+

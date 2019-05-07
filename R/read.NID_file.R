@@ -14,16 +14,14 @@ read.NID_file <- function(filename) {
     con <- file(filename,"rb")
     bin.header <- readBin(con, integer(),  n = header.length, size=1, endian = "little")
     bin.ID = readBin(con, integer(),  n = 2, size=1, endian = "little")
-    r = list(header = bin.header,
-             ID = bin.ID)
+    #r = list(header = bin.header, ID = bin.ID)
+    r = list()
 
-    j = 3
     if (sum(bin.ID) == sum(c(35,33))) {
       if(length(q)>0) {
         for(i in 1:length(q)) {
           bin.data <- readBin(con, integer(),  n = q[i]*q[i], size=2, endian = "little")
-          r[[j]] = bin.data
-          j = j + 1
+          r[[i]] = bin.data
         }
       }
     }

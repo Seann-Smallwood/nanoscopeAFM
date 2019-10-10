@@ -14,10 +14,10 @@ devtools::install_github("thomasgredig/nanoscopeAFM")
 
 The main functions from this library are:
 
-- check.NID_file: should return 0
-- read.NID_header: reads the header of a NID file
-- read.NID_file: read the images from a NID file
-- read.NID_Sweep_file: Frequency Sweep NID file
+- **check.NID_file**: should return 0
+- **read.NID_header**: reads the header of a NID file
+- **read.NID_file**: read the images from a NID file
+- **read.NID_Sweep_file**: Frequency Sweep NID file
 
 
 ## Example
@@ -43,3 +43,16 @@ plot(raster(m))
 ![sample output from code above](images/Calibration-NID-File.png)
 
 You may need to perform additional image analysis, for example you may want to remove the background.
+
+## Frequency Sweep
+
+If the NID file is a frequency sweep, you can display the data using the function `read.NID_Sweep_file` which will return a list that contains data frames with the frequency vs. amplitude data.
+
+```R
+q = read.NID_Sweep_file(fname[1])
+plot(q[[1]],xlab='f (Hz)', ylab='A')
+```
+
+![sample output for frequency sweep](images/Frequency-Sweep.png)
+
+The units for amplitude are stored in the header of the file and can be modified accordingly.

@@ -4,9 +4,9 @@
 #' @return list with data frames that have freq vs. ampl.
 #' @examples
 #' filename = dir(pattern='nid$', recursive=TRUE)[1]
-#' d = read.NID_Sweep_file(filename)
+#' d = read.NID_sweepFile(filename)
 #' @export
-read.NID_Sweep_file <- function(filename) {
+read.NID_sweepFile <- function(filename) {
   # read header
   h = read.NID_header(filename)
   k1= h[[2]]

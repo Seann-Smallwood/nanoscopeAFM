@@ -17,6 +17,7 @@ The main functions from this library are:
 - **check.NID_file**: should return 0
 - **read.NID_header**: reads the header of a NID file
 - **read.NID_file**: read the images from a NID file
+- **flatten.NID_matrix**: plane fit to remove background
 - **read.NID_Sweep_file**: Frequency Sweep NID file
 
 
@@ -42,7 +43,14 @@ plot(raster(m))
 
 ![sample output from code above](images/Calibration-NID-File.png)
 
-You may need to perform additional image analysis, for example you may want to remove the background.
+You may need to perform additional image analysis, for example you may want to remove the background. This can be performed with this code:
+
+```R
+m1 = flatten.NID_matrix(m)
+plot(raster(m1))
+```
+![sample output from code above](images/Calibration-NID-File.Flattened.png)
+
 
 ## Frequency Sweep
 

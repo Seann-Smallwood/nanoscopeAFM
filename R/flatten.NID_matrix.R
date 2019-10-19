@@ -13,11 +13,10 @@ flatten.NID_matrix <- function(m) {
   x1 = rep(1:nrow(m), each=ncol(m))
   y1 = rep(1:ncol(m), nrow(m))
 
-  m0 = length(m)
   b = c(sum(x1*z1), sum(y1*z1), sum(z1))
   a = matrix(data = c(sum(x1*x1), sum(x1*y1), sum(x1),
                       sum(x1*y1), sum(y1*y1), sum(y1),
-                      sum(x1), sum(y1), m0),
+                      sum(x1), sum(y1), length(m)),
              nrow=3)
   x = solve(a,b)
   matrix(x1*x[1] + y1*x[2] + x[3] - z1, nrow=nrow(m))

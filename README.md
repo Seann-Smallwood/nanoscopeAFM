@@ -51,6 +51,19 @@ The first image is usually a topography channel (z-axis, units of meters) and th
 
 ## Image Analysis
 
+Histogram can be used to study the roughness or height levels:
+
+```R
+# make a histogram
+ggplot(d, aes(x=z.flatten)) + 
+    geom_histogram(aes(y=..density..), 
+    colour="black", fill="white", bins=200)+
+    geom_density(alpha=0.2, fill='red')
+```
+
+![histogram example](images/CalibrationGrid-Histogram.png)
+
+
 You may need to perform additional image analysis, for example you may want to remove the background. This can be performed with this code:
 
 ```R

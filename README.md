@@ -25,25 +25,25 @@ The main functions from this library are:
 
 ## Example
 
-The image can be loaded into memory using `read.NID_file` as the command, so here is an example:
 
+The image can be loaded into memory using `NID.loadImage` command using a filename and the image number. The image is automatically flattened and contains both the original measurement (z) as well as the flattened image (z.flatten); so here is an example:
 
 ```R
 library(nanoscopeAFM)
+library(ggplot2)
 fname = dir(pattern='nid$', recursive = TRUE)
-d <- read.NID_file(fname[1])
-```
+d = NID.loadImage(fname[2],1)
 
-Then, `d` will be a list with several images corresponding to the channels. In order to display the image use the raster library. 
+ggplot(d, aes(x*1e6,y*1e6, fill=z.flatten*1e9)) + 
+    geom_raster() +
+    xlab(expression(paste('x (',mu,'m)'))) + 
+    ylab(expression(paste('y (',mu,'m)'))) + 
+    theme_bw()
+```    
+    
+The first image is usually a topography channel (z-axis, units of meters) and the second image maybe the cantilever amplitude in units of voltage.
 
-```R
-library(raster)
-# display the first image, which is 256 x 256
-m = matrix(d[[1]], nrow=256)
-plot(raster(m))
-```
 
-![sample output from code above](images/Calibration-NID-File.png)
 
 You may need to perform additional image analysis, for example you may want to remove the background. This can be performed with this code:
 

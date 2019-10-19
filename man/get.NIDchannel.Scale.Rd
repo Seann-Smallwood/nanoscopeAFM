@@ -12,7 +12,7 @@ get.NIDchannel.Scale(headerList, imageNo)
 \item{imageNo}{1,2,3,4 denoting the number of the image}
 }
 \value{
-3 lists for (x,y,z) with scales
+data.frame with scales for (x,y,z)
 }
 \description{
 returns the scales of a particular channel / image

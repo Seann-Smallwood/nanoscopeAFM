@@ -19,6 +19,7 @@ The main functions from this library are:
 - **read.NID_file**: read the images from a NID file
 - **flatten.NID_matrix**: plane fit to remove background
 - **read.NID_Sweep_file**: Frequency Sweep NID file
+- **get.NIDchannel.Scale**: returns scales of image
 
 
 ## Example

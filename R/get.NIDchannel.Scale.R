@@ -12,7 +12,7 @@ get.NIDitem.numeric <- function(item, name) {
 #'
 #' @param headerList header list as obtained from read.NID_headerItems
 #' @param imageNo 1,2,3,4 denoting the number of the image
-#' @return 3 lists for (x,y,z) with scales
+#' @return data.frame with scales for (x,y,z)
 #' @examples
 #' filename = dir(pattern='nid$', recursive=TRUE)[1]
 #' h=read.NID_headerItems(filename)
@@ -25,17 +25,17 @@ get.NIDchannel.Scale <- function(headerList, imageNo) {
   k.set = grep(d.set,headerList[[1]])
   h = headerList[[k.set]]
 
-  ax=list(axis='x',units = get.NIDitem(h,'Dim0Unit'),
+  ax=data.frame(axis='x',units = get.NIDitem(h,'Dim0Unit'),
           from=get.NIDitem.numeric(h,'Dim0Min'),
           to=get.NIDitem.numeric(h,'Dim0Min')+get.NIDitem.numeric(h,'Dim0Range'),
           length=get.NIDitem.numeric(h,'Points'))
-  ay=list(axis='y',units = get.NIDitem(h,'Dim1Unit'),
+  ay=data.frame(axis='y',units = get.NIDitem(h,'Dim1Unit'),
           from=get.NIDitem.numeric(h,'Dim1Min'),
           to=get.NIDitem.numeric(h,'Dim1Min')+get.NIDitem.numeric(h,'Dim1Range'),
           length=get.NIDitem.numeric(h,'Lines'))
-  az=list(axis='z',units = get.NIDitem(h,'Dim2Unit'),
+  az=data.frame(axis='z',units = get.NIDitem(h,'Dim2Unit'),
           from=get.NIDitem.numeric(h,'Dim2Min'),
           to=get.NIDitem.numeric(h,'Dim2Min')+get.NIDitem.numeric(h,'Dim2Range'),
           length=2**get.NIDitem.numeric(h,'SaveBits'))
-  c(ax,ay,az)
+  rbind(ax,ay,az)
 }

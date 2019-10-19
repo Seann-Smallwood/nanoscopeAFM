@@ -4,7 +4,7 @@
 \alias{get.NIDchannel.Scale}
 \title{returns the scales of a particular channel / image}
 \usage{
-get.NIDchannel.Scale(headerList, imageNo)
+get.NIDchannel.Scale(headerList, imageNo = 1)
 }
 \arguments{
 \item{headerList}{header list as obtained from read.NID_headerItems}

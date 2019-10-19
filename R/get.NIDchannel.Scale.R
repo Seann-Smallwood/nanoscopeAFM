@@ -18,7 +18,7 @@ get.NIDitem.numeric <- function(item, name) {
 #' h=read.NID_headerItems(filename)
 #' get.NIDchannel.Scale(h,1)
 #' @export
-get.NIDchannel.Scale <- function(headerList, imageNo) {
+get.NIDchannel.Scale <- function(headerList, imageNo = 1) {
   c1 = switch(imageNo, "Gr0-Ch1","Gr0-Ch2","Gr1-Ch1","Gr1-Ch2",
               "Gr2-Ch1","Gr2-Ch2","Gr3-Ch1","Gr3-Ch2")
   d.set = get.NIDitem(headerList[[2]],c1)

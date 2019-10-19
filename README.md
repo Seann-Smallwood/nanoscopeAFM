@@ -14,6 +14,7 @@ devtools::install_github("thomasgredig/nanoscopeAFM")
 
 The main functions from this library are:
 
+- **NID.loadImage**: loads an NID image
 - **check.NID_file**: should return 0
 - **read.NID_header**: reads the header of a NID file
 - **read.NID_file**: read the images from a NID file

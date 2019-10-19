@@ -38,12 +38,18 @@ ggplot(d, aes(x*1e6,y*1e6, fill=z.flatten*1e9)) +
     geom_raster() +
     xlab(expression(paste('x (',mu,'m)'))) + 
     ylab(expression(paste('y (',mu,'m)'))) + 
+    labs(fill='z (nm)') +
+    scale_y_continuous(expand=c(0,0))+
+    scale_x_continuous(expand=c(0,0))+
     theme_bw()
 ```    
     
 The first image is usually a topography channel (z-axis, units of meters) and the second image maybe the cantilever amplitude in units of voltage.
 
+![Rastered image after flattening](CalibrationGrid.png)
 
+
+## Image Analysis
 
 You may need to perform additional image analysis, for example you may want to remove the background. This can be performed with this code:
 

@@ -46,7 +46,7 @@ ggplot(d, aes(x*1e6,y*1e6, fill=z.flatten*1e9)) +
     
 The first image is usually a topography channel (z-axis, units of meters) and the second image maybe the cantilever amplitude in units of voltage.
 
-![Rastered image after flattening](CalibrationGrid.png)
+![Rastered image after flattening](images/CalibrationGrid.png)
 
 
 ## Image Analysis

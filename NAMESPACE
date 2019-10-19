@@ -3,6 +3,7 @@
 export(check.NID_file)
 export(flatten.NID_matrix)
 export(get.NID_imageInfo)
+export(get.NIDchannel.Scale)
 export(read.NID_file)
 export(read.NID_header)
 export(read.NID_headerItems)

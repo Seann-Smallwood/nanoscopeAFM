@@ -7,18 +7,20 @@
 #' d = read.NID_sweepFile(filename)
 #' @export
 read.NID_sweepFile <- function(filename) {
+  # read header file and find length
+  h = read.NID_headerItems(filename)
+  d.set = get.NIDitem(h[[2]],'Gr0-Ch2')
+  k.set = grep(d.set, h[[1]])
+  k1 = h[[k.set]]
+  freq.min = get.NIDitem.numeric(k1,'Dim0Min')
+  freq.range = get.NIDitem.numeric(k1,'Dim0Range')
+  freq.len = get.NIDitem.numeric(k1,'Points')
+  A.min = get.NIDitem.numeric(k1,'Dim2Min')
+  A.range = get.NIDitem.numeric(k1,'Dim2Range')
+  A.len = 2**get.NIDitem.numeric(k1,'SaveBits')
+
   # read header
   h = read.NID_header(filename)
-  k1= h[[2]]
-  # find lengths of frequency sweep data
-  k2 = k1[grep('Points=', k1)]
-  q = as.numeric(gsub('\\D','\\1',k2))
-  k3 = k1[grep('Dim0Min=', k1)]
-  freq.min = as.numeric(gsub('\\D','\\1',k3))
-  k3 = k1[grep('Dim0Range=', k1)]
-  freq.range = as.numeric(gsub('\\D','\\1',k3))
-
-
   header.length = h[[1]]
   con <- file(filename,"rb")
   bin.header <- readBin(con, integer(),  n = header.length, size=1, endian = "little")
@@ -27,14 +29,10 @@ read.NID_sweepFile <- function(filename) {
   r = list()
 
   if (sum(bin.ID) == sum(c(35,33))) {
-    if(length(q)>0) {
-      for(i in 1:length(q)) {
-        if(q[i]>0) {
-          bin.data <- readBin(con, integer(),  n = q[i], size=2, endian = "little")
-          r[[i]] = data.frame(x = seq(from=freq.min[i], to=freq.min[i] + freq.range[i], length.out=q[i]),
-                              y = bin.data)
-        }
-      }
+    if(freq.len>0) {
+        bin.data <- readBin(con, integer(),  n = freq.len, size=2, endian = "little")
+        r[[i]] = data.frame(x = seq(from=freq.min, to=freq.min + freq.range, length.out=freq.len),
+                            y = bin.data/A.len*A.range+A.min)
     }
   }
   close(con)

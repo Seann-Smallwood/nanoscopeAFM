@@ -31,8 +31,8 @@ read.NID_sweepFile <- function(filename) {
   if (sum(bin.ID) == sum(c(35,33))) {
     if(freq.len>0) {
         bin.data <- readBin(con, integer(),  n = freq.len, size=2, endian = "little")
-        r = data.frame(x = seq(from=freq.min, to=freq.min + freq.range, length.out=freq.len),
-                            y = bin.data/A.len*A.range+A.min)
+        r = data.frame(Freq.Hz = seq(from=freq.min, to=freq.min + freq.range, length.out=freq.len),
+                            Amplitude.V = (bin.data*A.range/A.len) + A.min)
     }
   }
   close(con)

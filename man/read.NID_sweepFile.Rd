@@ -10,7 +10,7 @@ read.NID_sweepFile(filename)
 \item{filename}{filename including path}
 }
 \value{
-list with data frames that have freq vs. ampl.
+data.frame with data frames that have freq vs. ampl.
 }
 \description{
 loads frequency sweep data from NID file

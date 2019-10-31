@@ -4,9 +4,9 @@
 #' @return mismatch in image size + header with file size (should be 0)
 #' @examples
 #' filename = dir(pattern='nid$', recursive=TRUE)[1]
-#' d = check.NID_file(filename)
+#' d = NID.checkFile(filename)
 #' @export
-check.NID_file <- function(filename) {
+NID.checkFile <- function(filename) {
   # does file exist?
   if (!file.exists(filename)) return -1
   # length of file in bytes

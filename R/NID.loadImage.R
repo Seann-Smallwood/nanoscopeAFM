@@ -10,13 +10,14 @@
 #' ggplot(d, aes(x,y,fill=z.flatten)) + geom_raster()
 #' @export
 NID.loadImage <- function(filename,imageNo) {
+  if (!file.exists(filename)) warning(paste("File",filename,"does NOT exist."))
   # read header information
   h = read.NID_headerItems(filename)
   # read all images
   d = read.NID_file(filename)
 
   # get scaling for image
-  s1 = get.NIDchannel.Scale(h,imageNo)
+  s1 = NID.getChannelScale(h,imageNo)
 
   # create the rastering sequences for x-, y-axes
   # and convert pixels from z-axis into scale (m or V)

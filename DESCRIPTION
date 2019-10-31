@@ -1,10 +1,10 @@
 Package: nanoscopeAFM
 Type: Package
-Title: Load Atomic Force Microscopy NID Data Files
-Version: 0.2
-Authors@R: person("Thomas", "Gredig", email = "tgredig@csulb.edu",
+Title: Load Atomic Force Microscopy NID and NanoScope Data Files
+Version: 0.3
+Authors@R: person("Thomas", "Gredig", email = "thomas.gredig@csulb.edu",
                   role = c("aut", "cre"))
-Maintainer: Thomas Gredig <tgredig@csulb.edu>
+Maintainer: Thomas Gredig <thomas.gredig@csulb.edu>
 Description: Reads two types of atomic force microscopy (AFM) files into memory 
     for pixel by pixel analysis. The supported file formats include NanoSurf 
     NID files and VEECO NanoScope files. 

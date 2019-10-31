@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.NID_file.R
 \name{read.NID_file}
 \alias{read.NID_file}
-\title{loads images of AFM NID file}
+\title{loads images of AFM NID file (use NID.loadImage whenever)}
 \usage{
 read.NID_file(filename)
 }
@@ -13,7 +13,7 @@ read.NID_file(filename)
 list with header, file ID, and images
 }
 \description{
-loads images of AFM NID file
+loads images of AFM NID file (use NID.loadImage whenever)
 }
 \examples{
 filename = dir(pattern='nid$', recursive=TRUE)[1]

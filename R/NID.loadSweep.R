@@ -4,9 +4,9 @@
 #' @return data.frame with data frames that have freq vs. ampl.
 #' @examples
 #' filename = dir(pattern='nid$', recursive=TRUE)[1]
-#' d = read.NID_sweepFile(filename)
+#' d = NID.loadSweep(filename)
 #' @export
-read.NID_sweepFile <- function(filename) {
+NID.loadSweep <- function(filename) {
   # read header file and find length
   h = read.NID_headerItems(filename)
   d.set = get.NIDitem(h[[2]],'Gr0-Ch2')

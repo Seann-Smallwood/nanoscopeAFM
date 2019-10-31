@@ -1,4 +1,4 @@
-#' loads images of AFM NID file
+#' loads images of AFM NID file (use NID.loadImage whenever)
 #'
 #' @param filename filename including path
 #' @return list with header, file ID, and images
@@ -7,7 +7,7 @@
 #' d = read.NID_file(filename)
 #' @export
 read.NID_file <- function(filename) {
-  if (check.NID_file(filename) == 0) {
+  if (NID.checkFile(filename) == 0) {
     h = read.NID_header(filename)
     q = get.NID_imageInfo(h[[2]])
 

@@ -7,12 +7,13 @@
 #' d = read.Nanoscope_file(filename)
 #' @export
 read.Nanoscope_file <- function(filename) {
+  if(!file.exists(filename)) { warning(paste("File",filename," does NOT exist !")) }
   # read the header of the AFM file
   q = read.Nanoscope_header(filename)
   # retrieve header length + file image lengths
   dlen.num = as.numeric(q$value[grepl('Data length',q$name)])
   # load components
-  con <- file(fname,"rb")
+  con <- file(filename,"rb")
   bin.header <- readBin(con, integer(),  n = dlen.num[1], size=1, endian = "little")
   imageNo = 1
   r = list()

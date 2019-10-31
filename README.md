@@ -98,9 +98,11 @@ Similar functions are available for Nanoscope files
 
 ```R
 fname = dir(pattern='\\.\\d+$', recursive = TRUE)
-d = read.Nanoscope_file(fname[1])
-bin.data = d[[1]]
-library(raster)
-m = matrix(bin.data, nrow=sqrt(length(bin.data)))
-plot(raster(m))
+for(f in fname) {
+    d = read.Nanoscope_file(f)
+    bin.data = d[[1]]
+    library(raster)
+    m = matrix(bin.data, nrow=sqrt(length(bin.data)))
+    plot(raster(m))
+}
 ```

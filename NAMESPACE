@@ -2,6 +2,7 @@
 
 export(NID.checkFile)
 export(NID.getChannelScale)
+export(NID.lineProfile)
 export(NID.loadImage)
 export(NID.loadSweep)
 export(flatten.NID_matrix)

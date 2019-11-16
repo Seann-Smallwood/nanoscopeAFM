@@ -92,6 +92,20 @@ plot(q[[1]],xlab='f (Hz)', ylab='A')
 The units for amplitude are stored in the header of the file and can be modified accordingly.
 
 
+## Line Profile
+
+Using the [Bresenham algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm), the pixel locations along a profile line are computed.
+
+
+```R
+# d is populated with NID.loadImage()
+q = NID.lineProfile(d, 0,0,2e-6,2e-6)
+d2 = d[q,]
+d2$distance = sqrt(d$x*d$x+d$y*d$y)
+# plot the line profile
+plot(d2$distance, d2$z.flatten)
+```
+
 # Nanoscope AFM images
 
 Similar functions are available for Nanoscope files

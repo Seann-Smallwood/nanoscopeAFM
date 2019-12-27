@@ -1,4 +1,6 @@
-#' Line Profile
+#' Line Profile: create a profile data line across an image (d), providing
+#'   the starting point (x1,y1) and end point (x2,y2). The start and end
+#'   points are provided in length units of the images (usch as micrometers)
 #'
 #' @param d AFM image in data frame
 #' @param x1 start x position in AFM units from bottom right
@@ -8,7 +10,7 @@
 #' @return vector with line profile for data frame
 #' @examples
 #' filename = dir(pattern='nid$', recursive=TRUE)[1]
-#' d = NID.loadSweep(filename)
+#' d = NID.loadImage(filename,1)
 #' q = NID.lineProfile(d,0,0,1e-6,1-6)
 #' plot(d$z.flatten[q])
 #' @export

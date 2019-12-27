@@ -4,7 +4,7 @@
 \alias{NID.loadImage}
 \title{returns the scaled image + flattend image}
 \usage{
-NID.loadImage(filename, imageNo)
+NID.loadImage(filename, imageNo = 1)
 }
 \arguments{
 \item{filename}{filename including path}
@@ -20,6 +20,6 @@ returns the scaled image + flattend image
 }
 \examples{
 filename = dir(pattern='nid$', recursive=TRUE)[1]
-d = NID.loadImage(filename)
+d = NID.loadImage(filename,1)
 ggplot(d, aes(x,y,fill=z.flatten)) + geom_raster()
 }

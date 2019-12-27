@@ -6,10 +6,10 @@
 #'         and the z-axis (original) and flattened
 #' @examples
 #' filename = dir(pattern='nid$', recursive=TRUE)[1]
-#' d = NID.loadImage(filename)
+#' d = NID.loadImage(filename,1)
 #' ggplot(d, aes(x,y,fill=z.flatten)) + geom_raster()
 #' @export
-NID.loadImage <- function(filename,imageNo) {
+NID.loadImage <- function(filename,imageNo=1) {
   if (!file.exists(filename)) warning(paste("File",filename,"does NOT exist."))
   # read header information
   h = read.NID_headerItems(filename)

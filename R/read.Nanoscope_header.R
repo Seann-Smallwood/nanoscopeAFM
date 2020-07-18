@@ -8,6 +8,7 @@
 #' @export
 read.Nanoscope_header <- function(filename) {
   if (!file.exists(filename)) { warning(paste("File",filename,"does NOT exist.")) }
+  if (file.info(filename)$size<20000) { warning(paste("File",filename,"is too small. Data may be missing."))}
   first_line = ''
   header = c()
   con <- file(filename,"rb")

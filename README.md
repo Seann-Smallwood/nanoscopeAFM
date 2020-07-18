@@ -120,3 +120,9 @@ for(f in fname) {
     plot(raster(m))
 }
 ```
+
+For header information, you can run:
+
+```R
+h = read.Nanoscope_header(f)
+```

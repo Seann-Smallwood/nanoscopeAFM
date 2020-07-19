@@ -108,6 +108,8 @@ plot(d2$distance, d2$z.flatten)
 
 # Nanoscope AFM images
 
+The [header file](http://www.weizmann.ac.il/Chemical_Research_Support/surflab/peter/headers/) is documented for versions 2,3, and 4. [Z-scaling Info](https://bioafm.physics.leidenuniv.nl/dokuwiki/lib/exe/fetch.php?media=afm:nanoscope_software_8.10_user_guide-d_004-1025-000_.pdf)
+
 Similar functions are available for Nanoscope files
 
 ```R

@@ -38,16 +38,16 @@ library(ggplot2)
 fname = dir(pattern='nid$', recursive = TRUE)
 d = NID.loadImage(fname[2],1)
 
-ggplot(d, aes(x*1e6,y*1e6, fill=z.flatten*1e9)) + 
+ggplot(d, aes(x*1e6,y*1e6, fill=z.flatten*1e9)) +
     geom_raster() +
-    xlab(expression(paste('x (',mu,'m)'))) + 
-    ylab(expression(paste('y (',mu,'m)'))) + 
+    xlab(expression(paste('x (',mu,'m)'))) +
+    ylab(expression(paste('y (',mu,'m)'))) +
     labs(fill='z (nm)') +
     scale_y_continuous(expand=c(0,0))+
     scale_x_continuous(expand=c(0,0))+
     theme_bw()
 ```    
-    
+
 The first image is usually a topography channel (z-axis, units of meters) and the second image maybe the cantilever amplitude in units of voltage.
 
 ![Rastered image after flattening](images/CalibrationGrid.png)
@@ -59,8 +59,8 @@ Histogram can be used to study the roughness or height levels:
 
 ```R
 # make a histogram
-ggplot(d, aes(x=z.flatten)) + 
-    geom_histogram(aes(y=..density..), 
+ggplot(d, aes(x=z.flatten)) +
+    geom_histogram(aes(y=..density..),
     colour="black", fill="white", bins=200)+
     geom_density(alpha=0.2, fill='red')
 ```
@@ -134,9 +134,18 @@ Convert and save all files in folder to PNG format
 file.list = raw.findFiles(path.RAW, date='2016', instrument='afm')
 file.list = file.list[grep('\\d{3}$',file.list)]
 
-# 
+# save the first image of each AFM file
 for(f in file.list) {
-  h = read.Nanoscope_header(f)
+  d= read.Nanoscope_file_scaled(f)
+  ggplot() +
+    geom_raster(data = d , aes(x = x, y = y, fill = z)) +
+    coord_equal(expand=FALSE) +
+    xlab('x (nm)') +
+    ylab('y (nm)') +
+    scale_fill_continuous(name='z (nm)') +
+    ggtitle(f)
+  filename.png = gsub(str_extract(f, pattern = '\\..{3}$'),'.png',f)
+  ggsave(file.path('',filename.png), dpi=300)
 }
 ```
 

@@ -1,6 +1,6 @@
 # nanoscopeAFM
 
-Analyzes Atomic Force Microsocpy (AFM) images from nanosurf (.nid) or nanoscope devices.
+Analyzes Atomic Force Microsocpy (AFM) images from Nanosurf (.nid) or Veeco Multimode Nanoscope III.
 
 
 ## Installation
@@ -27,7 +27,7 @@ More specialized functions from the library:
 - **get.NIDchannel.Scale**: returns scales of image
 
 
-## Example
+# NanoSurf Images
 
 
 The image can be loaded into memory using `NID.loadImage` command using a filename and the image number. The image is automatically flattened and contains both the original measurement (z) as well as the flattened image (z.flatten); so here is an example:
@@ -109,7 +109,6 @@ plot(d2$distance, d2$z.flatten)
 # Nanoscope AFM images
 
 
-
 Similar functions are available for Nanoscope files
 
 ```R
@@ -127,6 +126,18 @@ For header information, you can run:
 
 ```R
 h = read.Nanoscope_header(f)
+```
+
+Convert and save all files in folder to PNG format
+```R
+# find the files
+file.list = raw.findFiles(path.RAW, date='2016', instrument='afm')
+file.list = file.list[grep('\\d{3}$',file.list)]
+
+# 
+for(f in file.list) {
+  h = read.Nanoscope_header(f)
+}
 ```
 
 # Technical Notes

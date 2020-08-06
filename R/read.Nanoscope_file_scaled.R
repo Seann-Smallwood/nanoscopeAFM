@@ -47,6 +47,7 @@ read.Nanoscope_file_scaled <- function(filename) {
     x = rep(seq(from=0, to=width.nm, length=lines), lines)
     y = rep(seq(from=0, to=height.nm, length=lines), each=lines)
     d = read.Nanoscope_file(filename)
+    z = d[[1]]  #chose first image
     d = data.frame(x,y,z=z*zConversion)
   }
   d

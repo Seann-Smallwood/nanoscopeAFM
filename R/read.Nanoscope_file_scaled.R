@@ -13,14 +13,14 @@
 #' @export
 read.Nanoscope_file_scaled <- function(filename) {
   d = data.frame()
-  if (file.exists(f)==FALSE) {
-    warning(paste("Nanoscope Load Error: File",f,"does not exist."))
+  if (file.exists(filename)==FALSE) {
+    warning(paste("Nanoscope Load Error: File",filename,"does not exist."))
     return(d)
   }
   # read header information
-  h = read.Nanoscope_header(f)
+  h = read.Nanoscope_header(filename)
   if (nrow(h)==0) {
-    warning(paste("Nanoscope Load Error: File",f,"has no header information."))
+    warning(paste("Nanoscope Load Error: File",filename,"has no header information."))
   } else {
     line.num = as.numeric(h$value[grep('Number of lines',h$name)])
     lines = line.num[1]
@@ -46,7 +46,7 @@ read.Nanoscope_file_scaled <- function(filename) {
     # load image
     x = rep(seq(from=0, to=width.nm, length=lines), lines)
     y = rep(seq(from=0, to=height.nm, length=lines), each=lines)
-    d = read.Nanoscope_file(f)
+    d = read.Nanoscope_file(filename)
     d = data.frame(x,y,z=z*zConversion)
   }
   d

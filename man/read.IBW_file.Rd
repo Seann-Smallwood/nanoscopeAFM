@@ -4,13 +4,15 @@
 \alias{read.IBW_file}
 \title{loads images}
 \usage{
-read.IBW_file(filename)
+read.IBW_file(filename, no = 1)
 }
 \arguments{
 \item{filename}{filename including path}
+
+\item{no}{number of the channel}
 }
 \value{
-list with header, file ID, and images
+image with attributes
 }
 \description{
 loads images

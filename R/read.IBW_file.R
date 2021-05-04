@@ -8,7 +8,7 @@
 #' d = read.IBW_file(filename)
 #' @export
 read.IBW_file <- function(filename, no=1) {
-  d = read.ibw(filename)
+  d = IgorR::read.ibw(filename)
   q2 = attr(d, "WaveHeader")
   x = 1:dim(d)[1]
   y = 1:dim(d)[2]

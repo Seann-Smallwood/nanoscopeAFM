@@ -14,13 +14,13 @@ devtools::install_github("thomasgredig/nanoscopeAFM")
 
 The main functions from this library are:
 
-- **NID.checkFile**: should return 0
-- **NID.loadImage**: loads an NID image
-- **NID.loadSweep**: Frequency Sweep NID file
-
+- **read.AFM_file**: loads the AFM image as a matrix and includes attributes
 
 More specialized functions from the library:
 
+- **NID.checkFile**: should return 0
+- **NID.loadImage**: loads an NID image
+- **NID.loadSweep**: Frequency Sweep NID file
 - **read.NID_header**: reads the header of a NID file
 - **read.NID_file**: read the images from a NID file
 - **flatten.NID_matrix**: plane fit to remove background

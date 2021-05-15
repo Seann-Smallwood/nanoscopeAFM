@@ -24,5 +24,7 @@ read.AFM_file <- function(filename, no=1) {
     df = read.Nanoscope_file(filename)
   }
   attr(df,'filename')=basename(filename)
+  df$x.nm = attr(df, "convFactor") * df$x * 1e6
+  df$y.nm = attr(df, "convFactor") * df$y * 1e6
   df
 }

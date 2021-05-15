@@ -26,6 +26,47 @@ More specialized functions from the library:
 - **flatten.NID_matrix**: plane fit to remove background
 - **get.NIDchannel.Scale**: returns scales of image
 
+# AFM Images
+
+Loading an AFM image into memory works as follows:
+
+```R
+fname = 'image.ibw' # Igor Wavefile, NID file
+d = read.AFM_file(fname)
+```
+
+The attributes can be viewed with `str(d)` and include units. The conversion from line to distance is made with the `attr(d, "convFactor")` factor. The image is usually displayed as follows:
+
+```R
+library(ggplot2)
+library(scales)
+
+ggplot(d, aes(x.nm, y.nm, fill = z.nm)) + 
+  geom_raster() +
+  scale_fill_gradient2(mid='white', high=muted('purple')) +
+  xlab(expression(paste('x (',mu,'m)'))) +
+  ylab(expression(paste('y (',mu,'m)'))) +
+  labs(fill='z (nm)') +
+  scale_y_continuous(expand=c(0,0))+
+  scale_x_continuous(expand=c(0,0))+
+  coord_equal() +
+  theme_bw()
+```
+
+A cross-section of the image can now easily be created:
+
+```R
+LINE.NO = 45
+d1 = subset(d, y==LINE.NO)
+ggplot(d1, aes(x.nm, z.nm)) +
+  geom_path(col='black') + 
+  geom_point(col='red', size=2) + 
+  geom_point(col='white', size=1)+ 
+  scale_x_continuous(breaks=0:20*0.2) + 
+  xlab(expression(paste('x (',mu,'m)'))) +
+  ylab('z (nm)') + 
+  theme_bw()
+```
 
 # NanoSurf Images
 

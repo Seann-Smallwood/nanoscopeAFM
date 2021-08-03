@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.AFM_file.R
 \name{read.AFM_file}
 \alias{read.AFM_file}
-\title{loads image file}
+\title{loads AFM image file}
 \usage{
 read.AFM_file(filename, no = 1)
 }
@@ -15,7 +15,7 @@ read.AFM_file(filename, no = 1)
 AFM image with attributes
 }
 \description{
-loads image file
+loads AFM image file
 }
 \examples{
 filename = dir(pattern='ibw$', recursive=TRUE)[1]

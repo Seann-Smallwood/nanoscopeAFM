@@ -1,4 +1,4 @@
-#' loads image file
+#' loads AFM image file
 #'
 #' @param filename filename of AFM image raw data including path
 #' @param no number of the channel
@@ -24,7 +24,7 @@ read.AFM_file <- function(filename, no=1) {
     df = read.Nanoscope_file(filename)
   }
   attr(df,'filename')=basename(filename)
-  df$x.nm = attr(df, "convFactor") * df$x * 1e6
-  df$y.nm = attr(df, "convFactor") * df$y * 1e6
+  df$x.nm = attr(df, "convFactor") * (df$x-1) * 1e9
+  df$y.nm = attr(df, "convFactor") * (df$y-1) * 1e9
   df
 }

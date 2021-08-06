@@ -1,0 +1,22 @@
+citHeader("To cite nanoscopeAFM in publications use:")
+
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+
+citEntry(
+  entry    = "Manual",
+  title    = "{nanoscopeAFM} - AFM analysis tool in R",
+  author   = "Gredig, Thomas",
+  journal  = "",
+  year     = year,
+  volume   = "",
+  number   = "",
+  pages    = "",
+  note     = note,
+  url      = "https://thomasgredig.github.io/nanoscopeAFM/",
+  doi      = "xx/zenodo.xx",
+  doi      = "xx/zenodo.xx",
+  textVersion = paste0(
+    "Thomas Gredig (", year, "). nanoscopeAFM - visualization and analysis of atomic force microscopy images. ", note, "."
+  )
+)

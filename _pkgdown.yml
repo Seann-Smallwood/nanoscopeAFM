@@ -1,0 +1,12 @@
+url: https://thomasgredig.github.io/nanoscopeAFM
+
+template:
+  params:
+    bootswatch: simplex
+
+authors:
+  Thomas Gredig:
+    href: http://www.thomasgredig.com
+
+development:
+  mode: unreleased

@@ -2,20 +2,22 @@
 % Please edit documentation in R/read.Nanoscope_file.R
 \name{read.Nanoscope_file}
 \alias{read.Nanoscope_file}
-\title{loads images of AFM Nanoscope file (use Nanoscope.loadImage whenever)}
+\title{Returns Veeco NanoScope AFM image with Scaling}
 \usage{
-read.Nanoscope_file(filename)
+read.Nanoscope_file(filename, no = 1)
 }
 \arguments{
 \item{filename}{filename including path}
+
+\item{no}{image number}
 }
 \value{
-list with header, file ID, and images
+image
 }
 \description{
-loads images of AFM Nanoscope file (use Nanoscope.loadImage whenever)
+Returns Veeco NanoScope AFM image with Scaling
 }
 \examples{
-filename = dir(pattern='000$', recursive=TRUE)[1]
-d = read.Nanoscope_file(filename)
+filename = dir(pattern='\\\\d$', recursive=TRUE)[1]
+h = read.Nanoscope_file(filename)
 }

@@ -1,0 +1,19 @@
+#' flattens an AFM image using a plane fit
+#'
+#' @param d data.frame with AFM image
+#' @return flattened matrix with AFM image
+#' @examples
+#' filename = dir(pattern='\\d$', recursive=TRUE)[1]
+#' d = AFM.read(filename)
+#' d$z.flatten = AFM.flatten(d)
+#' @export
+AFM.flatten <- function(d) {
+  SZ = nrow(d)
+  b = with(d, c(sum(x*z), sum(y*z), sum(z)))
+  a = with(d, matrix(data = c(sum(x*x), sum(x*y), sum(x),
+                      sum(x*y), sum(y*y), sum(y),
+                      sum(x), sum(y), SZ),
+             nrow=3))
+  solvX = solve(a,b)
+  with(d, x*solvX[1] + y*solvX[2] + solvX[3] - z)
+}

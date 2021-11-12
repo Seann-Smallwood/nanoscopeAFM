@@ -7,6 +7,7 @@
 #' d = read.NID_file(filename)
 #' @export
 read.NID_file <- function(filename) {
+  warning('DEPREACTED: use read.NanoSurf_file()')
   if (NID.checkFile(filename) == 0) {
     h = read.NID_header(filename)
     q = get.NID_imageInfo(h[[2]])

@@ -1,4 +1,4 @@
-#' loads images
+#' DEPRECATED: loads Asylum Research Igor Wave AFM files
 #'
 #' @param filename filename including path
 #' @param no number of the channel
@@ -8,6 +8,7 @@
 #' d = read.IBW_file(filename)
 #' @export
 read.IBW_file <- function(filename, no=1) {
+  warning("DEPRECATED: use read.AR_file() instead")
   d = IgorR::read.ibw(filename)
   q2 = attr(d, "WaveHeader")
   x = 1:dim(d)[1]
@@ -26,3 +27,4 @@ read.IBW_file <- function(filename, no=1) {
   attr(dr,"Units") <- q2$dimUnits[no]
   dr
 }
+

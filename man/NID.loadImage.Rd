@@ -2,7 +2,7 @@
 % Please edit documentation in R/NID.loadImage.R
 \name{NID.loadImage}
 \alias{NID.loadImage}
-\title{returns the scaled image + flattend image}
+\title{DEPRACATED: returns the scaled image + flattend image}
 \usage{
 NID.loadImage(filename, imageNo = 1)
 }
@@ -16,7 +16,7 @@ data.frame with four components, x and y-axes
         and the z-axis (original) and flattened
 }
 \description{
-returns the scaled image + flattend image
+DEPRACATED: returns the scaled image + flattend image
 }
 \examples{
 filename = dir(pattern='nid$', recursive=TRUE)[1]

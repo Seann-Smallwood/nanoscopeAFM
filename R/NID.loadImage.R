@@ -1,4 +1,4 @@
-#' returns the scaled image + flattend image
+#' DEPRACATED: returns the scaled image + flattend image
 #'
 #' @param filename filename including path
 #' @param imageNo a number of the image, 1,2,3,4

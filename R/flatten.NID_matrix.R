@@ -9,6 +9,7 @@
 #' flatten.NID_matrix(m)
 #' @export
 flatten.NID_matrix <- function(m) {
+  warning('Depracated: use AFM.flatten()')
   z1 = as.vector(m)
   x1 = rep(1:nrow(m), each=ncol(m))
   y1 = rep(1:ncol(m), nrow(m))

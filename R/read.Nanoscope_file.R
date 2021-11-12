@@ -1,12 +1,64 @@
-#' loads images of AFM Nanoscope file (use Nanoscope.loadImage whenever)
+#' Returns Veeco NanoScope AFM image with Scaling
 #'
 #' @param filename filename including path
-#' @return list with header, file ID, and images
+#' @param no image number
+#' @return image
 #' @examples
-#' filename = dir(pattern='000$', recursive=TRUE)[1]
-#' d = read.Nanoscope_file(filename)
+#' filename = dir(pattern='\\d$', recursive=TRUE)[1]
+#' h = read.Nanoscope_file(filename)
 #' @export
-read.Nanoscope_file <- function(filename) {
+read.Nanoscope_file <- function(filename, no=1) {
+  d = data.frame()
+  if (file.exists(filename)==FALSE) {
+    warning(paste("Nanoscope Load Error: File",filename,"does not exist."))
+    return(d)
+  }
+  # read header information
+  #h = read.Nanoscope_header(filename)
+  h = read.Nanoscope_params(filename, no)
+  if (nrow(h)==0) {
+    warning(paste("Nanoscope Load Error: File",filename,"has no header information."))
+  } else {
+    line.num = as.numeric(h$value[grep('Number of lines',h$name)])
+    lines = line.num[1]
+    line.sam = as.numeric(h$value[grep('Samps/line',h$name)[-1]])
+    zScale = h$value[grep('Sens. Zscan',h$name)]
+    zSens = h$value[grep('Z center',h$name)]
+    image.size = h$value[grep('Scan size',h$name)[-1]]
+    Scale.nm.V = as.numeric(gsub(' nm/V','',stringr::str_extract(zScale, pattern = '\\d+\\.\\d+ nm/V$')))
+    Sens.V = as.numeric(gsub(' V','',stringr::str_extract(zSens, pattern = '\\d+\\.\\d+ V$')))
+    zConversion = Scale.nm.V*Sens.V/(2^16)
+    qq = strsplit(image.size[1],' ')
+    width.nm = as.numeric(sapply(qq,'[[',2))
+    height.nm = as.numeric(sapply(qq,'[[',3))
+    units = sapply(qq,'[[',4)
+    # convert to nm
+    if (units=='~m') {
+      width.nm = width.nm*1000
+      height.nm = height.nm *1000
+    } else if (!(units=='nm')) {
+      warning(paste('Nanoscope units are neither nm nor um, but ',units))
+    }
+
+    step.nm = height.nm / lines
+
+    # load image
+    x.nm = rep(seq(from=0, to=width.nm, length=lines), lines)
+    y.nm = rep(seq(from=0, to=height.nm, length=lines), each=lines)
+    z = read.Nanoscope_BIN(filename, no)
+    d = data.frame(x = rep(1:lines, lines),
+                   y =  rep(1:lines, each=lines),
+                   z,
+                   x.nm,
+                   y.nm,
+                   z.nm = z*zConversion)
+  }
+  d
+}
+
+
+#' loads the binary data from the Veeco file
+read.Nanoscope_BIN <- function(filename, no=1) {
   if(!file.exists(filename)) { warning(paste("File",filename," does NOT exist !")) }
   # read the header of the AFM file
   q = read.Nanoscope_header(filename)
@@ -23,5 +75,58 @@ read.Nanoscope_file <- function(filename) {
     imageNo = imageNo+1
   }
   close(con)
-  r
+  r[[no]]
+}
+
+
+# returns header information
+read.Nanoscope_header <- function(filename) {
+  if (!file.exists(filename)) { warning(paste("File",filename,"does NOT exist.")) }
+  if (file.info(filename)$size<20000) { warning(paste("File",filename,"is too small. Data may be missing."))}
+  first_line = ''
+  header = c()
+  con <- file(filename,"rb")
+  i=0
+  err = FALSE
+  while(first_line != "\\*File list end" ) {
+    first_line <- readLines(con,n=1)
+    if (length(first_line)==0) { err = TRUE; break; }
+    header=c(header, first_line)
+    i=i+1
+  }
+  close(con)
+  if (err==TRUE) {
+    data.frame(
+      name='Reading error',
+      value='TRUE'
+    )
+  } else {
+    header = gsub('\\\\','',header)
+    header[grep('^\\*',header)] = paste0(header[grep('^\\*',header)],":NEW SECTION")
+    p1 = strsplit(header,':')
+    data.frame(
+      name = unlist(lapply(p1,"[[",1)),
+      value = unlist(lapply(p1,"[[",2)),
+      stringsAsFactors = FALSE
+    )
+  }
+}
+
+
+# returns header information for particular image number only
+read.Nanoscope_params <- function(filename, no=1) {
+  h = read.Nanoscope_header(filename)
+  # parse out parameters that are relevant to image number no
+  sections = grep('NEW SECTION', h$value)
+  imNo = grep('Ciao image list$',h$name[sections])[no]
+  fileNo = grep('File list$', h$name[sections])
+  scanNo = grep('Scanner list$', h$name[sections])
+  ciaoNo = grep('Ciao scan list$', h$name[sections])
+  eqipNo = grep('Equipment list', h$name[sections])
+
+  h[c(sections[fileNo]:(sections[fileNo+1]-1),
+      sections[eqipNo]:(sections[eqipNo+1]-1),
+      sections[scanNo]:(sections[scanNo+1]-1),
+      sections[ciaoNo]:(sections[ciaoNo+1]-1),
+      sections[imNo]:(sections[imNo+1]-1)),]
 }

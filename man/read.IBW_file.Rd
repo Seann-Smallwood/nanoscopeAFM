@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.IBW_file.R
 \name{read.IBW_file}
 \alias{read.IBW_file}
-\title{loads images}
+\title{DEPRECATED: loads Asylum Research Igor Wave AFM files}
 \usage{
 read.IBW_file(filename, no = 1)
 }
@@ -15,7 +15,7 @@ read.IBW_file(filename, no = 1)
 image with attributes
 }
 \description{
-loads images
+DEPRECATED: loads Asylum Research Igor Wave AFM files
 }
 \examples{
 filename = dir(pattern='ibw$', recursive=TRUE)[1]

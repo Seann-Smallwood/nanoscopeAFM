@@ -5,7 +5,6 @@
 #' @examples
 #' filename = dir(pattern='nid$', recursive=TRUE)[1]
 #' d = NID.checkFile(filename)
-#' @export
 NID.checkFile <- function(filename) {
   # does file exist?
   if (!file.exists(filename)) return -1

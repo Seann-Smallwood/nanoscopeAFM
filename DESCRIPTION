@@ -1,19 +1,25 @@
 Package: nanoscopeAFM
 Type: Package
 Title: Load Atomic Force Microscopy Data Files
-Version: 0.5.1
+Version: 0.6.1
 Year: 2020
 Authors@R: person("Thomas", "Gredig", email = "thomas.gredig@csulb.edu",
-                  role = c("aut", "cre"))
+                  role = c("aut", "cre"),
+                  comment = c(ORCID = "0000-0002-5824-7626"))
 Maintainer: Thomas Gredig <thomas.gredig@csulb.edu>
 Description: Reads atomic force microscopy (AFM) image files into data tables
     for analysis. The supported file formats include NanoSurf NID files, VEECO 
-    NanoScope files, and Igor Wavefiles
+    NanoScope files, Park AFM files, and Igor Wavefiles. It can also flatten
+    images and do basic data analysis.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 Imports:
-    tools
+    tools,
+    IgorR,
+    plyr,
+    stringr,
+    ggplot2
 Suggests: 
     testthat (>= 2.1.0)

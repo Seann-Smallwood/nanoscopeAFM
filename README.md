@@ -1,6 +1,6 @@
 # nanoscopeAFM
 
-Analyzes Atomic Force Microsocpy (AFM) images from Nanosurf (.nid) or Veeco Multimode Nanoscope III.
+Analyzes Atomic Force Microsocpy images; currently four types are supported, images from Nanosurf (.nid), Veeco Multimode Nanoscope III, Park AFM images, and Asylum Research AFM images.
 
 
 ## Installation
@@ -14,24 +14,17 @@ devtools::install_github("thomasgredig/nanoscopeAFM")
 
 The main functions from this library are:
 
-- **read.AFM_file**: loads the AFM image as a matrix and includes attributes
+- **AFM.read**: loads the AFM image as a matrix and includes attributes, the AFM image can be Veeco, Park, Asylum Research, or NanoSurf
+- **AFM.info**: returns information about the image
 
-More specialized functions from the library:
 
-- **NID.checkFile**: should return 0
-- **NID.loadImage**: loads an NID image
-- **NID.loadSweep**: Frequency Sweep NID file
-- **read.NID_header**: reads the header of a NID file
-- **read.NID_file**: read the images from a NID file
-- **flatten.NID_matrix**: plane fit to remove background
-- **get.NIDchannel.Scale**: returns scales of image
 
 # AFM Images
 
 Loading an AFM image into memory works as follows:
 
 ```R
-fname = 'image.ibw' # Igor Wavefile, NID file
+fname = 'image.ibw' # Igor Wavefile, NID file, AR file, or Nanoscope file
 d = read.AFM_file(fname)
 ```
 
@@ -68,30 +61,6 @@ ggplot(d1, aes(x.nm, z.nm)) +
   theme_bw()
 ```
 
-# NanoSurf Images
-
-
-The image can be loaded into memory using `NID.loadImage` command using a filename and the image number. The image is automatically flattened and contains both the original measurement (z) as well as the flattened image (z.flatten); so here is an example:
-
-```R
-library(nanoscopeAFM)
-library(ggplot2)
-fname = dir(pattern='nid$', recursive = TRUE)
-d = NID.loadImage(fname[2],1)
-
-ggplot(d, aes(x*1e6,y*1e6, fill=z.flatten*1e9)) +
-    geom_raster() +
-    xlab(expression(paste('x (',mu,'m)'))) +
-    ylab(expression(paste('y (',mu,'m)'))) +
-    labs(fill='z (nm)') +
-    scale_y_continuous(expand=c(0,0))+
-    scale_x_continuous(expand=c(0,0))+
-    theme_bw()
-```    
-
-The first image is usually a topography channel (z-axis, units of meters) and the second image maybe the cantilever amplitude in units of voltage.
-
-![Rastered image after flattening](images/CalibrationGrid.png)
 
 
 ## Image Analysis
@@ -100,7 +69,7 @@ Histogram can be used to study the roughness or height levels:
 
 ```R
 # make a histogram
-ggplot(d, aes(x=z.flatten)) +
+ggplot(d, aes(x=z.nm)) +
     geom_histogram(aes(y=..density..),
     colour="black", fill="white", bins=200)+
     geom_density(alpha=0.2, fill='red')
@@ -109,14 +78,6 @@ ggplot(d, aes(x=z.flatten)) +
 ![histogram example](images/CalibrationGrid-Histogram.png)
 
 
-You may need to perform additional image analysis, for example you may want to remove the background. This can be performed with this code:
-
-```R
-library(raster)
-m1 = flatten.NID_matrix(m)
-plot(raster(m1))
-```
-![sample output from code above](images/Calibration-NID-File.Flattened.png)
 
 
 ## Frequency Sweep
@@ -150,25 +111,6 @@ plot(d2$distance, d2$z.flatten)
 # Nanoscope AFM images
 
 
-Similar functions are available for Nanoscope files
-
-```R
-fname = dir(pattern='\\.\\d+$', recursive = TRUE)
-for(f in fname) {
-    d = read.Nanoscope_file(f)
-    bin.data = d[[1]]
-    library(raster)
-    m = matrix(bin.data, nrow=sqrt(length(bin.data)))
-    plot(raster(m))
-}
-```
-
-For header information, you can run:
-
-```R
-h = read.Nanoscope_header(f)
-```
-
 Convert and save all files in folder to PNG format
 ```R
 # find the files
@@ -177,7 +119,7 @@ file.list = file.list[grep('\\d{3}$',file.list)]
 
 # save the first image of each AFM file
 for(f in file.list) {
-  d= read.Nanoscope_file_scaled(f)
+  d = AFM.read(f)
   ggplot() +
     geom_raster(data = d , aes(x = x, y = y, fill = z)) +
     coord_equal(expand=FALSE) +
@@ -189,6 +131,15 @@ for(f in file.list) {
   ggsave(file.path('',filename.png), dpi=300)
 }
 ```
+
+# Deprecated Functions
+
+In version 0.5 and earlier, some additional functions were available, these have been deprecated and should be replaced as follows:
+
+* read.AFM_file() -> AFM.read()
+* NID.loadImage() -> AFM.read()
+* flatten.NID_matrix() -> AFM.flatten()
+
 
 # Technical Notes
 

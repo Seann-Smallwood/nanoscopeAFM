@@ -2,7 +2,9 @@
 % Please edit documentation in R/AFM.flatten.R
 \name{AFM.flatten}
 \alias{AFM.flatten}
-\title{flattens an AFM image using a plane fit}
+\title{flattens an AFM image using a plane fit
+this flattens only z, not z.nm, so scaling
+factor would need to be applied for z.nm}
 \usage{
 AFM.flatten(d)
 }
@@ -14,9 +16,11 @@ flattened matrix with AFM image
 }
 \description{
 flattens an AFM image using a plane fit
+this flattens only z, not z.nm, so scaling
+factor would need to be applied for z.nm
 }
 \examples{
-filename = dir(pattern='\\\\d$', recursive=TRUE)[1]
+filename = dir(pattern='ibw$', recursive=TRUE)[1]
 d = AFM.read(filename)
 d$z.flatten = AFM.flatten(d)
 }

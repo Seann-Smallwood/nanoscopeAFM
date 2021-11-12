@@ -89,3 +89,152 @@ NID.getChannelScale <- function(headerList, imageNo = 1) {
                 length=2**get.NIDitem.numeric(h,'SaveBits'))
   rbind(ax,ay,az)
 }
+
+
+
+#' loads header of NanoSurf AFM NID file and returns
+#' parameters for particular image
+#'
+#' @param filename filename including path
+#' @param imageNo image number to get data on
+#' @return list
+#' @examples
+#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' read.NanoSurf_header(filename, 1)
+#' @export
+read.NanoSurf_header <- function(filename, imageNo=1) {
+  # read the NID header
+  k1 = read.NID_header(filename)[[2]]
+  k1 = enc2utf8(k1)
+  gsub('<b5>','\u00b5',k1) -> k1
+  gsub('<b0>','\u00b0',k1) -> k1
+  # k1[grep('<[0-9a-z][0-9a-z]>',k1)]   # <- find any extended ASCII
+  # separate groups
+  from = grep("^\\[.*\\]$",k1)
+  to = c(from[-1]-1, length(k1))
+  itemslist <- mapply(
+    function(x, y) return(k1[x:y]),
+    x = from, y = to - 1,
+    SIMPLIFY = FALSE
+  )
+  # add list with titles
+  allParams = c(list(c('HEADERS',k1[from])),itemslist)
+  p = c()
+
+  # extract specific information
+  dataSet = grep('\\[DataSet\\]',allParams[[1]])
+  p = c(p, allParams[[dataSet]][c(2,3)])
+
+  dataSetInfo = grep('\\[DataSet-Info\\]',allParams[[1]])
+  p = c(p,allParams[[dataSetInfo]][grep('^--\\s',allParams[[dataSetInfo]], invert=TRUE)[-1]])
+
+  # convert to associative array
+  pspl = strsplit(p, '=', useBytes=TRUE)
+  p2=c()
+  p2[sapply(pspl,'[[',1)] = sapply(pspl,'[[',2)
+  p2
+}
+
+
+# > k1[from]
+# [1] "[DataSet]"                           "[DataSet-Info]"                      "[DataSet\\DataSetInfos]"
+# [4] "[DataSet\\DataSetInfos\\Scan]"       "[DataSet\\DataSetInfos\\Feedback]"   "[DataSet\\DataSetInfos\\Global]"
+# [7] "[DataSet\\DataSetInfos\\Module]"     "[DataSet\\Calibration]"              "[DataSet\\Calibration\\Scanhead]"
+# [10] "[DataSet\\Calibration\\Cantilever]"  "[DataSet\\Parameters]"               "[DataSet\\Parameters\\Approach]"
+# [13] "[DataSet\\Parameters\\ZFeedback]"    "[DataSet\\Parameters\\Lithography]"  "[DataSet\\Parameters\\Imaging]"
+# [16] "[DataSet\\Parameters\\SignalIO]"     "[DataSet\\Parameters\\Spectroscopy]" "[DataSet\\Parameters\\SPMSystem]"
+# [19] "[DataSet-0:1]"                       "[DataSet-0:2]"                       "[DataSet-1:1]"
+# [22] "[DataSet-1:2]"                       "[SetView]"                           "[SetView-View0]"
+# [25] "[SetView-View1]"                     "[SetView-View2]"                     "[SetView-View3]"
+
+# ######################################
+# read NID file, AFM file
+#
+# Date: 2019-02-10
+# Author: Thomas Gredig
+#
+# ######################################
+
+# loads header of NanoSurf NID file as text vector
+#
+# str(t)
+# List of 2
+# $ header.len: num 12917
+# $ header    : chr [1:626] "[DataSet]" "Version=2" "GroupCount=2" "Gr0-Name=Scan forward" ...
+# > head(t[[2]])
+# [1] "[DataSet]"             "Version=2"             "GroupCount=2"          "Gr0-Name=Scan forward"
+# [5] "Gr0-ID=0"              "Gr0-Count=21"
+read.NID_header <- function(filename) {
+  if (!file.exists(filename)) { return(empty.header) }
+  Sys.setlocale('LC_ALL','en_US')
+  con <- file(filename,"rb")
+  rline = ''
+  i=0
+  dlen.header = 0
+  while( TRUE ) {
+    rline = readLines(con,n=1)
+    if (substr(rline,1,2) == "#!" ) break
+    i = i + 1
+    dlen.header = dlen.header + nchar(rline, type="bytes") + 2
+  }
+  close(con)
+
+  con <- file(filename,"rb")
+  header = readLines(con, n=(i-1))
+  close(con)
+
+  list(header.len = dlen.header, header = header)
+}
+
+
+#' loads header of NID file and separates into items
+#' first item in list has the titles of the others
+#'
+#' @param filename filename including path
+#' @return list
+#' @examples
+#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' read.NID_headerItems(filename)
+#' @export
+read.NID_headerItems <- function(filename) {
+  # read the NID header
+  k1 = read.NID_header(filename)[[2]]
+  # separate groups
+  from = grep("^\\[.*\\]$",k1)
+  to = c(from[-1]-1, length(k1))
+  itemslist <- mapply(
+    function(x, y) return(k1[x:y]),
+    x = from, y = to - 1,
+    SIMPLIFY = FALSE
+  )
+  # add list with titles
+  c(list(c('HEADERS',k1[from])),itemslist)
+}
+
+#' checks AFM NID file length
+#'
+#' @param filename filename including path
+#' @return mismatch in image size + header with file size (should be 0)
+#' @examples
+#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' d = NID.checkFile(filename)
+NID.checkFile <- function(filename) {
+  # does file exist?
+  if (!file.exists(filename)) return -1
+  # length of file in bytes
+  file.len = file.info(filename)$size
+
+  # read header
+  h = read.NID_header(filename)
+  # get header length in bytes
+  header.length = h[[1]]
+
+  # get number of images and size of images
+  q = get.NID_imageInfo(h[[2]])
+
+  # compare file length with images + header +
+  # 2 bytes for #! character, which is the beginning
+  # of the images
+  file.len - sum(q*q)*2 - header.length - 2
+}
+

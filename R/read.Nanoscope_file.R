@@ -16,38 +16,36 @@ read.Nanoscope_file <- function(filename, no=1) {
   # read header information
   #h = read.Nanoscope_header(filename)
   h = read.Nanoscope_params(filename, no)
-  if (nrow(h)==0) {
+  if (length(h)==0) {
     warning(paste("Nanoscope Load Error: File",filename,"has no header information."))
   } else {
-    line.num = as.numeric(h$value[grep('Number of lines',h$name)])
-    lines = line.num[1]
-    line.sam = as.numeric(h$value[grep('Samps/line',h$name)[-1]])
-    zScale = h$value[grep('Sens. Zscan',h$name)]
-    zSens = h$value[grep('Z center',h$name)]
-    image.size = h$value[grep('Scan size',h$name)[-1]]
+    line.num = as.numeric(h['Number of lines'])
+    line.sam = as.numeric(h['Samps/line'])
+    zScale = h['AT-Sens. Zscan']
+    zSens = h['AT-Z center']
+    image.size = h['Scan size']
     Scale.nm.V = as.numeric(gsub(' nm/V','',stringr::str_extract(zScale, pattern = '\\d+\\.\\d+ nm/V$')))
     Sens.V = as.numeric(gsub(' V','',stringr::str_extract(zSens, pattern = '\\d+\\.\\d+ V$')))
     zConversion = Scale.nm.V*Sens.V/(2^16)
-    qq = strsplit(image.size[1],' ')
-    width.nm = as.numeric(sapply(qq,'[[',2))
-    height.nm = as.numeric(sapply(qq,'[[',3))
-    units = sapply(qq,'[[',4)
+    wh = strsplit(gsub('\\s*(.*)\\s.*','\\1', h['Scan size2'])," ")[[1]]
+    width.nm = as.numeric(wh[1])
+    height.nm = as.numeric(wh[2])
     # convert to nm
-    if (units=='~m') {
+    if (length(grep('~m',h['Scan size2']))) {
       width.nm = width.nm*1000
       height.nm = height.nm *1000
     } else if (!(units=='nm')) {
       warning(paste('Nanoscope units are neither nm nor um, but ',units))
     }
 
-    step.nm = height.nm / lines
+    step.nm = height.nm / line.num
 
     # load image
-    x.nm = rep(seq(from=0, to=width.nm, length=lines), lines)
-    y.nm = rep(seq(from=0, to=height.nm, length=lines), each=lines)
+    x.nm = rep(seq(from=0, to=width.nm, length=line.num), line.num)
+    y.nm = rep(seq(from=0, to=height.nm, length=line.num), each=line.num)
     z = read.Nanoscope_BIN(filename, no)
-    d = data.frame(x = rep(1:lines, lines),
-                   y =  rep(1:lines, each=lines),
+    d = data.frame(x = rep(1:line.num, line.num),
+                   y =  rep(1:line.num, each=line.num),
                    z,
                    x.nm,
                    y.nm,
@@ -112,21 +110,124 @@ read.Nanoscope_header <- function(filename) {
   }
 }
 
-
+# > h$name[sections]
+# [1] "*File list"       "*Equipment list"  "*Scanner list"    "*Ciao scan list"  "*Fast Scan list"  "*Ciao image list"
+# [7] "*Ciao image list" "*File list end"
 # returns header information for particular image number only
 read.Nanoscope_params <- function(filename, no=1) {
   h = read.Nanoscope_header(filename)
   # parse out parameters that are relevant to image number no
   sections = grep('NEW SECTION', h$value)
-  imNo = grep('Ciao image list$',h$name[sections])[no]
   fileNo = grep('File list$', h$name[sections])
   scanNo = grep('Scanner list$', h$name[sections])
   ciaoNo = grep('Ciao scan list$', h$name[sections])
   eqipNo = grep('Equipment list', h$name[sections])
+  imNo = grep('Ciao image list$',h$name[sections])[no]
 
-  h[c(sections[fileNo]:(sections[fileNo+1]-1),
+  h = h[c(sections[fileNo]:(sections[fileNo+1]-1),
       sections[eqipNo]:(sections[eqipNo+1]-1),
       sections[scanNo]:(sections[scanNo+1]-1),
       sections[ciaoNo]:(sections[ciaoNo+1]-1),
       sections[imNo]:(sections[imNo+1]-1)),]
+
+  # tidy up some of the names
+  gsub("^\\*", 'SECTION-' , h$name) -> h$name
+  winNum = grep("^@\\d", h$name)
+  nl = unique(h$name[winNum])
+  for(nm in nl) { n1 = which(h$name==nm); v1 = paste(h$value[n1], collapse=';;'); h=h[-n1,]; h=rbind(h,data.frame(name=nm,value=v1)); }
+  gsub('^@','AT-',h$name) -> h$name
+  nl = h$name[duplicated(h$name)==TRUE]
+  for(nm in nl) { j=1; for(i in which(h$name==nm)) { if(j>1) {h$name[i] = paste0(h$name[i],j)}; j=j+1; } }
+
+  p2=c()
+  p2[h$name] = h$value
+  p2
 }
+
+
+
+
+# ######################################
+# read NID file, AFM file
+#
+# Date: 2019-02-10
+# Author: Thomas Gredig
+#
+# ######################################
+#
+# # Nanosurf image data format (NID format)
+# # from easyscan AFM
+#
+#
+# # read the header of the NID AFM files
+# # seems header file ends with "" (empty) or
+# # with #!F
+# ######################################
+
+#empty.header = list(header.len = 0, header = c(''))
+
+#' loads header of AFM NID file
+#'
+#' @param filename filename including path
+#' @return list with length in bytes and header as text
+#' @examples
+#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' read.NID_header(filename)
+#' @export
+read.NID_header <- function(filename) {
+  if (!file.exists(filename)) { return(empty.header) }
+  Sys.setlocale('LC_ALL','en_US')
+  con <- file(filename,"rb")
+  rline = ''
+  i=0
+  dlen.header = 0
+  while( TRUE ) {
+    rline = readLines(con,n=1)
+    if (substr(rline,1,2) == "#!" ) break
+    i = i + 1
+    dlen.header = dlen.header + nchar(rline, type="bytes") + 2
+  }
+  close(con)
+
+  con <- file(filename,"rb")
+  header = readLines(con, n=(i-1))
+  close(con)
+
+  list(header.len = dlen.header, header = header)
+}
+
+
+
+
+#' returns number of lines for each image
+#'
+#' @param header.string header string of NID file (use read.NID_header)
+#' @return vector with line numbers for each image
+#' @examples
+#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' hdr = read.NID_header(filename)
+#' get.NID_imageInfo(hdr[[2]])
+#' @export
+get.NID_imageInfo <- function(header.string) {
+  # split data sets
+  from = grep('\\[DataSet-',header.string)
+  to = c(from[-1]-1, length(header.string))
+
+  itemslist <- mapply(
+    function(x, y) return(header.string[x:y]),
+    x = from, y = to,
+    SIMPLIFY = FALSE
+  )
+  itemslist[[1]] <- NULL
+
+  image.Lines <- lapply(itemslist,
+                        function(x) {
+                          x[grep('Lines',x)]
+                        }
+  )
+
+  as.numeric(
+    unlist(lapply(image.Lines, function(x) { sapply(strsplit(x,"="),'[[',2) }))
+  )
+}
+

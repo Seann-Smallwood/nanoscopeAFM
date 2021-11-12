@@ -1,9 +1,11 @@
 #' flattens an AFM image using a plane fit
+#' this flattens only z, not z.nm, so scaling
+#' factor would need to be applied for z.nm
 #'
 #' @param d data.frame with AFM image
 #' @return flattened matrix with AFM image
 #' @examples
-#' filename = dir(pattern='\\d$', recursive=TRUE)[1]
+#' filename = dir(pattern='ibw$', recursive=TRUE)[1]
 #' d = AFM.read(filename)
 #' d$z.flatten = AFM.flatten(d)
 #' @export

@@ -3,6 +3,11 @@
 Author: **Thomas Gredig**
 
 
+## nanoscopeAFM 0.6.2
+
+* add AFM.info with common information about AFM image
+
+
 ## nanoscopeAFM 0.6.1
 
 * Major update, rename most functions (see README for deprecated functions)

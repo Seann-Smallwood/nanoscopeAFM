@@ -2,7 +2,8 @@
 % Please edit documentation in R/AFM.info.R
 \name{AFM.info}
 \alias{AFM.info}
-\title{find AFM image information}
+\title{find AFM image information, much of the information is specific to the
+AFM instrument; common pieces are included with the tag INFO}
 \usage{
 AFM.info(filename, no = 1)
 }
@@ -12,10 +13,11 @@ AFM.info(filename, no = 1)
 \item{no}{channel number (for Veeco, NanoSurf, AR)}
 }
 \value{
-returns gerenal information about the AFM image
+returns information about the AFM image as an associative vector
 }
 \description{
-find AFM image information
+find AFM image information, much of the information is specific to the
+AFM instrument; common pieces are included with the tag INFO
 }
 \examples{
 filename = dir(pattern='ibw$', recursive=TRUE)[1]

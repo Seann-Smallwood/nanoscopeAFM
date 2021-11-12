@@ -1,4 +1,5 @@
-#' loads AFM image file
+#' loads AFM image files from different instruments and stores 6 rows (x,y,z) and also (x.nm, y.nm, z.nm) with
+#' units in nanometer
 #'
 #' @param filename filename of (Veeco, Park, AR, NanoSurf) AFM image including path
 #' @param no channel number (for Veeco, NanoSurf, AR)
@@ -23,8 +24,6 @@ AFM.read <- function(filename, no=1) {
       df = read.Nanoscope_file(filename,no)
     }
     attr(df,'filename')=basename(filename)
-    # df$x.nm = attr(df, "convFactor") * (df$x-1) * 1e9
-    # df$y.nm = attr(df, "convFactor") * (df$y-1) * 1e9
   } # else { warning(paste("File does not exist:",filename)) }
   df
 }

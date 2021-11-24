@@ -2,7 +2,10 @@
 % Please edit documentation in R/read.AR_file.R
 \name{read.AR_eofHeader.V2}
 \alias{read.AR_eofHeader.V2}
-\title{returns names of AR channel names}
+\title{returns the version 2 header information tagged
+at the end of the AR file, which includes several tags
+including the $DataTypeList and $NumberOfFiles
+ex: "HeightRetrace,AmplitudeRetrace,PhaseRetrace,ZSensorRetrace,"}
 \usage{
 read.AR_eofHeader.V2(wavefile, Verbose = FALSE)
 }
@@ -15,9 +18,13 @@ read.AR_eofHeader.V2(wavefile, Verbose = FALSE)
 list of channels and additional information
 }
 \description{
-returns names of AR channel names
+returns the version 2 header information tagged
+at the end of the AR file, which includes several tags
+including the $DataTypeList and $NumberOfFiles
+ex: "HeightRetrace,AmplitudeRetrace,PhaseRetrace,ZSensorRetrace,"
 }
 \examples{
 filename = dir(pattern='ibw$', recursive=TRUE)[1]
-afmHeadInfo = read.AR_eofHeader.V2(filename)
+afmV2header = read.AR_eofHeader.V2(filename)
+afmV2header$DataTypeList
 }

@@ -1,6 +1,12 @@
 # Read Park AFM files
 # Author: Thomas Gredig
 # =====================
+
+# private files used with read.Park_file.R
+#
+NULL
+
+
 tagReader <- function(fname) {
   # check if file exists
   if (!file.exists(fname)) stop(paste("file",fname,"not found!"))

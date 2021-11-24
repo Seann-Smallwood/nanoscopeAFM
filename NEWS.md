@@ -6,6 +6,7 @@ Author: **Thomas Gredig**
 
 * add notes/comments to INFO
 * open MFM images from Igor with Nap files
+* using field descriptions: https://github.com/wking/igor/blob/master/igor/binarywave.py
 
 
 ## nanoscopeAFM 0.6.2

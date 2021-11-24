@@ -2,6 +2,24 @@ context("Asylum Research AFM image check")
 
 COMMON.INFO.ITEMS = 7
 
+
+test_that("AR: check channels ", {
+  filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
+                                        pattern='ibw$', recursive = TRUE)[1])
+  h1 = read.AR_eofHeader.V2(filename)
+  ch = .getChannelName(h1,1)
+  expect_equal(.getChannelUnits(ch),"m")
+  ch = .getChannelName(h1,2)
+  expect_equal(.getChannelUnits(ch),"m")
+  ch = .getChannelName(h1,3)
+  expect_equal(.getChannelUnits(ch),"deg")
+  ch = .getChannelName(h1,4)
+  expect_equal(.getChannelUnits(ch),"m")
+  expect_equal(as.numeric(h1$NumberOfFiles),4)
+})
+
+
+
 test_that("check AR image loads", {
   filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
                                         pattern='ibw$', recursive = TRUE)[1])
@@ -26,12 +44,12 @@ test_that("check AR image size ", {
 })
 
 
-test_that("AR: loading image out of bounds ", {
-  filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
-                                        pattern='ibw$', recursive = TRUE)[1])
-  d = AFM.read(filename,20)
-  expect_equal(length(d), 0)
-})
+# test_that("AR: loading image out of bounds ", {
+#   filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
+#                                         pattern='ibw$', recursive = TRUE)[1])
+#   d = AFM.read(filename,20)
+#   expect_equal(length(d), 0)
+# })
 
 test_that("AR: check version 2 channel list ", {
   filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
@@ -40,11 +58,3 @@ test_that("AR: check version 2 channel list ", {
   expect_equal(length(h1), 13)
 })
 
-
-test_that("AR: test channel names ", {
-  filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
-                                        pattern='ibw$', recursive = TRUE)[1])
-  s1 = read.AR_channelNames(filename)
-  #dput(s1)
-  expect_equal(length(s1), 4)
-})

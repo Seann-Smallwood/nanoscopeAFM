@@ -8,6 +8,10 @@
 #' d = read.AR_file(filename)
 #' @export
 read.AR_file <- function(filename, no=1) {
+  h1 = read.AR_eofHeader.V2(filename)
+  if (no > as.numeric(h1$NumberOfFiles)) warning("Requested image no is out of range.")
+  channelName = .getChannelName(h1, no)
+  units = .getChannelUnits(channelName)
   suppressWarnings({
     d = IgorR::read.ibw(filename)
   })
@@ -15,6 +19,8 @@ read.AR_file <- function(filename, no=1) {
   imageDim <- q2$nDim[1:2]
   noChannels <- q2$nDim[3]
   dr = data.frame()
+  attr(dr, "channel") = channelName
+  attr(dr, "units") = units
 
   if(no <= noChannels) {
     x = 1:dim(d)[1]
@@ -79,33 +85,19 @@ read.AR_header <- function(filename, no=1) {
 }
 
 
-#' returns names of AR channels
-#'
-#' @param filename filename including path
-#' @return string with channel names ("Height", "Amplitude")
-#' @examples
-#' filename = dir(pattern='ibw$', recursive=TRUE)[1]
-#' s1 = read.AR_channelNames(filename)
-read.AR_channelNames <- function(filename) {
-  read.AR_header(filename) -> r1
-  # find Channel Names for AR:
-  channelNames = c(paste0(r1[grep('^Channel',attr(r1,'names'))]))
-  NapMode = as.numeric(r1[grep('NapMode',attr(r1,'names'))])
-  if (NapMode==1) {
-    channelNames = c(channelNames,paste0('Nap',r1[grep('^FastMap\\d',attr(r1,'names'))]))
-  }
-  channelNames = gsub('\\s+','',channelNames)
-  channelNames[-which(channelNames=='None')]
-}
 
-#' returns names of AR channel names
+#' returns the version 2 header information tagged
+#' at the end of the AR file, which includes several tags
+#' including the $DataTypeList and $NumberOfFiles
+#' ex: "HeightRetrace,AmplitudeRetrace,PhaseRetrace,ZSensorRetrace,"
 #'
 #' @param wavefile filename including path
 #' @param Verbose if true, returns additional information
 #' @return list of channels and additional information
 #' @examples
 #' filename = dir(pattern='ibw$', recursive=TRUE)[1]
-#' afmHeadInfo = read.AR_eofHeader.V2(filename)
+#' afmV2header = read.AR_eofHeader.V2(filename)
+#' afmV2header$DataTypeList
 #' @export
 read.AR_eofHeader.V2 <- function(wavefile, Verbose = FALSE) {
   con <- file(wavefile, "rb",encoding="macintosh")
@@ -127,7 +119,7 @@ read.AR_eofHeader.V2 <- function(wavefile, Verbose = FALSE) {
 
   # read complete header version 2
   s3=list()
-  if (headerSize>10 & headerSize<1000) {
+  if (headerSize>10 & headerSize<1200) {
     seek(con, where=fsize-headerSize)
     rawc = readBin(con, what="raw", headerSize)
     s=readBin(rawc, what="character")
@@ -136,5 +128,22 @@ read.AR_eofHeader.V2 <- function(wavefile, Verbose = FALSE) {
 
     s3[sapply(p3,'[[',1)] =  sapply(p3,'[[',2)
   } else { warning("Header size incorrect.") }
+  close(con)
+
   s3
+}
+
+
+# private files
+NULL
+
+.getChannelName <- function(h1,no) {
+  # from h1=read.AR_eofHeader.V2(filename)
+  strsplit(h1$DataTypeList,",")[[1]][no]
+}
+
+.getChannelUnits <- function(channelName) {
+  units = "m"  # default units
+  if(grepl('Phase',channelName)) units="deg"
+  units
 }

@@ -4,6 +4,7 @@
 #' @param filename filename of (Veeco, Park, AR, NanoSurf) AFM image including path
 #' @param no channel number (for Veeco, NanoSurf, AR)
 #' @return AFM image with attributes
+#' @author thomasgredig
 #' @examples
 #' filename = dir(pattern='ibw$', recursive=TRUE)[1]
 #' d = AFM.read(filename)

@@ -33,6 +33,13 @@ test_that("AR: loading image out of bounds ", {
   expect_equal(length(d), 0)
 })
 
+test_that("AR: check version 2 channel list ", {
+  filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
+                                        pattern='ibw$', recursive = TRUE)[1])
+  h1 = read.AR_eofHeader.V2(filename)
+  expect_equal(length(h1), 13)
+})
+
 
 test_that("AR: test channel names ", {
   filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),

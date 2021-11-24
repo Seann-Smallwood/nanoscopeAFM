@@ -86,7 +86,6 @@ read.AR_header <- function(filename, no=1) {
 #' @examples
 #' filename = dir(pattern='ibw$', recursive=TRUE)[1]
 #' s1 = read.AR_channelNames(filename)
-#' @export
 read.AR_channelNames <- function(filename) {
   read.AR_header(filename) -> r1
   # find Channel Names for AR:
@@ -96,6 +95,46 @@ read.AR_channelNames <- function(filename) {
     channelNames = c(channelNames,paste0('Nap',r1[grep('^FastMap\\d',attr(r1,'names'))]))
   }
   channelNames = gsub('\\s+','',channelNames)
-  channelNames = channelNames[-which(channelNames=='None')]
+  channelNames[-which(channelNames=='None')]
 }
 
+#' returns names of AR channel names
+#'
+#' @param wavefile filename including path
+#' @param Verbose if true, returns additional information
+#' @return list of channels and additional information
+#' @examples
+#' filename = dir(pattern='ibw$', recursive=TRUE)[1]
+#' afmHeadInfo = read.AR_eofHeader.V2(filename)
+#' @export
+read.AR_eofHeader.V2 <- function(wavefile, Verbose = FALSE) {
+  con <- file(wavefile, "rb",encoding="macintosh")
+
+  # check Igor Wavefile is version 5
+  bytes=readBin(con,"integer",2,size=1)
+  if(bytes[1]==0){ endian="big"; version=bytes[2] } else { endian="little"; version=bytes[1] }
+  if(Verbose) cat("version = ",version,"endian = ",endian,"\n")
+  if(version != 5) { warning("Not sure how to read IBW")}
+
+  # find the end of the file
+  fsize = file.info(wavefile)$size
+  seek(con, where=fsize-10)
+  # read header size
+  rawc = readBin(con, what="raw", 10)    # "0466 MFP3D"
+  s=readBin(rawc, what="character")
+  headerSize = as.numeric(gsub('^(\\d+).*','\\1',s))
+  if(Verbose) cat("headerSize = ",headerSize,"\n")
+
+  # read complete header version 2
+  s3=list()
+  if (headerSize>10 & headerSize<1000) {
+    seek(con, where=fsize-headerSize)
+    rawc = readBin(con, what="raw", headerSize)
+    s=readBin(rawc, what="character")
+    p2= strsplit(strsplit(s,';')[[1]],":")
+    p3 = p2[which(sapply(p2, length)==2)]
+
+    s3[sapply(p3,'[[',1)] =  sapply(p3,'[[',2)
+  } else { warning("Header size incorrect.") }
+  s3
+}

@@ -28,7 +28,7 @@ fname = 'image.ibw' # Igor Wavefile, NID file, AR file, or Nanoscope file
 d = read.AFM_file(fname)
 ```
 
-The attributes can be viewed with `str(d)` and include units. The conversion from line to distance is made with the `attr(d, "convFactor")` factor. The image is usually displayed as follows:
+The attributes can be viewed with `str(d)` and include units.
 
 ```R
 library(ggplot2)

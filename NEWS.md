@@ -2,6 +2,11 @@
 
 Author: **Thomas Gredig**
 
+## nanoscopeAFM 0.6.3
+
+* add notes/comments to INFO
+* open MFM images from Igor with Nap files
+
 
 ## nanoscopeAFM 0.6.2
 

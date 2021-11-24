@@ -23,3 +23,6 @@ units in nanometer
 filename = dir(pattern='ibw$', recursive=TRUE)[1]
 d = AFM.read(filename)
 }
+\author{
+thomasgredig
+}

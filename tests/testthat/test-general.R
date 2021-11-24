@@ -17,7 +17,7 @@ test_that("flattening image", {
 
 context("AFM info header information")
 
-COMMON.INFO.ITEMS = 8
+COMMON.INFO.ITEMS = 9
 
 test_that("PARK AFM info", {
   filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),

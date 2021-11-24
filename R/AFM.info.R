@@ -28,6 +28,7 @@ AFM.info <- function(filename, no=1) {
       r=c(r,INFO.height.nm=as.numeric(r['SlowScanSize']))
       r=c(r,INFO.scanRate.Hz=scanRate)
       r=c(r,INFO.vibrationFreq.Hz=as.numeric(r['ResFreq1']))
+      r=c(r,INFO.note=as.character(r['ImageNote']))
 
       # ===============
     } else if (fext=='nid') {
@@ -45,6 +46,7 @@ AFM.info <- function(filename, no=1) {
       r=c(r,INFO.height.nm=width.nm)
       r=c(r,INFO.scanRate.Hz=1/as.numeric(gsub('s','',r['Time/Line'])))
       r=c(r,INFO.vibrationFreq.Hz=as.numeric(r['Vibration freq']))
+      r=c(r,INFO.note='')
 
       # ===============
     } else if (fext=='tiff') {
@@ -63,6 +65,7 @@ AFM.info <- function(filename, no=1) {
       r=c(r,INFO.height.nm=as.numeric(r['dfYScanSizeum'])*1000)
       r=c(r,INFO.scanRate.Hz=as.numeric(r['dfScanRateHz']))
       r=c(r,INFO.vibrationFreq.Hz=NA)
+      r=c(r,INFO.note='')
 
       # ===============
     } else {
@@ -79,6 +82,7 @@ AFM.info <- function(filename, no=1) {
       r=c(r,INFO.height.nm=as.numeric(wh[2])*1000)
       r=c(r,INFO.scanRate.Hz=as.numeric(r['Scan rate']))
       r=c(r,INFO.vibrationFreq.Hz=NA)
+      r=c(r,INFO.note='')
 
       # ===============
     }

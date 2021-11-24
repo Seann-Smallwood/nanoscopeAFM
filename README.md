@@ -62,6 +62,23 @@ ggplot(d1, aes(x.nm, z.nm)) +
 ```
 
 
+## Image Info
+
+Use the `AFM.info()` function to obtain information about the AFM image. The information depends on the file format, but some items are common for all images; these items start with **"INFO."**.
+
+```R
+AFM.info(fname) -> r1
+r1[grep('INFO.',attr(r1,'names'))]
+```
+
+The AFM image information can also be saved into a file.
+
+```R
+AFM.info(fname) -> r1
+d2 = data.frame(n = attr(r1, "names"), val=r1)
+write.csv(d2, file='AFMinfo.csv', row.names = FALSE)
+```
+
 
 ## Image Analysis
 

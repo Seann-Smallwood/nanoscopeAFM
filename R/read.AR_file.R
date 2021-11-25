@@ -1,4 +1,6 @@
-#' loads Asylum Research Igor Wave AFM files
+#' loads Asylum Research Igor AFM wavefile
+#' which can contain multiple images, returns channel
+#' name and units in attributes
 #'
 #' @param filename filename including path
 #' @param no number of the channel
@@ -6,12 +8,14 @@
 #' @examples
 #' filename = dir(pattern='ibw$', recursive=TRUE)[1]
 #' d = read.AR_file(filename)
+#' attr(d, 'channel')
 #' @export
 read.AR_file <- function(filename, no=1) {
   h1 = read.AR_eofHeader.V2(filename)
   if (no > as.numeric(h1$NumberOfFiles)) warning("Requested image no is out of range.")
   channelName = .getChannelName(h1, no)
   units = .getChannelUnits(channelName)
+
   suppressWarnings({
     d = IgorR::read.ibw(filename)
   })
@@ -19,8 +23,6 @@ read.AR_file <- function(filename, no=1) {
   imageDim <- q2$nDim[1:2]
   noChannels <- q2$nDim[3]
   dr = data.frame()
-  attr(dr, "channel") = channelName
-  attr(dr, "units") = units
 
   if(no <= noChannels) {
     x = 1:dim(d)[1]
@@ -32,14 +34,27 @@ read.AR_file <- function(filename, no=1) {
       z = d[zp]
     )
 
+    attr(dr, "channel") = channelName
+    attr(dr, "units") = units
+
     sfA = q2['sfA']$sfA
     convFactor <- sfA[no]
-    Units <- q2$dimUnits[no]
+    wfUnits <- q2$dimUnits[no]
 
-    dr$x.nm = convFactor*1e9 * dr$x
-    dr$y.nm = convFactor*1e9 * dr$y
-    dr$z.nm = 1e9 * dr$z
-    dr$z.nm = dr$z.nm - min(dr$z.nm)
+    if (units=='m') {
+      dr$x.nm = convFactor*1e9 * dr$x
+      dr$y.nm = convFactor*1e9 * dr$y
+      dr$z.nm = 1e9 * dr$z
+      dr$z.nm = dr$z.nm - min(dr$z.nm)
+    } else {
+      dr$x.nm = convFactor*1e9 * dr$x
+      dr$y.nm = convFactor*1e9 * dr$y
+      dr$z.nm = dr$z
+    }
+
+    attr(dr, "convFactor") = sfA[no]
+    attr(dr, "channelDirection") = .getChannelDirection(h1, no)
+    attr(dr, "noImages") = h1$NumberOfFiles
   }
   dr
 }
@@ -139,7 +154,12 @@ NULL
 
 .getChannelName <- function(h1,no) {
   # from h1=read.AR_eofHeader.V2(filename)
-  strsplit(h1$DataTypeList,",")[[1]][no]
+  gsub('(.*)[RT][er].*$','\\1',strsplit(h1$DataTypeList,",")[[1]][no])
+}
+
+.getChannelDirection <- function(h1,no) {
+  # from h1=read.AR_eofHeader.V2(filename)
+  gsub('.*?([RT][er].*)$','\\1',strsplit(h1$DataTypeList,",")[[1]][no])
 }
 
 .getChannelUnits <- function(channelName) {

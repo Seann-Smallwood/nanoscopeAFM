@@ -19,11 +19,11 @@ test_that("AR: check channels ", {
 })
 
 
-
 test_that("check AR image loads", {
   filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
                                         pattern='ibw$', recursive = TRUE)[1])
   d = read.AR_file(filename,1)
+  expect_equal(attr(d,'units'),"m")
   expect_equal(nrow(d),128*128)
 })
 

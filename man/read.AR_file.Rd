@@ -2,7 +2,9 @@
 % Please edit documentation in R/read.AR_file.R
 \name{read.AR_file}
 \alias{read.AR_file}
-\title{loads Asylum Research Igor Wave AFM files}
+\title{loads Asylum Research Igor AFM wavefile
+which can contain multiple images, returns channel
+name and units in attributes}
 \usage{
 read.AR_file(filename, no = 1)
 }
@@ -15,9 +17,12 @@ read.AR_file(filename, no = 1)
 image with attributes
 }
 \description{
-loads Asylum Research Igor Wave AFM files
+loads Asylum Research Igor AFM wavefile
+which can contain multiple images, returns channel
+name and units in attributes
 }
 \examples{
 filename = dir(pattern='ibw$', recursive=TRUE)[1]
 d = read.AR_file(filename)
+attr(d, 'channel')
 }

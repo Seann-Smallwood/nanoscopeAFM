@@ -4,6 +4,7 @@
 #' @param filename filename of (Veeco, Park, AR, NanoSurf) AFM image including path
 #' @param no channel number (for Veeco, NanoSurf, AR)
 #' @return returns information about the AFM image as an associative vector
+#' @author thomasgredig
 #' @examples
 #' filename = dir(pattern='ibw$', recursive=TRUE)[1]
 #' d = AFM.info(filename)

@@ -23,3 +23,6 @@ AFM instrument; common pieces are included with the tag INFO
 filename = dir(pattern='ibw$', recursive=TRUE)[1]
 d = AFM.info(filename)
 }
+\author{
+thomasgredig
+}

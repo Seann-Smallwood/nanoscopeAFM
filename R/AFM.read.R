@@ -1,5 +1,6 @@
-#' loads AFM image files from different instruments and stores 6 rows (x,y,z) and also (x.nm, y.nm, z.nm) with
-#' units in nanometer
+#' loads AFM image files from different instruments and stores 6 rows (x,y,z) and
+#' converted units, when possible (xc,yc,zc), use the attributes to find the units and
+#' channel name
 #'
 #' @param filename filename of (Veeco, Park, AR, NanoSurf) AFM image including path
 #' @param no channel number (for Veeco, NanoSurf, AR)

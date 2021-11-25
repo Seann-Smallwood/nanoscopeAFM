@@ -5,6 +5,7 @@
 #' @param filename filename including path
 #' @param no number of the channel
 #' @return image with attributes
+#' @author thomasgredig
 #' @examples
 #' filename = dir(pattern='ibw$', recursive=TRUE)[1]
 #' d = read.AR_file(filename)

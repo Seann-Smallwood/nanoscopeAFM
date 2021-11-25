@@ -26,3 +26,6 @@ filename = dir(pattern='ibw$', recursive=TRUE)[1]
 d = read.AR_file(filename)
 attr(d, 'channel')
 }
+\author{
+thomasgredig
+}

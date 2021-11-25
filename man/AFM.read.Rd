@@ -2,8 +2,9 @@
 % Please edit documentation in R/AFM.read.R
 \name{AFM.read}
 \alias{AFM.read}
-\title{loads AFM image files from different instruments and stores 6 rows (x,y,z) and also (x.nm, y.nm, z.nm) with
-units in nanometer}
+\title{loads AFM image files from different instruments and stores 6 rows (x,y,z) and
+converted units, when possible (xc,yc,zc), use the attributes to find the units and
+channel name}
 \usage{
 AFM.read(filename, no = 1)
 }
@@ -16,8 +17,9 @@ AFM.read(filename, no = 1)
 AFM image with attributes
 }
 \description{
-loads AFM image files from different instruments and stores 6 rows (x,y,z) and also (x.nm, y.nm, z.nm) with
-units in nanometer
+loads AFM image files from different instruments and stores 6 rows (x,y,z) and
+converted units, when possible (xc,yc,zc), use the attributes to find the units and
+channel name
 }
 \examples{
 filename = dir(pattern='ibw$', recursive=TRUE)[1]

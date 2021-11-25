@@ -1,6 +1,7 @@
 library(testthat)
 library(nanoscopeAFM)
 
+setwd('tests/testthat')
 test_check("nanoscopeAFM")
 
 # create a new test =======

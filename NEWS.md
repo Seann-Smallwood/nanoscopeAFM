@@ -2,6 +2,17 @@
 
 Author: **Thomas Gredig**
 
+
+## nanoscopeAFM 0.6.6
+
+* update test files:
+  - system.file("Park_20210916_034.tiff",package="nanoscopeAFM")
+  - system.file("AR_20211011.ibw",package="nanoscopeAFM")
+  - system.file("Veeco_20160622.003",package="nanoscopeAFM")
+  - system.file("NanoSurf_20160301.nid",package="nanoscopeAFM")
+
+
+
 ## nanoscopeAFM 0.6.3
 
 * add notes/comments to INFO

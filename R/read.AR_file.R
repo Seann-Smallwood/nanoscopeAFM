@@ -7,8 +7,7 @@
 #' @return image with attributes
 #' @author thomasgredig
 #' @examples
-#' filename = dir(pattern='ibw$', recursive=TRUE)[1]
-#' d = read.AR_file(filename)
+#' d = read.AR_file(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
 #' attr(d, 'channel')
 #' @export
 read.AR_file <- function(filename, no=1) {
@@ -66,8 +65,7 @@ read.AR_file <- function(filename, no=1) {
 #' @param no number of the channel
 #' @return image with attributes
 #' @examples
-#' filename = dir(pattern='ibw$', recursive=TRUE)[1]
-#' d = read.AR_header(filename)
+#' d = read.AR_header(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
 #' @export
 read.AR_header <- function(filename, no=1) {
   suppressWarnings({
@@ -111,7 +109,7 @@ read.AR_header <- function(filename, no=1) {
 #' @param Verbose if true, returns additional information
 #' @return list of channels and additional information
 #' @examples
-#' filename = dir(pattern='ibw$', recursive=TRUE)[1]
+#' filename = system.file("AR_20211011.ibw",package="nanoscopeAFM")
 #' afmV2header = read.AR_eofHeader.V2(filename)
 #' afmV2header$DataTypeList
 #' @export

@@ -2,7 +2,9 @@
 #'
 #' @param filename Park AFM filename including path
 #' @return image with attributes
+#' @author thomasgredig
 #' @examples
+#' filename = system.file("Park_20210916_034.tiff",package="nanoscopeAFM")
 #' d = read.Park_file(filename)
 #' @export
 read.Park_file <- function(filename) {

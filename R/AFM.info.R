@@ -3,13 +3,13 @@
 #'
 #' @param filename filename of (Veeco, Park, AR, NanoSurf) AFM image including path
 #' @param no channel number (for Veeco, NanoSurf, AR)
+#' @param fullInfo if \code{TRUE}, return all full header info
 #' @return returns information about the AFM image as an associative vector
 #' @author thomasgredig
 #' @examples
-#' filename = dir(pattern='ibw$', recursive=TRUE)[1]
-#' d = AFM.info(filename)
+#' h1 = AFM.info(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
 #' @export
-AFM.info <- function(filename, no=1) {
+AFM.info <- function(filename, no=1, fullInfo=FALSE) {
   r = c()  # associative array, all common tags start with INFO (mandatory), others are optional
   if (file.exists(filename)) {
     r=c(r,INFO.noImages=1)

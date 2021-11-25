@@ -7,12 +7,11 @@
 #' @return AFM image with attributes
 #' @author thomasgredig
 #' @examples
-#' filename = dir(pattern='ibw$', recursive=TRUE)[1]
-#' d = AFM.read(filename)
+#' d = AFM.read(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
 #' @export
 AFM.read <- function(filename, no=1) {
   # does file exist?
-  df = NULL
+  df = data.frame()
   if (file.exists(filename)) {
     # get file extension
     fext = tolower(tools::file_ext(filename))
@@ -26,6 +25,6 @@ AFM.read <- function(filename, no=1) {
       df = read.Nanoscope_file(filename,no)
     }
     attr(df,'filename')=basename(filename)
-  } # else { warning(paste("File does not exist:",filename)) }
+  }  else { warning(paste("File does not exist:",filename)) }
   df
 }

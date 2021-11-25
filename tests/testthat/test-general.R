@@ -7,8 +7,9 @@ test_that("check loading non-existant file", {
 })
 
 test_that("flattening image", {
-  filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
-                                        pattern='tiff$', recursive = TRUE)[1])
+#  filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
+#                                        pattern='tiff$', recursive = TRUE)[1])
+  system.file("Park_20210916_034.tiff",package="nanoscopeAFM")
   d = AFM.read(filename)
   expect_equal(length(AFM.flatten(d)),256*256)
 })

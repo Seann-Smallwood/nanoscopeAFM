@@ -11,6 +11,7 @@ test_that("check NID file reads correctly", {
 test_that("use general AFM reading function to read NanoSurf file", {
   filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
                                         pattern='nid$', recursive = TRUE)[1])
+  system.file("NanoSurf_20160301.nid",package="nanoscopeAFM")
   d = AFM.read(filename)
   expect_equal(length(d), 6)
   expect_equal(nrow(d),128*128)

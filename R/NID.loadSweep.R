@@ -3,8 +3,7 @@
 #' @param filename filename including path
 #' @return data.frame with data frames that have freq vs. ampl.
 #' @examples
-#' filename = dir(pattern='nid$', recursive=TRUE)[1]
-#' d = NID.loadSweep(filename)
+#' d = NID.loadSweep(system.file("NanoSurf_20160301.nid",package="nanoscopeAFM"))
 #' @export
 NID.loadSweep <- function(filename) {
   # read header file and find length

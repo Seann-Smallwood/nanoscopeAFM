@@ -18,6 +18,5 @@ image with attributes
 loads Asylum Research Igor Wave AFM files
 }
 \examples{
-filename = dir(pattern='ibw$', recursive=TRUE)[1]
-d = read.AR_header(filename)
+d = read.AR_header(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
 }

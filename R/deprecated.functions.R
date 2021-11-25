@@ -8,7 +8,7 @@
 #' @return flattened matrix with AFM image
 #' @author thomasgredig
 #' @examples
-#' filename = system.file("NanoSurf_20160301.nid",package="nanoscopeAFM")
+#' filename = system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM")
 #' d = read.NID_file(filename)
 #' m = matrix(d[[1]],nrow=256, ncol=256)
 #' flatten.NID_matrix(m)
@@ -36,7 +36,7 @@ flatten.NID_matrix <- function(m) {
 #' @return data.frame with four components, x and y-axes
 #'         and the z-axis (original) and flattened
 #' @examples
-#' filename = system.file("NanoSurf_20160301.nid",package="nanoscopeAFM")
+#' filename = system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM")
 #' d = NID.loadImage(filename,1)
 #' ggplot(d, aes(x,y,fill=z.flatten)) + geom_raster()
 #' @export
@@ -82,7 +82,7 @@ NID.loadImage <- function(filename,imageNo=1) {
 #' @param no channel number (for Veeco, NanoSurf, AR)
 #' @return AFM image with attributes
 #' @examples
-#' d = read.AFM_file(system.file("NanoSurf_20160301.nid",package="nanoscopeAFM"))
+#' d = read.AFM_file(system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM"))
 #' @export
 read.AFM_file <- function(filename, no=1) {
   warning('Depracated function: use AFM.read()')
@@ -98,7 +98,7 @@ read.AFM_file <- function(filename, no=1) {
 #' @param no number of the channel
 #' @return image with attributes
 #' @examples
-#' d = read.IBW_file(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = read.IBW_file(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' @export
 read.IBW_file <- function(filename, no=1) {
   warning("DEPRECATED: use read.AR_file() instead")
@@ -127,7 +127,7 @@ read.IBW_file <- function(filename, no=1) {
 #' @param filename filename including path
 #' @return list with header, file ID, and images
 #' @examples
-#' d = read.NID_file(system.file("NanoSurf_20160301.nid",package="nanoscopeAFM"))
+#' d = read.NID_file(system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM"))
 #' @export
 read.NID_file <- function(filename) {
   warning('DEPREACTED: use read.NanoSurf_file()')

@@ -18,6 +18,6 @@ loads header of NID file and separates into items
 first item in list has the titles of the others
 }
 \examples{
-filename = dir(pattern='nid$', recursive=TRUE)[1]
+filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
 read.NID_headerItems(filename)
 }

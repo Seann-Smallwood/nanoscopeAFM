@@ -7,7 +7,7 @@
 #' @return AFM image with attributes
 #' @author thomasgredig
 #' @examples
-#' d = AFM.read(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = AFM.read(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' @export
 AFM.read <- function(filename, no=1) {
   # does file exist?

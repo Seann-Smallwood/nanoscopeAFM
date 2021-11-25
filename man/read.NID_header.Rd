@@ -16,6 +16,6 @@ list with length in bytes and header as text
 loads header of AFM NID file
 }
 \examples{
-filename = dir(pattern='nid$', recursive=TRUE)[1]
+filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
 read.NID_header(filename)
 }

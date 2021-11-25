@@ -15,7 +15,3 @@ mismatch in image size + header with file size (should be 0)
 \description{
 checks AFM NID file length
 }
-\examples{
-filename = dir(pattern='nid$', recursive=TRUE)[1]
-d = NID.checkFile(filename)
-}

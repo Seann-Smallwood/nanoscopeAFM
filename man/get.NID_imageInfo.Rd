@@ -16,7 +16,6 @@ vector with line numbers for each image
 returns number of lines for each image
 }
 \examples{
-filename = dir(pattern='nid$', recursive=TRUE)[1]
-hdr = read.NID_header(filename)
+hdr = read.NID_header(system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM"))
 get.NID_imageInfo(hdr[[2]])
 }

@@ -20,6 +20,6 @@ loads header of NanoSurf AFM NID file and returns
 parameters for particular image
 }
 \examples{
-filename = dir(pattern='nid$', recursive=TRUE)[1]
+filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
 read.NanoSurf_header(filename, 1)
 }

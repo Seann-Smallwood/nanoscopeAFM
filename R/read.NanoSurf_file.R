@@ -4,7 +4,7 @@
 #' @param imageNo number of the image file
 #' @return AFM image
 #' @examples
-#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
 #' d = read.NanoSurf_file(filename)
 #' @export
 read.NanoSurf_file<- function(filename, imageNo=1) {
@@ -99,7 +99,7 @@ NID.getChannelScale <- function(headerList, imageNo = 1) {
 #' @param imageNo image number to get data on
 #' @return list
 #' @examples
-#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
 #' read.NanoSurf_header(filename, 1)
 #' @export
 read.NanoSurf_header <- function(filename, imageNo=1) {
@@ -165,7 +165,7 @@ read.NanoSurf_header <- function(filename, imageNo=1) {
 # [1] "[DataSet]"             "Version=2"             "GroupCount=2"          "Gr0-Name=Scan forward"
 # [5] "Gr0-ID=0"              "Gr0-Count=21"
 read.NID_header <- function(filename) {
-  if (!file.exists(filename)) { return(empty.header) }
+  if (!file.exists(filename)) { return(NULL) }
   Sys.setlocale('LC_ALL','en_US')
   con <- file(filename,"rb")
   rline = ''
@@ -193,7 +193,7 @@ read.NID_header <- function(filename) {
 #' @param filename filename including path
 #' @return list
 #' @examples
-#' filename = dir(pattern='nid$', recursive=TRUE)[1]
+#' filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
 #' read.NID_headerItems(filename)
 #' @export
 read.NID_headerItems <- function(filename) {
@@ -215,9 +215,6 @@ read.NID_headerItems <- function(filename) {
 #'
 #' @param filename filename including path
 #' @return mismatch in image size + header with file size (should be 0)
-#' @examples
-#' filename = dir(pattern='nid$', recursive=TRUE)[1]
-#' d = NID.checkFile(filename)
 NID.checkFile <- function(filename) {
   # does file exist?
   if (!file.exists(filename)) return -1

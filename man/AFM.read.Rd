@@ -22,8 +22,7 @@ converted units, when possible (xc,yc,zc), use the attributes to find the units 
 channel name
 }
 \examples{
-filename = dir(pattern='ibw$', recursive=TRUE)[1]
-d = AFM.read(filename)
+d = AFM.read(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 }
 \author{
 thomasgredig

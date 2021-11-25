@@ -18,6 +18,6 @@ image
 Returns Veeco NanoScope AFM image with Scaling
 }
 \examples{
-filename = dir(pattern='\\\\d$', recursive=TRUE)[1]
+filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
 h = read.Nanoscope_file(filename)
 }

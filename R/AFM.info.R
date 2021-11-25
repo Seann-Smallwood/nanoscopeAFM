@@ -7,7 +7,7 @@
 #' @return returns information about the AFM image as an associative vector
 #' @author thomasgredig
 #' @examples
-#' h1 = AFM.info(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
+#' h1 = AFM.info(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' @export
 AFM.info <- function(filename, no=1, fullInfo=FALSE) {
   r = c()  # associative array, all common tags start with INFO (mandatory), others are optional

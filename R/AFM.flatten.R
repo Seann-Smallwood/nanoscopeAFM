@@ -6,7 +6,7 @@
 #' @return flattened matrix with AFM image
 #' @author thomasgredig
 #' @examples
-#' d = AFM.read(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = AFM.read(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' d$z.flatten = AFM.flatten(d)
 #' @export
 AFM.flatten <- function(d) {

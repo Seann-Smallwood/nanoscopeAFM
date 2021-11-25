@@ -28,7 +28,7 @@ Line Profile: create a profile data line across an image (d), providing
   points are provided in length units of the images (usch as micrometers)
 }
 \examples{
-filename = dir(pattern='nid$', recursive=TRUE)[1]
+filename = system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM")
 d = NID.loadImage(filename,1)
 q = NID.lineProfile(d,0,0,1e-6,1-6)
 plot(d$z.flatten[q])

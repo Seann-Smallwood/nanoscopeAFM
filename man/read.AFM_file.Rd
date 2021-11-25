@@ -20,6 +20,5 @@ DEPRECATED: use AFM.read()
 loads AFM image file
 }
 \examples{
-filename = dir(pattern='ibw$', recursive=TRUE)[1]
-d = read.AFM_file(filename)
+d = read.AFM_file(system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM"))
 }

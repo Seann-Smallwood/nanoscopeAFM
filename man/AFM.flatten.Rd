@@ -20,7 +20,9 @@ this flattens only z, not z.nm, so scaling
 factor would need to be applied for z.nm
 }
 \examples{
-filename = dir(pattern='ibw$', recursive=TRUE)[1]
-d = AFM.read(filename)
+d = AFM.read(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 d$z.flatten = AFM.flatten(d)
+}
+\author{
+thomasgredig
 }

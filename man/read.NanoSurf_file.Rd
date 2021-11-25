@@ -18,6 +18,6 @@ AFM image
 loads images of AFM NID file (use NID.loadImage whenever)
 }
 \examples{
-filename = dir(pattern='nid$', recursive=TRUE)[1]
+filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
 d = read.NanoSurf_file(filename)
 }

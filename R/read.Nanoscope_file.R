@@ -4,7 +4,7 @@
 #' @param no image number
 #' @return image
 #' @examples
-#' filename = system.file("Veeco_20160622.003",package="nanoscopeAFM")
+#' filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
 #' h = read.Nanoscope_file(filename)
 #' @export
 read.Nanoscope_file <- function(filename, no=1) {
@@ -54,6 +54,9 @@ read.Nanoscope_file <- function(filename, no=1) {
   d
 }
 
+# private functions
+# ==
+NULL
 
 #' loads the binary data from the Veeco file
 read.Nanoscope_BIN <- function(filename, no=1) {
@@ -171,7 +174,7 @@ read.Nanoscope_params <- function(filename, no=1) {
 #' @param filename filename including path
 #' @return list with length in bytes and header as text
 #' @examples
-#' filename = system.file("Veeco_20160622.003",package="nanoscopeAFM")
+#' filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
 #' read.NID_header(filename)
 #' @export
 read.NID_header <- function(filename) {
@@ -204,7 +207,7 @@ read.NID_header <- function(filename) {
 #' @param header.string header string of NID file (use read.NID_header)
 #' @return vector with line numbers for each image
 #' @examples
-#' hdr = read.NID_header(system.file("Veeco_20160622.003",package="nanoscopeAFM"))
+#' hdr = read.NID_header(system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM"))
 #' get.NID_imageInfo(hdr[[2]])
 #' @export
 get.NID_imageInfo <- function(header.string) {

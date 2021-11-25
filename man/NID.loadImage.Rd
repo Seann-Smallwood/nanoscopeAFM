@@ -19,7 +19,7 @@ data.frame with four components, x and y-axes
 DEPRACATED: returns the scaled image + flattend image
 }
 \examples{
-filename = dir(pattern='nid$', recursive=TRUE)[1]
+filename = system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM")
 d = NID.loadImage(filename,1)
 ggplot(d, aes(x,y,fill=z.flatten)) + geom_raster()
 }

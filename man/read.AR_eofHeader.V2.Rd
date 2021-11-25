@@ -24,7 +24,7 @@ including the $DataTypeList and $NumberOfFiles
 ex: "HeightRetrace,AmplitudeRetrace,PhaseRetrace,ZSensorRetrace,"
 }
 \examples{
-filename = dir(pattern='ibw$', recursive=TRUE)[1]
+filename = system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
 afmV2header = read.AR_eofHeader.V2(filename)
 afmV2header$DataTypeList
 }

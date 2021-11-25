@@ -18,8 +18,11 @@ DEPRECATEDD: use AFM.flatten() instead:
 flattens a NID AFM image using a plane fit
 }
 \examples{
-filename = dir(pattern='nid$', recursive=TRUE)[1]
+filename = system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM")
 d = read.NID_file(filename)
 m = matrix(d[[1]],nrow=256, ncol=256)
 flatten.NID_matrix(m)
+}
+\author{
+thomasgredig
 }

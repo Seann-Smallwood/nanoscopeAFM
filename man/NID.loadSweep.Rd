@@ -16,6 +16,5 @@ data.frame with data frames that have freq vs. ampl.
 loads frequency sweep data from NID file
 }
 \examples{
-filename = dir(pattern='nid$', recursive=TRUE)[1]
-d = NID.loadSweep(filename)
+d = NID.loadSweep(system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM"))
 }

@@ -16,5 +16,9 @@ image with attributes
 loads images
 }
 \examples{
+filename = system.file("extdata","Park_20210916_034.tiff",package="nanoscopeAFM")
 d = read.Park_file(filename)
+}
+\author{
+thomasgredig
 }

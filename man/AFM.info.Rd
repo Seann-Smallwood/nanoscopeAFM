@@ -5,12 +5,14 @@
 \title{find AFM image information, much of the information is specific to the
 AFM instrument; common pieces are included with the tag INFO}
 \usage{
-AFM.info(filename, no = 1)
+AFM.info(filename, no = 1, fullInfo = FALSE)
 }
 \arguments{
 \item{filename}{filename of (Veeco, Park, AR, NanoSurf) AFM image including path}
 
 \item{no}{channel number (for Veeco, NanoSurf, AR)}
+
+\item{fullInfo}{if \code{TRUE}, return all full header info}
 }
 \value{
 returns information about the AFM image as an associative vector
@@ -20,8 +22,7 @@ find AFM image information, much of the information is specific to the
 AFM instrument; common pieces are included with the tag INFO
 }
 \examples{
-filename = dir(pattern='ibw$', recursive=TRUE)[1]
-d = AFM.info(filename)
+h1 = AFM.info(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 }
 \author{
 thomasgredig

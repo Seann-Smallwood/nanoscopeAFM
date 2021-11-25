@@ -22,8 +22,7 @@ which can contain multiple images, returns channel
 name and units in attributes
 }
 \examples{
-filename = dir(pattern='ibw$', recursive=TRUE)[1]
-d = read.AR_file(filename)
+d = read.AR_file(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 attr(d, 'channel')
 }
 \author{

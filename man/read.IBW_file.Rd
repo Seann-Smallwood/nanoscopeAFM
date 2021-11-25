@@ -20,6 +20,5 @@ DEPRECATED: use read.AR_file()
 loads Asylum Research Igor Wave AFM files
 }
 \examples{
-filename = dir(pattern='ibw$', recursive=TRUE)[1]
-d = read.IBW_file(filename)
+d = read.IBW_file(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 }

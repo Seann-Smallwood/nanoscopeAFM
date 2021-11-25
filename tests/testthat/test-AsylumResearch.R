@@ -1,18 +1,15 @@
 context("Asylum Research AFM image check")
 
 COMMON.INFO.ITEMS = 7
-filename = system.file("AR_20211011.ibw",package="nanoscopeAFM")
+filename = system.file("extdata", "AR_20211011.ibw",package="nanoscopeAFM")
 
 test_that("AR: filefound", {
-  filename = system.file("AR_20211011.ibw",package="nanoscopeAFM")
-  dput(getwd())
+  filename = system.file("extdata", "AR_20211011.ibw",package="nanoscopeAFM")
   expect_true(file.exists(filename))
 })
 
 
 test_that("AR: check channels ", {
-  filename = system.file("AR_20211011.ibw",package="nanoscopeAFM")
-
   h1 = read.AR_eofHeader.V2(filename)
   ch = .getChannelName(h1,1)
   expect_equal(.getChannelUnits(ch),"m")

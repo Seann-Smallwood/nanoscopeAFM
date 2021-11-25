@@ -9,7 +9,7 @@
 #' @param y2 end y position in AFM units from bottom right
 #' @return vector with line profile for data frame
 #' @examples
-#' filename = system.file("NanoSurf_20160301.nid",package="nanoscopeAFM")
+#' filename = system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM")
 #' d = NID.loadImage(filename,1)
 #' q = NID.lineProfile(d,0,0,1e-6,1-6)
 #' plot(d$z.flatten[q])

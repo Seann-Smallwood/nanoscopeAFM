@@ -7,7 +7,7 @@
 #' @return image with attributes
 #' @author thomasgredig
 #' @examples
-#' d = read.AR_file(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = read.AR_file(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' attr(d, 'channel')
 #' @export
 read.AR_file <- function(filename, no=1) {
@@ -109,7 +109,7 @@ read.AR_header <- function(filename, no=1) {
 #' @param Verbose if true, returns additional information
 #' @return list of channels and additional information
 #' @examples
-#' filename = system.file("AR_20211011.ibw",package="nanoscopeAFM")
+#' filename = system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
 #' afmV2header = read.AR_eofHeader.V2(filename)
 #' afmV2header$DataTypeList
 #' @export

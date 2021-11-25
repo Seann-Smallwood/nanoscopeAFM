@@ -25,6 +25,52 @@ test_that("check AR image loads", {
   d = read.AR_file(filename,1)
   expect_equal(attr(d,'units'),"m")
   expect_equal(nrow(d),128*128)
+  expect_equal(min(d$x.nm), 0)
+  expect_equal(min(d$y.nm), 0)
+  expect_equal(max(d$x.nm), 4000)
+  expect_equal(max(d$y.nm), 4000)
+})
+
+
+test_that("check AR image loads for image 2", {
+  filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
+                                        pattern='ibw$', recursive = TRUE)[1])
+  d = read.AR_file(filename,2)
+  expect_equal(attr(d,'units'),"m")
+  expect_equal(nrow(d),128*128)
+
+  expect_equal(min(d$x.nm), 0)
+  expect_equal(min(d$y.nm), 0)
+  expect_equal(max(d$x.nm), 4000)
+  expect_equal(max(d$y.nm), 4000)
+})
+
+
+test_that("check AR image loads for image 3", {
+  filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
+                                        pattern='ibw$', recursive = TRUE)[1])
+  d = read.AR_file(filename,3)
+  expect_equal(attr(d,'units'),"deg")
+  expect_equal(nrow(d),128*128)
+
+  expect_equal(min(d$x.nm), 0)
+  expect_equal(min(d$y.nm), 0)
+  expect_equal(max(d$x.nm), 4000)
+  expect_equal(max(d$y.nm), 4000)
+})
+
+
+test_that("check AR image loads for image 4", {
+  filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
+                                        pattern='ibw$', recursive = TRUE)[1])
+  d = read.AR_file(filename,4)
+  expect_equal(attr(d,'units'),"m")
+  expect_equal(nrow(d),128*128)
+
+  expect_equal(min(d$x.nm), 0)
+  expect_equal(min(d$y.nm), 0)
+  expect_equal(max(d$x.nm), 4000)
+  expect_equal(max(d$y.nm), 4000)
 })
 
 
@@ -36,20 +82,6 @@ test_that("use general AFM loading for AR image", {
 })
 
 
-test_that("check AR image size ", {
-  filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
-                                        pattern='ibw$', recursive = TRUE)[1])
-  d = AFM.read(filename)
-  expect_equal(signif(max(d$x.nm),3), signif(4030,3))
-})
-
-
-# test_that("AR: loading image out of bounds ", {
-#   filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),
-#                                         pattern='ibw$', recursive = TRUE)[1])
-#   d = AFM.read(filename,20)
-#   expect_equal(length(d), 0)
-# })
 
 test_that("AR: check version 2 channel list ", {
   filename = file.path('../../inst',dir(system.file(package = "nanoscopeAFM"),

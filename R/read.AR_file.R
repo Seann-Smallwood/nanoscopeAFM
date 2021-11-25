@@ -39,17 +39,17 @@ read.AR_file <- function(filename, no=1) {
     attr(dr, "units") = units
 
     sfA = q2['sfA']$sfA
-    convFactor <- sfA[no]
-    wfUnits <- q2$dimUnits[no]
+    convFactor <- sfA[1]  # all images should have same dimensions
+    # wfUnits <- q2$dimUnits[no]
 
     if (units=='m') {
-      dr$x.nm = convFactor*1e9 * dr$x
-      dr$y.nm = convFactor*1e9 * dr$y
+      dr$x.nm = convFactor*1e9 * (dr$x-1)
+      dr$y.nm = convFactor*1e9 * (dr$y-1)
       dr$z.nm = 1e9 * dr$z
       dr$z.nm = dr$z.nm - min(dr$z.nm)
     } else {
-      dr$x.nm = convFactor*1e9 * dr$x
-      dr$y.nm = convFactor*1e9 * dr$y
+      dr$x.nm = convFactor*1e9 * (dr$x-1)
+      dr$y.nm = convFactor*1e9 * (dr$y-1)
       dr$z.nm = dr$z
     }
 

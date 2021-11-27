@@ -27,6 +27,7 @@ check_AFMdata <- function(object) {
 #' @slot z.units units for z (deg, m)
 #' @slot channel name of channel
 #' @slot instrument name of instrument (Park, AR, NanoSurf, Veeco)
+#' @slot history history of file changes
 #' @slot fullfilename name of filename
 AFMdata<-setClass("AFMdata",
                   slots = c(data="data.frame",
@@ -38,6 +39,7 @@ AFMdata<-setClass("AFMdata",
                             z.units = "character",
                             channel="character",
                             instrument="character",
+                            history="character",
                             fullfilename="character"
                   ),
                   validity = check_AFMdata)
@@ -55,6 +57,7 @@ AFMdata<-setClass("AFMdata",
 #' @slot z.units units for z (deg, m)
 #' @slot channel name of channel
 #' @slot instrument name of instrument (Park, AR, NanoSurf, Veeco)
+#' @slot history changes to file
 #' @slot fullfilename name of filename
 #' @export
 setMethod(f="initialize",
@@ -69,6 +72,7 @@ setMethod(f="initialize",
                                z.units ,
                                channel,
                                instrument,
+                               history,
                                fullfilename)
           {
             if (!missing(data)) .Object@data<-data
@@ -80,6 +84,7 @@ setMethod(f="initialize",
             if (!missing(z.units)) .Object@z.units<-z.units
             if (!missing(channel)) .Object@channel <-channel
             if (!missing(instrument)) .Object@instrument <-instrument
+            if (!missing(history)) .Object@history <-history
             if (!missing(fullfilename)) .Object@fullfilename<-fullfilename
             validObject(.Object)
             return(.Object)
@@ -96,6 +101,7 @@ setMethod(f="initialize",
 #' @param z.units units for z (deg, m)
 #' @param channel name of channel
 #' @param instrument name of instrument (Park, AR, NanoSurf, Veeco)
+#' @param history history of file changes
 #' @param fullfilename name of filename
 #' @export
 AFMdata <- function(data,
@@ -107,6 +113,7 @@ AFMdata <- function(data,
                     z.units ,
                     channel,
                     instrument,
+                    history,
                     fullfilename) {
   return(new("AFMdata",
              data,
@@ -118,6 +125,7 @@ AFMdata <- function(data,
              z.units ,
              channel,
              instrument,
+             history,
              fullfilename))
 }
 
@@ -145,6 +153,7 @@ AFM.import <- function(filename) {
     z.conv = z.conv,
     z.units = .getChannelUnits(attr(d,"channel")),
     instrument = attr(d,"instrument"),
+    history = '',
     fullfilename = filename
   )
 }
@@ -163,6 +172,7 @@ AFM.import <- function(filename) {
 print.AFMdata <- function(obj) {
   cat("Object:",obj@instrument,"AFM image\n")
   cat(max(obj@x.max.nm),"nm  x ",max(obj@y.max.nm),'nm \n')
+  cat("History:",obj@history)
   cat("Filename:",obj@fullfilename)
 }
 
@@ -183,6 +193,7 @@ summary.AFMdata <- function(obj) {
     size = paste(max(obj@x.max.nm),"x",max(obj@y.max.nm),'nm'),
     channel = paste(obj@channel),
     z.units = paste(obj@z.units),
+    history = paste(obj@history),
     filename = obj@fullfilename
   )
 }
@@ -203,7 +214,7 @@ plot.AFMdata <- function(obj,mpt=NA,...) {
   if (is.na(mpt)) mean(obj@data$z.nm) -> mpt
   xlab <- expression(paste('x (',mu,'m)'))
   print(
-    ggplot(obj@data, aes(x.nm, y.nm, fill = z.nm)) +
+    ggplot(obj@data, aes(x.nm/1000, y.nm/1000, fill = z.nm)) +
       geom_raster() +
       scale_fill_gradient2(low='red', mid='white', high='blue',
                            midpoint=mpt) +
@@ -236,14 +247,13 @@ AFM.histogram <- function(AFMdata) {
                      colour="black", fill="white", bins=200)+
       geom_density(alpha=0.2, fill='red')
   )
-
 }
 
 # (simple check only at the moment): NEEDS more work
 
 #' checks if the object is an AFM image
 #'
-#' @param AFMdata AFMdata object
+#' @param myAFMdata AFMdata object
 #' @return \code{TRUE} if object is an AFM image
 #' @author thomasgredig
 #' @export
@@ -251,7 +261,8 @@ AFM.histogram <- function(AFMdata) {
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' AFM.isImage(d)
 #' @export
-AFM.isImage <- function(AFMdata) {
-  ((AFMdata@x.pixels > 1) & (AFMdata@y.pixels>1))
+AFM.isImage <- function(myAFMdata) {
+  #myAFMdata@history <<- paste(myAFMdata@history,"checkImage;")
+  ((myAFMdata@x.pixels > 1) & (myAFMdata@y.pixels>1))
 }
 

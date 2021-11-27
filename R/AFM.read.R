@@ -24,12 +24,20 @@ AFM.read <- function(filename, no=1) {
     } else if (fext=='nid') {
       df = read.NanoSurf_file(filename,no)
       attr(df,"instrument")='NanoSurf'
+      h = AFM.info(filename)
+      attr(d,"channel") =h['Op. mode']
     } else if (fext=='tiff') {
       df = read.Park_file(filename)
+      AFM.info(filename) -> h1
+      attr(df,"channel")=h1$sourceName
       attr(df,"instrument")='Park'
     } else {
       df = read.Nanoscope_file(filename,no)
+      r = AFM.info(f)
       attr(df,"instrument")='Veeco'
+      attr(df,"channelDirection") = r['Frame direction']
+      attr(df,"note")=r['Note']
+      attr(df,"channel")= r['Data type']   # not sure
     }
   }  else { warning(paste("File does not exist:",filename)) }
   df

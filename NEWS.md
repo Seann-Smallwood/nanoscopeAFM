@@ -2,6 +2,11 @@
 
 Author: **Thomas Gredig**
 
+## nanoscopeAFM 1.0.1
+
+* fix channels for AFM import
+
+
 ## nanoscopeAFM 1.0
 
 * create S4 class AFMdata

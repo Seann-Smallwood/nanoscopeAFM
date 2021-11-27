@@ -179,7 +179,10 @@ print.AFMdata <- function(obj) {
 summary.AFMdata <- function(obj) {
   data.frame(
     object = paste(obj@instrument,"AFM image"),
+    resolution = paste(obj@x.pixels,"x",obj@y.pixels),
     size = paste(max(obj@x.max.nm),"x",max(obj@y.max.nm),'nm'),
+    channel = paste(obj@channel),
+    z.units = paste(obj@z.units),
     filename = obj@fullfilename
   )
 }

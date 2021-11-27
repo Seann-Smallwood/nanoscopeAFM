@@ -1,5 +1,8 @@
-#' loads AFM image files from different instruments and stores 6 rows (x,y,z) and
-#' converted units, when possible (xc,yc,zc), use the attributes to find the units and
+#' loads AFM image file
+#'
+#' \code{AFM.read} reads data files from different instruments
+#' and stores 6 rows (x,y,z) and converted units, when possible
+#' (xc,yc,zc), use the attributes to find the units and
 #' channel name
 #'
 #' @param filename filename of (Veeco, Park, AR, NanoSurf) AFM image including path
@@ -17,14 +20,17 @@ AFM.read <- function(filename, no=1) {
     fext = tolower(tools::file_ext(filename))
     if (fext=='ibw') {
       df = read.AR_file(filename,no)
+      attr(df,"instrument")='AR'
     } else if (fext=='nid') {
       df = read.NanoSurf_file(filename,no)
+      attr(df,"instrument")='NanoSurf'
     } else if (fext=='tiff') {
       df = read.Park_file(filename)
+      attr(df,"instrument")='Park'
     } else {
       df = read.Nanoscope_file(filename,no)
+      attr(df,"instrument")='Veeco'
     }
-    attr(df,'filename')=basename(filename)
   }  else { warning(paste("File does not exist:",filename)) }
   df
 }

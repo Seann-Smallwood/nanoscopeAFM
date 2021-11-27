@@ -155,5 +155,3 @@ read.NID_file <- function(filename) {
   r
 }
 
-
-

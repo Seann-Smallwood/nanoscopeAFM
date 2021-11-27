@@ -149,7 +149,7 @@ read.AR_eofHeader.V2 <- function(wavefile, Verbose = FALSE) {
 
 
 # private files
-NULL
+
 
 .getChannelName <- function(h1,no) {
   # from h1=read.AR_eofHeader.V2(filename)
@@ -163,6 +163,8 @@ NULL
 
 .getChannelUnits <- function(channelName) {
   units = "m"  # default units
-  if(grepl('Phase',channelName)) units="deg"
+  if (nchar(channelName)>0) {
+    if(grepl('Phase',channelName)) units="deg"
+  } else { units="" }
   units
 }

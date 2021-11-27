@@ -2,14 +2,20 @@
 
 Author: **Thomas Gredig**
 
+## nanoscopeAFM 1.0
+
+* create S4 class AFMdata
+* create print method to display image
+* create AFM.import function to generate class AFMdata
+
 
 ## nanoscopeAFM 0.6.6
 
 * update test files:
-  - system.file("Park_20210916_034.tiff",package="nanoscopeAFM")
-  - system.file("AR_20211011.ibw",package="nanoscopeAFM")
-  - system.file("Veeco_20160622.003",package="nanoscopeAFM")
-  - system.file("NanoSurf_20160301.nid",package="nanoscopeAFM")
+  - system.file("extdata","Park_20210916_034.tiff",package="nanoscopeAFM")
+  - system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
+  - system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
+  - system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM")
 
 
 

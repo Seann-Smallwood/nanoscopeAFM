@@ -6,12 +6,13 @@ test_that("check loading non-existant file", {
   expect_equal(nrow(d), 0)
 })
 
-test_that("flattening image", {
-  filename = system.file("extdata", "Park_20210916_034.tiff",package="nanoscopeAFM")
-  d = AFM.read(filename)
-  expect_equal(length(AFM.flatten(d)),256*256)
-})
-
+# test_that("flattening image", {
+#   filename = system.file("extdata", "Park_20210916_034.tiff",package="nanoscopeAFM")
+#   d = AFM.import(filename)
+#   d2 = AFM.flatten(d)
+#   expect_equal(nrow(d),nrow(d2))
+# })
+#
 
 
 context("AFM info header information")

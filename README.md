@@ -10,13 +10,38 @@ Analyzes Atomic Force Microsocpy images; currently four types are supported, ima
 devtools::install_github("thomasgredig/nanoscopeAFM")
 ```
 
-## Description
+## Usage
 
-The main functions from this library are:
+Use this package to generate `AFMdata` S4 data objects, which can be used to quickly display AFM data and also process AFM data. Here are some examples:
 
-- **AFM.read**: loads the AFM image as a matrix and includes attributes, the AFM image can be Veeco, Park, Asylum Research, or NanoSurf
-- **AFM.info**: returns information about the image
+Creating an `AFMdata` data object:
 
+```R
+d = AFM.import('image.ibw')
+class(d)
+```
+
+Print essential data and output a summary:
+
+```R
+print(d)
+summary(d)
+```
+
+Graph the object using ggplot2 package:
+
+```R
+plot(d)
+```
+
+## not fully supported yet:
+
+
+Flatten the object with a plane; this generates a new `AFMdata` object:
+
+```R
+d2 = AFM.flatten(d)
+```
 
 
 # AFM Images
@@ -160,9 +185,7 @@ In version 0.5 and earlier, some additional functions were available, these have
 
 # Technical Notes
 
-The [least significant bit (LSB)](https://masteringelectronicsdesign.com/an-adc-and-dac-least-significant-bit-lsb/) provides the smallest voltage step, given the 16-bit resolution of the NanoScope AFM, then Vref = 2^16*LSB.
-
-
-
-
-The [header file](http://www.weizmann.ac.il/Chemical_Research_Support/surflab/peter/headers/) is documented for versions 2,3, and 4. [Z-scaling Info](https://bioafm.physics.leidenuniv.nl/dokuwiki/lib/exe/fetch.php?media=afm:nanoscope_software_8.10_user_guide-d_004-1025-000_.pdf)
+* The [least significant bit (LSB)](https://masteringelectronicsdesign.com/an-adc-and-dac-least-significant-bit-lsb/) provides the smallest voltage step, given the 16-bit resolution of the NanoScope AFM, then Vref = 2^16*LSB.
+* The [header file](http://www.weizmann.ac.il/Chemical_Research_Support/surflab/peter/headers/) is documented for versions 2,3, and 4. [Z-scaling Info](https://bioafm.physics.leidenuniv.nl/dokuwiki/lib/exe/fetch.php?media=afm:nanoscope_software_8.10_user_guide-d_004-1025-000_.pdf)
+* [https://www.instructables.com/A-Low-Cost-Atomic-Force-Microscope-%E4%BD%8E%E6%88%90%E6%9C%AC%E5%8E%9F%E5%AD%90%E5%8A%9B%E9%A1%AF%E5%BE%AE%E9%8F%A1/](Low Cost DIY AFM)
+* [https://rdrr.io/cran/AFM/](AFM Analysis R package) by Mathieu Beauvais on [https://github.com/cran/AFM](cran/AFM)

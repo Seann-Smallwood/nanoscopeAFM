@@ -6,10 +6,10 @@
 this flattens only z, not z.nm, so scaling
 factor would need to be applied for z.nm}
 \usage{
-AFM.flatten(d)
+AFM.flatten(AFMdata)
 }
 \arguments{
-\item{d}{data.frame with AFM image}
+\item{AFMdata}{AFMdata object}
 }
 \value{
 flattened matrix with AFM image
@@ -21,7 +21,7 @@ factor would need to be applied for z.nm
 }
 \examples{
 d = AFM.read(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
-d$z.flatten = AFM.flatten(d)
+d2 = AFM.flatten(d)
 }
 \author{
 thomasgredig

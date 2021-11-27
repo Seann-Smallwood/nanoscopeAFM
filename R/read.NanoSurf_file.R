@@ -66,9 +66,9 @@ read.NanoSurf_file<- function(filename, imageNo=1) {
   data.frame(x =rep(1:s1$length[1], each = s1$length[1]),
              y = rep(1:s1$length[1], times = s1$length[1]),
              z = d[[imageNo]],
-             x.nm=rep(seq1,each=s1$length[2]),
-             y.nm=rep(seq2,times=s1$length[1]),
-             z.nm=d[[imageNo]]/s1$length[3]*range.z+s1$from[3])
+             x.nm=rep(seq1,each=s1$length[2])*1e9,
+             y.nm=rep(seq2,times=s1$length[1])*1e9,
+             z.nm=(d[[imageNo]]/s1$length[3]*range.z+s1$from[3])*1e9)
 }
 
 

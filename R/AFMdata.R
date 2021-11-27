@@ -206,7 +206,7 @@ AFM.raster <- function(myAFMdata) {
   data.frame(
     x.nm = rep(1:myAFMdata@x.pixels,myAFMdata@y.pixels),
     y.nm = rep(1:myAFMdata@y.pixels,each=myAFMdata@x.pixels),
-    z.nm = myAFMdata@data$z * z.conv
+    z.nm = myAFMdata@data$z * myAFMdata@z.conv
   )
 }
 

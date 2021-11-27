@@ -25,7 +25,7 @@ AFM.read <- function(filename, no=1) {
       df = read.NanoSurf_file(filename,no)
       attr(df,"instrument")='NanoSurf'
       h = AFM.info(filename)
-      attr(d,"channel") =h['Op. mode']
+      attr(df,"channel") =h['Op. mode']
     } else if (fext=='tiff') {
       df = read.Park_file(filename)
       AFM.info(filename) -> h1
@@ -33,7 +33,7 @@ AFM.read <- function(filename, no=1) {
       attr(df,"instrument")='Park'
     } else {
       df = read.Nanoscope_file(filename,no)
-      r = AFM.info(f)
+      r = AFM.info(filename)
       attr(df,"instrument")='Veeco'
       attr(df,"channelDirection") = r['Frame direction']
       attr(df,"note")=r['Note']

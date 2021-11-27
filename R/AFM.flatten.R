@@ -11,12 +11,13 @@
 #' @export
 AFM.flatten <- function(myAFMdata) {
   AFMcopy = myAFMdata
-  AFMcopy@history <<- paste(AFMcopy@history,"AFM.flatten();")
+  AFMcopy@history <- paste(AFMcopy@history,"AFM.flatten();")
 
-  SZ = nrow(AFMcopy@data)
-  x = AFMcopy@data$x
-  y = AFMcopy@data$y
-  z = AFMcopy@data$z
+  d = AFM.raser(myAFMdata)
+  SZ = nrow(d)
+  x = d$x.nm
+  y = d$y.nm
+  z = d$z.nm
 
   b = c(sum(x*z), sum(y*z), sum(z))
   a = matrix(data = c(sum(x*x), sum(x*y), sum(x),
@@ -26,6 +27,6 @@ AFM.flatten <- function(myAFMdata) {
   a
   solvX = solve(a,b)
 
-  AFMcopy@data$z.nm =  x*solvX[1] + y*solvX[2] + solvX[3] - z
+  AFMcopy@data$z =  x*solvX[1] + y*solvX[2] + solvX[3] - z
   AFMcopy
 }

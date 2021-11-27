@@ -135,7 +135,6 @@ AFMdata <- function(data,
 #' @param filename name of AFM filename
 #' @return AFMdata object
 #' @author thomasgredig
-#' @export
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' @export
@@ -143,8 +142,9 @@ AFM.import <- function(filename) {
   d = AFM.read(filename)
   z.conv = 1
   if (d$z[1]>0) z.conv = d$z.nm[1] / d$z[1]
+  d1 = data.frame(z=d$z)
   AFMdata(
-    data = d,
+    data = d1,
     channel = attr(d,"channel"),
     x.max.nm = max(d$x.nm),
     y.max.nm = max(d$y.nm),
@@ -164,7 +164,6 @@ AFM.import <- function(filename) {
 #' @param obj AFMdata object
 #' @return text with object information
 #' @author thomasgredig
-#' @export
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' print(d)
@@ -172,7 +171,7 @@ AFM.import <- function(filename) {
 print.AFMdata <- function(obj) {
   cat("Object:",obj@instrument,"AFM image\n")
   cat(max(obj@x.max.nm),"nm  x ",max(obj@y.max.nm),'nm \n')
-  cat("History:",obj@history)
+  cat("History:",obj@history,'\n')
   cat("Filename:",obj@fullfilename)
 }
 
@@ -181,7 +180,6 @@ print.AFMdata <- function(obj) {
 #' @param obj AFMdata object
 #' @return ggplot graph
 #' @author thomasgredig
-#' @export
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' summary(d)
@@ -198,23 +196,38 @@ summary.AFMdata <- function(obj) {
   )
 }
 
+#' returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers
+#'
+#' @param myAFMdata AFMdata object
+#' @return data.frame with  ($x.nm, $y.nm, $z.nm)
+#' @author thomasgredig
+#' @export
+AFM.raster <- function(myAFMdata) {
+  data.frame(
+    x.nm = rep(1:myAFMdata@x.pixels,myAFMdata@y.pixels),
+    y.nm = rep(1:myAFMdata@y.pixels,each=myAFMdata@x.pixels),
+    z.nm = myAFMdata@data$z * z.conv
+  )
+}
+
 #' graph of AFMdata object
 #'
 #' @param obj AFMdata object
 #' @param mpt midpoint for coloring
 #' @return ggplot graph
 #' @author thomasgredig
-#' @export
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' summary(d)
 #' @export
 plot.AFMdata <- function(obj,mpt=NA,...) {
-  cat("Filename:",obj@fullfilename)
-  if (is.na(mpt)) mean(obj@data$z.nm) -> mpt
+  cat("Graphing:",obj@fullfilename)
+  d = AFM.raster(obj)
+
+  if (is.na(mpt)) mean(d$z.nm) -> mpt
   xlab <- expression(paste('x (',mu,'m)'))
   print(
-    ggplot(obj@data, aes(x.nm/1000, y.nm/1000, fill = z.nm)) +
+    ggplot(d, aes(x.nm/1000, y.nm/1000, fill = z.nm)) +
       geom_raster() +
       scale_fill_gradient2(low='red', mid='white', high='blue',
                            midpoint=mpt) +
@@ -234,7 +247,6 @@ plot.AFMdata <- function(obj,mpt=NA,...) {
 #' @param AFMdata AFMdata object
 #' @return draws a ggplot graph
 #' @author thomasgredig
-#' @export
 #' @examples
 #' library(ggplot2)
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
@@ -256,7 +268,6 @@ AFM.histogram <- function(AFMdata) {
 #' @param myAFMdata AFMdata object
 #' @return \code{TRUE} if object is an AFM image
 #' @author thomasgredig
-#' @export
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' AFM.isImage(d)

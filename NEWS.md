@@ -5,6 +5,7 @@ Author: **Thomas Gredig**
 ## nanoscopeAFM 1.0.1
 
 * fix channels for AFM import
+* include only data$z, generate the others using AFM.raster()
 
 
 ## nanoscopeAFM 1.0

@@ -14,6 +14,7 @@ AFMdata(
   z.units,
   channel,
   instrument,
+  history,
   fullfilename
 )
 
@@ -27,6 +28,7 @@ AFMdata(
   z.units,
   channel,
   instrument,
+  history,
   fullfilename
 )
 }
@@ -48,6 +50,8 @@ AFMdata(
 \item{channel}{name of channel}
 
 \item{instrument}{name of instrument (Park, AR, NanoSurf, Veeco)}
+
+\item{history}{history of file changes}
 
 \item{fullfilename}{name of filename}
 }
@@ -74,6 +78,8 @@ A S4 class to store and manipulate images from Atomic Force Microscopes.
 \item{\code{channel}}{name of channel}
 
 \item{\code{instrument}}{name of instrument (Park, AR, NanoSurf, Veeco)}
+
+\item{\code{history}}{history of file changes}
 
 \item{\code{fullfilename}}{name of filename}
 }}

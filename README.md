@@ -34,13 +34,12 @@ Graph the object using ggplot2 package:
 plot(d)
 ```
 
-## not fully supported yet:
-
 
 Flatten the object with a plane; this generates a new `AFMdata` object:
 
 ```R
 d2 = AFM.flatten(d)
+plot(d2)
 ```
 
 

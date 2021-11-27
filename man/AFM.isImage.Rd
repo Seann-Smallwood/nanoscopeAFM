@@ -4,10 +4,10 @@
 \alias{AFM.isImage}
 \title{checks if the object is an AFM image}
 \usage{
-AFM.isImage(AFMdata)
+AFM.isImage(myAFMdata)
 }
 \arguments{
-\item{AFMdata}{AFMdata object}
+\item{myAFMdata}{AFMdata object}
 }
 \value{
 \code{TRUE} if object is an AFM image

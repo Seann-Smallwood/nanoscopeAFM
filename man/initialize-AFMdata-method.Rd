@@ -15,6 +15,7 @@
   z.units,
   channel,
   instrument,
+  history,
   fullfilename
 )
 }
@@ -44,6 +45,8 @@ Constructor method of AFMImage Class.
 \item{\code{channel}}{name of channel}
 
 \item{\code{instrument}}{name of instrument (Park, AR, NanoSurf, Veeco)}
+
+\item{\code{history}}{changes to file}
 
 \item{\code{fullfilename}}{name of filename}
 }}

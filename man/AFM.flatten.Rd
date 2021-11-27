@@ -6,10 +6,10 @@
 this flattens only z, not z.nm, so scaling
 factor would need to be applied for z.nm}
 \usage{
-AFM.flatten(myAFMdata)
+AFM.flatten(obj)
 }
 \arguments{
-\item{myAFMdata}{AFMdata object}
+\item{obj}{AFMdata object}
 }
 \value{
 flattened matrix with AFM image

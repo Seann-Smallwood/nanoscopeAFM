@@ -4,10 +4,10 @@
 \alias{AFM.histogram}
 \title{graph a histogram for the AFM image}
 \usage{
-AFM.histogram(AFMdata)
+AFM.histogram(obj)
 }
 \arguments{
-\item{AFMdata}{AFMdata object}
+\item{obj}{AFMdata object}
 }
 \value{
 draws a ggplot graph

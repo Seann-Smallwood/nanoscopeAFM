@@ -2,6 +2,11 @@
 
 Author: **Thomas Gredig**
 
+## nanoscopeAFM 1.0.3
+
+* some minor fixes to make AFM.raster() work
+* add AFM.lineProfile() function (not rendering though yet)
+
 ## nanoscopeAFM 1.0.1
 
 * fix channels for AFM import

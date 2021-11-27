@@ -6,6 +6,11 @@ test_that("check loading non-existant file", {
   expect_equal(nrow(d), 0)
 })
 
+test_that("AFMdata object", {
+  a = AFMdata(instrument='AR')
+  expect_true(isS4(a))
+})
+
 # test_that("flattening image", {
 #   filename = system.file("extdata", "Park_20210916_034.tiff",package="nanoscopeAFM")
 #   d = AFM.import(filename)
@@ -49,3 +54,11 @@ test_that("Veeco AFM info", {
 })
 
 
+
+context("Importing AFM file")
+
+test_that("importing Asylum Research AR AFM sample file", {
+  filename = system.file("extdata", "AR_20211011.ibw",package="nanoscopeAFM")
+  d = AFM.import(filename)
+  expect_true(AFM.isImage(d))
+})

@@ -140,7 +140,7 @@ AFM.import <- function(filename) {
     y.max.nm = max(d$y.nm),
     x.pixels = max(d$x),
     y.pixels = max(d$y),
-    z.conv = d$z / d$z.nm,
+    z.conv = d$z.nm[1] / d$z[1],
     z.units = .getChannelUnits(attr(d,"channel")),
     instrument = attr(d,"instrument"),
     fullfilename = filename
@@ -213,11 +213,10 @@ plot.AFMdata <- function(obj,mpt=NA,...) {
 }
 
 
-
-#' graph a histogram of the height distribution for an AFMdata object
+#' graph a histogram for the AFM image
 #'
 #' @param AFMdata AFMdata object
-#' @return ggplot graph
+#' @return draws a ggplot graph
 #' @author thomasgredig
 #' @export
 #' @examples
@@ -232,6 +231,22 @@ AFM.histogram <- function(AFMdata) {
                      colour="black", fill="white", bins=200)+
       geom_density(alpha=0.2, fill='red')
   )
+
 }
 
+# (simple check only at the moment): NEEDS more work
+
+#' checks if the object is an AFM image
+#'
+#' @param AFMdata AFMdata object
+#' @return \code{TRUE} if object is an AFM image
+#' @author thomasgredig
+#' @export
+#' @examples
+#' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' AFM.isImage(d)
+#' @export
+AFM.isImage <- function(AFMdata) {
+  ((AFMdata@x.pixels > 1) & (AFMdata@y.pixels>1))
+}
 

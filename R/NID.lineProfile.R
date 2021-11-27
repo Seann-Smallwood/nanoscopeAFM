@@ -1,6 +1,6 @@
 #' Line Profile: create a profile data line across an image (d), providing
 #'   the starting point (x1,y1) and end point (x2,y2). The start and end
-#'   points are provided in length units of the images (usch as micrometers)
+#'   points are provided in length units of the images (such as micrometers)
 #'
 #' @param d AFM image in data frame
 #' @param x1 start x position in AFM units from bottom right

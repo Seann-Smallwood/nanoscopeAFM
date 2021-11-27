@@ -203,10 +203,12 @@ summary.AFMdata <- function(obj) {
 #' @author thomasgredig
 #' @export
 AFM.raster <- function(myAFMdata) {
+  x.conv = myAFMdata@x.max.nm / myAFMdata@x.pixels
+  y.conv = myAFMdata@y.max.nm / myAFMdata@y.pixels
   data.frame(
-    x.nm = rep(1:myAFMdata@x.pixels,myAFMdata@y.pixels),
-    y.nm = rep(1:myAFMdata@y.pixels,each=myAFMdata@x.pixels),
-    z.nm = myAFMdata@data$z * myAFMdata@z.conv
+    x = rep(1:myAFMdata@x.pixels,myAFMdata@y.pixels)*x.conv,
+    y = rep(1:myAFMdata@y.pixels,each=myAFMdata@x.pixels)*y.conv,
+    z = myAFMdata@data$z * myAFMdata@z.conv
   )
 }
 
@@ -224,10 +226,10 @@ plot.AFMdata <- function(obj,mpt=NA,...) {
   cat("Graphing:",obj@fullfilename)
   d = AFM.raster(obj)
 
-  if (is.na(mpt)) mean(d$z.nm) -> mpt
+  if (is.na(mpt)) mean(d$z) -> mpt
   xlab <- expression(paste('x (',mu,'m)'))
   print(
-    ggplot(d, aes(x.nm/1000, y.nm/1000, fill = z.nm)) +
+    ggplot(d, aes(x/1000, y/1000, fill = z)) +
       geom_raster() +
       scale_fill_gradient2(low='red', mid='white', high='blue',
                            midpoint=mpt) +
@@ -244,7 +246,7 @@ plot.AFMdata <- function(obj,mpt=NA,...) {
 
 #' graph a histogram for the AFM image
 #'
-#' @param AFMdata AFMdata object
+#' @param obj AFMdata object
 #' @return draws a ggplot graph
 #' @author thomasgredig
 #' @examples
@@ -252,9 +254,10 @@ plot.AFMdata <- function(obj,mpt=NA,...) {
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' AFM.histogram(d)
 #' @export
-AFM.histogram <- function(AFMdata) {
+AFM.histogram <- function(obj) {
+  d = AFM.raster(obj)
   print(
-    ggplot(AFMdata@data, aes(x=z.nm)) +
+    ggplot(d, aes(x=z)) +
       geom_histogram(aes(y=..density..),
                      colour="black", fill="white", bins=200)+
       geom_density(alpha=0.2, fill='red')
@@ -265,15 +268,14 @@ AFM.histogram <- function(AFMdata) {
 
 #' checks if the object is an AFM image
 #'
-#' @param myAFMdata AFMdata object
+#' @param obj AFMdata object
 #' @return \code{TRUE} if object is an AFM image
 #' @author thomasgredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' AFM.isImage(d)
 #' @export
-AFM.isImage <- function(myAFMdata) {
-  #myAFMdata@history <<- paste(myAFMdata@history,"checkImage;")
-  ((myAFMdata@x.pixels > 1) & (myAFMdata@y.pixels>1))
+AFM.isImage <- function(obj) {
+  ((obj@x.pixels > 1) & (obj@y.pixels>1))
 }
 

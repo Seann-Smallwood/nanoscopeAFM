@@ -2,9 +2,7 @@
 % Please edit documentation in R/NID.lineProfile.R
 \name{NID.lineProfile}
 \alias{NID.lineProfile}
-\title{Line Profile: create a profile data line across an image (d), providing
-  the starting point (x1,y1) and end point (x2,y2). The start and end
-  points are provided in length units of the images (such as micrometers)}
+\title{Line Profile}
 \usage{
 NID.lineProfile(d, x1, y1, x2, y2)
 }
@@ -23,13 +21,7 @@ NID.lineProfile(d, x1, y1, x2, y2)
 vector with line profile for data frame
 }
 \description{
-Line Profile: create a profile data line across an image (d), providing
+create a profile data line across an image (d), providing
   the starting point (x1,y1) and end point (x2,y2). The start and end
   points are provided in length units of the images (such as micrometers)
-}
-\examples{
-filename = system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM")
-d = NID.loadImage(filename,1)
-q = NID.lineProfile(d,0,0,1e-6,1-6)
-plot(d$z.flatten[q])
 }

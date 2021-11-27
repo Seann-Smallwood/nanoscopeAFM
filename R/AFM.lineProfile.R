@@ -1,20 +1,20 @@
-#' Line Profile: create a profile data line across an image (d), providing
+#' Line Profile
+#'
+#' create a profile data line across an image (d), providing
 #'   the starting point (x1,y1) and end point (x2,y2). The start and end
 #'   points are provided in length units of the images (such as micrometers)
 #'
-#' @param d AFM image in data frame
+#' @param obj AFMdata object
 #' @param x1 start x position in AFM units from bottom right
 #' @param y1 start y position in AFM units from bottom right
 #' @param x2 end x position in AFM units from bottom right
 #' @param y2 end y position in AFM units from bottom right
-#' @return vector with line profile for data frame
-#' @examples
-#' filename = system.file("extdata","NanoSurf_20160301.nid",package="nanoscopeAFM")
-#' d = NID.loadImage(filename,1)
-#' q = NID.lineProfile(d,0,0,1e-6,1-6)
-#' plot(d$z.flatten[q])
+#' @return AFMdata object with line data
 #' @export
-NID.lineProfile <- function(d,x1,y1,x2,y2) {
+AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
+  AFMcopy = obj
+  AFMcopy@history <- paste(AFMcopy@history,"AFM.lineProfile();")
+  d = AFM.raster(AFMcopy)
   range.x = max(d$x) - min(d$x)
   range.y = max(d$y) - min(d$y)
   if(x1 >= range.x) { warning("x1: Out of range"); x1=0.99*range.x }
@@ -49,5 +49,6 @@ NID.lineProfile <- function(d,x1,y1,x2,y2) {
     q1= x1.pixel*width.x+y1.pixel
     r=c(r, q1)
   }
-  r
+  AFMcopy@data = data.frame(r)
+  AFMcopy
 }

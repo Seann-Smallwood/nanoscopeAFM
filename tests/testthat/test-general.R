@@ -11,13 +11,13 @@ test_that("AFMdata object", {
   expect_true(isS4(a))
 })
 
-# test_that("flattening image", {
-#   filename = system.file("extdata", "Park_20210916_034.tiff",package="nanoscopeAFM")
-#   d = AFM.import(filename)
-#   d2 = AFM.flatten(d)
-#   expect_equal(nrow(d),nrow(d2))
-# })
-#
+test_that("flattening image", {
+  filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
+  d = AFM.import(filename)
+  d2 = AFM.flatten(d)
+  expect_equal(nrow(d@data),nrow(d2@data))
+})
+
 
 
 context("AFM info header information")

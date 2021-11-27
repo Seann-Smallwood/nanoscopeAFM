@@ -149,7 +149,7 @@ read.AR_eofHeader.V2 <- function(wavefile, Verbose = FALSE) {
 
 
 # private files
-
+NULL
 
 .getChannelName <- function(h1,no) {
   # from h1=read.AR_eofHeader.V2(filename)

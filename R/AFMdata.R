@@ -133,6 +133,8 @@ AFMdata <- function(data,
 #' @export
 AFM.import <- function(filename) {
   d = AFM.read(filename)
+  z.conv = 1
+  if (d$z[1]>0) z.conv = d$z.nm[1] / d$z[1]
   AFMdata(
     data = d,
     channel = attr(d,"channel"),
@@ -140,7 +142,7 @@ AFM.import <- function(filename) {
     y.max.nm = max(d$y.nm),
     x.pixels = max(d$x),
     y.pixels = max(d$y),
-    z.conv = d$z.nm[1] / d$z[1],
+    z.conv = z.conv,
     z.units = .getChannelUnits(attr(d,"channel")),
     instrument = attr(d,"instrument"),
     fullfilename = filename

@@ -4,10 +4,10 @@
 \alias{AFM.raster}
 \title{returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers}
 \usage{
-AFM.raster(myAFMdata)
+AFM.raster(obj)
 }
 \arguments{
-\item{myAFMdata}{AFMdata object}
+\item{obj}{AFMdata object}
 }
 \value{
 data.frame with  ($x.nm, $y.nm, $z.nm)

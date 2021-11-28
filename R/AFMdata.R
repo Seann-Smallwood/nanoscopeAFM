@@ -198,17 +198,18 @@ summary.AFMdata <- function(obj) {
 
 #' returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers
 #'
-#' @param myAFMdata AFMdata object
+#' @param obj AFMdata object
 #' @return data.frame with  ($x.nm, $y.nm, $z.nm)
 #' @author thomasgredig
 #' @export
-AFM.raster <- function(myAFMdata) {
-  x.conv = myAFMdata@x.max.nm / myAFMdata@x.pixels
-  y.conv = myAFMdata@y.max.nm / myAFMdata@y.pixels
+AFM.raster <- function(obj) {
+  if(!isS4(obj)) { stop("not an S4 object") }
+  x.conv = obj@x.max.nm / obj@x.pixels
+  y.conv = obj@y.max.nm / obj@y.pixels
   data.frame(
-    x = rep(1:myAFMdata@x.pixels,myAFMdata@y.pixels)*x.conv,
-    y = rep(1:myAFMdata@y.pixels,each=myAFMdata@x.pixels)*y.conv,
-    z = myAFMdata@data$z * myAFMdata@z.conv
+    x = rep(1:obj@x.pixels,obj@y.pixels)*x.conv,
+    y = rep(1:obj@y.pixels,each=obj@x.pixels)*y.conv,
+    z = obj@data$z * obj@z.conv
   )
 }
 

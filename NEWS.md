@@ -6,6 +6,7 @@ Author: **Thomas Gredig**
 
 * some minor fixes to make AFM.raster() work
 * add AFM.lineProfile() function (not rendering though yet)
+* [Github IO Help Page](https://thomasgredig.github.io/nanoscopeAFM/)
 
 ## nanoscopeAFM 1.0.1
 

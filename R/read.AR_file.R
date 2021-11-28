@@ -148,9 +148,13 @@ read.AR_eofHeader.V2 <- function(wavefile, Verbose = FALSE) {
 }
 
 
-# private files
-NULL
 
+#' \code{.getChannelName} returns channel name based on header info
+#'
+#' @param h1 filename including path
+#' @param no image number
+#' @return list of channels and additional information
+#' @export
 .getChannelName <- function(h1,no) {
   # from h1=read.AR_eofHeader.V2(filename)
   gsub('(.*)[RT][er].*$','\\1',strsplit(h1$DataTypeList,",")[[1]][no])

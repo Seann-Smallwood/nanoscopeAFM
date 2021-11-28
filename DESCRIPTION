@@ -11,6 +11,7 @@ Description: Reads atomic force microscopy (AFM) image files into data tables
     for analysis. The supported file formats include NanoSurf NID files, VEECO 
     NanoScope files, Park AFM files, and Igor Wavefiles. It can also flatten
     images and do basic data analysis.
+URL: https://thomasgredig.github.io/nanoscopeAFM/
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

@@ -1,6 +1,19 @@
+title: nanoscopeAFM
+
+home:
+  title: Import and analyze AFM images
+  description: Imports atomic force microscopy (AFM) images from four different instruments; images can be analyzed and displayed
+
 url: https://thomasgredig.github.io/nanoscopeAFM
 
 template:
+  opengraph:
+    image:
+      src: man/figures/logo.png
+      alt: "nanoscopeAFM - AFM analysis tool in R"
+    twitter:
+      creator: "@ied7"
+      card: summary_large_image
   params:
     bootswatch: simplex
 
@@ -10,3 +23,6 @@ authors:
 
 development:
   mode: unreleased
+
+
+

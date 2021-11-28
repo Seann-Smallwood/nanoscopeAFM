@@ -3,6 +3,7 @@
 S3method(plot,AFMdata)
 S3method(print,AFMdata)
 S3method(summary,AFMdata)
+export(.getChannelName)
 export(AFM.flatten)
 export(AFM.histogram)
 export(AFM.import)

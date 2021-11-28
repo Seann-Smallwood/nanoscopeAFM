@@ -141,7 +141,7 @@ AFMdata <- function(data,
 AFM.import <- function(filename) {
   d = AFM.read(filename)
   z.conv = 1
-  if (d$z[1]>0) z.conv = d$z.nm[1] / d$z[1]
+  if (d$z[1] != 0) z.conv = d$z.nm[1] / d$z[1]
   d1 = data.frame(z=d$z)
   AFMdata(
     data = d1,
@@ -185,12 +185,15 @@ print.AFMdata <- function(obj) {
 #' summary(d)
 #' @export
 summary.AFMdata <- function(obj) {
-  data.frame(
+  d = AFM.raster(obj)
+  r = data.frame(
     object = paste(obj@instrument,"AFM image"),
     resolution = paste(obj@x.pixels,"x",obj@y.pixels),
     size = paste(max(obj@x.max.nm),"x",max(obj@y.max.nm),'nm'),
     channel = paste(obj@channel),
     z.units = paste(obj@z.units),
+    z.min.nm = min(d$z),
+    z.max.nm = max(d$z),
     history = paste(obj@history),
     filename = obj@fullfilename
   )

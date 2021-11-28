@@ -1,6 +1,8 @@
-# nanoscopeAFM
+# nanoscopeAFM  <img src="man/figures/logo.png" align="right" alt="" width="280" />
+
 
 Analyzes Atomic Force Microsocpy images; currently four types are supported, images from Nanosurf (.nid), Veeco Multimode Nanoscope III, Park AFM images, and Asylum Research AFM images.
+
 
 
 ## Installation

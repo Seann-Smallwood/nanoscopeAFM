@@ -55,28 +55,4 @@ test_that("Veeco AFM info", {
 
 
 
-context("Importing AFM file")
 
-test_that("importing Asylum Research AR AFM sample file", {
-  filename = system.file("extdata", "AR_20211011.ibw",package="nanoscopeAFM")
-  d = AFM.import(filename)
-  expect_true(AFM.isImage(d))
-})
-
-test_that("importing Park AFM sample file", {
-  filename = system.file("extdata", "Park_20210916_034.tiff",package="nanoscopeAFM")
-  d = AFM.import(filename)
-  expect_true(AFM.isImage(d))
-})
-
-test_that("importing Veeco AFM sample file", {
-  filename = system.file("extdata", "Veeco_20160622.003",package="nanoscopeAFM")
-  d = AFM.import(filename)
-  expect_true(AFM.isImage(d))
-})
-
-test_that("importing NanoSurf AFM sample file", {
-  filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
-  d = AFM.import(filename)
-  expect_true(AFM.isImage(d))
-})

@@ -18,3 +18,6 @@ test_check("nanoscopeAFM")
 
 # publish on GitHub
 # usethis::use_github_action("pkgdown")
+
+# do the checks:
+# devtools::test()

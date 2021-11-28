@@ -15,3 +15,6 @@ test_check("nanoscopeAFM")
 # step by step testing =====
 # setwd('./tests/testthat')
 
+
+# publish on GitHub
+# usethis::use_github_action("pkgdown")

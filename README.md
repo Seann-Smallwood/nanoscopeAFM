@@ -43,47 +43,7 @@ plot(d2)
 ```
 
 
-# AFM Images
 
-Loading an AFM image into memory works as follows:
-
-```R
-fname = 'image.ibw' # Igor Wavefile, NID file, AR file, or Nanoscope file
-d = read.AFM_file(fname)
-```
-
-The attributes can be viewed with `str(d)` and include units.
-
-```R
-library(ggplot2)
-library(scales)
-
-ggplot(d, aes(x.nm, y.nm, fill = z.nm)) + 
-  geom_raster() +
-  scale_fill_gradient2(mid='white', high=muted('purple')) +
-  xlab(expression(paste('x (',mu,'m)'))) +
-  ylab(expression(paste('y (',mu,'m)'))) +
-  labs(fill='z (nm)') +
-  scale_y_continuous(expand=c(0,0))+
-  scale_x_continuous(expand=c(0,0))+
-  coord_equal() +
-  theme_bw()
-```
-
-A cross-section of the image can now easily be created:
-
-```R
-LINE.NO = 45
-d1 = subset(d, y==LINE.NO)
-ggplot(d1, aes(x.nm, z.nm)) +
-  geom_path(col='black') + 
-  geom_point(col='red', size=2) + 
-  geom_point(col='white', size=1)+ 
-  scale_x_continuous(breaks=0:20*0.2) + 
-  xlab(expression(paste('x (',mu,'m)'))) +
-  ylab('z (nm)') + 
-  theme_bw()
-```
 
 
 ## Image Info
@@ -110,29 +70,9 @@ Histogram can be used to study the roughness or height levels:
 
 ```R
 # make a histogram
-ggplot(d, aes(x=z.nm)) +
-    geom_histogram(aes(y=..density..),
-    colour="black", fill="white", bins=200)+
-    geom_density(alpha=0.2, fill='red')
+d = AFM.read(filename)
+AFM.histogram(d)
 ```
-
-![histogram example](images/CalibrationGrid-Histogram.png)
-
-
-
-
-## Frequency Sweep
-
-If the NID file is a frequency sweep, you can display the data using the function `NID.loadSweep` which will return a list that contains data frames with the frequency vs. amplitude data.
-
-```R
-q = NID.loadSweep(fname[1])
-plot(q[[1]],xlab='f (Hz)', ylab='A')
-```
-
-![sample output for frequency sweep](images/Frequency-Sweep.png)
-
-The units for amplitude are stored in the header of the file and can be modified accordingly.
 
 
 ## Line Profile
@@ -182,9 +122,36 @@ In version 0.5 and earlier, some additional functions were available, these have
 * flatten.NID_matrix() -> AFM.flatten()
 
 
+## Frequency Sweep (Deprecated)
+
+If the NID file is a frequency sweep, you can display the data using the function `NID.loadSweep` which will return a list that contains data frames with the frequency vs. amplitude data.
+
+```R
+q = NID.loadSweep(fname[1])
+plot(q[[1]],xlab='f (Hz)', ylab='A')
+```
+
+
+## Line Profile (Deprecated)
+
+A cross-section of the image can now easily be created:
+
+```R
+LINE.NO = 45
+d1 = subset(d, y==LINE.NO)
+ggplot(d1, aes(x.nm, z.nm)) +
+  geom_path(col='black') + 
+  geom_point(col='red', size=2) + 
+  geom_point(col='white', size=1)+ 
+  scale_x_continuous(breaks=0:20*0.2) + 
+  xlab(expression(paste('x (',mu,'m)'))) +
+  ylab('z (nm)') + 
+  theme_bw()
+```
+
 # Technical Notes
 
 * The [least significant bit (LSB)](https://masteringelectronicsdesign.com/an-adc-and-dac-least-significant-bit-lsb/) provides the smallest voltage step, given the 16-bit resolution of the NanoScope AFM, then Vref = 2^16*LSB.
 * The [header file](http://www.weizmann.ac.il/Chemical_Research_Support/surflab/peter/headers/) is documented for versions 2,3, and 4. [Z-scaling Info](https://bioafm.physics.leidenuniv.nl/dokuwiki/lib/exe/fetch.php?media=afm:nanoscope_software_8.10_user_guide-d_004-1025-000_.pdf)
-* [https://www.instructables.com/A-Low-Cost-Atomic-Force-Microscope-%E4%BD%8E%E6%88%90%E6%9C%AC%E5%8E%9F%E5%AD%90%E5%8A%9B%E9%A1%AF%E5%BE%AE%E9%8F%A1/](Low Cost DIY AFM)
-* [https://rdrr.io/cran/AFM/](AFM Analysis R package) by Mathieu Beauvais on [https://github.com/cran/AFM](cran/AFM)
+* [Low Cost DIY AFM](https://www.instructables.com/A-Low-Cost-Atomic-Force-Microscope-%E4%BD%8E%E6%88%90%E6%9C%AC%E5%8E%9F%E5%AD%90%E5%8A%9B%E9%A1%AF%E5%BE%AE%E9%8F%A1/)
+* [AFM Analysis R package](https://rdrr.io/cran/AFM/) by Mathieu Beauvais on [cran/AFM](https://github.com/cran/AFM)

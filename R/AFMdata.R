@@ -187,7 +187,7 @@ print.AFMdata <- function(obj) {
 #' @export
 summary.AFMdata <- function(obj) {
   d = AFM.raster(obj)
-  r = data.frame(
+  data.frame(
     object = paste(obj@instrument,"AFM image"),
     resolution = paste(obj@x.pixels,"x",obj@y.pixels),
     size = paste(max(obj@x.max.nm),"x",max(obj@y.max.nm),'nm'),

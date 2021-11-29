@@ -4,6 +4,10 @@ Author: **Thomas Gredig**
 
 ## nanoscopeAFM 1.0.3
 
+* correct height computation for NanoScope images
+
+## nanoscopeAFM 1.0.3
+
 * some minor fixes to make AFM.raster() work
 * add AFM.lineProfile() function (not rendering though yet)
 * [Github IO Help Page](https://thomasgredig.github.io/nanoscopeAFM/)

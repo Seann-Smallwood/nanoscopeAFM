@@ -73,8 +73,8 @@ AFM.info <- function(filename, no=1, fullInfo=FALSE) {
       # VEECO
       # ===============
       r=c(r,INFO.type='Veeco')
-      r = c(r, read.Nanoscope_params(filename, no) )
-      wh = strsplit(gsub('\\s*(.*)\\s.*','\\1', r['Scan size2'])," ")[[1]]
+      r = c(r, read.Nanoscope_file(filename, no, headerOnly=TRUE) )
+      wh = strsplit(gsub('\\s*(.*)\\s.*','\\1', r['Scan size'])," ")[[1]]
 
       # mandatory tags:
       r=c(r,INFO.widthPixel=as.numeric(r['Samps/line2']))

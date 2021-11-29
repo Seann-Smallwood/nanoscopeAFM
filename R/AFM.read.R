@@ -33,11 +33,7 @@ AFM.read <- function(filename, no=1) {
       attr(df,"instrument")='Park'
     } else {
       df = read.Nanoscope_file(filename,no)
-      r = AFM.info(filename)
       attr(df,"instrument")='Veeco'
-      attr(df,"channelDirection") = r['Frame direction']
-      attr(df,"note")=r['Note']
-      attr(df,"channel")= r['Data type']   # not sure
     }
   }  else { warning(paste("File does not exist:",filename)) }
   df

@@ -23,8 +23,8 @@ test_that("Asylum Research Igor AFM image size check", {
   r = summary(d)
   # min height -32.46nm
   # max height 50.79nm
-  expect_equal(r$z.min.nm,-32.46)
-  expect_equal(r$z.max.nm,50.79)
+  expect_equal(r$z.min.nm,-32.46,tolerance = 1e-2)
+  expect_equal(r$z.max.nm,50.79,tolerance = 1e-2)
 
 })
 
@@ -107,8 +107,8 @@ test_that("NanoSurf image size check", {
   r = summary(d)
   # min height -294.2nm
   # max height -88.5nm
-  expect_equal(r$z.min.nm,-294.2)
-  expect_equal(r$z.max.nm,-88.5)
+  expect_equal(r$z.min.nm,-294.2,tolerance = 1e-2)
+  expect_equal(r$z.max.nm,-88.5,tolerance = 1e-2)
 })
 
 

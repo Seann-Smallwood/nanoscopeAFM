@@ -4,15 +4,17 @@
 \alias{read.Nanoscope_file}
 \title{Returns Veeco NanoScope AFM image with Scaling}
 \usage{
-read.Nanoscope_file(filename, no = 1)
+read.Nanoscope_file(filename, no = 1, headerOnly = FALSE)
 }
 \arguments{
 \item{filename}{filename including path}
 
 \item{no}{image number}
+
+\item{headerOnly}{if \code{TRUE}, returns header only and no image}
 }
 \value{
-image
+image or header information
 }
 \description{
 Returns Veeco NanoScope AFM image with Scaling

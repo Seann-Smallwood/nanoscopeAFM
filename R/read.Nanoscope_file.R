@@ -2,148 +2,106 @@
 #'
 #' @param filename filename including path
 #' @param no image number
-#' @return image
+#' @param headerOnly if \code{TRUE}, returns header only and no image
+#' @return image or header information
 #' @examples
 #' filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
 #' h = read.Nanoscope_file(filename)
 #' @export
-read.Nanoscope_file <- function(filename, no=1) {
-  d = data.frame()
-  if (file.exists(filename)==FALSE) {
-    warning(paste("Nanoscope Load Error: File",filename,"does not exist."))
-    return(d)
-  }
-  # read header information
-  #h = read.Nanoscope_header(filename)
-  h = read.Nanoscope_params(filename, no)
-  if (length(h)==0) {
-    warning(paste("Nanoscope Load Error: File",filename,"has no header information."))
-  } else {
-    line.num = as.numeric(h['Number of lines'])
-    line.sam = as.numeric(h['Samps/line'])
-    zScale = h['AT-Sens. Zscan']
-    zSens = h['AT-Z center']
-    image.size = h['Scan size']
-    Scale.nm.V = as.numeric(gsub(' nm/V','',stringr::str_extract(zScale, pattern = '\\d+\\.\\d+ nm/V$')))
-    Sens.V = as.numeric(gsub(' V','',stringr::str_extract(zSens, pattern = '\\d+\\.\\d+ V$')))
-    zConversion = Scale.nm.V*Sens.V/(2^16)
-    wh = strsplit(gsub('\\s*(.*)\\s.*','\\1', h['Scan size2'])," ")[[1]]
-    width.nm = as.numeric(wh[1])
-    height.nm = as.numeric(wh[2])
-    # convert to nm
-    if (length(grep('~m',h['Scan size2']))) {
-      width.nm = width.nm*1000
-      height.nm = height.nm *1000
-    } else if (!(units=='nm')) {
-      warning(paste('Nanoscope units are neither nm nor um, but ',units))
-    }
-
-    step.nm = height.nm / line.num
-
-    # load image
-    x.nm = rep(seq(from=0, to=width.nm, length=line.num), line.num)
-    y.nm = rep(seq(from=0, to=height.nm, length=line.num), each=line.num)
-    z = read.Nanoscope_BIN(filename, no)
-    d = data.frame(x = rep(1:line.num, line.num),
-                   y =  rep(1:line.num, each=line.num),
-                   z,
-                   x.nm,
-                   y.nm,
-                   z.nm = z*zConversion)
-  }
-  d
-}
-
-# private functions
-# ==
-NULL
-
-# loads the binary data from the Veeco file
-read.Nanoscope_BIN <- function(filename, no=1) {
-  if(!file.exists(filename)) { warning(paste("File",filename," does NOT exist !")) }
-  # read the header of the AFM file
-  q = read.Nanoscope_header(filename)
-  # retrieve header length + file image lengths
-  dlen.num = as.numeric(q$value[grepl('Data length',q$name)])
-  # load components
-  con <- file(filename,"rb")
-  bin.header <- readBin(con, integer(),  n = dlen.num[1], size=1, endian = "little")
-  imageNo = 1
-  r = list()
-  while(imageNo < length(dlen.num)) {
-    bin.data   <- readBin(con, integer(),  n = dlen.num[imageNo+1]/2, size=2, endian = "little")
-    r[[imageNo]] = bin.data
-    imageNo = imageNo+1
-  }
-  close(con)
-  r[[no]]
-}
-
-
-# returns header information
-read.Nanoscope_header <- function(filename) {
-  if (!file.exists(filename)) { warning(paste("File",filename,"does NOT exist.")) }
-  if (file.info(filename)$size<20000) { warning(paste("File",filename,"is too small. Data may be missing."))}
-  first_line = ''
+read.Nanoscope_file <- function(filename, no=1, headerOnly = FALSE) {
+  err.msg = c()
+  # load header
   header = c()
   con <- file(filename,"rb")
-  i=0
-  err = FALSE
+  first_line = ''
   while(first_line != "\\*File list end" ) {
     first_line <- readLines(con,n=1)
-    if (length(first_line)==0) { err = TRUE; break; }
+    if (length(first_line)==0) { err.msg = c(err.msg,'Header error'); break; }
     header=c(header, first_line)
-    i=i+1
   }
-  close(con)
-  if (err==TRUE) {
-    data.frame(
-      name='Reading error',
-      value='TRUE'
-    )
-  } else {
-    header = gsub('\\\\','',header)
-    header[grep('^\\*',header)] = paste0(header[grep('^\\*',header)],":NEW SECTION")
-    p1 = strsplit(header,':')
-    data.frame(
-      name = unlist(lapply(p1,"[[",1)),
-      value = unlist(lapply(p1,"[[",2)),
-      stringsAsFactors = FALSE
-    )
-  }
-}
 
-# > h$name[sections]
-# [1] "*File list"       "*Equipment list"  "*Scanner list"    "*Ciao scan list"  "*Fast Scan list"  "*Ciao image list"
-# [7] "*Ciao image list" "*File list end"
-# returns header information for particular image number only
-read.Nanoscope_params <- function(filename, no=1) {
-  h = read.Nanoscope_header(filename)
+  # analyze header
+  header = gsub('\\\\','',header)
+  header[grep('^\\*',header)] = paste0(header[grep('^\\*',header)],":NEW SECTION")
+  HEADER.INFO = data.frame(
+    name = gsub("(.*?):.*","\\1",header),
+    value = gsub(".*?:(.*)","\\1",header),
+    stringsAsFactors = FALSE
+  )
+  Volt2nanometer = HEADER.INFO$value[grep('Sens. Zscan', HEADER.INFO$name)]
+  Volt2nanometer = as.numeric(gsub(' V(.*)nm/V','\\1',Volt2nanometer))
+  #write.csv(HEADER.INFO, file='VEECO-Header.csv')
+
   # parse out parameters that are relevant to image number no
-  sections = grep('NEW SECTION', h$value)
-  fileNo = grep('File list$', h$name[sections])
-  scanNo = grep('Scanner list$', h$name[sections])
-  ciaoNo = grep('Ciao scan list$', h$name[sections])
-  eqipNo = grep('Equipment list', h$name[sections])
-  imNo = grep('Ciao image list$',h$name[sections])[no]
+  sections = grep('NEW SECTION', HEADER.INFO$value)
+  fileNo = grep('File list$', HEADER.INFO$name[sections])
+  scanNo = grep('Scanner list$', HEADER.INFO$name[sections])
+  ciaoNo = grep('Ciao scan list$', HEADER.INFO$name[sections])
+  eqipNo = grep('Equipment list', HEADER.INFO$name[sections])
+  totalNumberImages = length(grep('Ciao image list$',HEADER.INFO$name[sections]))
+  imNo = grep('Ciao image list$',HEADER.INFO$name[sections])
 
-  h = h[c(sections[fileNo]:(sections[fileNo+1]-1),
-      sections[eqipNo]:(sections[eqipNo+1]-1),
-      sections[scanNo]:(sections[scanNo+1]-1),
-      sections[ciaoNo]:(sections[ciaoNo+1]-1),
-      sections[imNo]:(sections[imNo+1]-1)),]
+  # Image Header Online
+  imageHeader = HEADER.INFO[sections[imNo[no]]:(sections[imNo[no]+1]-1),]
+  getHeaderNumeric <- function(name) {as.numeric(imageHeader$value[grep(name,imageHeader$name)])  }
+  getHeaderStr <- function(name) {imageHeader$value[grep(name,imageHeader$name)]  }
+  getHeaderStrVal <- function(name) {imageHeader$value[grep(name,imageHeader$value)]  }
 
-  # tidy up some of the names
-  gsub("^\\*", 'SECTION-' , h$name) -> h$name
-  winNum = grep("^@\\d", h$name)
-  nl = unique(h$name[winNum])
-  for(nm in nl) { n1 = which(h$name==nm); v1 = paste(h$value[n1], collapse=';;'); h=h[-n1,]; h=rbind(h,data.frame(name=nm,value=v1)); }
-  gsub('^@','AT-',h$name) -> h$name
-  nl = h$name[duplicated(h$name)==TRUE]
-  for(nm in nl) { j=1; for(i in which(h$name==nm)) { if(j>1) {h$name[i] = paste0(h$name[i],j)}; j=j+1; } }
+  im.channelName = gsub('.*\\[(.*)\\].*','\\1',imageHeader$value[grep('Image Data:',imageHeader$value)])
+  im.line.num = getHeaderNumeric('Number of lines')
+  im.line.sam = getHeaderNumeric('Samps/line')
+  im.zMagnify = getHeaderStr('magnify')
+  im.zMagnifyFac = as.numeric(gsub('.*\\](.*)','\\1',im.zMagnify))
+  im.image.size = getHeaderStr('Scan size')
+  im.bytes.pixel = getHeaderNumeric('Bytes/pixel')
+  im.scanDirection = getHeaderStr('Line direction')
+  im.Zscale = getHeaderStrVal('Z scale:')
+  im.ZscaleFac = as.numeric(gsub('.*?\\)(.*)V','\\1',im.Zscale))
+  im.Zoffset = getHeaderStrVal('Z offset:')
+  im.dataOffset = getHeaderNumeric('Data offset')
+  im.dataLength = getHeaderNumeric('Data length')
 
-  p2=c()
-  p2[h$name] = h$value
-  p2
+  im.units='nm'  # default units
+  if (im.channelName=='Amplitude') im.units='V'
+  if (im.units=='V') Volt2nanometer=1
+  zConversion =  im.ZscaleFac / (2^(im.bytes.pixel*8)) * Volt2nanometer
+
+  wh = strsplit(gsub('\\s*(.*)\\s.*','\\1', im.image.size)," ")[[1]]
+  im.width.nm = as.numeric(wh[1])
+  im.height.nm = as.numeric(wh[2])
+  # convert um to nm
+  if (length(grep('~m',im.image.size))) {
+    im.width.nm = im.width.nm*1000
+    im.height.nm = im.height.nm *1000
+  }
+
+  step.nm = im.height.nm / im.line.num
+
+  # load image
+  x.nm = rep(seq(from=0, to=im.width.nm, length=im.line.num), im.line.num)
+  y.nm = rep(seq(from=0, to=im.height.nm, length=im.line.num), each=im.line.num)
+
+  #print(paste("Loading at offset",im.dataOffset," (",im.dataLength,"bytes)"))
+  seek(con, where  = im.dataOffset) # skip header
+  z   <- readBin(con, integer(),  n = im.dataLength/im.bytes.pixel, size=im.bytes.pixel, endian = "little")
+  close(con)
+
+  if (length(err.msg)>0) warning(err.msg)
+
+  df = data.frame(x = rep(1:im.line.num, im.line.num),
+                 y = rep(1:im.line.num, each=im.line.num),
+                 z,
+                 x.nm,
+                 y.nm,
+                 z.nm = z*zConversion)
+
+  attr(df,"channelDirection") = getHeaderStrVal('Line direction')
+  attr(df,"note")       = getHeaderStrVal('Note')
+  attr(df,"channel")    = im.channelName
+  attr(df,"units")      = im.units
+  attr(df,"date")       = HEADER.INFO$value[grep('^Date', HEADER.INFO$name)]
+  if (headerOnly) {
+    df = imageHeader
+  }
+  df
 }
-

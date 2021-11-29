@@ -45,7 +45,6 @@ read.AR_file <- function(filename, no=1) {
       dr$x.nm = convFactor*1e9 * (dr$x-1)
       dr$y.nm = convFactor*1e9 * (dr$y-1)
       dr$z.nm = 1e9 * dr$z
-      dr$z.nm = dr$z.nm - min(dr$z.nm)
     } else {
       dr$x.nm = convFactor*1e9 * (dr$x-1)
       dr$y.nm = convFactor*1e9 * (dr$y-1)

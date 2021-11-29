@@ -12,7 +12,6 @@ test_that("Asylum Research Igor AFM image size check", {
   filename = system.file("extdata", "AR_20211011.ibw",package="nanoscopeAFM")
   d = AFM.import(filename)
   # image is 4 x 4 um
-  expect_equal(d@y.max.nm,4000)
   df = AFM.raster(d)
   expect_equal(max(df$x),4000)
   expect_equal(max(df$y),4000)

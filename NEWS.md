@@ -2,7 +2,12 @@
 
 Author: **Thomas Gredig**
 
-## nanoscopeAFM 1.0.3
+## nanoscopeAFM 1.0.5
+
+* replace x.max.nm with x.conv, and y.conv similar to z.conv; scaling parameters to change units to nm
+* add sample description possibility
+
+## nanoscopeAFM 1.0.4
 
 * correct height computation for NanoScope images
 

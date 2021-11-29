@@ -7,8 +7,8 @@
 \S4method{initialize}{AFMdata}(
   .Object,
   data,
-  x.max.nm,
-  y.max.nm,
+  x.conv,
+  y.conv,
   x.pixels,
   y.pixels,
   z.conv,
@@ -16,6 +16,7 @@
   channel,
   instrument,
   history,
+  description,
   fullfilename
 )
 }
@@ -30,9 +31,9 @@ Constructor method of AFMImage Class.
 \describe{
 \item{\code{data}}{($x,$y,$z): a data.frame storing the coordinates of the sample and the measured heights}
 
-\item{\code{x.max.nm}}{maximum width in units of nm}
+\item{\code{x.conv}}{maximum width in units of nm}
 
-\item{\code{y.max.nm}}{maximum height in units of nm}
+\item{\code{y.conv}}{maximum height in units of nm}
 
 \item{\code{x.pixels}}{number of pixels in x-direction}
 
@@ -45,6 +46,8 @@ Constructor method of AFMImage Class.
 \item{\code{channel}}{name of channel}
 
 \item{\code{instrument}}{name of instrument (Park, AR, NanoSurf, Veeco)}
+
+\item{\code{description}}{AFM image description or note}
 
 \item{\code{history}}{changes to file}
 

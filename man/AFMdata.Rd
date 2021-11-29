@@ -6,8 +6,8 @@
 \usage{
 AFMdata(
   data,
-  x.max.nm,
-  y.max.nm,
+  x.conv,
+  y.conv,
   x.pixels,
   y.pixels,
   z.conv,
@@ -15,13 +15,14 @@ AFMdata(
   channel,
   instrument,
   history,
+  description,
   fullfilename
 )
 
 AFMdata(
   data,
-  x.max.nm,
-  y.max.nm,
+  x.conv,
+  y.conv,
   x.pixels,
   y.pixels,
   z.conv,
@@ -29,15 +30,16 @@ AFMdata(
   channel,
   instrument,
   history,
+  description,
   fullfilename
 )
 }
 \arguments{
 \item{data}{($x,$y,$z): a data.frame storing the coordinates of the sample and the measured heights}
 
-\item{x.max.nm}{maximum width in units of nm}
+\item{x.conv}{maximum width in units of nm}
 
-\item{y.max.nm}{maximum height in units of nm}
+\item{y.conv}{maximum height in units of nm}
 
 \item{x.pixels}{number of pixels in x-direction}
 
@@ -53,6 +55,8 @@ AFMdata(
 
 \item{history}{history of file changes}
 
+\item{description}{AFM image description or note}
+
 \item{fullfilename}{name of filename}
 }
 \description{
@@ -63,9 +67,9 @@ A S4 class to store and manipulate images from Atomic Force Microscopes.
 \describe{
 \item{\code{data}}{($x,$y,$z): a data.frame storing the coordinates of the sample and the measured heights}
 
-\item{\code{x.max.nm}}{maximum width in units of nm}
+\item{\code{x.conv}}{maximum width in units of nm}
 
-\item{\code{y.max.nm}}{maximum height in units of nm}
+\item{\code{y.conv}}{maximum height in units of nm}
 
 \item{\code{x.pixels}}{number of pixels in x-direction}
 
@@ -80,6 +84,8 @@ A S4 class to store and manipulate images from Atomic Force Microscopes.
 \item{\code{instrument}}{name of instrument (Park, AR, NanoSurf, Veeco)}
 
 \item{\code{history}}{history of file changes}
+
+\item{\code{description}}{AFM image description or note}
 
 \item{\code{fullfilename}}{name of filename}
 }}

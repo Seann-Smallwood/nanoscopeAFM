@@ -169,16 +169,17 @@ AFM.import <- function(filename) {
 #' print(d)
 #' @export
 print.AFMdata <- function(obj) {
-  cat("Object:",obj@instrument,"AFM image\n")
-  cat(max(obj@x.max.nm),"nm  x ",max(obj@y.max.nm),'nm \n')
-  cat("History:",obj@history,'\n')
-  cat("Filename:",obj@fullfilename)
+  cat("Object:    ",obj@instrument,"AFM image\n")
+  cat("Channel:   ", obj@channel,'\n')
+  cat("           ",max(obj@x.max.nm),"nm  x ",max(obj@y.max.nm),'nm \n')
+  cat("History:   ",obj@history,'\n')
+  cat("Filename:  ",obj@fullfilename)
 }
 
 #' summary of AFMdata object
 #'
 #' @param obj AFMdata object
-#' @return ggplot graph
+#' @return summary of AFMdata object
 #' @author thomasgredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
@@ -224,7 +225,7 @@ AFM.raster <- function(obj) {
 #' @author thomasgredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
-#' summary(d)
+#' plot.AFMdata(d)
 #' @export
 plot.AFMdata <- function(obj,mpt=NA,...) {
   cat("Graphing:",obj@fullfilename)

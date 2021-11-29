@@ -19,7 +19,7 @@ graph of AFMdata object
 }
 \examples{
 d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
-summary(d)
+plot.AFMdata(d)
 }
 \author{
 thomasgredig

@@ -10,7 +10,7 @@
 \item{obj}{AFMdata object}
 }
 \value{
-ggplot graph
+summary of AFMdata object
 }
 \description{
 summary of AFMdata object

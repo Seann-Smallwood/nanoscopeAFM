@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.0.3</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.1.0</span>
       </span>
     </div>
 
@@ -145,9 +145,7 @@
         <td>
           <p><code><a href="AFM.flatten.html">AFM.flatten()</a></code> </p>
         </td>
-        <td><p>flattens an AFM image using a plane fit
-this flattens only z, not z.nm, so scaling
-factor would need to be applied for z.nm</p></td>
+        <td><p>flattens an AFM image using a plane fit</p></td>
       </tr><tr>
         
         <td>
@@ -159,7 +157,7 @@ factor would need to be applied for z.nm</p></td>
         <td>
           <p><code><a href="AFM.import.html">AFM.import()</a></code> </p>
         </td>
-        <td><p>imports AFM file</p></td>
+        <td><p><code>AFM.import</code> imports AFM file</p></td>
       </tr><tr>
         
         <td>
@@ -218,12 +216,6 @@ AFM instrument; common pieces are included with the tag INFO</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="dot-getChannelName.html">.getChannelName()</a></code> </p>
-        </td>
-        <td><p><code>.getChannelName</code> returns channel name based on header info</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="flatten.NID_matrix.html">flatten.NID_matrix()</a></code> </p>
         </td>
         <td><p>DEPRECATEDD: use AFM.flatten() instead:
@@ -276,6 +268,12 @@ ex: "HeightRetrace,AmplitudeRetrace,PhaseRetrace,ZSensorRetrace,"</p></td>
         <td><p>loads Asylum Research Igor AFM wavefile
 which can contain multiple images, returns channel
 name and units in attributes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read.AR_file.v2.html">read.AR_file.v2()</a></code> </p>
+        </td>
+        <td><p><code>read.AR_file.v2</code> loads Asylum Research Igor AFM wavefile</p></td>
       </tr><tr>
         
         <td>

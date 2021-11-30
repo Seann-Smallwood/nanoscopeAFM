@@ -2,26 +2,26 @@
 % Please edit documentation in R/AFM.flatten.R
 \name{AFM.flatten}
 \alias{AFM.flatten}
-\title{flattens an AFM image using a plane fit
-this flattens only z, not z.nm, so scaling
-factor would need to be applied for z.nm}
+\title{flattens an AFM image using a plane fit}
 \usage{
-AFM.flatten(obj)
+AFM.flatten(obj, no = 1)
 }
 \arguments{
 \item{obj}{AFMdata object}
+
+\item{no}{Image number}
 }
 \value{
 flattened matrix with AFM image
 }
 \description{
-flattens an AFM image using a plane fit
-this flattens only z, not z.nm, so scaling
-factor would need to be applied for z.nm
+this flattens only z of one of the images
+using a plane fit
 }
 \examples{
 d = AFM.read(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 d2 = AFM.flatten(d)
+plot(d2)
 }
 \author{
 thomasgredig

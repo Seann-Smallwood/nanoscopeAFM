@@ -19,18 +19,18 @@ check_AFMdata <- function(object) {
 #'
 #' A S4 class to store and manipulate images from Atomic Force Microscopes.
 #'
-#' @slot data ($x,$y,$z): a data.frame storing the coordinates of the sample and the measured heights
-#' @slot x.conv maximum width in units of nm
-#' @slot y.conv maximum height in units of nm
+#' @slot data list with objects ($z is a list with images)
+#' @slot x.conv conversion factor from pixels to nm
+#' @slot y.conv conversion factor from pixels to nm
 #' @slot x.pixels number of pixels in x-direction
 #' @slot y.pixels number of pixels in y-direction
-#' @slot z.conv conversion factor for z to convert to $units
-#' @slot z.units units for z (deg, m)
-#' @slot channel name of channel
-#' @slot instrument name of instrument (Park, AR, NanoSurf, Veeco)
+#' @slot z.conv (not used)
+#' @slot z.units vector with units for $z (deg, m)
+#' @slot channel vector with names of channels
+#' @slot instrument name of instrument (Park, Cypher, NanoSurf, Veeco)
 #' @slot history history of file changes
 #' @slot description AFM image description or note
-#' @slot fullfilename name of filename
+#' @slot fullfilename name of file
 AFMdata<-setClass("AFMdata",
                   slots = c(data="list",
                             x.conv="numeric",
@@ -51,18 +51,18 @@ AFMdata<-setClass("AFMdata",
 #' Constructor method of AFMImage Class.
 #'
 #' @param .Object an AFMdata object
-#' @slot data ($x,$y,$z): a data.frame storing the coordinates of the sample and the measured heights
-#' @slot x.conv maximum width in units of nm
-#' @slot y.conv maximum height in units of nm
+#' @slot data list with objects ($z is a list with images)
+#' @slot x.conv conversion factor from pixels to nm
+#' @slot y.conv conversion factor from pixels to nm
 #' @slot x.pixels number of pixels in x-direction
 #' @slot y.pixels number of pixels in y-direction
-#' @slot z.conv conversion factor for z to convert to $units
-#' @slot z.units units for z (deg, m)
-#' @slot channel name of channel
-#' @slot instrument name of instrument (Park, AR, NanoSurf, Veeco)
+#' @slot z.conv (not used)
+#' @slot z.units vector with units for $z (deg, m)
+#' @slot channel vector with names of channels
+#' @slot instrument name of instrument (Park, Cypher, NanoSurf, Veeco)
+#' @slot history history of file changes
 #' @slot description AFM image description or note
-#' @slot history changes to file
-#' @slot fullfilename name of filename
+#' @slot fullfilename name of file
 #' @export
 setMethod(f="initialize",
           signature="AFMdata",
@@ -98,18 +98,18 @@ setMethod(f="initialize",
 
 #' Initialize the AFMdata object
 #'
-#' @param data ($x,$y,$z): a data.frame storing the coordinates of the sample and the measured heights
-#' @param x.conv maximum width in units of nm
-#' @param y.conv maximum height in units of nm
+#' @param data list with objects ($z is a list with images)
+#' @param x.conv conversion factor from pixels to nm
+#' @param y.conv conversion factor from pixels to nm
 #' @param x.pixels number of pixels in x-direction
 #' @param y.pixels number of pixels in y-direction
-#' @param z.conv conversion factor for z to convert to $units
-#' @param z.units units for z (deg, m)
-#' @param channel name of channel
-#' @param instrument name of instrument (Park, AR, NanoSurf, Veeco)
+#' @param z.conv (not used)
+#' @param z.units vector with units for $z (deg, m)
+#' @param channel vector with names of channels
+#' @param instrument name of instrument (Park, Cypher, NanoSurf, Veeco)
 #' @param history history of file changes
 #' @param description AFM image description or note
-#' @param fullfilename name of filename
+#' @param fullfilename name of file
 #' @export
 AFMdata <- function(data,
                     x.conv,
@@ -139,13 +139,15 @@ AFMdata <- function(data,
 }
 
 
-#' imports AFM file
+#' \code{AFM.import} imports AFM file
 #'
 #' @param filename name of AFM filename
 #' @return AFMdata object
 #' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' summary(d)
+#' plot(d)
 #' @export
 AFM.import <- function(filename) {
   if (grepl('ibw$',filename)) obj = read.AR_file.v2(filename)
@@ -209,7 +211,6 @@ summary.AFMdata <- function(obj) {
     resolution = paste(obj@x.pixels,"x",obj@y.pixels),
     size = paste(obj@x.conv*obj@x.pixels,"x",obj@y.conv*obj@y.pixels,'nm'),
     channel = paste(obj@channel),
-    z.units = paste(obj@z.units),
     history = paste(obj@history),
     filename = obj@fullfilename
   )
@@ -218,6 +219,7 @@ summary.AFMdata <- function(obj) {
     r$z.min[i]=min(d$z)
     r$z.max[i] = max(d$z)
   }
+  r$z.units = paste(obj@z.units)
   r
 }
 

@@ -35,29 +35,29 @@ AFMdata(
 )
 }
 \arguments{
-\item{data}{($x,$y,$z): a data.frame storing the coordinates of the sample and the measured heights}
+\item{data}{list with objects ($z is a list with images)}
 
-\item{x.conv}{maximum width in units of nm}
+\item{x.conv}{conversion factor from pixels to nm}
 
-\item{y.conv}{maximum height in units of nm}
+\item{y.conv}{conversion factor from pixels to nm}
 
 \item{x.pixels}{number of pixels in x-direction}
 
 \item{y.pixels}{number of pixels in y-direction}
 
-\item{z.conv}{conversion factor for z to convert to $units}
+\item{z.conv}{(not used)}
 
-\item{z.units}{units for z (deg, m)}
+\item{z.units}{vector with units for $z (deg, m)}
 
-\item{channel}{name of channel}
+\item{channel}{vector with names of channels}
 
-\item{instrument}{name of instrument (Park, AR, NanoSurf, Veeco)}
+\item{instrument}{name of instrument (Park, Cypher, NanoSurf, Veeco)}
 
 \item{history}{history of file changes}
 
 \item{description}{AFM image description or note}
 
-\item{fullfilename}{name of filename}
+\item{fullfilename}{name of file}
 }
 \description{
 A S4 class to store and manipulate images from Atomic Force Microscopes.
@@ -65,28 +65,28 @@ A S4 class to store and manipulate images from Atomic Force Microscopes.
 \section{Slots}{
 
 \describe{
-\item{\code{data}}{($x,$y,$z): a data.frame storing the coordinates of the sample and the measured heights}
+\item{\code{data}}{list with objects ($z is a list with images)}
 
-\item{\code{x.conv}}{maximum width in units of nm}
+\item{\code{x.conv}}{conversion factor from pixels to nm}
 
-\item{\code{y.conv}}{maximum height in units of nm}
+\item{\code{y.conv}}{conversion factor from pixels to nm}
 
 \item{\code{x.pixels}}{number of pixels in x-direction}
 
 \item{\code{y.pixels}}{number of pixels in y-direction}
 
-\item{\code{z.conv}}{conversion factor for z to convert to $units}
+\item{\code{z.conv}}{(not used)}
 
-\item{\code{z.units}}{units for z (deg, m)}
+\item{\code{z.units}}{vector with units for $z (deg, m)}
 
-\item{\code{channel}}{name of channel}
+\item{\code{channel}}{vector with names of channels}
 
-\item{\code{instrument}}{name of instrument (Park, AR, NanoSurf, Veeco)}
+\item{\code{instrument}}{name of instrument (Park, Cypher, NanoSurf, Veeco)}
 
 \item{\code{history}}{history of file changes}
 
 \item{\code{description}}{AFM image description or note}
 
-\item{\code{fullfilename}}{name of filename}
+\item{\code{fullfilename}}{name of file}
 }}
 

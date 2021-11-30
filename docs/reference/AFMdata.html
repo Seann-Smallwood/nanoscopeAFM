@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.0.3</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.1.0</span>
       </span>
     </div>
 
@@ -129,8 +129,8 @@
 
     <pre class="usage"><span class='fu'>AFMdata</span><span class='op'>(</span>
   <span class='va'>data</span>,
-  <span class='va'>x.max.nm</span>,
-  <span class='va'>y.max.nm</span>,
+  <span class='va'>x.conv</span>,
+  <span class='va'>y.conv</span>,
   <span class='va'>x.pixels</span>,
   <span class='va'>y.pixels</span>,
   <span class='va'>z.conv</span>,
@@ -138,13 +138,14 @@
   <span class='va'>channel</span>,
   <span class='va'>instrument</span>,
   <span class='va'>history</span>,
+  <span class='va'>description</span>,
   <span class='va'>fullfilename</span>
 <span class='op'>)</span>
 
 <span class='fu'>AFMdata</span><span class='op'>(</span>
   <span class='va'>data</span>,
-  <span class='va'>x.max.nm</span>,
-  <span class='va'>y.max.nm</span>,
+  <span class='va'>x.conv</span>,
+  <span class='va'>y.conv</span>,
   <span class='va'>x.pixels</span>,
   <span class='va'>y.pixels</span>,
   <span class='va'>z.conv</span>,
@@ -152,6 +153,7 @@
   <span class='va'>channel</span>,
   <span class='va'>instrument</span>,
   <span class='va'>history</span>,
+  <span class='va'>description</span>,
   <span class='va'>fullfilename</span>
 <span class='op'>)</span></pre>
 
@@ -160,15 +162,15 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>($x,$y,$z): a data.frame storing the coordinates of the sample and the measured heights</p></td>
+      <td><p>list with objects ($z is a list with images)</p></td>
     </tr>
     <tr>
-      <th>x.max.nm</th>
-      <td><p>maximum width in units of nm</p></td>
+      <th>x.conv</th>
+      <td><p>conversion factor from pixels to nm</p></td>
     </tr>
     <tr>
-      <th>y.max.nm</th>
-      <td><p>maximum height in units of nm</p></td>
+      <th>y.conv</th>
+      <td><p>conversion factor from pixels to nm</p></td>
     </tr>
     <tr>
       <th>x.pixels</th>
@@ -180,27 +182,31 @@
     </tr>
     <tr>
       <th>z.conv</th>
-      <td><p>conversion factor for z to convert to $units</p></td>
+      <td><p>(not used)</p></td>
     </tr>
     <tr>
       <th>z.units</th>
-      <td><p>units for z (deg, m)</p></td>
+      <td><p>vector with units for $z (deg, m)</p></td>
     </tr>
     <tr>
       <th>channel</th>
-      <td><p>name of channel</p></td>
+      <td><p>vector with names of channels</p></td>
     </tr>
     <tr>
       <th>instrument</th>
-      <td><p>name of instrument (Park, AR, NanoSurf, Veeco)</p></td>
+      <td><p>name of instrument (Park, Cypher, NanoSurf, Veeco)</p></td>
     </tr>
     <tr>
       <th>history</th>
       <td><p>history of file changes</p></td>
     </tr>
     <tr>
+      <th>description</th>
+      <td><p>AFM image description or note</p></td>
+    </tr>
+    <tr>
       <th>fullfilename</th>
-      <td><p>name of filename</p></td>
+      <td><p>name of file</p></td>
     </tr>
     </table>
 
@@ -209,27 +215,29 @@
     
 
 <dl>
-<dt><code>data</code></dt><dd><p>($x,$y,$z): a data.frame storing the coordinates of the sample and the measured heights</p></dd>
+<dt><code>data</code></dt><dd><p>list with objects ($z is a list with images)</p></dd>
 
-<dt><code>x.max.nm</code></dt><dd><p>maximum width in units of nm</p></dd>
+<dt><code>x.conv</code></dt><dd><p>conversion factor from pixels to nm</p></dd>
 
-<dt><code>y.max.nm</code></dt><dd><p>maximum height in units of nm</p></dd>
+<dt><code>y.conv</code></dt><dd><p>conversion factor from pixels to nm</p></dd>
 
 <dt><code>x.pixels</code></dt><dd><p>number of pixels in x-direction</p></dd>
 
 <dt><code>y.pixels</code></dt><dd><p>number of pixels in y-direction</p></dd>
 
-<dt><code>z.conv</code></dt><dd><p>conversion factor for z to convert to $units</p></dd>
+<dt><code>z.conv</code></dt><dd><p>(not used)</p></dd>
 
-<dt><code>z.units</code></dt><dd><p>units for z (deg, m)</p></dd>
+<dt><code>z.units</code></dt><dd><p>vector with units for $z (deg, m)</p></dd>
 
-<dt><code>channel</code></dt><dd><p>name of channel</p></dd>
+<dt><code>channel</code></dt><dd><p>vector with names of channels</p></dd>
 
-<dt><code>instrument</code></dt><dd><p>name of instrument (Park, AR, NanoSurf, Veeco)</p></dd>
+<dt><code>instrument</code></dt><dd><p>name of instrument (Park, Cypher, NanoSurf, Veeco)</p></dd>
 
 <dt><code>history</code></dt><dd><p>history of file changes</p></dd>
 
-<dt><code>fullfilename</code></dt><dd><p>name of filename</p></dd>
+<dt><code>description</code></dt><dd><p>AFM image description or note</p></dd>
+
+<dt><code>fullfilename</code></dt><dd><p>name of file</p></dd>
 
 </dl>
 

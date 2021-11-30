@@ -10,8 +10,8 @@ check_AFMdata <- function(object) {
     msg <- paste('Object has invalid instrument:',object@instrument)
     errors <- c(errors,msg)
   }
-  object@x.nm = round(object@x.conv * object@x.pixels)
-  object@y.nm = round(object@y.conv * object@y.pixels)
+  object@x.nm <<- round(object@x.conv * object@x.pixels)
+  object@y.nm <<- round(object@y.conv * object@y.pixels)
   if (length(errors) == 0) TRUE else errors
 }
 

@@ -17,6 +17,8 @@ test_that("Asylum Research Igor AFM image size check", {
   expect_equal(max(df$y),4000)
   expect_equal(d@x.pixels,128)
   expect_equal(d@y.pixels,128)
+  expect_equal(d@x.nm,4000)
+  expect_equal(d@y.nm,4000)
 })
 
 test_that("Asylum Research Igor AFM image size check", {

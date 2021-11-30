@@ -10,8 +10,6 @@ check_AFMdata <- function(object) {
     msg <- paste('Object has invalid instrument:',object@instrument)
     errors <- c(errors,msg)
   }
-  object@x.nm <<- round(object@x.conv * object@x.pixels)
-  object@y.nm <<- round(object@y.conv * object@y.pixels)
   if (length(errors) == 0) TRUE else errors
 }
 
@@ -86,8 +84,8 @@ setMethod(f="initialize",
                                fullfilename)
           {
             if (!missing(data)) .Object@data<-data
-            if (!missing(x.conv)) .Object@x.conv<-x.conv
-            if (!missing(y.conv)) .Object@y.conv<-y.conv
+            if (!missing(x.conv)) {.Object@x.conv<-x.conv; .Object@x.nm=x.conv*(x.pixels-1); }
+            if (!missing(y.conv)) {.Object@y.conv<-y.conv; .Object@y.nm=y.conv*(y.pixels-1); }
             if (!missing(x.pixels)) .Object@x.pixels<-x.pixels
             if (!missing(y.pixels)) .Object@y.pixels<-y.pixels
             if (!missing(z.conv)) .Object@z.conv<-z.conv

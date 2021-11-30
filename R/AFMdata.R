@@ -76,8 +76,8 @@ setMethod(f="initialize",
                                z.units ,
                                channel,
                                instrument,
-                               history,
-                               description,
+                               history = character(0),
+                               description = character(0),
                                fullfilename)
           {
             if (!missing(data)) .Object@data<-data
@@ -204,15 +204,14 @@ print.AFMdata <- function(obj) {
 #' summary(d)
 #' @export
 summary.AFMdata <- function(obj) {
-  if (purrr::is_empty(obj@description)) obj@description=""
+  #if (purrr::is_empty(obj@description)) obj@description=""
   r = data.frame(
     object = paste(obj@instrument,"AFM image"),
     description = paste(obj@description),
     resolution = paste(obj@x.pixels,"x",obj@y.pixels),
-    size = paste(obj@x.conv*obj@x.pixels,"x",obj@y.conv*obj@y.pixels,'nm'),
+    size = paste(round(obj@x.conv*obj@x.pixels),"x",round(obj@y.conv*obj@y.pixels),'nm'),
     channel = paste(obj@channel),
-    history = paste(obj@history),
-    filename = obj@fullfilename
+    history = paste(obj@history)
   )
   for(i in 1:length(r$channel)) {
     d = AFM.raster(obj,i)
@@ -222,6 +221,8 @@ summary.AFMdata <- function(obj) {
   r$z.units = paste(obj@z.units)
   r
 }
+
+
 
 #' returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers
 #'

@@ -252,7 +252,7 @@ AFM.raster <- function(obj,no=1) {
 #' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
-#' plot.AFMdata(d)
+#' plot(d)
 #' @export
 plot.AFMdata <- function(obj,no=1,mpt=NA,...) {
   if (no>length(obj@channel)) stop("imageNo out of bounds.")

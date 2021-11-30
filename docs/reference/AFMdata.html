@@ -99,6 +99,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/graphAFMimage.html">graphAFMimage</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -138,7 +150,7 @@
   <span class='va'>channel</span>,
   <span class='va'>instrument</span>,
   <span class='va'>history</span>,
-  <span class='va'>description</span>,
+  description <span class='op'>=</span> <span class='st'>""</span>,
   <span class='va'>fullfilename</span>
 <span class='op'>)</span>
 
@@ -153,7 +165,7 @@
   <span class='va'>channel</span>,
   <span class='va'>instrument</span>,
   <span class='va'>history</span>,
-  <span class='va'>description</span>,
+  description <span class='op'>=</span> <span class='st'>""</span>,
   <span class='va'>fullfilename</span>
 <span class='op'>)</span></pre>
 
@@ -224,6 +236,10 @@
 <dt><code>x.pixels</code></dt><dd><p>number of pixels in x-direction</p></dd>
 
 <dt><code>y.pixels</code></dt><dd><p>number of pixels in y-direction</p></dd>
+
+<dt><code>x.nm</code></dt><dd><p>length of image</p></dd>
+
+<dt><code>y.nm</code></dt><dd><p>height of image</p></dd>
 
 <dt><code>z.conv</code></dt><dd><p>(not used)</p></dd>
 

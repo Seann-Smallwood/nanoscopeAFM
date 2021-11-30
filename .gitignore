@@ -5,3 +5,4 @@
 .DS_Store
 .Rbuildignore
 nanoscopeAFM.Rproj
+inst/doc

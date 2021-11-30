@@ -1,0 +1,24 @@
+---
+title: "graphAFMimage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{graphAFMimage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(nanoscopeAFM)
+library(ggplot2)
+library(scales)
+filename = system.file("extdata","Park_20210916_034.tiff",package="nanoscopeAFM")
+afmd = AFM.import(filename)
+plot(afmd)
+```

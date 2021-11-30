@@ -246,19 +246,20 @@ AFM.raster <- function(obj,no=1) {
 #' graph of AFMdata object
 #'
 #' @param obj AFMdata object
+#' @param no number of the image
 #' @param mpt midpoint for coloring
-#' @param imageNo number of the image
 #' @return ggplot graph
 #' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' plot.AFMdata(d)
 #' @export
-plot.AFMdata <- function(obj,mpt=NA,imageNo=1,...) {
-  if (imageNo>length(obj@channel)) stop("imageNo out of bounds.")
-  cat("Graphing:",obj@channel[imageNo])
-  d = AFM.raster(obj,imageNo)
-  zLab = paste(obj@channel,obj@z.units)
+plot.AFMdata <- function(obj,no=1,mpt=NA,...) {
+  if (no>length(obj@channel)) stop("imageNo out of bounds.")
+  cat("Graphing:",obj@channel[no])
+  d = AFM.raster(obj,no)
+  zLab = paste0(obj@channel[no],' (',obj@z.units[no],')')
+  zLab = gsub('Retrace|Trace','',zLab)
 
   if (is.na(mpt)) mean(d$z) -> mpt
   xlab <- expression(paste('x (',mu,'m)'))

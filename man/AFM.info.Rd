@@ -25,5 +25,5 @@ AFM instrument; common pieces are included with the tag INFO
 h1 = AFM.info(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 }
 \author{
-thomasgredig
+Thomas Gredig
 }

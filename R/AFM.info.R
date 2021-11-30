@@ -1,3 +1,65 @@
+#' AFMinfo object with information about the AFM image
+#'
+#' @param filename filename of (Veeco, Park, AR, NanoSurf) AFM image including path
+#' @return AFMinfo object
+#' @author Thomas Gredig
+#' @export
+AFMinfo <- function(filename) {
+  fext = tolower(tools::file_ext(filename))
+  if (fext=='ibw') {
+    data = read.AR_header.v2(filename)
+    type = 'Cypher'
+    widthPixel = data$value[grep('PointsLines',data$name)[1]]
+    heightPixel = data$value[grep('ScanLines',data$name)[1]]
+    scanAngle = data$value[grep('ScanAngle',data$name)[1]]
+    scanRate.Hz = data$value[grep('ScanRate',data$name)[1]]
+    note = data$value[grep('ImageNote',data$name)[1]]
+  }
+  structure(
+    list(
+      data = data,
+      type = type,
+      filename = filename,
+      widthPixel = widthPixel,
+      heightPixel = heightPixel,
+      scanRate.Hz = scanRate.Hz,
+      note = note
+    ),
+    class = 'AFMinfo'
+  )
+}
+
+#' returns an item from the AFMinfo object
+#'
+#' @param AFMinfo object
+#' @param itemName name to retrieve (ScanRate, ScanAngle, ...)
+#' @return string or number
+#' @author Thomas Gredig
+#' @export
+AFMinfo.item <- function(obj, itemName) {
+  q = grep(itemName,obj$data$name)
+  itemValue = ''
+  if (length(q)>0) {
+    itemValue = obj$data$value[q[1]]
+  }
+  itemValue
+}
+
+
+#' summary for AFMinfo object
+#'
+#' @param obj AFMinfo object
+#' @return quick summary
+#' @author Thomas Gredig
+#' @export
+summary.AFMinfo <- function(obj) {
+  cat('AFM image type:', obj$type, "\n")
+  cat('Resolution:    ', obj$widthPixel, "x", obj$heightPixel,'\n')
+  cat('Scan rate (Hz):', obj$scanRate.Hz,'\n')
+  cat('Notes:         ', obj$note,'\n')
+  cat('Data Items:    ', nrow(obj$data),'\n')
+}
+
 #' find AFM image information, much of the information is specific to the
 #' AFM instrument; common pieces are included with the tag INFO
 #'
@@ -5,7 +67,7 @@
 #' @param no channel number (for Veeco, NanoSurf, AR)
 #' @param fullInfo if \code{TRUE}, return all full header info
 #' @return returns information about the AFM image as an associative vector
-#' @author thomasgredig
+#' @author Thomas Gredig
 #' @examples
 #' h1 = AFM.info(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' @export

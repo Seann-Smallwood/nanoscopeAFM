@@ -21,3 +21,6 @@ test_check("nanoscopeAFM")
 
 # do the checks:
 # devtools::test()
+
+# add vignettes
+# usethis::use_vignette("my-vignette")

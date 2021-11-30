@@ -31,6 +31,12 @@
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFMdata.html</loc>
   </url>
   <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFMinfo.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFMinfo.item.html</loc>
+  </url>
+  <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/NID.checkFile.html</loc>
   </url>
   <url>
@@ -70,6 +76,9 @@
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.AR_header.html</loc>
   </url>
   <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.AR_header.v2.html</loc>
+  </url>
+  <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.IBW_file.html</loc>
   </url>
   <url>
@@ -92,6 +101,12 @@
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/summary.AFMdata.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/summary.AFMinfo.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/afm-setpoint.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/graphAFMimage.html</loc>

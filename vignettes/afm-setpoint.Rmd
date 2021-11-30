@@ -1,0 +1,45 @@
+---
+title: "afm-setpoint"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{afm-setpoint}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Finding the Setpoint
+
+You can find the setpoint and other information about an AFM image by retrieving the `AFMinfo`. Here is an example:
+
+```{r}
+library(nanoscopeAFM)
+
+# loading the test file from the nanoscopeAFM package
+filename = (system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+# retrieving an AFMinfo object
+h = AFMinfo(filename)
+```
+
+
+Basic information about an image can also be viewed, once you have an `AFMinfo` object:
+
+```{r}
+# generate a summary of the AFMinfo object
+summary(h)
+```
+
+
+Finding additional special information, using the function `AFMinfo.item`; note that the search string is case-sensitive.
+
+```{r}
+sp = setPointvalue = AFMinfo.item(h, 'Setpoint')
+print(paste("Setpoint:",sp,"V"))
+```
+

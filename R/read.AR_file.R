@@ -98,6 +98,27 @@ read.AR_header <- function(filename, no=1) {
 }
 
 
+#' loads Asylum Research Igor Wave AFM header information
+#'
+#' @param filename filename including path
+#' @return header information
+#' @examples
+#' filename = system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
+#' d = read.AR_header.v2(filename)
+#' @export
+read.AR_header.v2 <- function(filename) {
+  suppressWarnings({
+    d = IgorR::read.ibw(filename)
+    # to get notes, need to read all, not just "header"
+  })
+  qNote = attr(d, "Note")
+  notes = strsplit(qNote,'\r')[[1]]
+  df = data.frame(
+    name = gsub('(.*?):.*','\\1',notes),
+    value = gsub('(.*?):(.*)','\\2',notes)
+  )
+}
+
 
 .getChannelName <- function(h1,no) {
   # from h1=read.AR_eofHeader.V2(filename)

@@ -4,10 +4,12 @@
 \alias{AFM.raster}
 \title{returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers}
 \usage{
-AFM.raster(obj)
+AFM.raster(obj, no = 1)
 }
 \arguments{
 \item{obj}{AFMdata object}
+
+\item{no}{image number}
 }
 \value{
 data.frame with  ($x.nm, $y.nm, $z.nm)
@@ -16,5 +18,5 @@ data.frame with  ($x.nm, $y.nm, $z.nm)
 returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers
 }
 \author{
-thomasgredig
+Thomas Gredig
 }

@@ -22,5 +22,5 @@ d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 plot.AFMdata(d)
 }
 \author{
-thomasgredig
+Thomas Gredig
 }

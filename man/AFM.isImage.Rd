@@ -20,5 +20,5 @@ d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 AFM.isImage(d)
 }
 \author{
-thomasgredig
+Thomas Gredig
 }

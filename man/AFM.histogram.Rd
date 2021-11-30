@@ -21,5 +21,5 @@ d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 AFM.histogram(d)
 }
 \author{
-thomasgredig
+Thomas Gredig
 }

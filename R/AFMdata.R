@@ -6,7 +6,7 @@
 check_AFMdata <- function(object) {
   errors <- character()
 
-  if (!(object@instrument %in% c('AR','Park','NanoSurf','Veeco'))) {
+  if (!(object@instrument %in% c('Cypher','Park','NanoSurf','Veeco'))) {
     msg <- paste('Object has invalid instrument:',object@instrument)
     errors <- c(errors,msg)
   }
@@ -32,7 +32,7 @@ check_AFMdata <- function(object) {
 #' @slot description AFM image description or note
 #' @slot fullfilename name of filename
 AFMdata<-setClass("AFMdata",
-                  slots = c(data="data.frame",
+                  slots = c(data="list",
                             x.conv="numeric",
                             y.conv="numeric",
                             x.pixels="numeric",
@@ -143,30 +143,34 @@ AFMdata <- function(data,
 #'
 #' @param filename name of AFM filename
 #' @return AFMdata object
-#' @author thomasgredig
+#' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' @export
 AFM.import <- function(filename) {
-  d = AFM.read(filename)
-  z.conv = 1
-  if (d$z[1] != 0) z.conv = d$z.nm[1] / d$z[1]
-  d1 = data.frame(z=d$z)
-  if (is.null(attr(d,"note"))) attr(d,"note")="none"
-  AFMdata(
-    data = d1,
-    channel = attr(d,"channel"),
-    x.conv = max(d$x.nm)/max(d$x),
-    y.conv = max(d$y.nm)/max(d$y),
-    x.pixels = max(d$x),
-    y.pixels = max(d$y),
-    z.conv = z.conv,
-    z.units = .getChannelUnits(attr(d,"channel")),
-    instrument = attr(d,"instrument"),
-    history = '',
-    description = attr(d,"note"),
-    fullfilename = filename
-  )
+  if (grepl('ibw$',filename)) obj = read.AR_file.v2(filename)
+  else {
+    d = AFM.read(filename)
+    z.conv = 1
+    if (d$z[1] != 0) z.conv = d$z.nm[1] / d$z[1]
+    d1 = list(d$z.nm)
+    if (is.null(attr(d,"note"))) attr(d,"note")="none"
+    obj = AFMdata(
+      data = list(z=d1),
+      channel = attr(d,"channel"),
+      x.conv = max(d$x.nm)/(max(d$x)-1),
+      y.conv = max(d$y.nm)/(max(d$y)-1),
+      x.pixels = max(d$x),
+      y.pixels = max(d$y),
+      z.conv = z.conv,
+      z.units = .getChannelUnits(attr(d,"channel")),
+      instrument = attr(d,"instrument"),
+      history = '',
+      description = attr(d,"note"),
+      fullfilename = filename
+    )
+  }
+  obj
 }
 
 
@@ -174,7 +178,7 @@ AFM.import <- function(filename) {
 #'
 #' @param obj AFMdata object
 #' @return text with object information
-#' @author thomasgredig
+#' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' print(d)
@@ -192,40 +196,44 @@ print.AFMdata <- function(obj) {
 #'
 #' @param obj AFMdata object
 #' @return summary of AFMdata object
-#' @author thomasgredig
+#' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' summary(d)
 #' @export
 summary.AFMdata <- function(obj) {
-  d = AFM.raster(obj)
   if (purrr::is_empty(obj@description)) obj@description=""
-  data.frame(
+  r = data.frame(
     object = paste(obj@instrument,"AFM image"),
     description = paste(obj@description),
     resolution = paste(obj@x.pixels,"x",obj@y.pixels),
     size = paste(obj@x.conv*obj@x.pixels,"x",obj@y.conv*obj@y.pixels,'nm'),
     channel = paste(obj@channel),
     z.units = paste(obj@z.units),
-    z.min.nm = min(d$z),
-    z.max.nm = max(d$z),
     history = paste(obj@history),
     filename = obj@fullfilename
   )
+  for(i in 1:length(r$channel)) {
+    d = AFM.raster(obj,i)
+    r$z.min[i]=min(d$z)
+    r$z.max[i] = max(d$z)
+  }
+  r
 }
 
 #' returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers
 #'
 #' @param obj AFMdata object
+#' @param no image number
 #' @return data.frame with  ($x.nm, $y.nm, $z.nm)
-#' @author thomasgredig
+#' @author Thomas Gredig
 #' @export
-AFM.raster <- function(obj) {
+AFM.raster <- function(obj,no=1) {
   if(!isS4(obj)) { stop("not an S4 object") }
   data.frame(
-    x = rep(1:obj@x.pixels,obj@y.pixels)*obj@x.conv,
-    y = rep(1:obj@y.pixels,each=obj@x.pixels)*obj@y.conv,
-    z = obj@data$z * obj@z.conv
+    x = rep(0:(obj@x.pixels-1),obj@y.pixels)*obj@x.conv,
+    y = rep(0:(obj@y.pixels-1),each=obj@x.pixels)*obj@y.conv,
+    z = obj@data$z[[no]]
   )
 }
 
@@ -234,13 +242,13 @@ AFM.raster <- function(obj) {
 #' @param obj AFMdata object
 #' @param mpt midpoint for coloring
 #' @return ggplot graph
-#' @author thomasgredig
+#' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' plot.AFMdata(d)
 #' @export
 plot.AFMdata <- function(obj,mpt=NA,...) {
-  cat("Graphing:",obj@fullfilename)
+  cat("Graphing:",obj@channel[1])
   d = AFM.raster(obj)
   zLab = paste(obj@channel,obj@z.units)
 
@@ -266,7 +274,7 @@ plot.AFMdata <- function(obj,mpt=NA,...) {
 #'
 #' @param obj AFMdata object
 #' @return draws a ggplot graph
-#' @author thomasgredig
+#' @author Thomas Gredig
 #' @examples
 #' library(ggplot2)
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
@@ -288,7 +296,7 @@ AFM.histogram <- function(obj) {
 #'
 #' @param obj AFMdata object
 #' @return \code{TRUE} if object is an AFM image
-#' @author thomasgredig
+#' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' AFM.isImage(d)

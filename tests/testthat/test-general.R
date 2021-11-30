@@ -7,7 +7,7 @@ test_that("check loading non-existant file", {
 })
 
 test_that("AFMdata object", {
-  a = AFMdata(instrument='AR')
+  a = AFMdata(instrument='Cypher')
   expect_true(isS4(a))
 })
 

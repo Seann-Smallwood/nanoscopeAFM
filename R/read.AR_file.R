@@ -99,6 +99,75 @@ read.AR_header <- function(filename, no=1) {
 
 
 
+.getChannelName <- function(h1,no) {
+  # from h1=read.AR_eofHeader.V2(filename)
+  gsub('(.*)[RT][er].*$','\\1',strsplit(h1$DataTypeList,",")[[1]][no])
+}
+
+.getChannelDirection <- function(h1,no) {
+  # from h1=read.AR_eofHeader.V2(filename)
+  gsub('.*?([RT][er].*)$','\\1',strsplit(h1$DataTypeList,",")[[1]][no])
+}
+
+.getChannelUnits <- function(channelName) {
+  units = "m"  # default units
+  if (nchar(channelName)>0) {
+    if(grepl('Phase',channelName)) units="deg"
+  } else { units="" }
+  units
+}
+
+#' \code{read.AR_file.v2} loads Asylum Research Igor AFM wavefile
+#'
+#' loads all images contained in Igor wavefile and
+#' returns an AFMdata object
+#'
+#' @param h1 filename including path
+#' @return \code{AFMdata} object
+#' @export
+read.AR_file.v2 <- function(filename) {
+  cat('loading')
+  h1 = read.AR_eofHeader.V2(filename)
+  channels = strsplit(h1$DataTypeList,',')[[1]]
+  units = rep('m', length(channels))
+  units[grep('^Phase',channels)] = 'deg'
+  cat('image')
+  suppressWarnings({
+    d = IgorR::read.ibw(filename)
+  })
+  q2 = attr(d, "WaveHeader")
+  imageDim <- q2$nDim[1:2]
+  noChannels <- q2$nDim[3]
+  dr = data.frame()
+  x.conv = q2$sfA[1]
+  y.conv = q2$sfA[2]
+  im.size = imageDim[1]*imageDim[2]
+  z.data=list()
+  for(i in 1:noChannels) {
+    z.conv = 1; if (units[i]=='m') z.conv=1e9
+    z.data[[i]] = d[(im.size*(i-1)+1):(im.size*i)]*z.conv
+  }
+
+  # return AFMdata object
+  AFMdata(
+    data = list(z=z.data),
+    channel = channels,
+    x.conv = x.conv*1e9,
+    y.conv = y.conv*1e9,
+    x.pixels = imageDim[1],
+    y.pixels = imageDim[2],
+    z.conv = 1,
+    z.units = units,
+    instrument = 'Cypher',
+    history = '',
+    description = gsub('.*ImageNote:(.*?)\r.*','\\1',attr(d,'Note')),
+    fullfilename = filename
+  )
+}
+
+
+
+
 #' returns the version 2 header information tagged
 #' at the end of the AR file, which includes several tags
 #' including the $DataTypeList and $NumberOfFiles
@@ -147,27 +216,3 @@ read.AR_eofHeader.V2 <- function(wavefile, Verbose = FALSE) {
 }
 
 
-
-#' \code{.getChannelName} returns channel name based on header info
-#'
-#' @param h1 filename including path
-#' @param no image number
-#' @return list of channels and additional information
-#' @export
-.getChannelName <- function(h1,no) {
-  # from h1=read.AR_eofHeader.V2(filename)
-  gsub('(.*)[RT][er].*$','\\1',strsplit(h1$DataTypeList,",")[[1]][no])
-}
-
-.getChannelDirection <- function(h1,no) {
-  # from h1=read.AR_eofHeader.V2(filename)
-  gsub('.*?([RT][er].*)$','\\1',strsplit(h1$DataTypeList,",")[[1]][no])
-}
-
-.getChannelUnits <- function(channelName) {
-  units = "m"  # default units
-  if (nchar(channelName)>0) {
-    if(grepl('Phase',channelName)) units="deg"
-  } else { units="" }
-  units
-}

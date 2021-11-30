@@ -15,6 +15,7 @@ test_that("Asylum Research Igor AFM image size check", {
   df = AFM.raster(d)
   expect_equal(max(df$x),4000)
   expect_equal(max(df$y),4000)
+  expect_equal(d@x.pixels,128)
   expect_equal(d@y.pixels,128)
 })
 
@@ -24,8 +25,8 @@ test_that("Asylum Research Igor AFM image size check", {
   r = summary(d)
   # min height -32.46nm
   # max height 50.79nm
-  expect_equal(r$z.min.nm,-32.46,tolerance = 1e-2)
-  expect_equal(r$z.max.nm,50.79,tolerance = 1e-2)
+  expect_equal(r$z.min[1],-32.46,tolerance = 1e-2)
+  expect_equal(r$z.max[1],50.79,tolerance = 1e-2)
 
 })
 
@@ -53,8 +54,8 @@ test_that("Park AFM image size check", {
   r = summary(d)
   # min height -2.71nm
   # max height 9.24nm
-  expect_equal(r$z.min.nm,-2.71, tolerance=1e-2)
-  expect_equal(r$z.max.nm,9.24, tolerance=1e-3)
+  expect_equal(r$z.min[1],-2.71, tolerance=1e-2)
+  expect_equal(r$z.max[1],9.24, tolerance=1e-3)
 })
 
 
@@ -83,8 +84,8 @@ test_that("Veeco AFM image size check", {
   r = summary(d)
   # min height -145.6nm
   # max height 13.9nm
-  expect_equal(r$z.min.nm,-145.6,tolerance = 1e-2)
-  expect_equal(r$z.max.nm,13.9,tolerance = 1e-2)
+  expect_equal(r$z.min[1],-145.6,tolerance = 1e-2)
+  expect_equal(r$z.max[1],13.9,tolerance = 1e-2)
 })
 
 
@@ -110,8 +111,8 @@ test_that("NanoSurf image size check", {
   r = summary(d)
   # min height -294.2nm
   # max height -88.5nm
-  expect_equal(r$z.min.nm,-294.2,tolerance = 1e-2)
-  expect_equal(r$z.max.nm,-88.5,tolerance = 1e-2)
+  expect_equal(r$z.min[1],-294.2,tolerance = 1e-2)
+  expect_equal(r$z.max[1],-88.5,tolerance = 1e-2)
 })
 
 

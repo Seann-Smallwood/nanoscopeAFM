@@ -2,6 +2,12 @@
 
 Author: **Thomas Gredig**
 
+## nanoscopeAFM 1.1.0
+
+* change data format of @data in AFMdata structure from data.frame to list to accommodate multiple images
+* new reader for AR images
+* eliminate z-conversion, since we are saving the units for the z values, just store the converted values
+
 ## nanoscopeAFM 1.0.5
 
 * replace x.max.nm with x.conv, and y.conv similar to z.conv; scaling parameters to change units to nm

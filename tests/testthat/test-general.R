@@ -46,12 +46,12 @@ test_that("Asylum Research AFM info", {
   expect_equal(as.numeric(d["INFO.widthPixel"]),128)
 })
 
-test_that("Veeco AFM info", {
-  filename = system.file("extdata", "Veeco_20160622.003",package="nanoscopeAFM")
-  d = AFM.info(filename)
-  expect_equal(length(grep('^INFO',names(d))), COMMON.INFO.ITEMS)    # all mandatory fields are set
-  expect_equal(as.numeric(d["INFO.widthPixel"]),512)
-})
+# test_that("Veeco AFM info", {
+#   filename = system.file("extdata", "Veeco_20160622.003",package="nanoscopeAFM")
+#   d = AFM.info(filename)
+#   expect_equal(length(grep('^INFO',names(d))), COMMON.INFO.ITEMS)    # all mandatory fields are set
+#   expect_equal(as.numeric(d["INFO.widthPixel"]),512)
+# })
 
 
 

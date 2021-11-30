@@ -5,6 +5,7 @@
 # make sure AFMdata is valid
 check_AFMdata <- function(object) {
   errors <- character()
+
   if (!(object@instrument %in% c('AR','Park','NanoSurf','Veeco'))) {
     msg <- paste('Object has invalid instrument:',object@instrument)
     errors <- c(errors,msg)
@@ -89,7 +90,7 @@ setMethod(f="initialize",
             if (!missing(channel)) .Object@channel <-channel
             if (!missing(instrument)) .Object@instrument <-instrument
             if (!missing(history)) .Object@history <-history
-            if (!missing(description)) .Object@description <-description
+            if (!missing(description)) .Object@description <-description else .Object@description=""
             if (!missing(fullfilename)) .Object@fullfilename<-fullfilename
             validObject(.Object)
             return(.Object)
@@ -198,6 +199,7 @@ print.AFMdata <- function(obj) {
 #' @export
 summary.AFMdata <- function(obj) {
   d = AFM.raster(obj)
+  if (purrr::is_empty(obj@description)) obj@description=""
   data.frame(
     object = paste(obj@instrument,"AFM image"),
     description = paste(obj@description),

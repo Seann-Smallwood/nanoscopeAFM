@@ -15,8 +15,8 @@
   z.units,
   channel,
   instrument,
-  history = character(0),
-  description = character(0),
+  history,
+  description,
   fullfilename
 )
 }

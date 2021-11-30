@@ -15,7 +15,7 @@ AFMdata(
   channel,
   instrument,
   history,
-  description,
+  description = "",
   fullfilename
 )
 
@@ -30,7 +30,7 @@ AFMdata(
   channel,
   instrument,
   history,
-  description,
+  description = "",
   fullfilename
 )
 }
@@ -74,6 +74,10 @@ A S4 class to store and manipulate images from Atomic Force Microscopes.
 \item{\code{x.pixels}}{number of pixels in x-direction}
 
 \item{\code{y.pixels}}{number of pixels in y-direction}
+
+\item{\code{x.nm}}{length of image}
+
+\item{\code{y.nm}}{height of image}
 
 \item{\code{z.conv}}{(not used)}
 

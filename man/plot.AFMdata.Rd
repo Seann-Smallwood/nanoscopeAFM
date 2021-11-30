@@ -4,12 +4,14 @@
 \alias{plot.AFMdata}
 \title{graph of AFMdata object}
 \usage{
-\method{plot}{AFMdata}(obj, mpt = NA, ...)
+\method{plot}{AFMdata}(obj, mpt = NA, imageNo = 1, ...)
 }
 \arguments{
 \item{obj}{AFMdata object}
 
 \item{mpt}{midpoint for coloring}
+
+\item{imageNo}{number of the image}
 }
 \value{
 ggplot graph

@@ -10,7 +10,8 @@ check_AFMdata <- function(object) {
     msg <- paste('Object has invalid instrument:',object@instrument)
     errors <- c(errors,msg)
   }
-
+  object@x.nm = round(object@x.conv * object@x.pixels)
+  object@y.nm = round(object@y.conv * object@y.pixels)
   if (length(errors) == 0) TRUE else errors
 }
 
@@ -24,6 +25,8 @@ check_AFMdata <- function(object) {
 #' @slot y.conv conversion factor from pixels to nm
 #' @slot x.pixels number of pixels in x-direction
 #' @slot y.pixels number of pixels in y-direction
+#' @slot x.nm length of image
+#' @slot y.nm height of image
 #' @slot z.conv (not used)
 #' @slot z.units vector with units for $z (deg, m)
 #' @slot channel vector with names of channels
@@ -37,6 +40,8 @@ AFMdata<-setClass("AFMdata",
                             y.conv="numeric",
                             x.pixels="numeric",
                             y.pixels="numeric",
+                            x.nm = "numeric",
+                            y.nm = "numeric",
                             z.conv = "numeric",
                             z.units = "character",
                             channel="character",
@@ -76,8 +81,8 @@ setMethod(f="initialize",
                                z.units ,
                                channel,
                                instrument,
-                               history = character(0),
-                               description = character(0),
+                               history,
+                               description,
                                fullfilename)
           {
             if (!missing(data)) .Object@data<-data
@@ -90,7 +95,7 @@ setMethod(f="initialize",
             if (!missing(channel)) .Object@channel <-channel
             if (!missing(instrument)) .Object@instrument <-instrument
             if (!missing(history)) .Object@history <-history
-            if (!missing(description)) .Object@description <-description else .Object@description=""
+            if (!missing(description)) .Object@description <-description
             if (!missing(fullfilename)) .Object@fullfilename<-fullfilename
             validObject(.Object)
             return(.Object)
@@ -121,7 +126,7 @@ AFMdata <- function(data,
                     channel,
                     instrument,
                     history,
-                    description,
+                    description="",
                     fullfilename) {
   return(new("AFMdata",
              data,
@@ -189,7 +194,7 @@ print.AFMdata <- function(obj) {
   cat("Object:     ",obj@instrument,"AFM image\n")
   cat("Description:",obj@description,'\n')
   cat("Channel:    ",obj@channel,'\n')
-  cat("            ",obj@x.conv*obj@x.pixels,"nm  x ",obj@y.conv*obj@y.pixels,'nm \n')
+  cat("            ",obj@x.nm,"nm  x ",obj@y.nm,'nm \n')
   cat("History:    ",obj@history,'\n')
   cat("Filename:   ",obj@fullfilename)
 }
@@ -204,12 +209,12 @@ print.AFMdata <- function(obj) {
 #' summary(d)
 #' @export
 summary.AFMdata <- function(obj) {
-  #if (purrr::is_empty(obj@description)) obj@description=""
+  if (purrr::is_empty(obj@description)) obj@description=""
   r = data.frame(
     object = paste(obj@instrument,"AFM image"),
     description = paste(obj@description),
     resolution = paste(obj@x.pixels,"x",obj@y.pixels),
-    size = paste(round(obj@x.conv*obj@x.pixels),"x",round(obj@y.conv*obj@y.pixels),'nm'),
+    size = paste(obj@x.nm,"x",round(obj@y.nm),'nm'),
     channel = paste(obj@channel),
     history = paste(obj@history)
   )
@@ -244,15 +249,17 @@ AFM.raster <- function(obj,no=1) {
 #'
 #' @param obj AFMdata object
 #' @param mpt midpoint for coloring
+#' @param imageNo number of the image
 #' @return ggplot graph
 #' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' plot.AFMdata(d)
 #' @export
-plot.AFMdata <- function(obj,mpt=NA,...) {
-  cat("Graphing:",obj@channel[1])
-  d = AFM.raster(obj)
+plot.AFMdata <- function(obj,mpt=NA,imageNo=1,...) {
+  if (imageNo>length(obj@channel)) stop("imageNo out of bounds.")
+  cat("Graphing:",obj@channel[imageNo])
+  d = AFM.raster(obj,imageNo)
   zLab = paste(obj@channel,obj@z.units)
 
   if (is.na(mpt)) mean(d$z) -> mpt

@@ -94,10 +94,16 @@
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.NanoSurf_header.html</loc>
   </url>
   <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.NanoSurf_header.v2.html</loc>
+  </url>
+  <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.Nanoscope_file.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.Park_file.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.Park_header.v2.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/summary.AFMdata.html</loc>

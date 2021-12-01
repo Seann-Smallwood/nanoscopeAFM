@@ -172,7 +172,7 @@
         <td>
           <p><code><a href="AFM.import.html">AFM.import()</a></code> </p>
         </td>
-        <td><p><code>AFM.import</code> imports AFM file</p></td>
+        <td><p>Imports AFM file</p></td>
       </tr><tr>
         
         <td>
@@ -197,7 +197,7 @@ AFM instrument; common pieces are included with the tag INFO</p></td>
         <td>
           <p><code><a href="AFM.raster.html">AFM.raster()</a></code> </p>
         </td>
-        <td><p>returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers</p></td>
+        <td><p>returns raster data frame</p></td>
       </tr><tr>
         
         <td>
@@ -215,7 +215,7 @@ AFM instrument; common pieces are included with the tag INFO</p></td>
         <td>
           <p><code><a href="AFMinfo.html">AFMinfo()</a></code> </p>
         </td>
-        <td><p>AFMinfo object with information about the AFM image</p></td>
+        <td><p>AFMinfo object</p></td>
       </tr><tr>
         
         <td>
@@ -292,21 +292,19 @@ ex: "HeightRetrace,AmplitudeRetrace,PhaseRetrace,ZSensorRetrace,"</p></td>
         <td>
           <p><code><a href="read.AR_file.html">read.AR_file()</a></code> </p>
         </td>
-        <td><p>loads Asylum Research Igor AFM wavefile
-which can contain multiple images, returns channel
-name and units in attributes</p></td>
+        <td><p>load Igor wavefile</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="read.AR_file.v2.html">read.AR_file.v2()</a></code> </p>
         </td>
-        <td><p><code>read.AR_file.v2</code> loads Asylum Research Igor AFM wavefile</p></td>
+        <td><p>loads Asylum Research Igor AFM wavefile</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="read.AR_header.html">read.AR_header()</a></code> </p>
         </td>
-        <td><p>loads Asylum Research Igor Wave AFM files</p></td>
+        <td><p>loads AR header</p></td>
       </tr><tr>
         
         <td>
@@ -350,6 +348,13 @@ parameters for particular image</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="read.NanoSurf_header.v2.html">read.NanoSurf_header.v2()</a></code> </p>
+        </td>
+        <td><p>loads header of NanoSurf AFM NID file and returns
+parameters for particular image</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="read.Nanoscope_file.html">read.Nanoscope_file()</a></code> </p>
         </td>
         <td><p>Returns Veeco NanoScope AFM image with Scaling</p></td>
@@ -359,6 +364,12 @@ parameters for particular image</p></td>
           <p><code><a href="read.Park_file.html">read.Park_file()</a></code> </p>
         </td>
         <td><p>loads images</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read.Park_header.v2.html">read.Park_header.v2()</a></code> </p>
+        </td>
+        <td><p>loads Park Image header</p></td>
       </tr><tr>
         
         <td>

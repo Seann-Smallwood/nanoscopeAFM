@@ -2,9 +2,7 @@
 % Please edit documentation in R/read.AR_file.R
 \name{read.AR_file}
 \alias{read.AR_file}
-\title{loads Asylum Research Igor AFM wavefile
-which can contain multiple images, returns channel
-name and units in attributes}
+\title{load Igor wavefile}
 \usage{
 read.AR_file(filename, no = 1)
 }
@@ -17,7 +15,7 @@ read.AR_file(filename, no = 1)
 image with attributes
 }
 \description{
-loads Asylum Research Igor AFM wavefile
+Asylum Research Igor AFM wavefile is loaded,
 which can contain multiple images, returns channel
 name and units in attributes
 }
@@ -26,5 +24,5 @@ d = read.AR_file(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
 attr(d, 'channel')
 }
 \author{
-thomasgredig
+Thomas Gredig
 }

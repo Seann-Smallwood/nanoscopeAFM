@@ -20,6 +20,7 @@ ggplot graph
 graph of AFMdata object
 }
 \examples{
+# requires ggplot2 and scales pacakges
 d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 plot(d)
 }

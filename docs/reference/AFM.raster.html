@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers — AFM.raster • nanoscopeAFM</title>
+<title>returns raster data frame — AFM.raster • nanoscopeAFM</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers — AFM.raster" />
-<meta property="og:description" content="returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers" />
+<meta property="og:title" content="returns raster data frame — AFM.raster" />
+<meta property="og:description" content="data frame has  ($x, $y, $z) in units of particular channel, ($x, $y) are
+always in units of nanometer" />
 <meta property="og:image" content="https://thomasgredig.github.io/nanoscopeAFM/reference/figures/logo.png" />
 <meta property="og:image:alt" content="nanoscopeAFM - AFM analysis tool in R" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -133,13 +134,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers</h1>
+    <h1>returns raster data frame</h1>
     
     <div class="hidden name"><code>AFM.raster.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers</p>
+    <p>data frame has  ($x, $y, $z) in units of particular channel, ($x, $y) are
+always in units of nanometer</p>
     </div>
 
     <pre class="usage"><span class='fu'>AFM.raster</span><span class='op'>(</span><span class='va'>obj</span>, no <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
@@ -159,7 +161,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data.frame with  ($x.nm, $y.nm, $z.nm)</p>
+    <p>data.frame with ($x, $y, $z) raster image; ($x,$y) in units of nm</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Thomas Gredig</p>

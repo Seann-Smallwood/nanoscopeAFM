@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.AR_file.R
 \name{read.AR_header}
 \alias{read.AR_header}
-\title{loads Asylum Research Igor Wave AFM files}
+\title{loads AR header}
 \usage{
 read.AR_header(filename, no = 1)
 }
@@ -15,7 +15,7 @@ read.AR_header(filename, no = 1)
 image with attributes
 }
 \description{
-loads Asylum Research Igor Wave AFM files
+use this function to read the header information
 }
 \examples{
 d = read.AR_header(system.file("AR_20211011.ibw",package="nanoscopeAFM"))

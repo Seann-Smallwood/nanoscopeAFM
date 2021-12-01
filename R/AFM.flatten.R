@@ -1,7 +1,7 @@
 #' flattens an AFM image using a plane fit
 #'
-#' this flattens only z of one of the images
-#' using a plane fit
+#' uses the AFM.raster() function, then makes a copy
+#' and returns the flattened object
 #'
 #' @param obj AFMdata object
 #' @param no Image number
@@ -14,7 +14,8 @@
 #' @export
 AFM.flatten <- function(obj,no=1) {
   AFMcopy = obj
-  AFMcopy@history <- paste(AFMcopy@history,"AFM.flatten(",no,");")
+  if (purrr::is_empty(AFMcopy@history)) AFMcopy@history=""
+  AFMcopy@history = paste(AFMcopy@history,"AFM.flatten(",no,");")
 
   d = AFM.raster(AFMcopy,no)
   SZ = nrow(d)

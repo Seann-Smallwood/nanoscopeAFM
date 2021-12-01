@@ -114,11 +114,12 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># generate a summary of the AFMinfo object</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span>
-<span class="co">#&gt; AFM image type: Cypher </span>
-<span class="co">#&gt; Resolution:      128 x  128 </span>
-<span class="co">#&gt; Scan rate (Hz):  2.0032 </span>
-<span class="co">#&gt; Notes:          KC200, FePc, KC20170720Si </span>
-<span class="co">#&gt; Data Items:     706</span></code></pre></div>
+<span class="co">#&gt; AFM image type:   Cypher </span>
+<span class="co">#&gt; Resolution:        128 x  128 </span>
+<span class="co">#&gt; Scan rate (Hz):    2.0032 </span>
+<span class="co">#&gt; Scan Angle (deg): </span>
+<span class="co">#&gt; Notes:            KC200, FePc, KC20170720Si </span>
+<span class="co">#&gt; Data Items:       706</span></code></pre></div>
 <p>Finding additional special information, using the function <code>AFMinfo.item</code>; note that the search string is case-sensitive.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sp</span> <span class="op">=</span> <span class="va">setPointvalue</span> <span class="op">=</span> <span class="fu"><a href="../reference/AFMinfo.item.html">AFMinfo.item</a></span><span class="op">(</span><span class="va">h</span>, <span class="st">'Setpoint'</span><span class="op">)</span>

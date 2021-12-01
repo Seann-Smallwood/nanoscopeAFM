@@ -2,7 +2,7 @@
 % Please edit documentation in R/AFMdata.R
 \name{AFM.import}
 \alias{AFM.import}
-\title{\code{AFM.import} imports AFM file}
+\title{Imports AFM file}
 \usage{
 AFM.import(filename)
 }
@@ -13,7 +13,7 @@ AFM.import(filename)
 AFMdata object
 }
 \description{
-\code{AFM.import} imports AFM file
+Use this function to create an AFMdata object from the filename
 }
 \examples{
 d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))

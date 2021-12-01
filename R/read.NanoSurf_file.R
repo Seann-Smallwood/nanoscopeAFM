@@ -289,3 +289,29 @@ get.NID_imageInfo <- function(header.string) {
     unlist(lapply(image.Lines, function(x) { sapply(strsplit(x,"="),'[[',2) }))
   )
 }
+
+
+
+
+#' loads header of NanoSurf AFM NID file and returns
+#' parameters for particular image
+#'
+#' @param filename filename including path
+#' @return list
+#' @examples
+#' filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
+#' h = read.NanoSurf_header.v2(filename)
+#' @export
+read.NanoSurf_header.v2 <- function(filename) {
+  # read the NID header
+  k1 = read.NID_header(filename)[[2]]
+  k1 = enc2utf8(k1)
+  gsub('<b5>','\u00b5',k1) -> k1
+  gsub('<b0>','\u00b0',k1) -> k1
+
+  q = grep("=",k1)
+  data.frame(
+    name = gsub('(.*?)=.*','\\1',k1[q]),
+    value = gsub('(.*?)=(.*)','\\2',k1[q])
+  )
+}

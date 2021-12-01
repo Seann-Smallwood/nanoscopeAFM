@@ -17,6 +17,9 @@ check_AFMdata <- function(object) {
 #' AFM image class
 #'
 #' A S4 class to store and manipulate images from Atomic Force Microscopes.
+#' It contains the names of channels (exact naming depends on the type/instrument)
+#' The class supports multiple images; it can also contain additional information
+#' such as lines, etc.
 #'
 #' @slot data list with objects ($z is a list with images)
 #' @slot x.conv conversion factor from pixels to nm
@@ -142,7 +145,9 @@ AFMdata <- function(data,
 }
 
 
-#' \code{AFM.import} imports AFM file
+#' Imports AFM file
+#'
+#' Use this function to create an AFMdata object from the filename
 #'
 #' @param filename name of AFM filename
 #' @return AFMdata object
@@ -227,11 +232,14 @@ summary.AFMdata <- function(obj) {
 
 
 
-#' returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers
+#' returns raster data frame
+#'
+#' data frame has  ($x, $y, $z) in units of particular channel, ($x, $y) are
+#' always in units of nanometer
 #'
 #' @param obj AFMdata object
 #' @param no image number
-#' @return data.frame with  ($x.nm, $y.nm, $z.nm)
+#' @return data.frame with ($x, $y, $z) raster image; ($x,$y) in units of nm
 #' @author Thomas Gredig
 #' @export
 AFM.raster <- function(obj,no=1) {
@@ -251,6 +259,7 @@ AFM.raster <- function(obj,no=1) {
 #' @return ggplot graph
 #' @author Thomas Gredig
 #' @examples
+#' # requires ggplot2 and scales pacakges
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' plot(d)
 #' @export
@@ -313,4 +322,3 @@ AFM.histogram <- function(obj) {
 AFM.isImage <- function(obj) {
   ((obj@x.pixels > 1) & (obj@y.pixels>1))
 }
-

@@ -101,7 +101,11 @@ read.Nanoscope_file <- function(filename, no=1, headerOnly = FALSE) {
   attr(df,"units")      = im.units
   attr(df,"date")       = HEADER.INFO$value[grep('^Date', HEADER.INFO$name)]
   if (headerOnly) {
-    df = imageHeader
+    fileHeader = HEADER.INFO[sections[fileNo[no]]:(sections[fileNo[no]+1]-1),]
+    ciaoHeader = HEADER.INFO[sections[ciaoNo[no]]:(sections[ciaoNo[no]+1]-1),]
+    scanHeader = HEADER.INFO[sections[scanNo[no]]:(sections[scanNo[no]+1]-1),]
+    equipHeader = HEADER.INFO[sections[eqipNo[no]]:(sections[eqipNo[no]+1]-1),]
+    df = rbind(imageHeader,equipHeader,scanHeader,ciaoHeader,fileHeader)
   }
   df
 }

@@ -15,8 +15,8 @@ AFM.flatten(obj, no = 1)
 flattened matrix with AFM image
 }
 \description{
-this flattens only z of one of the images
-using a plane fit
+uses the AFM.raster() function, then makes a copy
+and returns the flattened object
 }
 \examples{
 d = AFM.read(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))

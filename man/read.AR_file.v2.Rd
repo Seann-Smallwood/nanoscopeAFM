@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.AR_file.R
 \name{read.AR_file.v2}
 \alias{read.AR_file.v2}
-\title{\code{read.AR_file.v2} loads Asylum Research Igor AFM wavefile}
+\title{loads Asylum Research Igor AFM wavefile}
 \usage{
 read.AR_file.v2(filename)
 }

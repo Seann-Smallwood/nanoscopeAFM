@@ -2,7 +2,7 @@
 % Please edit documentation in R/AFMdata.R
 \name{AFM.raster}
 \alias{AFM.raster}
-\title{returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers}
+\title{returns raster data frame}
 \usage{
 AFM.raster(obj, no = 1)
 }
@@ -12,10 +12,11 @@ AFM.raster(obj, no = 1)
 \item{no}{image number}
 }
 \value{
-data.frame with  ($x.nm, $y.nm, $z.nm)
+data.frame with ($x, $y, $z) raster image; ($x,$y) in units of nm
 }
 \description{
-returns data frame with ($x.nm, $y.nm, $z.nm) in nanometers
+data frame has  ($x, $y, $z) in units of particular channel, ($x, $y) are
+always in units of nanometer
 }
 \author{
 Thomas Gredig

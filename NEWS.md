@@ -1,4 +1,4 @@
-# NEWS
+# CHANGELOG
 
 Author: **Thomas Gredig**
 
@@ -7,6 +7,7 @@ Author: **Thomas Gredig**
 * change data format of @data in AFMdata structure from data.frame to list to accommodate multiple images
 * new reader for AR images
 * eliminate z-conversion, since we are saving the units for the z values, just store the converted values
+* complete AFMinfo documentation for all 4 instruments
 
 ## nanoscopeAFM 1.0.5
 

@@ -15,6 +15,10 @@ quick summary
 \description{
 summary for AFMinfo object
 }
+\examples{
+h1 = AFMinfo(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+summary(h1)
+}
 \author{
 Thomas Gredig
 }

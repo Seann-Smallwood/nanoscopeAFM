@@ -48,3 +48,32 @@ read.Park_file <- function(filename) {
 
   d1
 }
+
+
+#' loads Park Image header
+#'
+#' @param filename Park AFM filename including path
+#' @return AFMinfo data
+#' @author Thomas Gredig
+#' @examples
+#' filename = system.file("extdata","Park_20210916_034.tiff",package="nanoscopeAFM")
+#' h = read.Park_header.v2(filename)
+#' @export
+read.Park_header.v2 <- function(filename) {
+
+  tiffTags = tagReader(filename)
+  afm.params = as.numeric(strsplit(tiffTags[16,'valueStr'],',')[[1]])
+  params = get.ParkAFM.header(afm.params)
+
+  r1 = data.frame(
+    name = colnames(params),
+    value = as.character(params[1,])
+  )
+  r2 = data.frame(
+    name = tiffTags[1:14,'tagName'],
+    value = tiffTags[1:14,'value']
+  )
+  r2[c(9:12),'value']=tiffTags[c(9:12),'valueStr']
+  rbind(r1,r2)
+}
+

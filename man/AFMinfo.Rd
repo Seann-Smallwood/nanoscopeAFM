@@ -2,18 +2,23 @@
 % Please edit documentation in R/AFM.info.R
 \name{AFMinfo}
 \alias{AFMinfo}
-\title{AFMinfo object with information about the AFM image}
+\title{AFMinfo object}
 \usage{
 AFMinfo(filename)
 }
 \arguments{
-\item{filename}{filename of (Veeco, Park, AR, NanoSurf) AFM image including path}
+\item{filename}{full filename of instrument file}
 }
 \value{
-AFMinfo object
+AFMinfo class object
 }
 \description{
-AFMinfo object with information about the AFM image
+heater information about the AFM image, includes scan rate, widths, etc.
+}
+\examples{
+filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
+h = AFMinfo(filename)
+summary(h)
 }
 \author{
 Thomas Gredig

@@ -61,6 +61,9 @@ AFMdata(
 }
 \description{
 A S4 class to store and manipulate images from Atomic Force Microscopes.
+It contains the names of channels (exact naming depends on the type/instrument)
+The class supports multiple images; it can also contain additional information
+such as lines, etc.
 }
 \section{Slots}{
 

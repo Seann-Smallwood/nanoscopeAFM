@@ -1,11 +1,13 @@
-#' loads Asylum Research Igor AFM wavefile
+#' load Igor wavefile
+#'
+#' Asylum Research Igor AFM wavefile is loaded,
 #' which can contain multiple images, returns channel
 #' name and units in attributes
 #'
 #' @param filename filename including path
 #' @param no number of the channel
 #' @return image with attributes
-#' @author thomasgredig
+#' @author Thomas Gredig
 #' @examples
 #' d = read.AR_file(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' attr(d, 'channel')
@@ -58,7 +60,9 @@ read.AR_file <- function(filename, no=1) {
   dr
 }
 
-#' loads Asylum Research Igor Wave AFM files
+#' loads AR header
+#'
+#' use this function to read the header information
 #'
 #' @param filename filename including path
 #' @param no number of the channel
@@ -138,7 +142,7 @@ read.AR_header.v2 <- function(filename) {
   units
 }
 
-#' \code{read.AR_file.v2} loads Asylum Research Igor AFM wavefile
+#' loads Asylum Research Igor AFM wavefile
 #'
 #' loads all images contained in Igor wavefile and
 #' returns an AFMdata object

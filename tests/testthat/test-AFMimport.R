@@ -6,6 +6,9 @@ test_that("importing Asylum Research AR AFM sample file", {
   filename = system.file("extdata", "AR_20211011.ibw",package="nanoscopeAFM")
   d = AFM.import(filename)
   expect_true(AFM.isImage(d))
+  h = AFMinfo(filename)
+  expect_equal(as.numeric(h$scanRate.Hz),2,tolerance = 1e-2)
+  expect_equal(h$type,'Cypher')
 })
 
 test_that("Asylum Research Igor AFM image size check", {
@@ -38,6 +41,9 @@ test_that("importing Park AFM sample file", {
   filename = system.file("extdata", "Park_20210916_034.tiff",package="nanoscopeAFM")
   d = AFM.import(filename)
   expect_true(AFM.isImage(d))
+  h = AFMinfo(filename)
+  expect_equal(as.numeric(h$scanRate.Hz),1.25,tolerance = 1e-2)
+  expect_equal(h$type,'Park')
 })
 
 test_that("Park AFM image size check", {
@@ -67,6 +73,9 @@ test_that("importing Veeco AFM sample file", {
   filename = system.file("extdata", "Veeco_20160622.003",package="nanoscopeAFM")
   d = AFM.import(filename)
   expect_true(AFM.isImage(d))
+  h = AFMinfo(filename)
+  expect_equal(as.numeric(h$scanRate.Hz),1,tolerance = 1e-2)
+  expect_equal(h$type,'Veeco')
 })
 
 
@@ -97,14 +106,16 @@ test_that("importing NanoSurf AFM sample file", {
   filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
   d = AFM.import(filename)
   expect_true(AFM.isImage(d))
+  h = AFMinfo(filename)
+  expect_equal(as.numeric(h$scanRate.Hz),1,tolerance = 1e-2)
 })
 
 test_that("NanoSurf image size check", {
   filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
   d = AFM.import(filename)
   # image is 10 x 10 um
-  expect_equal(d@x.pixels*d@x.conv,10000)
-  expect_equal(d@y.pixels*d@y.conv,10000)
+  expect_equal(d@x.pixels*d@x.conv,10000,tolerance = 1e-2)
+  expect_equal(d@y.pixels*d@y.conv,10000,tolerance = 1e-2)
 })
 
 test_that("NanoSurf image size check", {

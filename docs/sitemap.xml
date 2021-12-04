@@ -7,6 +7,9 @@
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.flatten.html</loc>
   </url>
   <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.getSampleImages.html</loc>
+  </url>
+  <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.histogram.html</loc>
   </url>
   <url>
@@ -37,16 +40,10 @@
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFMinfo.item.html</loc>
   </url>
   <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFMmath.params.html</loc>
+  </url>
+  <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/NID.checkFile.html</loc>
-  </url>
-  <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/NID.loadImage.html</loc>
-  </url>
-  <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/NID.loadSweep.html</loc>
-  </url>
-  <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/flatten.NID_matrix.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/get.NID_imageInfo.html</loc>
@@ -61,28 +58,13 @@
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/print.AFMdata.html</loc>
   </url>
   <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.AFM_file.html</loc>
-  </url>
-  <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.AR_eofHeader.V2.html</loc>
-  </url>
-  <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.AR_file.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.AR_file.v2.html</loc>
   </url>
   <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.AR_header.html</loc>
-  </url>
-  <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.AR_header.v2.html</loc>
-  </url>
-  <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.IBW_file.html</loc>
-  </url>
-  <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.NID_file.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/read.NID_headerItems.html</loc>
@@ -110,6 +92,12 @@
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/summary.AFMinfo.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/summary.AFMmath.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/AFM-graphTypes.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/afm-setpoint.html</loc>

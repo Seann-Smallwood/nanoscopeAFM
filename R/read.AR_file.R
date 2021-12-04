@@ -1,107 +1,3 @@
-#' load Igor wavefile
-#'
-#' Asylum Research Igor AFM wavefile is loaded,
-#' which can contain multiple images, returns channel
-#' name and units in attributes
-#'
-#' @param filename filename including path
-#' @param no number of the channel
-#' @return image with attributes
-#' @author Thomas Gredig
-#' @examples
-#' d = read.AR_file(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
-#' attr(d, 'channel')
-#' @export
-read.AR_file <- function(filename, no=1) {
-  h1 = read.AR_eofHeader.V2(filename)
-  if (no > as.numeric(h1$NumberOfFiles)) warning("Requested image no is out of range.")
-  channelName = .getChannelName(h1, no)
-  units = .getChannelUnits(channelName)
-
-  suppressWarnings({
-    d = IgorR::read.ibw(filename)
-  })
-  q2 = attr(d, "WaveHeader")
-  imageDim <- q2$nDim[1:2]
-  noChannels <- q2$nDim[3]
-  dr = data.frame()
-
-  if(no <= noChannels) {
-    x = 1:dim(d)[1]
-    y = 1:dim(d)[2]
-    zp = 1:(length(x)*length(y)) + (no-1)*(length(x)*length(y))
-    dr = data.frame(
-      x = rep(x, length(y)),
-      y = rep(y, each=length(x)),
-      z = d[zp]
-    )
-
-    attr(dr, "channel") = channelName
-    attr(dr, "units") = units
-
-    sfA = q2['sfA']$sfA
-    convFactor <- sfA[1]  # all images should have same dimensions
-    # wfUnits <- q2$dimUnits[no]
-
-    if (units=='m') {
-      dr$x.nm = convFactor*1e9 * (dr$x-1)
-      dr$y.nm = convFactor*1e9 * (dr$y-1)
-      dr$z.nm = 1e9 * dr$z
-    } else {
-      dr$x.nm = convFactor*1e9 * (dr$x-1)
-      dr$y.nm = convFactor*1e9 * (dr$y-1)
-      dr$z.nm = dr$z
-    }
-
-    attr(dr, "convFactor") = sfA[no]
-    attr(dr, "channelDirection") = .getChannelDirection(h1, no)
-    attr(dr, "noImages") = h1$NumberOfFiles
-  }
-  dr
-}
-
-#' loads AR header
-#'
-#' use this function to read the header information
-#'
-#' @param filename filename including path
-#' @param no number of the channel
-#' @return image with attributes
-#' @examples
-#' d = read.AR_header(system.file("AR_20211011.ibw",package="nanoscopeAFM"))
-#' @export
-read.AR_header <- function(filename, no=1) {
-  suppressWarnings({
-    d = IgorR::read.ibw(filename)
-    # to get notes, need to read all, not just "header"
-  })
-  qHead = attr(d, "WaveHeader")
-  p = c(version = attr(d, "BinHeader")$version,
-        creationDate = format(qHead$creationDate),
-        modDate = format(qHead$modDate),
-        npts = qHead$npts,
-        name = qHead$WaveName,
-        numImages = length(qHead$nDim),
-        nDim = qHead$nDim[no],
-        sfA = qHead$sfA[no],
-        sfB = qHead$sfB[no],
-        dataUnits = qHead$dataUnits,
-        dimUnits = qHead$dimUnits[no],
-        platform = qHead$platform)
-  qNote = attr(d, "Note")
-  notes = strsplit(qNote,'\r')[[1]]
-  pspl = strsplit(notes, ":")
-  n4 = which(sapply(pspl,length) < 2)
-  for(i in 1:length(n4)) { pspl[[n4[i]-i+1]] <- NULL }
-  n4 = which(sapply(pspl,length) > 2)
-  for(i in 1:length(n4)) { pspl[[n4[i]]][2] = paste(pspl[[n4[i]]][-1],collapse=':') }
-
-  p2=c()
-  p2[sapply(pspl,'[[',1)] = sapply(pspl,'[[',2)
-  p2
-}
-
-
 #' loads Asylum Research Igor Wave AFM header information
 #'
 #' @param filename filename including path
@@ -124,23 +20,6 @@ read.AR_header.v2 <- function(filename) {
 }
 
 
-.getChannelName <- function(h1,no) {
-  # from h1=read.AR_eofHeader.V2(filename)
-  gsub('(.*)[RT][er].*$','\\1',strsplit(h1$DataTypeList,",")[[1]][no])
-}
-
-.getChannelDirection <- function(h1,no) {
-  # from h1=read.AR_eofHeader.V2(filename)
-  gsub('.*?([RT][er].*)$','\\1',strsplit(h1$DataTypeList,",")[[1]][no])
-}
-
-.getChannelUnits <- function(channelName) {
-  units = "m"  # default units
-  if (nchar(channelName)>0) {
-    if(grepl('Phase',channelName)) units="deg"
-  } else { units="" }
-  units
-}
 
 #' loads Asylum Research Igor AFM wavefile
 #'
@@ -154,7 +33,7 @@ read.AR_file.v2 <- function(filename) {
   cat('loading')
   h1 = read.AR_eofHeader.V2(filename)
   channels = strsplit(h1$DataTypeList,',')[[1]]
-  units = rep('m', length(channels))
+  units = rep('nm', length(channels))
   units[grep('^Phase',channels)] = 'deg'
   cat('image')
   suppressWarnings({
@@ -169,7 +48,7 @@ read.AR_file.v2 <- function(filename) {
   im.size = imageDim[1]*imageDim[2]
   z.data=list()
   for(i in 1:noChannels) {
-    z.conv = 1; if (units[i]=='m') z.conv=1e9
+    z.conv = 1; if (units[i]=='nm') z.conv=1e9
     z.data[[i]] = d[(im.size*(i-1)+1):(im.size*i)]*z.conv
   }
 

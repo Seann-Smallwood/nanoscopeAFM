@@ -4,7 +4,7 @@
 \alias{plot.AFMdata}
 \title{graph of AFMdata object}
 \usage{
-\method{plot}{AFMdata}(obj, no = 1, mpt = NA, ...)
+\method{plot}{AFMdata}(obj, no = 1, mpt = NA, graphType = 1, ...)
 }
 \arguments{
 \item{obj}{AFMdata object}
@@ -12,6 +12,8 @@
 \item{no}{number of the image}
 
 \item{mpt}{midpoint for coloring}
+
+\item{graphType}{1 = graph with legend outside, 2 = square graph with line bar}
 }
 \value{
 ggplot graph
@@ -22,7 +24,7 @@ graph of AFMdata object
 \examples{
 # requires ggplot2 and scales pacakges
 d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
-plot(d)
+plot(d, graphType=2)
 }
 \author{
 Thomas Gredig

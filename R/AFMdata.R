@@ -256,14 +256,15 @@ AFM.raster <- function(obj,no=1) {
 #' @param obj AFMdata object
 #' @param no number of the image
 #' @param mpt midpoint for coloring
+#' @param graphType 1 = graph with legend outside, 2 = square graph with line bar
 #' @return ggplot graph
 #' @author Thomas Gredig
 #' @examples
 #' # requires ggplot2 and scales pacakges
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
-#' plot(d)
+#' plot(d, graphType=2)
 #' @export
-plot.AFMdata <- function(obj,no=1,mpt=NA,...) {
+plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, ...) {
   if (no>length(obj@channel)) stop("imageNo out of bounds.")
   cat("Graphing:",obj@channel[no])
   d = AFM.raster(obj,no)
@@ -272,8 +273,9 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,...) {
 
   if (is.na(mpt)) mean(d$z) -> mpt
   xlab <- expression(paste('x (',mu,'m)'))
-  print(
-    ggplot(d, aes(x/1000, y/1000, fill = z)) +
+
+  if (graphType==1) {
+    g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
       geom_raster() +
       scale_fill_gradient2(low='red', mid='white', high='blue',
                            midpoint=mpt) +
@@ -284,7 +286,59 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,...) {
       scale_x_continuous(expand=c(0,0))+
       coord_equal() +
       theme_bw()
-  )
+  } else if (graphType==2) {
+    # figure out coordinates for line
+    bar.length = signif(obj@x.nm*0.2,2)  # nm
+    bar.x.start = 0.05*obj@x.pixels * obj@x.conv
+    bar.y.start = 0.05*obj@y.pixels * obj@y.conv
+    bar.x.end = bar.x.start + bar.length
+    d.line = data.frame(
+      x = c(bar.x.start, bar.x.end),
+      y = c(bar.y.start, bar.y.start),
+      z = 1,
+      label = c(paste(bar.length,"nm"),"")
+    )
+    zLab = obj@z.units[no]
+    g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
+      geom_raster() +
+      scale_fill_gradient2(low='red', mid='white', high='blue',
+                           midpoint=mpt) +
+      xlab("") +
+      ylab("") +
+      labs(fill=zLab) +
+      scale_y_continuous(expand=c(0,0))+
+      scale_x_continuous(expand=c(0,0))+
+      coord_equal() +
+      geom_line(data = d.line, aes(x/1000,y/1000), size=4) +
+      geom_text(data = d.line, aes(label=label), vjust=-1, hjust=0) +
+      theme_bw() +
+      theme(legend.position =c(0.99,0.01),
+            legend.justification = c(1,0)) +
+      theme(axis.text.x = element_blank(),
+            axis.ticks.x = element_blank(),
+            axis.text.y = element_blank(),
+            axis.ticks.y = element_blank())
+
+  } else if (graphType==3) {
+    zLab = obj@z.units[no]
+    g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
+      geom_raster() +
+      scale_fill_gradient2(low='red', mid='white', high='blue',
+                           midpoint=mpt) +
+      xlab("") +
+      ylab("") +
+      scale_y_continuous(expand=c(0,0))+
+      scale_x_continuous(expand=c(0,0))+
+      coord_equal() +
+      theme_bw() +
+      theme(legend.position = "none") +
+      theme(axis.text.x = element_blank(),
+            axis.ticks.x = element_blank(),
+            axis.text.y = element_blank(),
+            axis.ticks.y = element_blank())
+
+  } else stop('graphType is not supported.')
+  g1
 }
 
 

@@ -16,3 +16,8 @@ test_that("test Park AFM image scales", {
   expect_equal(nrow(d),256*256)
 })
 
+test_that("Park AFM image roughness check", {
+  d = AFMmath.params(AFM.import(filename))
+  expect_equal(d$Ra, 0.3788, tolerance = 1e-4)
+  expect_equal(d$Rq, 0.6351, tolerance = 1e-4)
+})

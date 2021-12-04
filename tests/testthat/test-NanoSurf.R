@@ -19,3 +19,11 @@ test_that("use general AFM reading function to read NanoSurf file", {
   mean(d$z.nm)
 })
 
+
+test_that("NanoSurf image roughness check", {
+  d = AFMmath.params(AFM.import(filename))
+  expect_equal(d$Ra, 23.67, tolerance = 1e-4)
+  expect_equal(d$Rq, 31.85, tolerance = 1e-4)
+})
+
+

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>summary of AFMdata object — summary.AFMdata • nanoscopeAFM</title>
+<title>sample AFM images — AFM.getSampleImages • nanoscopeAFM</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="summary of AFMdata object — summary.AFMdata" />
-<meta property="og:description" content="summary of AFMdata object" />
+<meta property="og:title" content="sample AFM images — AFM.getSampleImages" />
+<meta property="og:description" content="returns sample AFM images from library" />
 <meta property="og:image" content="https://thomasgredig.github.io/nanoscopeAFM/reference/figures/logo.png" />
 <meta property="og:image:alt" content="nanoscopeAFM - AFM analysis tool in R" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -136,48 +136,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>summary of AFMdata object</h1>
+    <h1>sample AFM images</h1>
     
-    <div class="hidden name"><code>summary.AFMdata.Rd</code></div>
+    <div class="hidden name"><code>AFM.getSampleImages.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>summary of AFMdata object</p>
+    <p>returns sample AFM images from library</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for AFMdata</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>AFM.getSampleImages</span><span class='op'>(</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>obj</th>
-      <td><p>AFMdata object</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>summary of AFMdata object</p>
+    <p>vector with path/filename to AFM sample images</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Thomas Gredig</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='va'>d</span> <span class='op'>=</span> <span class='fu'><a href='AFM.import.html'>AFM.import</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,<span class='st'>"AR_20211011.ibw"</span>,package<span class='op'>=</span><span class='st'>"nanoscopeAFM"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> loadingimage</span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             object               description resolution           size</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 Cypher AFM image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 Cypher AFM image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 Cypher AFM image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 Cypher AFM image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>            channel history     z.min    z.max z.units</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1    HeightRetrace         -32.45992 50.78832      nm</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 AmplitudeRetrace          29.00730 32.78488      nm</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3     PhaseRetrace          63.92822 85.18923     deg</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4   ZSensorRetrace         -29.44336 48.16414      nm</span>
+    <pre class="examples"><span class='r-in'><span class='va'>file.list</span> <span class='op'>=</span> <span class='fu'>AFM.getSampleImages</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>file.list</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpN2V97O/temp_libpath12fb3dad4554/nanoscopeAFM/extdata/AR_20211011.ibw"       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpN2V97O/temp_libpath12fb3dad4554/nanoscopeAFM/extdata/NanoSurf_20160301.nid" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpN2V97O/temp_libpath12fb3dad4554/nanoscopeAFM/extdata/Park_20210916_034.tiff"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpN2V97O/temp_libpath12fb3dad4554/nanoscopeAFM/extdata/Veeco_20160622.003"    </span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

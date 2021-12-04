@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">1.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.0</span>
       </span>
     </div>
 
@@ -105,6 +105,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/AFM-graphTypes.html">AFM-graphTypes</a>
+    </li>
     <li>
       <a href="../articles/afm-setpoint.html">afm-setpoint</a>
     </li>
@@ -161,6 +164,12 @@
           <p><code><a href="AFM.flatten.html">AFM.flatten()</a></code> </p>
         </td>
         <td><p>flattens an AFM image using a plane fit</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="AFM.getSampleImages.html">AFM.getSampleImages()</a></code> </p>
+        </td>
+        <td><p>sample AFM images</p></td>
       </tr><tr>
         
         <td>
@@ -225,28 +234,15 @@ AFM instrument; common pieces are included with the tag INFO</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="AFMmath.params.html">AFMmath.params()</a></code> </p>
+        </td>
+        <td><p>Various computed AFM image parameters</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="NID.checkFile.html">NID.checkFile()</a></code> </p>
         </td>
         <td><p>checks AFM NID file length</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="NID.loadImage.html">NID.loadImage()</a></code> </p>
-        </td>
-        <td><p>DEPRACATED: returns the scaled image + flattend image</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="NID.loadSweep.html">NID.loadSweep()</a></code> </p>
-        </td>
-        <td><p>loads frequency sweep data from NID file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="flatten.NID_matrix.html">flatten.NID_matrix()</a></code> </p>
-        </td>
-        <td><p>DEPRECATEDD: use AFM.flatten() instead:
-flattens a NID AFM image using a plane fit</p></td>
       </tr><tr>
         
         <td>
@@ -274,13 +270,6 @@ flattens a NID AFM image using a plane fit</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="read.AFM_file.html">read.AFM_file()</a></code> </p>
-        </td>
-        <td><p>DEPRECATED: use AFM.read()
-loads AFM image file</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="read.AR_eofHeader.V2.html">read.AR_eofHeader.V2()</a></code> </p>
         </td>
         <td><p>returns the version 2 header information tagged
@@ -290,41 +279,15 @@ ex: "HeightRetrace,AmplitudeRetrace,PhaseRetrace,ZSensorRetrace,"</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="read.AR_file.html">read.AR_file()</a></code> </p>
-        </td>
-        <td><p>load Igor wavefile</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="read.AR_file.v2.html">read.AR_file.v2()</a></code> </p>
         </td>
         <td><p>loads Asylum Research Igor AFM wavefile</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="read.AR_header.html">read.AR_header()</a></code> </p>
-        </td>
-        <td><p>loads AR header</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="read.AR_header.v2.html">read.AR_header.v2()</a></code> </p>
         </td>
         <td><p>loads Asylum Research Igor Wave AFM header information</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.IBW_file.html">read.IBW_file()</a></code> </p>
-        </td>
-        <td><p>DEPRECATED: use read.AR_file()
-loads Asylum Research Igor Wave AFM files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.NID_file.html">read.NID_file()</a></code> </p>
-        </td>
-        <td><p>DEPRECATED: use AFM.read()
-loads images of AFM NID file (use NID.loadImage whenever)</p></td>
       </tr><tr>
         
         <td>
@@ -382,6 +345,12 @@ parameters for particular image</p></td>
           <p><code><a href="summary.AFMinfo.html">summary(<i>&lt;AFMinfo&gt;</i>)</a></code> </p>
         </td>
         <td><p>summary for AFMinfo object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="summary.AFMmath.html">summary(<i>&lt;AFMmath&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Summary of computed AFM image parameters</p></td>
       </tr>
     </tbody>
     </table>

@@ -15,3 +15,10 @@ test_that("use general AFM reading function to read file", {
   expect_equal(nrow(d),512*512)
   expect_equal(max(d$z),3121)
 })
+
+
+test_that("Veeco image roughness check", {
+  d = AFMmath.params(AFM.import(filename))
+  expect_equal(d$Ra, 3.05, tolerance = 1e-3)
+  expect_equal(d$Rq, 10.18, tolerance = 1e-3)
+})

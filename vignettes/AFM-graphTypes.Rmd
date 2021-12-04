@@ -1,0 +1,81 @@
+---
+title: "AFM-graphTypes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{AFM-graphTypes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(nanoscopeAFM)
+library(ggplot2)
+library(scales)
+```
+
+## Loading AFM image
+
+```{r}
+fname = AFM.getSampleImages()[1]
+afmd = AFM.import(fname)
+```
+
+The AFM image can be displayed using graphTypes:
+
+## graphType 1
+
+This is the basic and default graph for an AFM image:
+
+```{r}
+plot(afmd, graphType=1)
+```
+
+## graphType 2
+
+This graph has a square shape and adds a bar of length 20%; it places the scale inside the graph.
+
+```{r}
+plot(afmd, graphType=2)
+```
+
+The image can be saved with `ggsave` as it is graphed with ggplot.
+
+```{r}
+g1 = plot(afmd, graphType=2)
+ggsave(tempfile(pattern = "", fileext = ".png"), plot=g1, dpi=300)
+```
+
+## graphType 3
+
+This graph type is bare and has neither length scales nor legend.
+
+```{r}
+plot(afmd, graphType=3)
+summary(afmd)
+```
+
+
+## graphing 2 plots side by side
+
+Use the package `cowplot` to create a graph with two plots. Use `save_plot` to save the graph.
+
+```{r}
+library(cowplot)
+fname2 = AFM.getSampleImages()[4]
+afmd2 = AFM.import(fname2)
+summary(afmd2)
+g1 = plot(afmd, graphType = 3)
+g2 = plot(afmd2, 1, graphType = 3)
+g3 = plot(afmd, 2, graphType = 3)
+g4 = plot(afmd, 3, graphType = 3)
+plot_grid(g1, g2, g3, g4,
+          labels=c('A','B','C','D'))
+```
+

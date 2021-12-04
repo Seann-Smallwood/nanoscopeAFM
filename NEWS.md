@@ -2,8 +2,15 @@
 
 Author: **Thomas Gredig**
 
+## nanoscopeAFM 2.0.0
+
+* remove old dependencies
+* add new types for AFM plotting, adding graphType = c(1,2)
+
+
 ## nanoscopeAFM 1.1.0
 
+* first release, use to have backwards-compatibility
 * change data format of @data in AFMdata structure from data.frame to list to accommodate multiple images
 * new reader for AR images
 * eliminate z-conversion, since we are saving the units for the z values, just store the converted values

@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.1</span>
       </span>
     </div>
 
@@ -107,6 +107,7 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
+<p>Complete descriptions for <a href="https://thomasgredig.github.io/nanoscopeAFM/">nanoscopeAFM library functions</a> and examples in the <a href="https://thomasgredig.github.io/nanoscopeAFM/articles/AFM-graphTypes.html">Article Vignettes</a>.</p>
 <p>Use this package to generate <code>AFMdata</code> S4 data objects, which can be used to quickly display AFM data and also process AFM data. Here are some examples:</p>
 <p>Creating an <code>AFMdata</code> data object:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -127,15 +128,13 @@
 <div id="image-info" class="section level2">
 <h2 class="hasAnchor">
 <a href="#image-info" class="anchor"></a>Image Info</h2>
-<p>Use the <code><a href="reference/AFM.info.html">AFM.info()</a></code> function to obtain information about the AFM image. The information depends on the file format, but some items are common for all images; these items start with <strong>“INFO.”</strong>.</p>
+<p>Use the <code><a href="reference/AFMinfo.html">AFMinfo()</a></code> function to obtain information about the AFM image. The information depends on the file format, but some items are common for all images; these items start with <strong>“INFO.”</strong>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/AFM.info.html">AFM.info</a></span><span class="op">(</span><span class="va">fname</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">r1</span>
-<span class="va">r1</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">'INFO.'</span>,<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">r1</span>,<span class="st">'names'</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="va">r1</span> <span class="op">=</span> <span class="fu"><a href="reference/AFMinfo.html">AFMinfo</a></span><span class="op">(</span><span class="va">fname</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fname</span><span class="op">)</span></code></pre></div>
 <p>The AFM image information can also be saved into a file.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/AFM.info.html">AFM.info</a></span><span class="op">(</span><span class="va">fname</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">r1</span>
-<span class="va">d2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">r1</span>, <span class="st">"names"</span><span class="op">)</span>, val<span class="op">=</span><span class="va">r1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">d2</span>, file<span class="op">=</span><span class="st">'AFMinfo.csv'</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">r1</span><span class="op">$</span><span class="va">data</span>, file<span class="op">=</span><span class="st">'AFMinfo.csv'</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="image-analysis" class="section level2">
 <h2 class="hasAnchor">
@@ -157,53 +156,8 @@
 <span class="va">d2</span><span class="op">$</span><span class="va">distance</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">x</span><span class="op">*</span><span class="va">d</span><span class="op">$</span><span class="va">x</span><span class="op">+</span><span class="va">d</span><span class="op">$</span><span class="va">y</span><span class="op">*</span><span class="va">d</span><span class="op">$</span><span class="va">y</span><span class="op">)</span>
 <span class="co"># plot the line profile</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">d2</span><span class="op">$</span><span class="va">distance</span>, <span class="va">d2</span><span class="op">$</span><span class="va">z.flatten</span><span class="op">)</span></code></pre></div>
-</div>
-</div>
-<div id="nanoscope-afm-images" class="section level1">
-<h1 class="hasAnchor">
-<a href="#nanoscope-afm-images" class="anchor"></a>Nanoscope AFM images</h1>
-<p>Convert and save all files in folder to PNG format</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># find the files</span>
-<span class="va">file.list</span> <span class="op">=</span> <span class="fu">raw.findFiles</span><span class="op">(</span><span class="va">path.RAW</span>, date<span class="op">=</span><span class="st">'2016'</span>, instrument<span class="op">=</span><span class="st">'afm'</span><span class="op">)</span>
-<span class="va">file.list</span> <span class="op">=</span> <span class="va">file.list</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">'\\d{3}$'</span>,<span class="va">file.list</span><span class="op">)</span><span class="op">]</span>
-
-<span class="co"># save the first image of each AFM file</span>
-<span class="kw">for</span><span class="op">(</span><span class="va">f</span> <span class="kw">in</span> <span class="va">file.list</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="reference/AFM.read.html">AFM.read</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span>
-  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">geom_raster</span><span class="op">(</span>data <span class="op">=</span> <span class="va">d</span> , <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, fill <span class="op">=</span> <span class="va">z</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">coord_equal</span><span class="op">(</span>expand<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">xlab</span><span class="op">(</span><span class="st">'x (nm)'</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">ylab</span><span class="op">(</span><span class="st">'y (nm)'</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">scale_fill_continuous</span><span class="op">(</span>name<span class="op">=</span><span class="st">'z (nm)'</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">ggtitle</span><span class="op">(</span><span class="va">f</span><span class="op">)</span>
-  <span class="va">filename.png</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="fu">str_extract</span><span class="op">(</span><span class="va">f</span>, pattern <span class="op">=</span> <span class="st">'\\..{3}$'</span><span class="op">)</span>,<span class="st">'.png'</span>,<span class="va">f</span><span class="op">)</span>
-  <span class="fu">ggsave</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">''</span>,<span class="va">filename.png</span><span class="op">)</span>, dpi<span class="op">=</span><span class="fl">300</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
-</div>
-<div id="deprecated-functions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#deprecated-functions" class="anchor"></a>Deprecated Functions</h1>
-<p>In version 0.5 and earlier, some additional functions were available, these have been deprecated and should be replaced as follows:</p>
-<ul>
-<li>read.AFM_file() -&gt; AFM.read()</li>
-<li>NID.loadImage() -&gt; AFM.read()</li>
-<li>flatten.NID_matrix() -&gt; AFM.flatten()</li>
-</ul>
-<div id="frequency-sweep-deprecated" class="section level2">
-<h2 class="hasAnchor">
-<a href="#frequency-sweep-deprecated" class="anchor"></a>Frequency Sweep (Deprecated)</h2>
-<p>If the NID file is a frequency sweep, you can display the data using the function <code>NID.loadSweep</code> which will return a list that contains data frames with the frequency vs. amplitude data.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">q</span> <span class="op">=</span> <span class="fu">NID.loadSweep</span><span class="op">(</span><span class="va">fname</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">q</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,xlab<span class="op">=</span><span class="st">'f (Hz)'</span>, ylab<span class="op">=</span><span class="st">'A'</span><span class="op">)</span></code></pre></div>
-</div>
-<div id="line-profile-deprecated" class="section level2">
-<h2 class="hasAnchor">
-<a href="#line-profile-deprecated" class="anchor"></a>Line Profile (Deprecated)</h2>
 <p>A cross-section of the image can now easily be created:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">LINE.NO</span> <span class="op">=</span> <span class="fl">45</span>
 <span class="va">d1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">d</span>, <span class="va">y</span><span class="op">==</span><span class="va">LINE.NO</span><span class="op">)</span>
 <span class="fu">ggplot</span><span class="op">(</span><span class="va">d1</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">x.nm</span>, <span class="va">z.nm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>

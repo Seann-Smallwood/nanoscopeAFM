@@ -61,10 +61,15 @@ AFMinfo <- function(filename) {
 
 #' returns an item from the AFMinfo object
 #'
-#' @param AFMinfo object
+#' @param obj AFMinfo object
 #' @param itemName name to retrieve (ScanRate, ScanAngle, ...)
 #' @return string or number
 #' @author Thomas Gredig
+#' @examples
+#' filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
+#' h = AFMinfo(filename)
+#' AFMinfo.item(h,"Description")
+#' AFMinfo.item(h,"Operating mode")
 #' @export
 AFMinfo.item <- function(obj, itemName) {
   q = grep(itemName,obj$data$name)

@@ -6,7 +6,7 @@
 #' @author Thomas Gredig
 #' @examples
 #' file.list = AFM.getSampleImages()
-#' print(file.list)
+#' print(paste("Found",length(file.list),"sample files."))
 #' @export
 AFM.getSampleImages <- function() {
   pfad = system.file("extdata",package="nanoscopeAFM")

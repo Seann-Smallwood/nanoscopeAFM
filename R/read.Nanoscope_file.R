@@ -1,13 +1,4 @@
-#' Returns Veeco NanoScope AFM image with Scaling
-#'
-#' @param filename filename including path
-#' @param no image number
-#' @param headerOnly if \code{TRUE}, returns header only and no image
-#' @return image or header information
-#' @examples
-#' filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
-#' h = read.Nanoscope_file(filename)
-#' @export
+# Returns Veeco NanoScope AFM image with Scaling
 read.Nanoscope_file <- function(filename, no=1, headerOnly = FALSE) {
   err.msg = c()
   # load header

@@ -1,8 +1,6 @@
 # nanoscopeAFM  <img src="man/figures/logo.png" align="right" alt="" width="280" />
 
-
 Analyzes Atomic Force Microsocpy images; currently four types are supported, images from Nanosurf (.nid), Veeco Multimode Nanoscope III, Park AFM images, and Asylum Research AFM images.
-
 
 
 ## Installation
@@ -13,6 +11,8 @@ devtools::install_github("thomasgredig/nanoscopeAFM")
 ```
 
 ## Usage
+
+Complete descriptions for [nanoscopeAFM library functions](https://thomasgredig.github.io/nanoscopeAFM/) and examples in the [Article Vignettes](https://thomasgredig.github.io/nanoscopeAFM/articles/AFM-graphTypes.html).
 
 Use this package to generate `AFMdata` S4 data objects, which can be used to quickly display AFM data and also process AFM data. Here are some examples:
 
@@ -50,19 +50,17 @@ plot(d2)
 
 ## Image Info
 
-Use the `AFM.info()` function to obtain information about the AFM image. The information depends on the file format, but some items are common for all images; these items start with **"INFO."**.
+Use the `AFMinfo()` function to obtain information about the AFM image. The information depends on the file format, but some items are common for all images; these items start with **"INFO."**.
 
 ```R
-AFM.info(fname) -> r1
-r1[grep('INFO.',attr(r1,'names'))]
+r1 = AFMinfo(fname)
+summary(fname)
 ```
 
 The AFM image information can also be saved into a file.
 
 ```R
-AFM.info(fname) -> r1
-d2 = data.frame(n = attr(r1, "names"), val=r1)
-write.csv(d2, file='AFMinfo.csv', row.names = FALSE)
+write.csv(r1$data, file='AFMinfo.csv', row.names = FALSE)
 ```
 
 
@@ -91,50 +89,6 @@ d2$distance = sqrt(d$x*d$x+d$y*d$y)
 plot(d2$distance, d2$z.flatten)
 ```
 
-# Nanoscope AFM images
-
-
-Convert and save all files in folder to PNG format
-```R
-# find the files
-file.list = raw.findFiles(path.RAW, date='2016', instrument='afm')
-file.list = file.list[grep('\\d{3}$',file.list)]
-
-# save the first image of each AFM file
-for(f in file.list) {
-  d = AFM.read(f)
-  ggplot() +
-    geom_raster(data = d , aes(x = x, y = y, fill = z)) +
-    coord_equal(expand=FALSE) +
-    xlab('x (nm)') +
-    ylab('y (nm)') +
-    scale_fill_continuous(name='z (nm)') +
-    ggtitle(f)
-  filename.png = gsub(str_extract(f, pattern = '\\..{3}$'),'.png',f)
-  ggsave(file.path('',filename.png), dpi=300)
-}
-```
-
-# Deprecated Functions
-
-In version 0.5 and earlier, some additional functions were available, these have been deprecated and should be replaced as follows:
-
-* read.AFM_file() -> AFM.read()
-* NID.loadImage() -> AFM.read()
-* flatten.NID_matrix() -> AFM.flatten()
-
-
-## Frequency Sweep (Deprecated)
-
-If the NID file is a frequency sweep, you can display the data using the function `NID.loadSweep` which will return a list that contains data frames with the frequency vs. amplitude data.
-
-```R
-q = NID.loadSweep(fname[1])
-plot(q[[1]],xlab='f (Hz)', ylab='A')
-```
-
-
-## Line Profile (Deprecated)
 
 A cross-section of the image can now easily be created:
 
@@ -150,6 +104,8 @@ ggplot(d1, aes(x.nm, z.nm)) +
   ylab('z (nm)') + 
   theme_bw()
 ```
+
+
 
 # Technical Notes
 

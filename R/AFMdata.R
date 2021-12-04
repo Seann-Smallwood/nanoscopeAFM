@@ -241,6 +241,10 @@ summary.AFMdata <- function(obj) {
 #' @param no image number
 #' @return data.frame with ($x, $y, $z) raster image; ($x,$y) in units of nm
 #' @author Thomas Gredig
+#' @examples
+#' afmd = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = AFM.raster(afmd, 1)
+#' head(d)
 #' @export
 AFM.raster <- function(obj,no=1) {
   if(!isS4(obj)) { stop("not an S4 object") }

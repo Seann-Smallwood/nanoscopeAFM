@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.1</span>
       </span>
     </div>
 
@@ -185,13 +185,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="AFM.info.html">AFM.info()</a></code> </p>
-        </td>
-        <td><p>find AFM image information, much of the information is specific to the
-AFM instrument; common pieces are included with the tag INFO</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="AFM.isImage.html">AFM.isImage()</a></code> </p>
         </td>
         <td><p>checks if the object is an AFM image</p></td>
@@ -201,6 +194,12 @@ AFM instrument; common pieces are included with the tag INFO</p></td>
           <p><code><a href="AFM.lineProfile.html">AFM.lineProfile()</a></code> </p>
         </td>
         <td><p>Line Profile</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="AFM.math.params.html">AFM.math.params()</a></code> </p>
+        </td>
+        <td><p>Various computed AFM image parameters</p></td>
       </tr><tr>
         
         <td>
@@ -234,24 +233,6 @@ AFM instrument; common pieces are included with the tag INFO</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="AFMmath.params.html">AFMmath.params()</a></code> </p>
-        </td>
-        <td><p>Various computed AFM image parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="NID.checkFile.html">NID.checkFile()</a></code> </p>
-        </td>
-        <td><p>checks AFM NID file length</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get.NID_imageInfo.html">get.NID_imageInfo()</a></code> </p>
-        </td>
-        <td><p>returns number of lines for each image</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="initialize-AFMdata-method.html">initialize(<i>&lt;AFMdata&gt;</i>)</a></code> </p>
         </td>
         <td><p>Constructor method of AFMImage Class.</p></td>
@@ -267,72 +248,6 @@ AFM instrument; common pieces are included with the tag INFO</p></td>
           <p><code><a href="print.AFMdata.html">print(<i>&lt;AFMdata&gt;</i>)</a></code> </p>
         </td>
         <td><p>print essential information about the AFMdata object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.AR_eofHeader.V2.html">read.AR_eofHeader.V2()</a></code> </p>
-        </td>
-        <td><p>returns the version 2 header information tagged
-at the end of the AR file, which includes several tags
-including the $DataTypeList and $NumberOfFiles
-ex: "HeightRetrace,AmplitudeRetrace,PhaseRetrace,ZSensorRetrace,"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.AR_file.v2.html">read.AR_file.v2()</a></code> </p>
-        </td>
-        <td><p>loads Asylum Research Igor AFM wavefile</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.AR_header.v2.html">read.AR_header.v2()</a></code> </p>
-        </td>
-        <td><p>loads Asylum Research Igor Wave AFM header information</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.NID_headerItems.html">read.NID_headerItems()</a></code> </p>
-        </td>
-        <td><p>loads header of NID file and separates into items
-first item in list has the titles of the others</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.NanoSurf_file.html">read.NanoSurf_file()</a></code> </p>
-        </td>
-        <td><p>loads images of AFM NID file (use NID.loadImage whenever)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.NanoSurf_header.html">read.NanoSurf_header()</a></code> </p>
-        </td>
-        <td><p>loads header of NanoSurf AFM NID file and returns
-parameters for particular image</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.NanoSurf_header.v2.html">read.NanoSurf_header.v2()</a></code> </p>
-        </td>
-        <td><p>loads header of NanoSurf AFM NID file and returns
-parameters for particular image</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.Nanoscope_file.html">read.Nanoscope_file()</a></code> </p>
-        </td>
-        <td><p>Returns Veeco NanoScope AFM image with Scaling</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.Park_file.html">read.Park_file()</a></code> </p>
-        </td>
-        <td><p>loads images</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.Park_header.v2.html">read.Park_header.v2()</a></code> </p>
-        </td>
-        <td><p>loads Park Image header</p></td>
       </tr><tr>
         
         <td>

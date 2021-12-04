@@ -21,7 +21,8 @@ and stores 6 rows (x,y,z) and converted units, when possible
 channel name
 }
 \examples{
-d = AFM.read(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+filename = system.file("extdata","Park_20210916_034.tiff",package="nanoscopeAFM")
+d = AFM.read(filename)
 }
 \author{
 thomasgredig

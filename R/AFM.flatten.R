@@ -8,7 +8,7 @@
 #' @return flattened matrix with AFM image
 #' @author thomasgredig
 #' @examples
-#' d = AFM.read(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' d2 = AFM.flatten(d)
 #' plot(d2)
 #' @export

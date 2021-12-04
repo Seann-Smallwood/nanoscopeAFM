@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AFM image class — AFMdata • nanoscopeAFM</title>
+<title>Various computed AFM image parameters — AFM.math.params • nanoscopeAFM</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,8 @@
 
 
 
-<meta property="og:title" content="AFM image class — AFMdata" />
-<meta property="og:description" content="A S4 class to store and manipulate images from Atomic Force Microscopes.
-It contains the names of channels (exact naming depends on the type/instrument)
-The class supports multiple images; it can also contain additional information
-such as lines, etc." />
+<meta property="og:title" content="Various computed AFM image parameters — AFM.math.params" />
+<meta property="og:description" content="Various computed AFM image parameters" />
 <meta property="og:image" content="https://thomasgredig.github.io/nanoscopeAFM/reference/figures/logo.png" />
 <meta property="og:image:alt" content="nanoscopeAFM - AFM analysis tool in R" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -139,136 +136,46 @@ such as lines, etc." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>AFM image class</h1>
+    <h1>Various computed AFM image parameters</h1>
     
-    <div class="hidden name"><code>AFMdata.Rd</code></div>
+    <div class="hidden name"><code>AFM.math.params.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A S4 class to store and manipulate images from Atomic Force Microscopes.
-It contains the names of channels (exact naming depends on the type/instrument)
-The class supports multiple images; it can also contain additional information
-such as lines, etc.</p>
+    <p>Various computed AFM image parameters</p>
     </div>
 
-    <pre class="usage"><span class='fu'>AFMdata</span><span class='op'>(</span>
-  <span class='va'>data</span>,
-  <span class='va'>x.conv</span>,
-  <span class='va'>y.conv</span>,
-  <span class='va'>x.pixels</span>,
-  <span class='va'>y.pixels</span>,
-  <span class='va'>z.conv</span>,
-  <span class='va'>z.units</span>,
-  <span class='va'>channel</span>,
-  <span class='va'>instrument</span>,
-  <span class='va'>history</span>,
-  description <span class='op'>=</span> <span class='st'>""</span>,
-  <span class='va'>fullfilename</span>
-<span class='op'>)</span>
-
-<span class='fu'>AFMdata</span><span class='op'>(</span>
-  <span class='va'>data</span>,
-  <span class='va'>x.conv</span>,
-  <span class='va'>y.conv</span>,
-  <span class='va'>x.pixels</span>,
-  <span class='va'>y.pixels</span>,
-  <span class='va'>z.conv</span>,
-  <span class='va'>z.units</span>,
-  <span class='va'>channel</span>,
-  <span class='va'>instrument</span>,
-  <span class='va'>history</span>,
-  description <span class='op'>=</span> <span class='st'>""</span>,
-  <span class='va'>fullfilename</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>AFM.math.params</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>list with objects ($z is a list with images)</p></td>
-    </tr>
-    <tr>
-      <th>x.conv</th>
-      <td><p>conversion factor from pixels to nm</p></td>
-    </tr>
-    <tr>
-      <th>y.conv</th>
-      <td><p>conversion factor from pixels to nm</p></td>
-    </tr>
-    <tr>
-      <th>x.pixels</th>
-      <td><p>number of pixels in x-direction</p></td>
-    </tr>
-    <tr>
-      <th>y.pixels</th>
-      <td><p>number of pixels in y-direction</p></td>
-    </tr>
-    <tr>
-      <th>z.conv</th>
-      <td><p>(not used)</p></td>
-    </tr>
-    <tr>
-      <th>z.units</th>
-      <td><p>vector with units for $z (deg, m)</p></td>
-    </tr>
-    <tr>
-      <th>channel</th>
-      <td><p>vector with names of channels</p></td>
-    </tr>
-    <tr>
-      <th>instrument</th>
-      <td><p>name of instrument (Park, Cypher, NanoSurf, Veeco)</p></td>
-    </tr>
-    <tr>
-      <th>history</th>
-      <td><p>history of file changes</p></td>
-    </tr>
-    <tr>
-      <th>description</th>
-      <td><p>AFM image description or note</p></td>
-    </tr>
-    <tr>
-      <th>fullfilename</th>
-      <td><p>name of file</p></td>
+      <th>obj</th>
+      <td><p>AFMdata class</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
+    <p>structure with various computed AFM image parameters, such
+as roughness</p>
 
-<dl>
-<dt><code>data</code></dt><dd><p>list with objects ($z is a list with images)</p></dd>
-
-<dt><code>x.conv</code></dt><dd><p>conversion factor from pixels to nm</p></dd>
-
-<dt><code>y.conv</code></dt><dd><p>conversion factor from pixels to nm</p></dd>
-
-<dt><code>x.pixels</code></dt><dd><p>number of pixels in x-direction</p></dd>
-
-<dt><code>y.pixels</code></dt><dd><p>number of pixels in y-direction</p></dd>
-
-<dt><code>x.nm</code></dt><dd><p>length of image</p></dd>
-
-<dt><code>y.nm</code></dt><dd><p>height of image</p></dd>
-
-<dt><code>z.conv</code></dt><dd><p>(not used)</p></dd>
-
-<dt><code>z.units</code></dt><dd><p>vector with units for $z (deg, m)</p></dd>
-
-<dt><code>channel</code></dt><dd><p>vector with names of channels</p></dd>
-
-<dt><code>instrument</code></dt><dd><p>name of instrument (Park, Cypher, NanoSurf, Veeco)</p></dd>
-
-<dt><code>history</code></dt><dd><p>history of file changes</p></dd>
-
-<dt><code>description</code></dt><dd><p>AFM image description or note</p></dd>
-
-<dt><code>fullfilename</code></dt><dd><p>name of file</p></dd>
-
-</dl>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='r-in'><span class='va'>filename</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,<span class='st'>"AR_20211011.ibw"</span>,package<span class='op'>=</span><span class='st'>"nanoscopeAFM"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>AFM.math.params</span><span class='op'>(</span><span class='fu'><a href='AFM.import.html'>AFM.import</a></span><span class='op'>(</span><span class='va'>filename</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $basename</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "AR_20211011.ibw"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Ra</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 6.365067</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Rq</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 7.865308</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> attr(,"class")</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "AFMmath"</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

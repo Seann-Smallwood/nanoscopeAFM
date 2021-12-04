@@ -14,7 +14,7 @@ returns sample AFM images from library
 }
 \examples{
 file.list = AFM.getSampleImages()
-print(file.list)
+print(paste("Found",length(file.list),"sample files."))
 }
 \author{
 Thomas Gredig

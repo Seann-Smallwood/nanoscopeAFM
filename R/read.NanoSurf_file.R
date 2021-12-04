@@ -15,16 +15,23 @@
 # # with #!F
 # ######################################
 
+# loads header of NanoSurf AFM NID file and returns
+read.NanoSurf_header.v2 <- function(filename) {
+  # read the NID header
+  k1 = read.NID_header(filename)[[2]]
+  k1 = enc2utf8(k1)
+  gsub('<b5>','\u00b5',k1) -> k1
+  gsub('<b0>','\u00b0',k1) -> k1
 
-#' loads images of AFM NID file (use NID.loadImage whenever)
-#'
-#' @param filename filename including path
-#' @param imageNo number of the image file
-#' @return AFM image
-#' @examples
-#' filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
-#' d = read.NanoSurf_file(filename)
-#' @export
+  q = grep("=",k1)
+  data.frame(
+    name = gsub('(.*?)=.*','\\1',k1[q]),
+    value = gsub('(.*?)=(.*)','\\2',k1[q])
+  )
+}
+
+
+# loads images of AFM NID file (use NID.loadImage whenever)
 read.NanoSurf_file<- function(filename, imageNo=1) {
   if (!file.exists(filename)) warning(paste("File",filename,"does NOT exist."))
   # read header information
@@ -71,6 +78,8 @@ read.NanoSurf_file<- function(filename, imageNo=1) {
              z.nm=(d[[imageNo]]* (range.z/65536) )*1e9)
 }
 
+# additional helper functions to read NID files
+NULL
 
 
 get.NIDitem <- function(item, name) {
@@ -110,16 +119,7 @@ NID.getChannelScale <- function(headerList, imageNo = 1) {
 
 
 
-#' loads header of NanoSurf AFM NID file and returns
-#' parameters for particular image
-#'
-#' @param filename filename including path
-#' @param imageNo image number to get data on
-#' @return list
-#' @examples
-#' filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
-#' read.NanoSurf_header(filename, 1)
-#' @export
+
 read.NanoSurf_header <- function(filename, imageNo=1) {
   # read the NID header
   k1 = read.NID_header(filename)[[2]]
@@ -205,15 +205,7 @@ read.NID_header <- function(filename) {
 }
 
 
-#' loads header of NID file and separates into items
-#' first item in list has the titles of the others
-#'
-#' @param filename filename including path
-#' @return list
-#' @examples
-#' filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
-#' read.NID_headerItems(filename)
-#' @export
+
 read.NID_headerItems <- function(filename) {
   # read the NID header
   k1 = read.NID_header(filename)[[2]]
@@ -229,10 +221,7 @@ read.NID_headerItems <- function(filename) {
   c(list(c('HEADERS',k1[from])),itemslist)
 }
 
-#' checks AFM NID file length
-#'
-#' @param filename filename including path
-#' @return mismatch in image size + header with file size (should be 0)
+
 NID.checkFile <- function(filename) {
   # does file exist?
   if (!file.exists(filename)) return -1
@@ -256,17 +245,6 @@ NID.checkFile <- function(filename) {
 
 
 
-
-
-
-#' returns number of lines for each image
-#'
-#' @param header.string header string of NID file (use read.NID_header)
-#' @return vector with line numbers for each image
-#' @examples
-#' hdr = read.NID_header(system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM"))
-#' get.NID_imageInfo(hdr[[2]])
-#' @export
 get.NID_imageInfo <- function(header.string) {
   # split data sets
   from = grep('\\[DataSet-',header.string)
@@ -293,25 +271,4 @@ get.NID_imageInfo <- function(header.string) {
 
 
 
-#' loads header of NanoSurf AFM NID file and returns
-#' parameters for particular image
-#'
-#' @param filename filename including path
-#' @return list
-#' @examples
-#' filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
-#' h = read.NanoSurf_header.v2(filename)
-#' @export
-read.NanoSurf_header.v2 <- function(filename) {
-  # read the NID header
-  k1 = read.NID_header(filename)[[2]]
-  k1 = enc2utf8(k1)
-  gsub('<b5>','\u00b5',k1) -> k1
-  gsub('<b0>','\u00b0',k1) -> k1
 
-  q = grep("=",k1)
-  data.frame(
-    name = gsub('(.*?)=.*','\\1',k1[q]),
-    value = gsub('(.*?)=(.*)','\\2',k1[q])
-  )
-}

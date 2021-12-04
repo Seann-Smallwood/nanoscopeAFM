@@ -1,12 +1,4 @@
-#' loads images
-#'
-#' @param filename Park AFM filename including path
-#' @return image with attributes
-#' @author thomasgredig
-#' @examples
-#' filename = system.file("extdata","Park_20210916_034.tiff",package="nanoscopeAFM")
-#' d = read.Park_file(filename)
-#' @export
+# read PARK AFM images
 read.Park_file <- function(filename) {
   # read TIFF tags
   tiffTags = tagReader(filename)
@@ -50,15 +42,7 @@ read.Park_file <- function(filename) {
 }
 
 
-#' loads Park Image header
-#'
-#' @param filename Park AFM filename including path
-#' @return AFMinfo data
-#' @author Thomas Gredig
-#' @examples
-#' filename = system.file("extdata","Park_20210916_034.tiff",package="nanoscopeAFM")
-#' h = read.Park_header.v2(filename)
-#' @export
+# loads Park Image header
 read.Park_header.v2 <- function(filename) {
 
   tiffTags = tagReader(filename)

@@ -13,7 +13,7 @@ test_that("AR: check version 2 channel list ", {
 
 
 test_that("AR: check image roughness ", {
-  d = AFMmath.params(AFM.import(filename))
+  d = AFM.math.params(AFM.import(filename))
   expect_equal(d$Ra, 6.365067, tolerance = 1e-5)
   expect_equal(d$Rq, 7.865308, tolerance = 1e-5)
 })

@@ -1,11 +1,4 @@
-#' loads Asylum Research Igor Wave AFM header information
-#'
-#' @param filename filename including path
-#' @return header information
-#' @examples
-#' filename = system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
-#' d = read.AR_header.v2(filename)
-#' @export
+# read Igor AFM image files
 read.AR_header.v2 <- function(filename) {
   suppressWarnings({
     d = IgorR::read.ibw(filename)
@@ -19,23 +12,11 @@ read.AR_header.v2 <- function(filename) {
   )
 }
 
-
-
-#' loads Asylum Research Igor AFM wavefile
-#'
-#' loads all images contained in Igor wavefile and
-#' returns an AFMdata object
-#'
-#' @param h1 filename including path
-#' @return \code{AFMdata} object
-#' @export
 read.AR_file.v2 <- function(filename) {
-  cat('loading')
   h1 = read.AR_eofHeader.V2(filename)
   channels = strsplit(h1$DataTypeList,',')[[1]]
   units = rep('nm', length(channels))
   units[grep('^Phase',channels)] = 'deg'
-  cat('image')
   suppressWarnings({
     d = IgorR::read.ibw(filename)
   })
@@ -70,21 +51,6 @@ read.AR_file.v2 <- function(filename) {
 }
 
 
-
-
-#' returns the version 2 header information tagged
-#' at the end of the AR file, which includes several tags
-#' including the $DataTypeList and $NumberOfFiles
-#' ex: "HeightRetrace,AmplitudeRetrace,PhaseRetrace,ZSensorRetrace,"
-#'
-#' @param wavefile filename including path
-#' @param Verbose if true, returns additional information
-#' @return list of channels and additional information
-#' @examples
-#' filename = system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
-#' afmV2header = read.AR_eofHeader.V2(filename)
-#' afmV2header$DataTypeList
-#' @export
 read.AR_eofHeader.V2 <- function(wavefile, Verbose = FALSE) {
   con <- file(wavefile, "rb",encoding="macintosh")
 

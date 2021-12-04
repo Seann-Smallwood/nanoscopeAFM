@@ -1,12 +1,13 @@
 #' Various computed AFM image parameters
 #'
 #' @param obj AFMdata class
-#' @return structure with various computed AFM image parameters
+#' @return structure with various computed AFM image parameters, such
+#' as roughness
 #' @examples
 #' filename = system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
-#' d = AFM.math.params(AFM.import(filename))
+#' AFM.math.params(AFM.import(filename))
 #' @export
-AFMmath.params <- function(obj) {
+AFM.math.params <- function(obj) {
   Ra = get.Ra(obj@data$z[[1]])
   Rq = get.Rq(obj@data$z[[1]])
   structure(

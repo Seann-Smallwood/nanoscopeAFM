@@ -20,6 +20,7 @@ AFMinfo <- function(filename) {
     scanAngle = data$value[grep('ScanAngle',data$name)[1]]
     scanRate.Hz = data$value[grep('ScanRate',data$name)[1]]
     note = data$value[grep('ImageNote',data$name)[1]]
+    noChannels = 8 - sum(data$value[grep('^Channel\\d',data$name)]==" None")
   } else if (fext=='tiff') {
     data = read.Park_header.v2(filename)
     type = 'Park'
@@ -28,6 +29,7 @@ AFMinfo <- function(filename) {
     scanAngle = data$value[grep('dfAngle',data$name)[1]]
     scanRate.Hz = data$value[grep('dfScanRateHz',data$name)[1]]
     note = data$value[grep('ImageNote',data$name)[1]]
+    noChannels = 1
   } else if (fext=='nid') {
     data = read.NanoSurf_header.v2(filename)
     type = 'NanoSurf'
@@ -35,7 +37,9 @@ AFMinfo <- function(filename) {
     heightPixel = data$value[grep('Lines',data$name)[1]]
     scanAngle = data$value[grep('dfAngle',data$name)[1]]
     scanRate.Hz = 1/as.numeric(gsub('(\\d+).*','\\1',data$value[grep('Time/Line',data$name)[1]]))
+    vibrationFreq.Hz = as.numeric(gsub('kHz','',data$value[grep('Vibration freq',data$name)[1]]))*1000
     note = ""
+    noChannels = 1
   } else {  # Veeco
     data = read.Nanoscope_file(filename, headerOnly=TRUE)
     type = 'Veeco'
@@ -44,6 +48,7 @@ AFMinfo <- function(filename) {
     scanAngle = data$value[grep('Feature scan angle',data$name)[1]]
     scanRate.Hz = data$value[grep('Scan rate',data$name)[1]]
     note = data$value[grep('Note',data$name)[1]]
+    noChannels = 1
   }
   structure(
     list(
@@ -93,6 +98,7 @@ AFMinfo.item <- function(obj, itemName) {
 summary.AFMinfo <- function(obj) {
   cat('AFM image type:  ', obj$type, "\n")
   cat('Resolution:      ', obj$widthPixel, "x", obj$heightPixel,'\n')
+  cat('Channels:        ', obj$noChannels,'\n')
   cat('Scan rate (Hz):  ', obj$scanRate.Hz,'\n')
   cat('Scan Angle (deg):', obj$scanAngle,'\n')
   cat('Notes:           ', obj$note,'\n')

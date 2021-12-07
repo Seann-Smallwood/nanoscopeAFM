@@ -14,38 +14,58 @@ read.AR_header.v2 <- function(filename) {
 
 read.AR_file.v2 <- function(filename) {
   h1 = read.AR_eofHeader.V2(filename)
-  channels = strsplit(h1$DataTypeList,',')[[1]]
+  if (length(h1$DataTypeList)>0) { channels = strsplit(h1$DataTypeList,',')[[1]] }
+  else { channels = strsplit(h1$DataTypes,',')[[1]] }
   units = rep('nm', length(channels))
   units[grep('^Phase',channels)] = 'deg'
   suppressWarnings({
     d = IgorR::read.ibw(filename)
   })
   q2 = attr(d, "WaveHeader")
-  imageDim <- q2$nDim[1:2]
-  noChannels <- q2$nDim[3]
-  dr = data.frame()
-  x.conv = q2$sfA[1]
-  y.conv = q2$sfA[2]
-  im.size = imageDim[1]*imageDim[2]
-  z.data=list()
-  for(i in 1:noChannels) {
-    z.conv = 1; if (units[i]=='nm') z.conv=1e9
-    z.data[[i]] = d[(im.size*(i-1)+1):(im.size*i)]*z.conv
-  }
+  noChannels <- h1$NumberOfFiles
+  if (as.numeric(h1$IsImage)==1) {
+    # loading an image file
+    imageDim <- q2$nDim[1:2]
+    dr = data.frame()
+    x.conv = q2$sfA[1] * 1e9
+    y.conv = q2$sfA[2] * 1e9
+    y.pixels = imageDim[2]
+    im.size = imageDim[1]*imageDim[2]
+    z.data=list()
+    for(i in 1:noChannels) {
+      z.conv = 1; if (units[i]=='nm') z.conv=1e9
+      z.data[[i]] = d[(im.size*(i-1)+1):(im.size*i)]*z.conv
+    }
+    description = gsub('.*ImageNote:(.*?)\r.*','\\1',attr(d,'Note'))
+  } else if (as.numeric(h1$IsForce)==1) {
+    # loading a force curve
+    units[grep('^Freq',channels)] = 'Hz'
+    units[grep('^Time',channels)] = 's'
+    imageDim = q2$nDim[1]
+    x.conv = q2$sfA[1]
+    y.conv = 0
+    y.pixels = 0
+    z.data=list()
+    dr = data.frame()
+    for(i in 1:noChannels) {
+      z.data[[i]] = d[(imageDim*(i-1)+1):(imageDim*i)]
+    }
+    description = 'Force'
+  } else { warning("Neither image nor force data in AFM image.") }
 
   # return AFMdata object
   AFMdata(
     data = list(z=z.data),
     channel = channels,
-    x.conv = x.conv*1e9,
-    y.conv = y.conv*1e9,
+    x.conv = x.conv,
+    y.conv = y.conv,
     x.pixels = imageDim[1],
-    y.pixels = imageDim[2],
+    y.pixels = y.pixels,
     z.conv = 1,
     z.units = units,
     instrument = 'Cypher',
     history = '',
-    description = gsub('.*ImageNote:(.*?)\r.*','\\1',attr(d,'Note')),
+    description = description,
     fullfilename = filename
   )
 }

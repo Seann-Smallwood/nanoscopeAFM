@@ -87,8 +87,8 @@ setMethod(f="initialize",
                                fullfilename)
           {
             if (!missing(data)) .Object@data<-data
-            if (!missing(x.conv)) {.Object@x.conv<-x.conv; .Object@x.nm=x.conv*(x.pixels-1); }
-            if (!missing(y.conv)) {.Object@y.conv<-y.conv; .Object@y.nm=y.conv*(y.pixels-1); }
+            if (!missing(x.conv)) {.Object@x.conv<-x.conv; .Object@x.nm=round(x.conv*(x.pixels-1)); }
+            if (!missing(y.conv)) {.Object@y.conv<-y.conv; .Object@y.nm=round(y.conv*(y.pixels-1)); }
             if (!missing(x.pixels)) .Object@x.pixels<-x.pixels
             if (!missing(y.pixels)) .Object@y.pixels<-y.pixels
             if (!missing(z.conv)) .Object@z.conv<-z.conv
@@ -248,11 +248,19 @@ summary.AFMdata <- function(obj) {
 #' @export
 AFM.raster <- function(obj,no=1) {
   if(!isS4(obj)) { stop("not an S4 object") }
-  data.frame(
-    x = rep(0:(obj@x.pixels-1),obj@y.pixels)*obj@x.conv,
-    y = rep(0:(obj@y.pixels-1),each=obj@x.pixels)*obj@y.conv,
-    z = obj@data$z[[no]]
-  )
+  if (obj@y.conv==0) {
+    dr = data.frame(
+      x = (0:(obj@x.pixels-1))*obj@x.conv,
+      z = obj@data$z[[no]]
+    )
+  } else {
+    dr = data.frame(
+      x = rep(0:(obj@x.pixels-1),obj@y.pixels)*obj@x.conv,
+      y = rep(0:(obj@y.pixels-1),each=obj@x.pixels)*obj@y.conv,
+      z = obj@data$z[[no]]
+    )
+  }
+  dr
 }
 
 #' graph of AFMdata object

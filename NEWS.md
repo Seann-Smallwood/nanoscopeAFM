@@ -2,6 +2,10 @@
 
 Author: **Thomas Gredig**
 
+## nanoscopeAFM 2.0.2
+
+* Park images and force curves are supported
+
 ## nanoscopeAFM 2.0.0
 
 * remove old dependencies

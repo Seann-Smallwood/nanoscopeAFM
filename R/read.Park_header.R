@@ -314,7 +314,7 @@ getStrip <- function(q, X,len) {
 as32Bit <- function(v) { v[4]*2^24+v[3]*2^16+v[2]*2^8+v[1] }
 
 
-# v = vector with 8 bytes containg sign+11bit exp + 51bit mantissa
+# v = vector with 8 bytes containing sign+11bit exp + 51bit mantissa
 # ________________________________________
 # byte2double(c(15,89,253,84,251,33,9,64)) returns roughly Pi
 # byte2double(c(0,0,0,0,0,0,8,64)) returns 3.0

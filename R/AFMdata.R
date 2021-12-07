@@ -194,7 +194,8 @@ AFM.import <- function(filename) {
 #' print(d)
 #' @export
 print.AFMdata <- function(obj) {
-  cat("Object:     ",obj@instrument,"AFM image\n")
+  if(AFM.isImage(obj)) dataType='Image' else dataType='Force Curve'
+  cat("Object:     ",obj@instrument,"AFM",dataType,"\n")
   cat("Description:",obj@description,'\n')
   cat("Channel:    ",obj@channel,'\n')
   cat("            ",obj@x.nm,"nm  x ",obj@y.nm,'nm \n')
@@ -213,8 +214,9 @@ print.AFMdata <- function(obj) {
 #' @export
 summary.AFMdata <- function(obj) {
   if (purrr::is_empty(obj@description)) obj@description=""
+  if(AFM.isImage(obj)) dataType='Image' else dataType='Force Curve'
   r = data.frame(
-    object = paste(obj@instrument,"AFM image"),
+    object = paste(obj@instrument,dataType),
     description = paste(obj@description),
     resolution = paste(obj@x.pixels,"x",obj@y.pixels),
     size = paste(obj@x.nm,"x",round(obj@y.nm),'nm'),
@@ -248,15 +250,15 @@ summary.AFMdata <- function(obj) {
 #' @export
 AFM.raster <- function(obj,no=1) {
   if(!isS4(obj)) { stop("not an S4 object") }
-  if (obj@y.conv==0) {
+  if (isImage(obj)) {
     dr = data.frame(
-      x = (0:(obj@x.pixels-1))*obj@x.conv,
+      x = rep(0:(obj@x.pixels-1),obj@y.pixels)*obj@x.conv,
+      y = rep(0:(obj@y.pixels-1),each=obj@x.pixels)*obj@y.conv,
       z = obj@data$z[[no]]
     )
   } else {
     dr = data.frame(
-      x = rep(0:(obj@x.pixels-1),obj@y.pixels)*obj@x.conv,
-      y = rep(0:(obj@y.pixels-1),each=obj@x.pixels)*obj@y.conv,
+      x = (0:(obj@x.pixels-1))*obj@x.conv,
       z = obj@data$z[[no]]
     )
   }
@@ -388,3 +390,4 @@ AFM.histogram <- function(obj) {
 AFM.isImage <- function(obj) {
   ((obj@x.pixels > 1) & (obj@y.pixels>1))
 }
+

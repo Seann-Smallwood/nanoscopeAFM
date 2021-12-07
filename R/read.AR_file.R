@@ -17,7 +17,7 @@ read.AR_file.v2 <- function(filename) {
   if (length(h1$DataTypeList)>0) { channels = strsplit(h1$DataTypeList,',')[[1]] }
   else { channels = strsplit(h1$DataTypes,',')[[1]] }
   units = rep('nm', length(channels))
-  units[grep('^Phase',channels)] = 'deg'
+  units[grep('Phase',channels)] = 'deg'    # both Phase and NapPhase channels
   suppressWarnings({
     d = IgorR::read.ibw(filename)
   })
@@ -44,7 +44,7 @@ read.AR_file.v2 <- function(filename) {
     imageDim = q2$nDim[1]
     x.conv = q2$sfA[1]
     y.conv = 0
-    y.pixels = 0
+    y.pixels = 1
     z.data=list()
     dr = data.frame()
     for(i in 1:noChannels) {

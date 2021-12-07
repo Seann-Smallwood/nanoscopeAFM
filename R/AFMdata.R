@@ -152,7 +152,9 @@ AFMdata <- function(data,
 #' @param filename name of AFM filename
 #' @return AFMdata object
 #' @author Thomas Gredig
+#' @importFrom ggplot2 ggplot
 #' @examples
+#' library(ggplot2)
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' summary(d)
 #' plot(d)
@@ -250,7 +252,7 @@ summary.AFMdata <- function(obj) {
 #' @export
 AFM.raster <- function(obj,no=1) {
   if(!isS4(obj)) { stop("not an S4 object") }
-  if (isImage(obj)) {
+  if (AFM.isImage(obj)) {
     dr = data.frame(
       x = rep(0:(obj@x.pixels-1),obj@y.pixels)*obj@x.conv,
       y = rep(0:(obj@y.pixels-1),each=obj@x.pixels)*obj@y.conv,
@@ -274,7 +276,7 @@ AFM.raster <- function(obj,no=1) {
 #' @return ggplot graph
 #' @author Thomas Gredig
 #' @examples
-#' # requires ggplot2 and scales pacakges
+#' library(ggplot2)
 #' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 #' plot(d, graphType=2)
 #' @export

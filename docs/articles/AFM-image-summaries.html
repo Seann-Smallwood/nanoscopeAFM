@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.2</span>
       </span>
     </div>
 
@@ -117,31 +117,31 @@
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="../reference/AFM.import.html">AFM.import</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co">#&gt; [1] "AR_20211011.ibw"</span>
-<span class="co">#&gt;             object               description resolution           size</span>
-<span class="co">#&gt; 1 Cypher AFM image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
-<span class="co">#&gt; 2 Cypher AFM image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
-<span class="co">#&gt; 3 Cypher AFM image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
-<span class="co">#&gt; 4 Cypher AFM image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
+<span class="co">#&gt;         object               description resolution           size</span>
+<span class="co">#&gt; 1 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
+<span class="co">#&gt; 2 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
+<span class="co">#&gt; 3 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
+<span class="co">#&gt; 4 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
 <span class="co">#&gt;            channel history     z.min    z.max z.units</span>
 <span class="co">#&gt; 1    HeightRetrace         -32.45992 50.78832      nm</span>
 <span class="co">#&gt; 2 AmplitudeRetrace          29.00730 32.78488      nm</span>
 <span class="co">#&gt; 3     PhaseRetrace          63.92822 85.18923     deg</span>
 <span class="co">#&gt; 4   ZSensorRetrace         -29.44336 48.16414      nm</span>
 <span class="co">#&gt; [1] "NanoSurf_20160301.nid"</span>
-<span class="co">#&gt;               object description resolution             size       channel</span>
-<span class="co">#&gt; 1 NanoSurf AFM image        none  128 x 128 10000 x 10000 nm Dynamic Force</span>
-<span class="co">#&gt;   history     z.min     z.max z.units</span>
-<span class="co">#&gt; 1         -294.1895 -88.50098       m</span>
+<span class="co">#&gt;           object description resolution             size       channel history</span>
+<span class="co">#&gt; 1 NanoSurf Image        none  128 x 128 10000 x 10000 nm Dynamic Force        </span>
+<span class="co">#&gt;       z.min     z.max z.units</span>
+<span class="co">#&gt; 1 -294.1895 -88.50098       m</span>
 <span class="co">#&gt; [1] "Park_20210916_034.tiff"</span>
-<span class="co">#&gt;           object description resolution           size    channel history</span>
-<span class="co">#&gt; 1 Park AFM image        none  256 x 256 2500 x 2500 nm Topography        </span>
-<span class="co">#&gt;       z.min    z.max z.units</span>
-<span class="co">#&gt; 1 -2.713213 9.244095       m</span>
+<span class="co">#&gt;       object description resolution           size    channel history     z.min</span>
+<span class="co">#&gt; 1 Park Image        none  256 x 256 2500 x 2500 nm Topography         -2.713213</span>
+<span class="co">#&gt;      z.max z.units</span>
+<span class="co">#&gt; 1 9.244095       m</span>
 <span class="co">#&gt; [1] "Veeco_20160622.003"</span>
-<span class="co">#&gt;            object description resolution              size channel history</span>
-<span class="co">#&gt; 1 Veeco AFM image              512 x 512 1769.08 x 1769 nm  Height        </span>
-<span class="co">#&gt;       z.min    z.max z.units</span>
-<span class="co">#&gt; 1 -145.6084 13.86895       m</span></code></pre></div>
+<span class="co">#&gt;        object description resolution           size channel history     z.min</span>
+<span class="co">#&gt; 1 Veeco Image              512 x 512 1769 x 1769 nm  Height         -145.6084</span>
+<span class="co">#&gt;      z.max z.units</span>
+<span class="co">#&gt; 1 13.86895       m</span></code></pre></div>
 <p>Additional information can be found using the <code>AFMinfo</code> object:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">for</span><span class="op">(</span><span class="va">filename</span> <span class="kw">in</span> <span class="va">file.list</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span> <span class="op">{</span>
@@ -864,7 +864,7 @@
 <span class="co">#&gt; [1] "Cypher"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $filename</span>
-<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpO44qmq/temp_libpathd7145ba34d4/nanoscopeAFM/extdata/AR_20211011.ibw"</span>
+<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/Rtmp7lBOc8/temp_libpath27263d631832/nanoscopeAFM/extdata/AR_20211011.ibw"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $widthPixel</span>
 <span class="co">#&gt; [1] " 128"</span>
@@ -1460,7 +1460,7 @@
 <span class="co">#&gt; [1] "NanoSurf"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $filename</span>
-<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpO44qmq/temp_libpathd7145ba34d4/nanoscopeAFM/extdata/NanoSurf_20160301.nid"</span>
+<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/Rtmp7lBOc8/temp_libpath27263d631832/nanoscopeAFM/extdata/NanoSurf_20160301.nid"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $widthPixel</span>
 <span class="co">#&gt; [1] "128 "</span>
@@ -1545,7 +1545,7 @@
 <span class="co">#&gt; [1] "Park"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $filename</span>
-<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpO44qmq/temp_libpathd7145ba34d4/nanoscopeAFM/extdata/Park_20210916_034.tiff"</span>
+<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/Rtmp7lBOc8/temp_libpath27263d631832/nanoscopeAFM/extdata/Park_20210916_034.tiff"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $widthPixel</span>
 <span class="co">#&gt; [1] "256"</span>

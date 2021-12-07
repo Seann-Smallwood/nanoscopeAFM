@@ -2,6 +2,10 @@
 
 Author: **Thomas Gredig**
 
+## nanoscopeAFM 2.0.3
+
+* rcmdcheck() package and add libraries
+
 ## nanoscopeAFM 2.0.2
 
 * Park images and force curves are supported

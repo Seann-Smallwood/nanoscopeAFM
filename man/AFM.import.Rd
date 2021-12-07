@@ -16,6 +16,7 @@ AFMdata object
 Use this function to create an AFMdata object from the filename
 }
 \examples{
+library(ggplot2)
 d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
 summary(d)
 plot(d)

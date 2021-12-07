@@ -24,7 +24,8 @@ Imports:
     ggplot2,
     methods,
     scales,
-    cowplot
+    cowplot,
+    purrr
 Suggests: 
     rmarkdown,
     knitr,

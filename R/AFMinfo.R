@@ -1,8 +1,8 @@
 #' AFMinfo object
 #'
-#' heater information about the AFM image, includes scan rate, widths, etc.
+#' header information about the AFM image, includes scan rate, widths, etc.
 #'
-#' @param filename full filename of instrument file
+#' @param filename full file name of instrument AFM file
 #' @return AFMinfo class object
 #' @author Thomas Gredig
 #' @examples
@@ -39,7 +39,7 @@ AFMinfo <- function(filename) {
     scanRate.Hz = 1/as.numeric(gsub('(\\d+).*','\\1',data$value[grep('Time/Line',data$name)[1]]))
     vibrationFreq.Hz = as.numeric(gsub('kHz','',data$value[grep('Vibration freq',data$name)[1]]))*1000
     note = ""
-    noChannels = 1
+    noChannels = NA
   } else {  # Veeco
     data = read.Nanoscope_file(filename, headerOnly=TRUE)
     type = 'Veeco'
@@ -48,7 +48,7 @@ AFMinfo <- function(filename) {
     scanAngle = data$value[grep('Feature scan angle',data$name)[1]]
     scanRate.Hz = data$value[grep('Scan rate',data$name)[1]]
     note = data$value[grep('Note',data$name)[1]]
-    noChannels = 1
+    noChannels = NA
   }
   structure(
     list(
@@ -64,23 +64,34 @@ AFMinfo <- function(filename) {
   )
 }
 
-#' returns an item from the AFMinfo object
+#' Specific information about AFM image
+#'
+#' Retrieve a specific information piece from the AFM image,
+#' such as "ScanRate", "Description", etc. The item names depend
+#' on the instrument; to find possible item names, leave
+#' \code{itemName} empty.
 #'
 #' @param obj AFMinfo object
 #' @param itemName name to retrieve (ScanRate, ScanAngle, ...)
-#' @return string or number
+#' @return if \code{itemName} is empty, returns list of names, otherwise the value for the specific data item
 #' @author Thomas Gredig
 #' @examples
 #' filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
 #' h = AFMinfo(filename)
+#' allNames = AFMinfo.item(h)
 #' AFMinfo.item(h,"Description")
 #' AFMinfo.item(h,"Operating mode")
+#' print(allNames)
 #' @export
-AFMinfo.item <- function(obj, itemName) {
+AFMinfo.item <- function(obj, itemName="") {
   q = grep(itemName,obj$data$name)
-  itemValue = ''
-  if (length(q)>0) {
-    itemValue = obj$data$value[q[1]]
+  if(itemName=="") { # return item names
+    itemValue = obj$data$name
+  } else { # return value of item
+    itemValue = ''
+    if (length(q)>0) {
+      itemValue = obj$data$value[q[1]]
+    }
   }
   itemValue
 }

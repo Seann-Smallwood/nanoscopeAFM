@@ -7,13 +7,13 @@
 AFMinfo(filename)
 }
 \arguments{
-\item{filename}{full filename of instrument file}
+\item{filename}{full file name of instrument AFM file}
 }
 \value{
 AFMinfo class object
 }
 \description{
-heater information about the AFM image, includes scan rate, widths, etc.
+header information about the AFM image, includes scan rate, widths, etc.
 }
 \examples{
 filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")

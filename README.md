@@ -1,14 +1,24 @@
 # nanoscopeAFM  <img src="man/figures/logo.png" align="right" alt="" width="280" />
 
-Analyzes Atomic Force Microsocpy images; currently four types are supported, images from Nanosurf (.nid), Veeco Multimode Nanoscope III, Park AFM images, and Asylum Research AFM images.
+Imports and analyzes Atomic Force Microsocpy images; currently four types are supported, images from Nanosurf (.nid), Veeco Multimode Nanoscope III (.000), Park AFM images (.tiff), and Asylum Research AFM images (.ibw).
 
 
 ## Installation
+
+Use the latest release from the GitHub repository:
 
 ```R
 # install.packages("devtools")
 devtools::install_github("thomasgredig/nanoscopeAFM")
 ```
+
+## Data Classes
+
+Several new data structures (S3 and S4) are introduced:
+
+- `AFMdata` - S4 class that contains all AFM images from a file
+- `AFMinfo` - S3 class that contains all parameters of the AFM images, such as vibration frequnecy, etc.
+- `AFMmath` - S3 class that contains computed paramters, such as roughness, etc. about a particular AFM image
 
 ## Usage
 

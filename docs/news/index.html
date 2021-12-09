@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.3</span>
       </span>
     </div>
 
@@ -142,6 +142,145 @@
       
     </div>
 
+    <div id="nanoscopeafm-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#nanoscopeafm-development-version" class="anchor"></a>nanoscopeAFM (development version)</h1>
+</div>
+    <div id="nanoscopeafm-203" class="section level1">
+<h1 class="page-header" data-toc-text="2.0.3">
+<a href="#nanoscopeafm-203" class="anchor"></a>nanoscopeAFM 2.0.3</h1>
+<ul>
+<li>allow AFMinfo.item() to return all names</li>
+<li>rcmdcheck() package and add libraries</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-202" class="section level1">
+<h1 class="page-header" data-toc-text="2.0.2">
+<a href="#nanoscopeafm-202" class="anchor"></a>nanoscopeAFM 2.0.2</h1>
+<ul>
+<li>Park images and force curves are supported</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-200" class="section level1">
+<h1 class="page-header" data-toc-text="2.0.0">
+<a href="#nanoscopeafm-200" class="anchor"></a>nanoscopeAFM 2.0.0</h1>
+<ul>
+<li>remove old dependencies</li>
+<li>add new types for AFM plotting, adding graphType = c(1,2)</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-110" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.0">
+<a href="#nanoscopeafm-110" class="anchor"></a>nanoscopeAFM 1.1.0</h1>
+<ul>
+<li>first release, use to have backwards-compatibility</li>
+<li>change data format of @data in AFMdata structure from data.frame to list to accommodate multiple images</li>
+<li>new reader for AR images</li>
+<li>eliminate z-conversion, since we are saving the units for the z values, just store the converted values</li>
+<li>complete AFMinfo documentation for all 4 instruments</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-105" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.5">
+<a href="#nanoscopeafm-105" class="anchor"></a>nanoscopeAFM 1.0.5</h1>
+<ul>
+<li>replace x.max.nm with x.conv, and y.conv similar to z.conv; scaling parameters to change units to nm</li>
+<li>add sample description possibility</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-104" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.4">
+<a href="#nanoscopeafm-104" class="anchor"></a>nanoscopeAFM 1.0.4</h1>
+<ul>
+<li>correct height computation for NanoScope images</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-103" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.3">
+<a href="#nanoscopeafm-103" class="anchor"></a>nanoscopeAFM 1.0.3</h1>
+<ul>
+<li>some minor fixes to make AFM.raster() work</li>
+<li>add AFM.lineProfile() function (not rendering though yet)</li>
+<li><a href="https://thomasgredig.github.io/nanoscopeAFM/">Github IO Help Page</a></li>
+</ul>
+</div>
+    <div id="nanoscopeafm-101" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.1">
+<a href="#nanoscopeafm-101" class="anchor"></a>nanoscopeAFM 1.0.1</h1>
+<ul>
+<li>fix channels for AFM import</li>
+<li>include only data$z, generate the others using AFM.raster()</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-10" class="section level1">
+<h1 class="page-header" data-toc-text="1.0">
+<a href="#nanoscopeafm-10" class="anchor"></a>nanoscopeAFM 1.0</h1>
+<ul>
+<li>create S4 class AFMdata</li>
+<li>create print method to display image</li>
+<li>create AFM.import function to generate class AFMdata</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-066" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.6">
+<a href="#nanoscopeafm-066" class="anchor"></a>nanoscopeAFM 0.6.6</h1>
+<ul>
+<li>update test files:
+<ul>
+<li>system.file(“extdata”,“Park_20210916_034.tiff”,package=“nanoscopeAFM”)</li>
+<li>system.file(“extdata”,“AR_20211011.ibw”,package=“nanoscopeAFM”)</li>
+<li>system.file(“extdata”,“Veeco_20160622.003”,package=“nanoscopeAFM”)</li>
+<li>system.file(“extdata”,“NanoSurf_20160301.nid”,package=“nanoscopeAFM”)</li>
+</ul>
+</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-063" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.3">
+<a href="#nanoscopeafm-063" class="anchor"></a>nanoscopeAFM 0.6.3</h1>
+<ul>
+<li>add notes/comments to INFO</li>
+<li>open MFM images from Igor with Nap files</li>
+<li>using field descriptions: <a href="https://github.com/wking/igor/blob/master/igor/binarywave.py" class="uri">https://github.com/wking/igor/blob/master/igor/binarywave.py</a>
+</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-062" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.2">
+<a href="#nanoscopeafm-062" class="anchor"></a>nanoscopeAFM 0.6.2</h1>
+<ul>
+<li>add AFM.info with common information about AFM image</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-061" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.1">
+<a href="#nanoscopeafm-061" class="anchor"></a>nanoscopeAFM 0.6.1</h1>
+<ul>
+<li>Major update, rename most functions (see README for deprecated functions)</li>
+<li>Add support for Park AFM images in TIFF format</li>
+<li>add images for Veeco, Nanosurf, Park, and Asylum Research</li>
+<li>expand testing (testthat)</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-060" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.0">
+<a href="#nanoscopeafm-060" class="anchor"></a>nanoscopeAFM 0.6.0</h1>
+<ul>
+<li>
+<p>support <a href="https://pkgdown.r-lib.org/">pgkdown</a>, use</p>
+<blockquote>
+<p>pkgdown::build_site() to build the site and export to <a href="https://thomasgredig.github.io">thomasgredig.github.io</a></p>
+</blockquote>
+</li>
+</ul>
+</div>
+    <div id="nanoscopeafm-051" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.1">
+<a href="#nanoscopeafm-051" class="anchor"></a>nanoscopeAFM 0.5.1</h1>
+<ul>
+<li>fixed scales in output</li>
+</ul>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

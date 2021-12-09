@@ -1,18 +1,6 @@
-#' loads AFM image file
-#'
-#' \code{AFM.read} reads data files from different instruments
-#' and stores 6 rows (x,y,z) and converted units, when possible
-#' (xc,yc,zc), use the attributes to find the units and
-#' channel name
-#'
-#' @param filename filename of (Veeco, Park, AR, NanoSurf) AFM image including path
-#' @param no channel number (for Veeco, NanoSurf, AR)
-#' @return AFM image with attributes
-#' @author thomasgredig
-#' @examples
-#' filename = system.file("extdata","Park_20210916_034.tiff",package="nanoscopeAFM")
-#' d = AFM.read(filename)
-#' @export
+# loads AFM image file
+# (code from previous version to load certain
+# types of images, should be deprecated, when possible)
 AFM.read <- function(filename, no=1) {
   # does file exist?
   df = data.frame()

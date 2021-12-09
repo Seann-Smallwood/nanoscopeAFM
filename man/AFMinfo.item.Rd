@@ -2,9 +2,9 @@
 % Please edit documentation in R/AFMinfo.R
 \name{AFMinfo.item}
 \alias{AFMinfo.item}
-\title{returns an item from the AFMinfo object}
+\title{Specific information about AFM image}
 \usage{
-AFMinfo.item(obj, itemName)
+AFMinfo.item(obj, itemName = "")
 }
 \arguments{
 \item{obj}{AFMinfo object}
@@ -12,16 +12,21 @@ AFMinfo.item(obj, itemName)
 \item{itemName}{name to retrieve (ScanRate, ScanAngle, ...)}
 }
 \value{
-string or number
+if \code{itemName} is empty, returns list of names, otherwise the value for the specific data item
 }
 \description{
-returns an item from the AFMinfo object
+Retrieve a specific information piece from the AFM image,
+such as "ScanRate", "Description", etc. The item names depend
+on the instrument; to find possible item names, leave
+\code{itemName} empty.
 }
 \examples{
 filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
 h = AFMinfo(filename)
+allNames = AFMinfo.item(h)
 AFMinfo.item(h,"Description")
 AFMinfo.item(h,"Operating mode")
+print(allNames)
 }
 \author{
 Thomas Gredig

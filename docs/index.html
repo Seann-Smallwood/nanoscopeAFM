@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.3</span>
       </span>
     </div>
 
@@ -99,13 +99,27 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#nanoscopeafm-" class="anchor"></a>nanoscopeAFM <img src="reference/figures/logo.png" align="right" alt="" width="280">
 </h1></div>
-<p>Analyzes Atomic Force Microsocpy images; currently four types are supported, images from Nanosurf (.nid), Veeco Multimode Nanoscope III, Park AFM images, and Asylum Research AFM images.</p>
+<p>Imports and analyzes Atomic Force Microsocpy images; currently four types are supported, images from Nanosurf (.nid), Veeco Multimode Nanoscope III (.000), Park AFM images (.tiff), and Asylum Research AFM images (.ibw).</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
+<p>Use the latest release from the GitHub repository:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"thomasgredig/nanoscopeAFM"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="data-classes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data-classes" class="anchor"></a>Data Classes</h2>
+<p>Several new data structures (S3 and S4) are introduced:</p>
+<ul>
+<li>
+<code>AFMdata</code> - S4 class that contains all AFM images from a file</li>
+<li>
+<code>AFMinfo</code> - S3 class that contains all parameters of the AFM images, such as vibration frequnecy, etc.</li>
+<li>
+<code>AFMmath</code> - S3 class that contains computed paramters, such as roughness, etc. about a particular AFM image</li>
+</ul>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -145,7 +159,7 @@
 <p>Histogram can be used to study the roughness or height levels:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make a histogram</span>
-<span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="reference/AFM.read.html">AFM.read</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span>
+<span class="va">d</span> <span class="op">=</span> <span class="fu">AFM.read</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span>
 <span class="fu"><a href="reference/AFM.histogram.html">AFM.histogram</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="line-profile" class="section level2">

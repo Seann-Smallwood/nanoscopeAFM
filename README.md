@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/184698455.svg)](https://zenodo.org/badge/latestdoi/184698455)
+
 # nanoscopeAFM  <img src="man/figures/logo.png" align="right" alt="" width="280" />
 
 Imports and analyzes Atomic Force Microsocpy images; currently four types are supported, images from Nanosurf (.nid), Veeco Multimode Nanoscope III (.000), Park AFM images (.tiff), and Asylum Research AFM images (.ibw).
@@ -106,12 +108,12 @@ A cross-section of the image can now easily be created:
 LINE.NO = 45
 d1 = subset(d, y==LINE.NO)
 ggplot(d1, aes(x.nm, z.nm)) +
-  geom_path(col='black') + 
-  geom_point(col='red', size=2) + 
-  geom_point(col='white', size=1)+ 
-  scale_x_continuous(breaks=0:20*0.2) + 
+  geom_path(col='black') +
+  geom_point(col='red', size=2) +
+  geom_point(col='white', size=1)+
+  scale_x_continuous(breaks=0:20*0.2) +
   xlab(expression(paste('x (',mu,'m)'))) +
-  ylab('z (nm)') + 
+  ylab('z (nm)') +
   theme_bw()
 ```
 

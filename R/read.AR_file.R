@@ -1,7 +1,7 @@
 # read Igor AFM image files
 read.AR_header.v2 <- function(filename) {
   suppressWarnings({
-    d = IgorR::read.ibw(filename)
+    d = read.ibw.image(filename)
     # to get notes, need to read all, not just "header"
   })
   qNote = attr(d, "Note")

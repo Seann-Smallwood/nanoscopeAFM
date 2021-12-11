@@ -161,6 +161,7 @@ AFMdata <- function(data,
 #' @export
 AFM.import <- function(filename) {
   if (grepl('ibw$',filename)) obj = read.AR_file.v2(filename)
+  else if (grepl('tiff$',filename)) obj = read.Park_file.v2(filename)
   else {
     d = AFM.read(filename)
     z.conv = 1

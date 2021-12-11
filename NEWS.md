@@ -1,3 +1,9 @@
+# nanoscopeAFM 2.0.4
+
+* update Park image reader
+* integrate Igor dependence
+
+
 # nanoscopeAFM 2.0.3
 
 * allow AFMinfo.item() to return all names

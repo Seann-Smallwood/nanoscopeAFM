@@ -137,3 +137,4 @@ test_that("verify all sample images", {
   }
   expect_equal(x.pixels, c(128,128,256,512))
 })
+

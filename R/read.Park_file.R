@@ -42,6 +42,58 @@ read.Park_file <- function(filename) {
 }
 
 
+read.Park_file.v2 <- function(filename) {
+  # read TIFF tags
+  tiffTags = tagReader(filename)
+  afm.params = as.numeric(strsplit(tiffTags[16,'valueStr'],',')[[1]])
+  params = get.ParkAFM.header(afm.params)
+
+  # check that the file can be displayed
+  if (!tiff.isPaletteColorImage(tiffTags)) stop("Not a palette color image.")
+  if (!tiff.getValue(tiffTags,'BitsPerSample') ==  8) stop("Not an 3 x 8-bit image.")
+
+  # read data
+  dataStart = tiffTags[which(tiffTags$tag==50434),]$value
+  dataLen = tiffTags[which(tiffTags$tag==50434),]$count
+  # warning(paste("length:",dataLen))
+  df = loadBinaryAFMDatafromTIFF(filename, dataStart, dataLen, params$nDataType)
+
+  # create image
+  imWidth = tiff.getValue(tiffTags, 'ImageWidth')
+  imHeight = tiff.getValue(tiffTags, 'ImageLength')
+  if (imHeight != imWidth) {
+    warning("Image is not square.")
+    imHeight=imWidth
+  }
+  if (length(df) != imHeight*imWidth) {
+    imHeight = sqrt(length(df))
+    imWidth = imHeight
+  }
+  channels = params$sourceName
+  units = 'nm'
+  description = params$imageMode
+
+  # Park TIFF images only have 1 channel
+  z.data = list()
+  z.data[[1]] = (df * params$dfDataGain) *  units2nanometer(params$UnitZ)
+  # return AFMdata object
+  AFMdata(
+    data = list(z=z.data),
+    channel = channels,
+    x.conv = params$dfXScanSizeum / (imWidth-1) * 1000,
+    y.conv = params$dfYScanSizeum / (imHeight-1) * 1000,
+    x.pixels = imWidth,
+    y.pixels = imHeight,
+    z.conv = 1,
+    z.units = units,
+    instrument = 'Park',
+    history = '',
+    description = description,
+    fullfilename = filename
+  )
+}
+
+
 # loads Park Image header
 read.Park_header.v2 <- function(filename) {
 

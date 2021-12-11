@@ -11,6 +11,13 @@ test_that("AR: check version 2 channel list ", {
   expect_equal(length(h1), 13)
 })
 
+test_that("AR: check AFM import ", {
+  obj = AFM.import(filename)
+  expect_equal(obj@x.pixels, 128)
+  expect_equal(length(obj@data$z), 4)
+  expect_equal( length(obj@data$z[[1]]), 128*128)
+})
+
 
 test_that("AR: check image roughness ", {
   d = AFM.math.params(AFM.import(filename))

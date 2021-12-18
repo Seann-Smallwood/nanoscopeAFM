@@ -19,7 +19,7 @@ read.AR_file.v2 <- function(filename) {
   units = rep('nm', length(channels))
   units[grep('Phase',channels)] = 'deg'    # both Phase and NapPhase channels
   suppressWarnings({
-    d = IgorR::read.ibw(filename)
+    d = read.ibw.image(filename)
   })
   q2 = attr(d, "WaveHeader")
   noChannels <- h1$NumberOfFiles

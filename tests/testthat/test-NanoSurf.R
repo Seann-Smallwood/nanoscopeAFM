@@ -1,7 +1,11 @@
 context("NanoSurf AFM image check")
 
 
-filename = system.file("extdata", "NanoSurf_20160301.nid",package="nanoscopeAFM")
+filename = AFM.getSampleImages(type='nid')
+
+test_that("check NanoSurf AFM image exists", {
+  expect_true(file.exists(filename))
+})
 
 
 test_that("check NID file reads correctly", {

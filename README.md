@@ -49,16 +49,6 @@ plot(d)
 ```
 
 
-Flatten the object with a plane; this generates a new `AFMdata` object:
-
-```R
-d2 = AFM.flatten(d)
-plot(d2)
-```
-
-
-
-
 
 ## Image Info
 
@@ -78,45 +68,12 @@ write.csv(r1$data, file='AFMinfo.csv', row.names = FALSE)
 
 ## Image Analysis
 
-Histogram can be used to study the roughness or height levels:
+Several functions are available for image analysis, including:
 
-```R
-# make a histogram
-d = AFM.read(filename)
-AFM.histogram(d)
-```
-
-
-## Line Profile
-
-Using the [Bresenham algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm), the pixel locations along a profile line are computed.
-
-
-```R
-# d is populated with NID.loadImage()
-q = NID.lineProfile(d, 0,0,2e-6,2e-6)
-d2 = d[q,]
-d2$distance = sqrt(d$x*d$x+d$y*d$y)
-# plot the line profile
-plot(d2$distance, d2$z.flatten)
-```
-
-
-A cross-section of the image can now easily be created:
-
-```R
-LINE.NO = 45
-d1 = subset(d, y==LINE.NO)
-ggplot(d1, aes(x.nm, z.nm)) +
-  geom_path(col='black') +
-  geom_point(col='red', size=2) +
-  geom_point(col='white', size=1)+
-  scale_x_continuous(breaks=0:20*0.2) +
-  xlab(expression(paste('x (',mu,'m)'))) +
-  ylab('z (nm)') +
-  theme_bw()
-```
-
+* [Flatten image](https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.flatten.html)
+* [Histogram](https://thomasgredig.github.io/nanoscopeAFM/docs/reference/AFM.histogram.html)
+* [Profile lines](https://thomasgredig.github.io/nanoscopeAFM/docs/reference/AFM.linePlot.html)
+* [Roughness analysis](https://thomasgredig.github.io/nanoscopeAFM/docs/reference/AFM.math.params.html)
 
 
 # Technical Notes

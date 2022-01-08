@@ -19,7 +19,7 @@ data frame has  ($x, $y, $z) in units of particular channel, ($x, $y) are
 always in units of nanometer
 }
 \examples{
-afmd = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+afmd = AFM.import(AFM.getSampleImages(type='ibw')[1])
 d = AFM.raster(afmd, 1)
 head(d)
 }

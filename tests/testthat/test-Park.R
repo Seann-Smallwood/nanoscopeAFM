@@ -1,7 +1,10 @@
 context("Park AFM image check")
 
-filename = system.file("extdata", "Park_20210916_034.tiff",package="nanoscopeAFM")
+filename = AFM.getSampleImages(type='tiff')
 
+test_that("check Park AFM image exists", {
+  expect_true(file.exists(filename))
+})
 
 test_that("check Park AFM images is read into memory", {
   d = read.Park_file(filename)

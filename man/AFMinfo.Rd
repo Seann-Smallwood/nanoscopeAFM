@@ -16,7 +16,7 @@ AFMinfo class object
 header information about the AFM image, includes scan rate, widths, etc.
 }
 \examples{
-filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
+filename = AFM.getSampleImages(type='003')
 h = AFMinfo(filename)
 summary(h)
 }

@@ -1,6 +1,10 @@
 context("Asylum Research AFM image check")
 
-filename = system.file("extdata", "AR_20211011.ibw",package="nanoscopeAFM")
+filename = AFM.getSampleImages(type='ibw')
+
+test_that("check AR AFM image exists", {
+  expect_true(file.exists(filename))
+})
 
 test_that("AR: filefound", {
   expect_true(file.exists(filename))

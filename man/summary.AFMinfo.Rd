@@ -16,7 +16,7 @@ quick summary
 summary for AFMinfo object
 }
 \examples{
-h1 = AFMinfo(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+h1 = AFMinfo(AFM.getSampleImages(type='ibw')[1])
 summary(h1)
 }
 \author{

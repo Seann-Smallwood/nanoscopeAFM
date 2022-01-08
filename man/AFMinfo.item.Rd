@@ -21,7 +21,7 @@ on the instrument; to find possible item names, leave
 \code{itemName} empty.
 }
 \examples{
-filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
+filename = AFM.getSampleImages(type='003')
 h = AFMinfo(filename)
 allNames = AFMinfo.item(h)
 AFMinfo.item(h,"Description")

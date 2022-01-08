@@ -1,6 +1,10 @@
 context("Veeco AFM image check")
 
-filename = system.file("extdata", "Veeco_20160622.003",package="nanoscopeAFM")
+filename = AFM.getSampleImages(type='003')
+
+test_that("check Veeco AFM image exists", {
+  expect_true(file.exists(filename))
+})
 
 test_that("check if Veeco AFM file reads", {
   d = read.Nanoscope_file(filename)

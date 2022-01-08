@@ -23,7 +23,7 @@ graph of AFMdata object
 }
 \examples{
 library(ggplot2)
-d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 plot(d, graphType=2)
 }
 \author{

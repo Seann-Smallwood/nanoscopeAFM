@@ -20,7 +20,7 @@ and returns the flattened object
 }
 \examples{
 library(ggplot2)
-d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 d2 = AFM.flatten(d)
 plot(d2,graphType=2)
 }

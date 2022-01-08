@@ -155,7 +155,7 @@ AFMdata <- function(data,
 #' @importFrom ggplot2 ggplot
 #' @examples
 #' library(ggplot2)
-#' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' summary(d)
 #' plot(d)
 #' @export
@@ -193,7 +193,7 @@ AFM.import <- function(filename) {
 #' @return text with object information
 #' @author Thomas Gredig
 #' @examples
-#' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' print(d)
 #' @export
 print.AFMdata <- function(obj) {
@@ -212,7 +212,7 @@ print.AFMdata <- function(obj) {
 #' @return summary of AFMdata object
 #' @author Thomas Gredig
 #' @examples
-#' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' summary(d)
 #' @export
 summary.AFMdata <- function(obj) {
@@ -247,7 +247,7 @@ summary.AFMdata <- function(obj) {
 #' @return data.frame with ($x, $y, $z) raster image; ($x,$y) in units of nm
 #' @author Thomas Gredig
 #' @examples
-#' afmd = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' afmd = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' d = AFM.raster(afmd, 1)
 #' head(d)
 #' @export
@@ -278,10 +278,11 @@ AFM.raster <- function(obj,no=1) {
 #' @author Thomas Gredig
 #' @examples
 #' library(ggplot2)
-#' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)
 #' @export
 plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, ...) {
+  require(ggplot2)
   if (no>length(obj@channel)) stop("imageNo out of bounds.")
   cat("Graphing:",obj@channel[no])
   d = AFM.raster(obj,no)
@@ -366,7 +367,7 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, ...) {
 #' @author Thomas Gredig
 #' @examples
 #' library(ggplot2)
-#' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' AFM.histogram(d)
 #' @export
 AFM.histogram <- function(obj) {
@@ -387,7 +388,7 @@ AFM.histogram <- function(obj) {
 #' @return \code{TRUE} if object is an AFM image
 #' @author Thomas Gredig
 #' @examples
-#' d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' AFM.isImage(d)
 #' @export
 AFM.isImage <- function(obj) {

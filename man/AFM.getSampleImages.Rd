@@ -4,7 +4,10 @@
 \alias{AFM.getSampleImages}
 \title{sample AFM images}
 \usage{
-AFM.getSampleImages()
+AFM.getSampleImages(type = "*")
+}
+\arguments{
+\item{type}{could be "ibw" for Asylum, "nid" for NanoSurf, "tiff" for Park, if empty or "*", all files will be returned}
 }
 \value{
 vector with path/filename to AFM sample images

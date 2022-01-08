@@ -4,7 +4,7 @@
 #' @return structure with various computed AFM image parameters, such
 #' as roughness
 #' @examples
-#' filename = system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
+#' filename = AFM.getSampleImages(type='ibw')
 #' AFM.math.params(AFM.import(filename))
 #' @export
 AFM.math.params <- function(obj) {
@@ -25,7 +25,7 @@ AFM.math.params <- function(obj) {
 #' @param obj AFMmath object
 #' @return prints a summary
 #' @examples
-#' filename = system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
+#' filename = AFM.getSampleImages(type='ibw')
 #' summary(AFM.math.params(AFM.import(filename)))
 #' @export
 summary.AFMmath <- function(obj) {

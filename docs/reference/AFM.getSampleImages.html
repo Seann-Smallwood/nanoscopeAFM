@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.3</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.5</span>
       </span>
     </div>
 
@@ -148,8 +148,16 @@
     <p>returns sample AFM images from library</p>
     </div>
 
-    <pre class="usage"><span class='fu'>AFM.getSampleImages</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>AFM.getSampleImages</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"*"</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>type</th>
+      <td><p>could be "ibw" for Asylum, "nid" for NanoSurf, "tiff" for Park, if empty or "*", all files will be returned</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

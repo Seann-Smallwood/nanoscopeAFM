@@ -6,7 +6,7 @@
 #' @return AFMinfo class object
 #' @author Thomas Gredig
 #' @examples
-#' filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
+#' filename = AFM.getSampleImages(type='003')
 #' h = AFMinfo(filename)
 #' summary(h)
 #' @export
@@ -76,7 +76,7 @@ AFMinfo <- function(filename) {
 #' @return if \code{itemName} is empty, returns list of names, otherwise the value for the specific data item
 #' @author Thomas Gredig
 #' @examples
-#' filename = system.file("extdata","Veeco_20160622.003",package="nanoscopeAFM")
+#' filename = AFM.getSampleImages(type='003')
 #' h = AFMinfo(filename)
 #' allNames = AFMinfo.item(h)
 #' AFMinfo.item(h,"Description")
@@ -103,7 +103,7 @@ AFMinfo.item <- function(obj, itemName="") {
 #' @return quick summary
 #' @author Thomas Gredig
 #' @examples
-#' h1 = AFMinfo(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+#' h1 = AFMinfo(AFM.getSampleImages(type='ibw')[1])
 #' summary(h1)
 #' @export
 summary.AFMinfo <- function(obj) {

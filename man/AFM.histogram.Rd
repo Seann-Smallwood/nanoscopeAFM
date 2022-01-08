@@ -17,7 +17,7 @@ graph a histogram for the AFM image
 }
 \examples{
 library(ggplot2)
-d = AFM.import(system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM"))
+d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 AFM.histogram(d)
 }
 \author{

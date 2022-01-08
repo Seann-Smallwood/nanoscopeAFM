@@ -13,7 +13,7 @@
 #' @export
 AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
   AFMcopy = obj
-  AFMcopy@history <- paste(AFMcopy@history,"AFM.lineProfile();")
+  AFMcopy@history <- paste(AFMcopy@history,"AFM.lineProfile(",x1,",",y1,",",x2,",",y2,");")
   d = AFM.raster(AFMcopy)
   range.x = max(d$x) - min(d$x)
   range.y = max(d$y) - min(d$y)
@@ -21,8 +21,8 @@ AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
   if(y1 >= range.y) { warning("y1: Out of range"); y1=0.99*range.y }
   if(x2 >= range.x) { warning("x2: Out of range"); x2=0.99*range.x}
   if(y2 >= range.y) { warning("y2: Out of range"); y2=0.99*range.y}
-  width.x = which(d$x>0)[1]-1
-  width.y = nrow(d)/width.x
+  width.x = AFMcopy@x.pixels
+  width.y = AFMcopy@y.pixels
   x1.pixel = round(x1/range.x*width.x)
   y1.pixel = round(y1/range.y*width.y)
   x2.pixel = round(x2/range.x*width.x)
@@ -34,21 +34,65 @@ AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
   sy = sign(y2.pixel - y1.pixel)
   er = Dx + Dy
   r = c(x1.pixel*width.x+y1.pixel)
+  q2=0
+  r2 = c(q2)
   # Bresenham's Line Algorithm
   while (!((x1.pixel == x2.pixel) & (y1.pixel == y2.pixel))) {
     er2 = 2*er
+    lx = ly = 0
     if(er2 >= Dy) {
       er = er + Dy
       x1.pixel = x1.pixel + sx;
+      lx = AFMcopy@x.conv
     }
     if(er2 <= Dx) {
       er = er + Dx
       y1.pixel = y1.pixel + sy
+      ly = AFMcopy@y.conv
     }
     # add data point
-    q1= x1.pixel*width.x+y1.pixel
+    q1 = x1.pixel*width.x+y1.pixel
+    q2 = q2+sqrt(lx^2+ly^2)
     r=c(r, q1)
+    r2 = c(r2, q2)
   }
-  AFMcopy@data = data.frame(r)
+  if (is.null(AFMcopy@data$line)) AFMcopy@data$line = list()
+  AFMcopy@data$line = append(AFMcopy@data$line,list(r))
+  if (is.null(AFMcopy@data$line.nm)) AFMcopy@data$line.nm = list()
+  AFMcopy@data$line.nm = append(AFMcopy@data$line.nm,list(r2))
   AFMcopy
+}
+
+#' Plots AFM line
+#'
+#' @param obj AFMdata object
+#' @param no channel number
+#' @param dataOnly if \code{TRUE} no graph is returned
+#' @examples
+#' filename = AFM.getSampleImages(type='ibw')
+#' d = AFM.import(filename)
+#' AFM.lineProfile(d, 0,0, 2000,2000) -> d1
+#' AFM.lineProfile(d1, 0,0, 100,2500) -> d2
+#' AFM.linePlot(d2)
+#' @export
+AFM.linePlot<- function(obj,no=1,dataOnly=FALSE) {
+  require(ggplot2)
+  if (is.null(obj@data$line)) { warning("No lines in object."); return() }
+  zData = obj@data$z[[no]]
+  i=1
+  r = data.frame()
+  for(ln in obj@data$line) {
+    dz = data.frame(x=obj@data$line.nm[[i]],y=zData[ln+1])
+    dz$type=i
+    i=i+1
+    r=rbind(r, dz)
+  }
+  if (dataOnly) return(r)
+  ggplot(r, aes(x,y,col=as.factor(type))) +
+    geom_path() +
+    xlab('d (nm)') +
+    scale_color_discrete('Line No') +
+    theme_bw() +
+    theme(legend.position = c(0.01,0.99),
+          legend.justification = c(0,1))
 }

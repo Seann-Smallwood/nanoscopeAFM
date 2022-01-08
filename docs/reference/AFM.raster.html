@@ -85,7 +85,7 @@ always in units of nanometer" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.3</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.5</span>
       </span>
     </div>
 
@@ -173,7 +173,7 @@ always in units of nanometer</p>
     <p>Thomas Gredig</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='va'>afmd</span> <span class='op'>=</span> <span class='fu'><a href='AFM.import.html'>AFM.import</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,<span class='st'>"AR_20211011.ibw"</span>,package<span class='op'>=</span><span class='st'>"nanoscopeAFM"</span><span class='op'>)</span><span class='op'>)</span></span>
+    <pre class="examples"><span class='r-in'><span class='va'>afmd</span> <span class='op'>=</span> <span class='fu'><a href='AFM.import.html'>AFM.import</a></span><span class='op'>(</span><span class='fu'><a href='AFM.getSampleImages.html'>AFM.getSampleImages</a></span><span class='op'>(</span>type<span class='op'>=</span><span class='st'>'ibw'</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>d</span> <span class='op'>=</span> <span class='fu'>AFM.raster</span><span class='op'>(</span><span class='va'>afmd</span>, <span class='fl'>1</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>           x y        z</span>

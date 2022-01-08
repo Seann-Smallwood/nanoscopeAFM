@@ -1,3 +1,7 @@
+# nanoscopeAFM 2.0.5
+
+* add line profiles
+
 # nanoscopeAFM 2.0.4
 
 * update Park image reader

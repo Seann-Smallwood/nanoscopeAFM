@@ -16,6 +16,6 @@ prints a summary
 Summary of computed AFM image parameters
 }
 \examples{
-filename = system.file("extdata","AR_20211011.ibw",package="nanoscopeAFM")
+filename = AFM.getSampleImages(type='ibw')
 summary(AFM.math.params(AFM.import(filename)))
 }

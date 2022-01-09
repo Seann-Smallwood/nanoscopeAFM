@@ -4,7 +4,7 @@
 \alias{plot.AFMdata}
 \title{graph of AFMdata object}
 \usage{
-\method{plot}{AFMdata}(obj, no = 1, mpt = NA, graphType = 1, ...)
+\method{plot}{AFMdata}(obj, no = 1, mpt = NA, graphType = 1, addLines = FALSE, ...)
 }
 \arguments{
 \item{obj}{AFMdata object}
@@ -13,7 +13,9 @@
 
 \item{mpt}{midpoint for coloring}
 
-\item{graphType}{1 = graph with legend outside, 2 = square graph with line bar}
+\item{graphType}{1 = graph with legend outside, 2 = square graph with line bar, 3 = plain graph}
+
+\item{addLines}{if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example}
 }
 \value{
 ggplot graph

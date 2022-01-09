@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/404.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/AFM-graphTypes.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/AFM-image-summaries.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/afm-setpoint.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/graphAFMimage.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/authors.html</loc>
+  </url>
+  <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/index.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/news/index.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.flatten.html</loc>
@@ -28,6 +55,9 @@
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.math.params.html</loc>
   </url>
   <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.plotLines.html</loc>
+  </url>
+  <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.raster.html</loc>
   </url>
   <url>
@@ -38,6 +68,9 @@
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/AFMinfo.item.html</loc>
+  </url>
+  <url>
+    <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/index.html</loc>
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/initialize-AFMdata-method.html</loc>
@@ -56,17 +89,5 @@
   </url>
   <url>
     <loc>https://thomasgredig.github.io/nanoscopeAFM/reference/summary.AFMmath.html</loc>
-  </url>
-  <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/AFM-graphTypes.html</loc>
-  </url>
-  <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/AFM-image-summaries.html</loc>
-  </url>
-  <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/afm-setpoint.html</loc>
-  </url>
-  <url>
-    <loc>https://thomasgredig.github.io/nanoscopeAFM/articles/graphAFMimage.html</loc>
   </url>
 </urlset>

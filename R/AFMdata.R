@@ -273,7 +273,8 @@ AFM.raster <- function(obj,no=1) {
 #' @param obj AFMdata object
 #' @param no number of the image
 #' @param mpt midpoint for coloring
-#' @param graphType 1 = graph with legend outside, 2 = square graph with line bar
+#' @param graphType 1 = graph with legend outside, 2 = square graph with line bar, 3 = plain graph
+#' @param addLines if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example
 #' @return ggplot graph
 #' @author Thomas Gredig
 #' @examples
@@ -281,8 +282,7 @@ AFM.raster <- function(obj,no=1) {
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)
 #' @export
-plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, ...) {
-  require(ggplot2)
+plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, addLines=FALSE, ...) {
   if (no>length(obj@channel)) stop("imageNo out of bounds.")
   cat("Graphing:",obj@channel[no])
   d = AFM.raster(obj,no)
@@ -291,6 +291,18 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, ...) {
 
   if (is.na(mpt)) mean(d$z) -> mpt
   xlab <- expression(paste('x (',mu,'m)'))
+  
+  
+  if (addLines) {
+    # check if there are lines
+    if (is.null(obj@data$line)) { warning("No lines attached.") }
+    else {
+      for(zLine in obj@data$line) {
+        d$z[zLine] = min(d$z)
+      }
+    }
+  }
+  
 
   if (graphType==1) {
     g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
@@ -356,6 +368,7 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, ...) {
             axis.ticks.y = element_blank())
 
   } else stop('graphType is not supported.')
+  
   g1
 }
 

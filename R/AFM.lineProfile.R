@@ -82,13 +82,13 @@ AFM.linePlot<- function(obj,no=1,dataOnly=FALSE) {
   i=1
   r = data.frame()
   for(ln in obj@data$line) {
-    dz = data.frame(x=obj@data$line.nm[[i]],y=zData[ln+1])
+    dz = data.frame(x=obj@data$line.nm[[i]],z=zData[ln+1])
     dz$type=i
     i=i+1
     r=rbind(r, dz)
   }
   if (dataOnly) return(r)
-  ggplot(r, aes(x,y,col=as.factor(type))) +
+  ggplot(r, aes(x,z,col=as.factor(type))) +
     geom_path() +
     xlab('d (nm)') +
     scale_color_discrete('Line No') +

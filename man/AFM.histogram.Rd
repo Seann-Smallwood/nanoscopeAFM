@@ -4,10 +4,12 @@
 \alias{AFM.histogram}
 \title{graph a histogram for the AFM image}
 \usage{
-AFM.histogram(obj)
+AFM.histogram(obj, dataOnly = FALSE)
 }
 \arguments{
 \item{obj}{AFMdata object}
+
+\item{dataOnly}{if \code{TRUE} a data frame with the histogram data is returned}
 }
 \value{
 draws a ggplot graph
@@ -19,6 +21,7 @@ graph a histogram for the AFM image
 library(ggplot2)
 d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 AFM.histogram(d)
+head(AFM.histogram(d, dataOnly=TRUE),n=20)
 }
 \author{
 Thomas Gredig

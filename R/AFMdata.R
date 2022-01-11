@@ -70,6 +70,7 @@ AFMdata<-setClass("AFMdata",
 #' @slot description AFM image description or note
 #' @slot fullfilename name of file
 #' @export
+#' @importFrom methods setMethod initialize
 setMethod(f="initialize",
           signature="AFMdata",
           definition= function(.Object,
@@ -291,8 +292,8 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, addLines=FALSE, ...) {
 
   if (is.na(mpt)) mean(d$z) -> mpt
   xlab <- expression(paste('x (',mu,'m)'))
-  
-  
+
+
   if (addLines) {
     # check if there are lines
     if (is.null(obj@data$line)) { warning("No lines attached.") }
@@ -302,7 +303,7 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, addLines=FALSE, ...) {
       }
     }
   }
-  
+
 
   if (graphType==1) {
     g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
@@ -368,7 +369,7 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, addLines=FALSE, ...) {
             axis.ticks.y = element_blank())
 
   } else stop('graphType is not supported.')
-  
+
   g1
 }
 
@@ -376,21 +377,29 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, addLines=FALSE, ...) {
 #' graph a histogram for the AFM image
 #'
 #' @param obj AFMdata object
+#' @param dataOnly if \code{TRUE} a data frame with the histogram data is returned
 #' @return draws a ggplot graph
 #' @author Thomas Gredig
 #' @examples
 #' library(ggplot2)
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' AFM.histogram(d)
+#' head(AFM.histogram(d, dataOnly=TRUE),n=20)
 #' @export
-AFM.histogram <- function(obj) {
+AFM.histogram <- function(obj, dataOnly=FALSE) {
   d = AFM.raster(obj)
-  print(
-    ggplot(d, aes(x=z)) +
+  if (dataOnly) {
+    graphics::hist(d$z, breaks=100, plot=FALSE) -> q
+    result = data.frame(mids = q$mids , zDensity = q$density)
+  } else {
+  result =
+    ggplot2::ggplot(d, aes(x=z)) +
       geom_histogram(aes(y=..density..),
-                     colour="black", fill="white", bins=200)+
-      geom_density(alpha=0.2, fill='red')
-  )
+                     colour="black", fill="pink", bins=200)+
+      geom_density(alpha=0.2, fill='red') +
+      theme_bw()
+  }
+  result
 }
 
 # (simple check only at the moment): NEEDS more work

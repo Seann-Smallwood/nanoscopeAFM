@@ -88,11 +88,20 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://thomasgredig.github.io/nanoscopeAFM/">nanoscopeAFM</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org" class="external-link">scales</a></span><span class="op">)</span>
-<span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"Park_20210916_034.tiff"</span>,package<span class="op">=</span><span class="st">"nanoscopeAFM"</span><span class="op">)</span>
+<span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="../reference/AFM.getSampleImages.html">AFM.getSampleImages</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'tiff'</span><span class="op">)</span>
 <span class="va">afmd</span> <span class="op">=</span> <span class="fu"><a href="../reference/AFM.import.html">AFM.import</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: Topography</span></code></pre></div>
 <p><img src="graphAFMimage_files/figure-html/setup-1.png" width="700"></p>
+<p>In order to get more contrast, we can trim 1 percent of the data points as the image may not be in the middle, see the histogram.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/AFM.histogram.html">AFM.histogram</a></span><span class="op">(</span><span class="va">afmd</span><span class="op">)</span></code></pre></div>
+<p><img src="graphAFMimage_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p>Using the <code>trimPeaks</code> option in <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>, we can remove half from the top and bottom of the histogram and bunch those data points up, so that the contrast enhances.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, trimPeaks <span class="op">=</span> <span class="fl">0.01</span>, mpt<span class="op">=</span><span class="op">-</span><span class="fl">0.5</span><span class="op">)</span>
+<span class="co">#&gt; Graphing: Topography</span></code></pre></div>
+<p><img src="graphAFMimage_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
   </main>
 </div>
 

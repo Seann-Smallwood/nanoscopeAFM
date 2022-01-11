@@ -4,18 +4,31 @@
 \alias{plot.AFMdata}
 \title{graph of AFMdata object}
 \usage{
-\method{plot}{AFMdata}(obj, no = 1, mpt = NA, graphType = 1, addLines = FALSE, ...)
+\method{plot}{AFMdata}(
+  obj,
+  no = 1,
+  mpt = NA,
+  graphType = 1,
+  trimPeaks = 0,
+  addLines = FALSE,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{obj}{AFMdata object}
 
-\item{no}{number of the image}
+\item{no}{channel number of the image}
 
 \item{mpt}{midpoint for coloring}
 
 \item{graphType}{1 = graph with legend outside, 2 = square graph with line bar, 3 = plain graph}
 
+\item{trimPeaks}{value from 0 to 1, where 0=trim 0% and 1=trim 100% of data points, generally a value less than 0.01 is useful to elevate the contrast of the image}
+
 \item{addLines}{if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example}
+
+\item{verbose}{if \code{TRUE} it outputs additional information.}
 }
 \value{
 ggplot graph

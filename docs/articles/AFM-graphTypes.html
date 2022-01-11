@@ -147,21 +147,27 @@
 <p>Use the package <code>cowplot</code> to create a graph with two plots. Use <code>save_plot</code> to save the graph.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span>
-<span class="va">fname2</span> <span class="op">=</span> <span class="fu"><a href="../reference/AFM.getSampleImages.html">AFM.getSampleImages</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>
+<span class="va">fname2</span> <span class="op">=</span> <span class="fu"><a href="../reference/AFM.getSampleImages.html">AFM.getSampleImages</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'ibw'</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
 <span class="va">afmd2</span> <span class="op">=</span> <span class="fu"><a href="../reference/AFM.import.html">AFM.import</a></span><span class="op">(</span><span class="va">fname2</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">afmd2</span><span class="op">)</span>
-<span class="co">#&gt;        object description resolution           size channel history     z.min</span>
-<span class="co">#&gt; 1 Veeco Image              512 x 512 1769 x 1769 nm  Height         -145.6084</span>
-<span class="co">#&gt;      z.max z.units</span>
-<span class="co">#&gt; 1 13.86895       m</span>
-<span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, graphType <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="co">#&gt;         object               description resolution           size</span>
+<span class="co">#&gt; 1 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
+<span class="co">#&gt; 2 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
+<span class="co">#&gt; 3 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
+<span class="co">#&gt; 4 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
+<span class="co">#&gt;            channel history     z.min    z.max z.units</span>
+<span class="co">#&gt; 1    HeightRetrace         -32.45992 50.78832      nm</span>
+<span class="co">#&gt; 2 AmplitudeRetrace          29.00730 32.78488      nm</span>
+<span class="co">#&gt; 3     PhaseRetrace          63.92822 85.18923     deg</span>
+<span class="co">#&gt; 4   ZSensorRetrace         -29.44336 48.16414      nm</span>
+<span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: HeightRetrace</span>
-<span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd2</span>, <span class="fl">1</span>, graphType <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; Graphing: Height</span>
-<span class="va">g3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, <span class="fl">2</span>, graphType <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd2</span>, no<span class="op">=</span><span class="fl">2</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">3</span>, mpt<span class="op">=</span><span class="fl">29.6</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: AmplitudeRetrace</span>
-<span class="va">g4</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, <span class="fl">3</span>, graphType <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="va">g3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, no<span class="op">=</span><span class="fl">3</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">3</span>, mpt<span class="op">=</span><span class="fl">65.5</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: PhaseRetrace</span>
+<span class="va">g4</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, no<span class="op">=</span><span class="fl">4</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="co">#&gt; Graphing: ZSensorRetrace</span>
 <span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span>, <span class="va">g3</span>, <span class="va">g4</span>,
           labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'C'</span>,<span class="st">'D'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="AFM-graphTypes_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>

@@ -272,10 +272,12 @@ AFM.raster <- function(obj,no=1) {
 #' graph of AFMdata object
 #'
 #' @param obj AFMdata object
-#' @param no number of the image
+#' @param no channel number of the image
 #' @param mpt midpoint for coloring
 #' @param graphType 1 = graph with legend outside, 2 = square graph with line bar, 3 = plain graph
+#' @param trimPeaks value from 0 to 1, where 0=trim 0% and 1=trim 100% of data points, generally a value less than 0.01 is useful to elevate the contrast of the image
 #' @param addLines if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example
+#' @param verbose if \code{TRUE} it outputs additional information.
 #' @return ggplot graph
 #' @author Thomas Gredig
 #' @examples
@@ -283,28 +285,39 @@ AFM.raster <- function(obj,no=1) {
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)
 #' @export
-plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, addLines=FALSE, ...) {
+plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALSE, verbose=FALSE, ...) {
   if (no>length(obj@channel)) stop("imageNo out of bounds.")
   cat("Graphing:",obj@channel[no])
+  if (verbose) print(paste("History:",obj@history))
   d = AFM.raster(obj,no)
   zLab = paste0(obj@channel[no],' (',obj@z.units[no],')')
   zLab = gsub('Retrace|Trace','',zLab)
 
-  if (is.na(mpt)) mean(d$z) -> mpt
   xlab <- expression(paste('x (',mu,'m)'))
 
+  if (trimPeaks>0) {
+    AFM.histogram(obj, no, dataOnly = TRUE) -> qHist
+    cumsum(qHist$zDensity) -> csHist
+    lowerBound = qHist$mids[tail(which(csHist<(trimPeaks/2)),n=1)]
+    upperBound = qHist$mids[head(which(csHist>(1-trimPeaks/2)),n=1)]
+    d$z[which(d$z<lowerBound)] <- lowerBound
+    d$z[which(d$z>upperBound)] <- upperBound
+  }
 
   if (addLines) {
     # check if there are lines
     if (is.null(obj@data$line)) { warning("No lines attached.") }
     else {
+      if (verbose) print("Adding lines using min. value for color.")
       for(zLine in obj@data$line) {
         d$z[zLine] = min(d$z)
       }
     }
   }
 
+  if (is.na(mpt)) mean(d$z) -> mpt
 
+  if (verbose) print(paste("z range: ",min(d$z)," to ",max(d$z)," midpoint",mpt))
   if (graphType==1) {
     g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
       geom_raster() +
@@ -377,6 +390,7 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, addLines=FALSE, ...) {
 #' graph a histogram for the AFM image
 #'
 #' @param obj AFMdata object
+#' @param no channel number of the image
 #' @param dataOnly if \code{TRUE} a data frame with the histogram data is returned
 #' @return draws a ggplot graph
 #' @author Thomas Gredig
@@ -386,8 +400,8 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, addLines=FALSE, ...) {
 #' AFM.histogram(d)
 #' head(AFM.histogram(d, dataOnly=TRUE),n=20)
 #' @export
-AFM.histogram <- function(obj, dataOnly=FALSE) {
-  d = AFM.raster(obj)
+AFM.histogram <- function(obj, no=1, dataOnly=FALSE) {
+  d = AFM.raster(obj,no)
   if (dataOnly) {
     graphics::hist(d$z, breaks=100, plot=FALSE) -> q
     result = data.frame(mids = q$mids , zDensity = q$density)

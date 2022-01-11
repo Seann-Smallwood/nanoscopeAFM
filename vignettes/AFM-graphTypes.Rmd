@@ -68,13 +68,13 @@ Use the package `cowplot` to create a graph with two plots. Use `save_plot` to s
 
 ```{r}
 library(cowplot)
-fname2 = AFM.getSampleImages()[4]
+fname2 = AFM.getSampleImages(type='ibw')[1]
 afmd2 = AFM.import(fname2)
 summary(afmd2)
-g1 = plot(afmd, graphType = 3)
-g2 = plot(afmd2, 1, graphType = 3)
-g3 = plot(afmd, 2, graphType = 3)
-g4 = plot(afmd, 3, graphType = 3)
+g1 = plot(afmd, trimPeaks=0.01, graphType = 3)
+g2 = plot(afmd2, no=2, trimPeaks=0.01, graphType = 3, mpt=29.6)
+g3 = plot(afmd, no=3, trimPeaks=0.01, graphType = 3, mpt=65.5)
+g4 = plot(afmd, no=4, trimPeaks=0.01, graphType = 3)
 plot_grid(g1, g2, g3, g4,
           labels=c('A','B','C','D'))
 ```

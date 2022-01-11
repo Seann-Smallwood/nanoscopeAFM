@@ -18,7 +18,20 @@ knitr::opts_chunk$set(
 library(nanoscopeAFM)
 library(ggplot2)
 library(scales)
-filename = system.file("extdata","Park_20210916_034.tiff",package="nanoscopeAFM")
+filename = AFM.getSampleImages(type='tiff')
 afmd = AFM.import(filename)
 plot(afmd)
+```
+ 
+In order to get more contrast, we can trim 1 percent of the data points as the image may not be in the middle, see the histogram.
+
+```{r}
+AFM.histogram(afmd)
+```
+
+Using the `trimPeaks` option in `plot()`, we can remove half from the top and bottom of the histogram and bunch those data points up, so that the contrast enhances.
+
+
+```{r}
+plot(afmd, trimPeaks = 0.01, mpt=-0.5)
 ```

@@ -70,7 +70,7 @@ AFMdata<-setClass("AFMdata",
 #' @slot description AFM image description or note
 #' @slot fullfilename name of file
 #' @export
-#' @importFrom methods setMethod initialize
+#' @importFrom methods setMethod initialize new validObject
 setMethod(f="initialize",
           signature="AFMdata",
           definition= function(.Object,
@@ -284,7 +284,8 @@ AFM.raster <- function(obj,no=1) {
 #' @param verbose if \code{TRUE} it outputs additional information.
 #' @return ggplot graph
 #' @author Thomas Gredig
-#' @importFrom ggplot2 ggplot aes
+#' @importFrom utils head tail
+#' @importFrom ggplot2 ggplot aes geom_raster geom_line theme_bw scale_fill_gradient2 xlab ylab labs scale_y_continuous scale_x_continuous coord_equal geom_text theme element_blank
 #' @examples
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)

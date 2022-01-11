@@ -10,7 +10,7 @@
 #' head(AFM.histogram(d, dataOnly=TRUE),n=20)
 #' AFM.histogram(d)
 #' @export
-#' @importFrom ggplot2 ggplot aes
+#' @importFrom ggplot2 ggplot aes geom_histogram geom_density
 #' @importFrom graphics hist
 AFM.histogram <- function(obj, no=1, dataOnly=FALSE) {
   d = AFM.raster(obj,no)

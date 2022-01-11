@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/184698455.svg)](https://zenodo.org/badge/latestdoi/184698455)
 
-# nanoscopeAFM  <img src="man/figures/logo.png" align="right" alt="" width="280" />
+# nanoscopeAFM  <img src="man/figures/logo.png" align="right" alt="" width="360" />
 
 Imports and analyzes Atomic Force Microsocpy images; currently four types are supported, images from Nanosurf (.nid), Veeco Multimode Nanoscope III (.000), Park AFM images (.tiff), and Asylum Research AFM images (.ibw).
 

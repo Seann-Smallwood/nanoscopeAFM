@@ -8,8 +8,8 @@
 #' @param verbose output fitting parameters
 #' @return flattened matrix with AFM image
 #' @author thomasgredig
+#' @importFrom purrr is_empty
 #' @examples
-#' library(ggplot2)
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' d2 = AFM.flatten(d)
 #' plot(d2,graphType=2)

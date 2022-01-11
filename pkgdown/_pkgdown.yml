@@ -7,16 +7,14 @@ home:
 url: https://thomasgredig.github.io/nanoscopeAFM
 
 template:
-  bootstrap: 5
+  bootstrap: 3
   opengraph:
     image:
       src: man/figures/logo.png
       alt: "nanoscopeAFM - AFM analysis tool in R"
     twitter:
       creator: "@ied7"
-      card: summary_large_image
-  params:
-    bootswatch: simplex
+
 
 authors:
   Thomas Gredig:

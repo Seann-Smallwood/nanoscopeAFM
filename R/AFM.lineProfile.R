@@ -68,15 +68,16 @@ AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
 #' @param obj AFMdata object
 #' @param no channel number
 #' @param dataOnly if \code{TRUE} no graph is returned
+#' @importFrom ggplot2 ggplot geom_path scale_color_discrete xlab theme_bw theme
 #' @examples
 #' filename = AFM.getSampleImages(type='ibw')
 #' d = AFM.import(filename)
 #' AFM.lineProfile(d, 0,0, 2000,2000) -> d1
 #' AFM.lineProfile(d1, 0,0, 100,2500) -> d2
 #' AFM.linePlot(d2)
+#' plot(d2,addLines=TRUE)
 #' @export
 AFM.linePlot<- function(obj,no=1,dataOnly=FALSE) {
-  require(ggplot2)
   if (is.null(obj@data$line)) { warning("No lines in object."); return() }
   zData = obj@data$z[[no]]
   i=1

@@ -22,4 +22,5 @@ d = AFM.import(filename)
 AFM.lineProfile(d, 0,0, 2000,2000) -> d1
 AFM.lineProfile(d1, 0,0, 100,2500) -> d2
 AFM.linePlot(d2)
+plot(d2,addLines=TRUE)
 }

@@ -71,9 +71,9 @@ write.csv(r1$data, file='AFMinfo.csv', row.names = FALSE)
 Several functions are available for image analysis, including:
 
 * [Flatten image](https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.flatten.html)
-* [Histogram](https://thomasgredig.github.io/nanoscopeAFM/docs/reference/AFM.histogram.html)
-* [Profile lines](https://thomasgredig.github.io/nanoscopeAFM/docs/reference/AFM.linePlot.html)
-* [Roughness analysis](https://thomasgredig.github.io/nanoscopeAFM/docs/reference/AFM.math.params.html)
+* [Histogram](https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.histogram.html)
+* [Profile lines](https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.linePlot.html)
+* [Roughness analysis](https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.math.params.html)
 
 
 # Technical Notes

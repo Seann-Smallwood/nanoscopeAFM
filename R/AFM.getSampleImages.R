@@ -1,8 +1,8 @@
-#' sample AFM images
+#' Sample AFM images
 #'
 #' @description
-#' returns sample AFM images from library
-#' @param type could be "ibw" for Asylum, "nid" for NanoSurf, "tiff" for Park, if empty or "*", all files will be returned
+#' returns sample AFM images included in this library
+#' @param type could be "ibw" for Asylum Research, "nid" for NanoSurf, "tiff" for Park, if empty or "*", all files will be returned
 #' @return vector with path/filename to AFM sample images
 #' @author Thomas Gredig
 #' @examples

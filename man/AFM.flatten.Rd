@@ -2,21 +2,23 @@
 % Please edit documentation in R/AFM.flatten.R
 \name{AFM.flatten}
 \alias{AFM.flatten}
-\title{flattens an AFM image using a plane fit}
+\title{Flattens an AFM image using a plane fit}
 \usage{
-AFM.flatten(obj, no = 1)
+AFM.flatten(obj, no = 1, verbose = FALSE)
 }
 \arguments{
 \item{obj}{AFMdata object}
 
-\item{no}{Image number}
+\item{no}{channel number}
+
+\item{verbose}{output fitting parameters}
 }
 \value{
 flattened matrix with AFM image
 }
 \description{
-uses the AFM.raster() function, then makes a copy
-and returns the flattened object
+uses the AFM.raster() function, makes a copy of the object
+and fits a plane, returns the flattened object
 }
 \examples{
 library(ggplot2)

@@ -1,10 +1,11 @@
-#' flattens an AFM image using a plane fit
+#' Flattens an AFM image using a plane fit
 #'
-#' uses the AFM.raster() function, then makes a copy
-#' and returns the flattened object
+#' uses the AFM.raster() function, makes a copy of the object
+#' and fits a plane, returns the flattened object
 #'
 #' @param obj AFMdata object
-#' @param no Image number
+#' @param no channel number
+#' @param verbose output fitting parameters
 #' @return flattened matrix with AFM image
 #' @author thomasgredig
 #' @examples
@@ -13,7 +14,7 @@
 #' d2 = AFM.flatten(d)
 #' plot(d2,graphType=2)
 #' @export
-AFM.flatten <- function(obj,no=1) {
+AFM.flatten <- function(obj,no=1,verbose=FALSE) {
   AFMcopy = obj
   if (purrr::is_empty(AFMcopy@history)) AFMcopy@history=""
   AFMcopy@history = paste(AFMcopy@history,"AFM.flatten(",no,");")
@@ -31,6 +32,8 @@ AFM.flatten <- function(obj,no=1) {
              nrow=3)
   a
   solvX = solve(a,b)
+
+  if (verbose) print(paste("Plane fit:", solvX))
 
   AFMcopy@data$z[[no]] =  x*solvX[1] + y*solvX[2] + solvX[3] - z
   AFMcopy

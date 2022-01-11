@@ -148,19 +148,22 @@ AFMdata <- function(data,
 
 #' Imports AFM file
 #'
-#' Use this function to create an AFMdata object from the filename
+#' Use this function to create an AFMdata object from the filename;
+#' four AFM formats (TIFF, NID, IBW, and 000) are supported. Use
+#' \code{AFM.raster()} to create a data.frame from this object, or
+#' use \code{plot()} to generate an image.
 #'
 #' @param filename name of AFM filename
+#' @param verbose if \code{TRUE}, output additional information during loading of file
 #' @return AFMdata object
 #' @author Thomas Gredig
-#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 ggplot aes
 #' @examples
-#' library(ggplot2)
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' summary(d)
 #' plot(d)
 #' @export
-AFM.import <- function(filename) {
+AFM.import <- function(filename, verbose=FALSE) {
   if (grepl('ibw$',filename)) obj = read.AR_file.v2(filename)
   else if (grepl('tiff$',filename)) obj = read.Park_file.v2(filename)
   else {
@@ -184,6 +187,7 @@ AFM.import <- function(filename) {
       fullfilename = filename
     )
   }
+  if (verbose) print(paste("Instrument:", obj@instrument))
   obj
 }
 
@@ -238,13 +242,13 @@ summary.AFMdata <- function(obj) {
 
 
 
-#' returns raster data frame
+#' Raster data frame
 #'
-#' data frame has  ($x, $y, $z) in units of particular channel, ($x, $y) are
+#' data frame has  ($x, $y, $z) in units for particular channel, ($x, $y) are
 #' always in units of nanometer
 #'
 #' @param obj AFMdata object
-#' @param no image number
+#' @param no channel number
 #' @return data.frame with ($x, $y, $z) raster image; ($x,$y) in units of nm
 #' @author Thomas Gredig
 #' @examples
@@ -253,14 +257,14 @@ summary.AFMdata <- function(obj) {
 #' head(d)
 #' @export
 AFM.raster <- function(obj,no=1) {
-  if(!isS4(obj)) { stop("not an S4 object") }
+  if(!isS4(obj)) { stop("Not an S4 object, AFMdata object expected.") }
   if (AFM.isImage(obj)) {
     dr = data.frame(
       x = rep(0:(obj@x.pixels-1),obj@y.pixels)*obj@x.conv,
       y = rep(0:(obj@y.pixels-1),each=obj@x.pixels)*obj@y.conv,
       z = obj@data$z[[no]]
     )
-  } else {
+  } else {  # could be a spectrum
     dr = data.frame(
       x = (0:(obj@x.pixels-1))*obj@x.conv,
       z = obj@data$z[[no]]
@@ -269,19 +273,19 @@ AFM.raster <- function(obj,no=1) {
   dr
 }
 
-#' graph of AFMdata object
+#' Graph of AFMdata object
 #'
 #' @param obj AFMdata object
 #' @param no channel number of the image
 #' @param mpt midpoint for coloring
 #' @param graphType 1 = graph with legend outside, 2 = square graph with line bar, 3 = plain graph
-#' @param trimPeaks value from 0 to 1, where 0=trim 0% and 1=trim 100% of data points, generally a value less than 0.01 is useful to elevate the contrast of the image
+#' @param trimPeaks value from 0 to 1, where 0=trim 0\% and 1=trim 100\% of data points, generally a value less than 0.01 is useful to elevate the contrast of the image
 #' @param addLines if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example
 #' @param verbose if \code{TRUE} it outputs additional information.
 #' @return ggplot graph
 #' @author Thomas Gredig
+#' @importFrom ggplot2 ggplot aes
 #' @examples
-#' library(ggplot2)
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)
 #' @export
@@ -387,34 +391,6 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALS
 }
 
 
-#' graph a histogram for the AFM image
-#'
-#' @param obj AFMdata object
-#' @param no channel number of the image
-#' @param dataOnly if \code{TRUE} a data frame with the histogram data is returned
-#' @return draws a ggplot graph
-#' @author Thomas Gredig
-#' @examples
-#' library(ggplot2)
-#' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
-#' AFM.histogram(d)
-#' head(AFM.histogram(d, dataOnly=TRUE),n=20)
-#' @export
-AFM.histogram <- function(obj, no=1, dataOnly=FALSE) {
-  d = AFM.raster(obj,no)
-  if (dataOnly) {
-    graphics::hist(d$z, breaks=100, plot=FALSE) -> q
-    result = data.frame(mids = q$mids , zDensity = q$density)
-  } else {
-  result =
-    ggplot2::ggplot(d, aes(x=z)) +
-      geom_histogram(aes(y=..density..),
-                     colour="black", fill="pink", bins=200)+
-      geom_density(alpha=0.2, fill='red') +
-      theme_bw()
-  }
-  result
-}
 
 # (simple check only at the moment): NEEDS more work
 

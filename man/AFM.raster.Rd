@@ -2,20 +2,20 @@
 % Please edit documentation in R/AFMdata.R
 \name{AFM.raster}
 \alias{AFM.raster}
-\title{returns raster data frame}
+\title{Raster data frame}
 \usage{
 AFM.raster(obj, no = 1)
 }
 \arguments{
 \item{obj}{AFMdata object}
 
-\item{no}{image number}
+\item{no}{channel number}
 }
 \value{
 data.frame with ($x, $y, $z) raster image; ($x,$y) in units of nm
 }
 \description{
-data frame has  ($x, $y, $z) in units of particular channel, ($x, $y) are
+data frame has  ($x, $y, $z) in units for particular channel, ($x, $y) are
 always in units of nanometer
 }
 \examples{

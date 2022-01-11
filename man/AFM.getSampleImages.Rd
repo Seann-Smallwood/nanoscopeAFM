@@ -2,18 +2,18 @@
 % Please edit documentation in R/AFM.getSampleImages.R
 \name{AFM.getSampleImages}
 \alias{AFM.getSampleImages}
-\title{sample AFM images}
+\title{Sample AFM images}
 \usage{
 AFM.getSampleImages(type = "*")
 }
 \arguments{
-\item{type}{could be "ibw" for Asylum, "nid" for NanoSurf, "tiff" for Park, if empty or "*", all files will be returned}
+\item{type}{could be "ibw" for Asylum Research, "nid" for NanoSurf, "tiff" for Park, if empty or "*", all files will be returned}
 }
 \value{
 vector with path/filename to AFM sample images
 }
 \description{
-returns sample AFM images from library
+returns sample AFM images included in this library
 }
 \examples{
 file.list = AFM.getSampleImages()

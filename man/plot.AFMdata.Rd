@@ -2,7 +2,7 @@
 % Please edit documentation in R/AFMdata.R
 \name{plot.AFMdata}
 \alias{plot.AFMdata}
-\title{graph of AFMdata object}
+\title{Graph of AFMdata object}
 \usage{
 \method{plot}{AFMdata}(
   obj,
@@ -24,7 +24,7 @@
 
 \item{graphType}{1 = graph with legend outside, 2 = square graph with line bar, 3 = plain graph}
 
-\item{trimPeaks}{value from 0 to 1, where 0=trim 0% and 1=trim 100% of data points, generally a value less than 0.01 is useful to elevate the contrast of the image}
+\item{trimPeaks}{value from 0 to 1, where 0=trim 0\% and 1=trim 100\% of data points, generally a value less than 0.01 is useful to elevate the contrast of the image}
 
 \item{addLines}{if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example}
 
@@ -34,10 +34,9 @@
 ggplot graph
 }
 \description{
-graph of AFMdata object
+Graph of AFMdata object
 }
 \examples{
-library(ggplot2)
 d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 plot(d, graphType=2)
 }

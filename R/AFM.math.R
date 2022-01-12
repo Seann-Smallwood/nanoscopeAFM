@@ -12,7 +12,7 @@ AFM.math.params <- function(obj) {
   Rq = get.Rq(obj@data$z[[1]])
   structure(
     list(
-      basename = basename(obj@fullfilename),
+      basename = basename(obj@fullFilename),
       Ra = Ra,
       Rq = Rq
     ),
@@ -22,16 +22,17 @@ AFM.math.params <- function(obj) {
 
 #' Summary of computed AFM image parameters
 #'
-#' @param obj AFMmath object
+#' @param object AFMmath object
+#' @param ... other arguments
 #' @return prints a summary
 #' @examples
 #' filename = AFM.getSampleImages(type='ibw')
 #' summary(AFM.math.params(AFM.import(filename)))
 #' @export
-summary.AFMmath <- function(obj) {
-  cat("Basename:      ", obj$basename,"\n")
-  cat("Roughness Ra = ", obj$Ra," nm \n")
-  cat("Roughness Rq = ", obj$Rq," nm \n")
+summary.AFMmath <- function(object, ...) {
+  cat("Basename:      ", object$basename,"\n")
+  cat("Roughness Ra = ", object$Ra," nm \n")
+  cat("Roughness Rq = ", object$Rq," nm \n")
 }
 
 

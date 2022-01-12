@@ -17,40 +17,39 @@
   instrument,
   history,
   description,
-  fullfilename
+  fullFilename
 )
 }
 \arguments{
 \item{.Object}{an AFMdata object}
+
+\item{data}{list with objects (z is a list with images)}
+
+\item{x.conv}{conversion factor from pixels to nm}
+
+\item{y.conv}{conversion factor from pixels to nm}
+
+\item{x.pixels}{number of pixels in x-direction}
+
+\item{y.pixels}{number of pixels in y-direction}
+
+\item{z.conv}{(not used)}
+
+\item{z.units}{vector with units for z (deg, m)}
+
+\item{channel}{vector with names of channels}
+
+\item{instrument}{name of instrument (Park, Cypher, NanoSurf, Veeco)}
+
+\item{history}{history of file changes}
+
+\item{description}{AFM image description or note}
+
+\item{fullFilename}{name of file}
+}
+\value{
+initialized AFMdata object
 }
 \description{
 Constructor method of AFMImage Class.
 }
-\section{Slots}{
-
-\describe{
-\item{\code{data}}{list with objects ($z is a list with images)}
-
-\item{\code{x.conv}}{conversion factor from pixels to nm}
-
-\item{\code{y.conv}}{conversion factor from pixels to nm}
-
-\item{\code{x.pixels}}{number of pixels in x-direction}
-
-\item{\code{y.pixels}}{number of pixels in y-direction}
-
-\item{\code{z.conv}}{(not used)}
-
-\item{\code{z.units}}{vector with units for $z (deg, m)}
-
-\item{\code{channel}}{vector with names of channels}
-
-\item{\code{instrument}}{name of instrument (Park, Cypher, NanoSurf, Veeco)}
-
-\item{\code{history}}{history of file changes}
-
-\item{\code{description}}{AFM image description or note}
-
-\item{\code{fullfilename}}{name of file}
-}}
-

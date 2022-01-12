@@ -4,10 +4,12 @@
 \alias{summary.AFMmath}
 \title{Summary of computed AFM image parameters}
 \usage{
-\method{summary}{AFMmath}(obj)
+\method{summary}{AFMmath}(object, ...)
 }
 \arguments{
-\item{obj}{AFMmath object}
+\item{object}{AFMmath object}
+
+\item{...}{other arguments}
 }
 \value{
 prints a summary

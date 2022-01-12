@@ -16,7 +16,7 @@ AFMdata(
   instrument,
   history,
   description = "",
-  fullfilename
+  fullFilename
 )
 
 AFMdata(
@@ -31,7 +31,7 @@ AFMdata(
   instrument,
   history,
   description = "",
-  fullfilename
+  fullFilename
 )
 }
 \arguments{
@@ -57,7 +57,7 @@ AFMdata(
 
 \item{description}{AFM image description or note}
 
-\item{fullfilename}{name of file}
+\item{fullFilename}{name of file}
 }
 \description{
 A S4 class to store and manipulate images from Atomic Force Microscopes.
@@ -94,6 +94,6 @@ such as lines, etc.
 
 \item{\code{description}}{AFM image description or note}
 
-\item{\code{fullfilename}}{name of file}
+\item{\code{fullFilename}}{name of file}
 }}
 

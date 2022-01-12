@@ -28,3 +28,11 @@ test_that("line Profile", {
   expect_equal(sum(q$z), 128.764, tolerance = 1e-4)
   expect_equal(nlevels(as.factor(q$type)), 2)
 })
+
+
+
+test_that("test histogram for image", {
+  filename = AFM.getSampleImages(type='ibw')
+  d = AFM.import(filename)
+  expect_equal( sum(AFM.histogram(d, dataOnly=TRUE)$zDensity), 1)
+})

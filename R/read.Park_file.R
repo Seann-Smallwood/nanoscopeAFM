@@ -89,7 +89,7 @@ read.Park_file.v2 <- function(filename) {
     instrument = 'Park',
     history = '',
     description = description,
-    fullfilename = filename
+    fullFilename = filename
   )
 }
 

@@ -224,7 +224,7 @@ read.NID_headerItems <- function(filename) {
 
 NID.checkFile <- function(filename) {
   # does file exist?
-  if (!file.exists(filename)) return -1
+  if (!file.exists(filename)) return(-1)
   # length of file in bytes
   file.len = file.info(filename)$size
 

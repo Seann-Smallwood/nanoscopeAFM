@@ -99,19 +99,20 @@ AFMinfo.item <- function(obj, itemName="") {
 
 #' summary for AFMinfo object
 #'
-#' @param obj AFMinfo object
+#' @param object AFMinfo object
+#' @param ... other parameters
 #' @return quick summary
 #' @author Thomas Gredig
 #' @examples
 #' h1 = AFMinfo(AFM.getSampleImages(type='ibw')[1])
 #' summary(h1)
 #' @export
-summary.AFMinfo <- function(obj) {
-  cat('AFM image type:  ', obj$type, "\n")
-  cat('Resolution:      ', obj$widthPixel, "x", obj$heightPixel,'\n')
-  cat('Channels:        ', obj$noChannels,'\n')
-  cat('Scan rate (Hz):  ', obj$scanRate.Hz,'\n')
-  cat('Scan Angle (deg):', obj$scanAngle,'\n')
-  cat('Notes:           ', obj$note,'\n')
-  cat('Data Items:      ', nrow(obj$data),'\n')
+summary.AFMinfo <- function(object, ...) {
+  cat('AFM image type:  ', object$type, "\n")
+  cat('Resolution:      ', object$widthPixel, "x", object$heightPixel,'\n')
+  cat('Channels:        ', object$noChannels,'\n')
+  cat('Scan rate (Hz):  ', object$scanRate.Hz,'\n')
+  cat('Scan Angle (deg):', object$scanAngle,'\n')
+  cat('Notes:           ', object$note,'\n')
+  cat('Data Items:      ', nrow(object$data),'\n')
 }

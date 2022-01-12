@@ -2,18 +2,21 @@
 % Please edit documentation in R/AFMdata.R
 \name{print.AFMdata}
 \alias{print.AFMdata}
-\title{print essential information about the AFMdata object}
+\title{Print AFMdata object}
 \usage{
-\method{print}{AFMdata}(obj)
+\method{print}{AFMdata}(x, ...)
 }
 \arguments{
-\item{obj}{AFMdata object}
+\item{x}{AFMdata object}
+
+\item{...}{other arguments}
 }
 \value{
 text with object information
 }
 \description{
-print essential information about the AFMdata object
+prints essential information about the AFMdata object, which includes
+the description, channel, image size, history, and filename
 }
 \examples{
 d = AFM.import(AFM.getSampleImages(type='ibw')[1])

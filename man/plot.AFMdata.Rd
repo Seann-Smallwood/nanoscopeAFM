@@ -5,7 +5,7 @@
 \title{Graph of AFMdata object}
 \usage{
 \method{plot}{AFMdata}(
-  obj,
+  x,
   no = 1,
   mpt = NA,
   graphType = 1,
@@ -16,7 +16,7 @@
 )
 }
 \arguments{
-\item{obj}{AFMdata object}
+\item{x}{AFMdata object}
 
 \item{no}{channel number of the image}
 
@@ -29,6 +29,8 @@
 \item{addLines}{if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example}
 
 \item{verbose}{if \code{TRUE} it outputs additional information.}
+
+\item{...}{other arguments}
 }
 \value{
 ggplot graph

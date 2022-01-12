@@ -67,13 +67,15 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for AFMdata</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">obj</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>obj</dt>
+    <dl><dt>object</dt>
 <dd><p>AFMdata object</p></dd>
+<dt>...</dt>
+<dd><p>other summary parameters</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -88,7 +90,7 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="AFM.import.html">AFM.import</a></span><span class="op">(</span><span class="fu"><a href="AFM.getSampleImages.html">AFM.getSampleImages</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'ibw'</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         object               description resolution           size</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      objectect               description resolution           size</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 Cypher Image KC200, FePc, KC20170720Si  128 x 128 4000 x 4000 nm</span>

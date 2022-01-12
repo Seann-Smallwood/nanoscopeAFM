@@ -4,10 +4,12 @@
 \alias{summary.AFMdata}
 \title{summary of AFMdata object}
 \usage{
-\method{summary}{AFMdata}(obj)
+\method{summary}{AFMdata}(object, ...)
 }
 \arguments{
-\item{obj}{AFMdata object}
+\item{object}{AFMdata object}
+
+\item{...}{other summary parameters}
 }
 \value{
 summary of AFMdata object

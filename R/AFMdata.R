@@ -1,19 +1,3 @@
-# =============================================
-# http://adv-r.had.co.nz/OO-essentials.html#s4
-# =============================================
-
-# make sure AFMdata is valid
-check_AFMdata <- function(object) {
-  errors <- character()
-
-  if (!(object@instrument %in% c('Cypher','Park','NanoSurf','Veeco'))) {
-    msg <- paste('Object has invalid instrument:',object@instrument)
-    errors <- c(errors,msg)
-  }
-  if (length(errors) == 0) TRUE else errors
-}
-
-
 #' AFM image class
 #'
 #' A S4 class to store and manipulate images from Atomic Force Microscopes.
@@ -34,7 +18,7 @@ check_AFMdata <- function(object) {
 #' @slot instrument name of instrument (Park, Cypher, NanoSurf, Veeco)
 #' @slot history history of file changes
 #' @slot description AFM image description or note
-#' @slot fullfilename name of file
+#' @slot fullFilename name of file
 AFMdata<-setClass("AFMdata",
                   slots = c(data="list",
                             x.conv="numeric",
@@ -49,26 +33,37 @@ AFMdata<-setClass("AFMdata",
                             instrument="character",
                             history="character",
                             description="character",
-                            fullfilename="character"
+                            fullFilename="character"
                   ),
-                  validity = check_AFMdata)
+                  validity =
+                    function(object) {
+                      errors <- character()
+
+                      if (!(object@instrument %in% c('Cypher','Park','NanoSurf','Veeco'))) {
+                        msg <- paste('Object has invalid instrument:',object@instrument)
+                        errors <- c(errors,msg)
+                      }
+                      if (length(errors) == 0) TRUE else errors
+                    }
+                  )
 
 
 #' Constructor method of AFMImage Class.
 #'
 #' @param .Object an AFMdata object
-#' @slot data list with objects ($z is a list with images)
-#' @slot x.conv conversion factor from pixels to nm
-#' @slot y.conv conversion factor from pixels to nm
-#' @slot x.pixels number of pixels in x-direction
-#' @slot y.pixels number of pixels in y-direction
-#' @slot z.conv (not used)
-#' @slot z.units vector with units for $z (deg, m)
-#' @slot channel vector with names of channels
-#' @slot instrument name of instrument (Park, Cypher, NanoSurf, Veeco)
-#' @slot history history of file changes
-#' @slot description AFM image description or note
-#' @slot fullfilename name of file
+#' @param data list with objects (z is a list with images)
+#' @param x.conv conversion factor from pixels to nm
+#' @param y.conv conversion factor from pixels to nm
+#' @param x.pixels number of pixels in x-direction
+#' @param y.pixels number of pixels in y-direction
+#' @param z.conv (not used)
+#' @param z.units vector with units for z (deg, m)
+#' @param channel vector with names of channels
+#' @param instrument name of instrument (Park, Cypher, NanoSurf, Veeco)
+#' @param history history of file changes
+#' @param description AFM image description or note
+#' @param fullFilename name of file
+#' @return initialized AFMdata object
 #' @export
 #' @importFrom methods setMethod initialize new validObject
 setMethod(f="initialize",
@@ -85,7 +80,7 @@ setMethod(f="initialize",
                                instrument,
                                history,
                                description,
-                               fullfilename)
+                               fullFilename)
           {
             if (!missing(data)) .Object@data<-data
             if (!missing(x.conv)) {.Object@x.conv<-x.conv; .Object@x.nm=round(x.conv*(x.pixels-1)); }
@@ -98,10 +93,13 @@ setMethod(f="initialize",
             if (!missing(instrument)) .Object@instrument <-instrument
             if (!missing(history)) .Object@history <-history
             if (!missing(description)) .Object@description <-description
-            if (!missing(fullfilename)) .Object@fullfilename<-fullfilename
+            if (!missing(fullFilename)) .Object@fullFilename<-fullFilename
             validObject(.Object)
             return(.Object)
           })
+
+
+
 
 #' Initialize the AFMdata object
 #'
@@ -116,7 +114,7 @@ setMethod(f="initialize",
 #' @param instrument name of instrument (Park, Cypher, NanoSurf, Veeco)
 #' @param history history of file changes
 #' @param description AFM image description or note
-#' @param fullfilename name of file
+#' @param fullFilename name of file
 #' @export
 AFMdata <- function(data,
                     x.conv,
@@ -129,7 +127,7 @@ AFMdata <- function(data,
                     instrument,
                     history,
                     description="",
-                    fullfilename) {
+                    fullFilename) {
   return(new("AFMdata",
              data,
              x.conv,
@@ -142,7 +140,7 @@ AFMdata <- function(data,
              instrument,
              history,
              description,
-             fullfilename))
+             fullFilename))
 }
 
 
@@ -184,7 +182,7 @@ AFM.import <- function(filename, verbose=FALSE) {
       instrument = attr(d,"instrument"),
       history = '',
       description = attr(d,"note"),
-      fullfilename = filename
+      fullFilename = filename
     )
   }
   if (verbose) print(paste("Instrument:", obj@instrument))
@@ -192,51 +190,56 @@ AFM.import <- function(filename, verbose=FALSE) {
 }
 
 
-#' print essential information about the AFMdata object
+#' Print AFMdata object
 #'
-#' @param obj AFMdata object
+#' prints essential information about the AFMdata object, which includes
+#' the description, channel, image size, history, and filename
+#'
+#' @param x AFMdata object
+#' @param ... other arguments
 #' @return text with object information
 #' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' print(d)
 #' @export
-print.AFMdata <- function(obj) {
-  if(AFM.isImage(obj)) dataType='Image' else dataType='Force Curve'
-  cat("Object:     ",obj@instrument,"AFM",dataType,"\n")
-  cat("Description:",obj@description,'\n')
-  cat("Channel:    ",obj@channel,'\n')
-  cat("            ",obj@x.nm,"nm  x ",obj@y.nm,'nm \n')
-  cat("History:    ",obj@history,'\n')
-  cat("Filename:   ",obj@fullfilename)
+print.AFMdata <- function(x, ...) {
+  if(AFM.isImage(x)) dataType='Image' else dataType='Force Curve'
+  cat("Object:     ",x@instrument,"AFM",dataType,"\n")
+  cat("Description:",x@description,'\n')
+  cat("Channel:    ",x@channel,'\n')
+  cat("            ",x@x.nm,"nm  x ",x@y.nm,'nm \n')
+  cat("History:    ",x@history,'\n')
+  cat("Filename:   ",x@fullFilename)
 }
 
 #' summary of AFMdata object
 #'
-#' @param obj AFMdata object
+#' @param object AFMdata object
+#' @param ... other summary parameters
 #' @return summary of AFMdata object
 #' @author Thomas Gredig
 #' @examples
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' summary(d)
 #' @export
-summary.AFMdata <- function(obj) {
-  if (purrr::is_empty(obj@description)) obj@description=""
-  if(AFM.isImage(obj)) dataType='Image' else dataType='Force Curve'
+summary.AFMdata <- function(object,...) {
+  if (purrr::is_empty(object@description)) object@description=""
+  if(AFM.isImage(object)) dataType='Image' else dataType='Force Curve'
   r = data.frame(
-    object = paste(obj@instrument,dataType),
-    description = paste(obj@description),
-    resolution = paste(obj@x.pixels,"x",obj@y.pixels),
-    size = paste(obj@x.nm,"x",round(obj@y.nm),'nm'),
-    channel = paste(obj@channel),
-    history = paste(obj@history)
+    objectect = paste(object@instrument,dataType),
+    description = paste(object@description),
+    resolution = paste(object@x.pixels,"x",object@y.pixels),
+    size = paste(object@x.nm,"x",round(object@y.nm),'nm'),
+    channel = paste(object@channel),
+    history = paste(object@history)
   )
   for(i in 1:length(r$channel)) {
-    d = AFM.raster(obj,i)
+    d = AFM.raster(object,i)
     r$z.min[i]=min(d$z)
     r$z.max[i] = max(d$z)
   }
-  r$z.units = paste(obj@z.units)
+  r$z.units = paste(object@z.units)
   r
 }
 
@@ -275,13 +278,14 @@ AFM.raster <- function(obj,no=1) {
 
 #' Graph of AFMdata object
 #'
-#' @param obj AFMdata object
+#' @param x AFMdata object
 #' @param no channel number of the image
 #' @param mpt midpoint for coloring
 #' @param graphType 1 = graph with legend outside, 2 = square graph with line bar, 3 = plain graph
 #' @param trimPeaks value from 0 to 1, where 0=trim 0\% and 1=trim 100\% of data points, generally a value less than 0.01 is useful to elevate the contrast of the image
 #' @param addLines if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example
 #' @param verbose if \code{TRUE} it outputs additional information.
+#' @param ... other arguments
 #' @return ggplot graph
 #' @author Thomas Gredig
 #' @importFrom utils head tail
@@ -290,18 +294,18 @@ AFM.raster <- function(obj,no=1) {
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)
 #' @export
-plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALSE, verbose=FALSE, ...) {
-  if (no>length(obj@channel)) stop("imageNo out of bounds.")
-  cat("Graphing:",obj@channel[no])
-  if (verbose) print(paste("History:",obj@history))
-  d = AFM.raster(obj,no)
-  zLab = paste0(obj@channel[no],' (',obj@z.units[no],')')
+plot.AFMdata <- function(x,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALSE, verbose=FALSE, ...) {
+  if (no>length(x@channel)) stop("imageNo out of bounds.")
+  cat("Graphing:",x@channel[no])
+  if (verbose) print(paste("History:",x@history))
+  d = AFM.raster(x,no)
+  zLab = paste0(x@channel[no],' (',x@z.units[no],')')
   zLab = gsub('Retrace|Trace','',zLab)
 
   xlab <- expression(paste('x (',mu,'m)'))
 
   if (trimPeaks>0) {
-    AFM.histogram(obj, no, dataOnly = TRUE) -> qHist
+    AFM.histogram(x, no, dataOnly = TRUE) -> qHist
     cumsum(qHist$zDensity) -> csHist
     lowerBound = qHist$mids[tail(which(csHist<(trimPeaks/2)),n=1)]
     upperBound = qHist$mids[head(which(csHist>(1-trimPeaks/2)),n=1)]
@@ -311,10 +315,10 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALS
 
   if (addLines) {
     # check if there are lines
-    if (is.null(obj@data$line)) { warning("No lines attached.") }
+    if (is.null(x@data$line)) { warning("No lines attached.") }
     else {
       if (verbose) print("Adding lines using min. value for color.")
-      for(zLine in obj@data$line) {
+      for(zLine in x@data$line) {
         d$z[zLine] = min(d$z)
       }
     }
@@ -337,17 +341,17 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALS
       theme_bw()
   } else if (graphType==2) {
     # figure out coordinates for line
-    bar.length = signif(obj@x.nm*0.2,2)  # nm
-    bar.x.start = 0.05*obj@x.pixels * obj@x.conv
-    bar.y.start = 0.05*obj@y.pixels * obj@y.conv
+    bar.length = signif(x@x.nm*0.2,2)  # nm
+    bar.x.start = 0.05*x@x.pixels * x@x.conv
+    bar.y.start = 0.05*x@y.pixels * x@y.conv
     bar.x.end = bar.x.start + bar.length
     d.line = data.frame(
       x = c(bar.x.start, bar.x.end),
       y = c(bar.y.start, bar.y.start),
       z = 1,
-      label = c(paste(bar.length,"nm"),"")
+      myLabel = c(paste(bar.length,"nm"),"")
     )
-    zLab = obj@z.units[no]
+    zLab = x@z.units[no]
     g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
       geom_raster() +
       scale_fill_gradient2(low='red', mid='white', high='blue',
@@ -359,7 +363,7 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALS
       scale_x_continuous(expand=c(0,0))+
       coord_equal() +
       geom_line(data = d.line, aes(x/1000,y/1000), size=4) +
-      geom_text(data = d.line, aes(label=label), vjust=-1, hjust=0) +
+      geom_text(data = d.line, aes(label=myLabel), vjust=-1, hjust=0) +
       theme_bw() +
       theme(legend.position =c(0.99,0.01),
             legend.justification = c(1,0)) +
@@ -369,7 +373,7 @@ plot.AFMdata <- function(obj,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALS
             axis.ticks.y = element_blank())
 
   } else if (graphType==3) {
-    zLab = obj@z.units[no]
+    zLab = x@z.units[no]
     g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
       geom_raster() +
       scale_fill_gradient2(low='red', mid='white', high='blue',

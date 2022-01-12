@@ -4,10 +4,12 @@
 \alias{summary.AFMinfo}
 \title{summary for AFMinfo object}
 \usage{
-\method{summary}{AFMinfo}(obj)
+\method{summary}{AFMinfo}(object, ...)
 }
 \arguments{
-\item{obj}{AFMinfo object}
+\item{object}{AFMinfo object}
+
+\item{...}{other parameters}
 }
 \value{
 quick summary

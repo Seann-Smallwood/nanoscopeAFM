@@ -14,18 +14,18 @@ Description: Reads atomic force microscopy (AFM) image files into data tables
 URL: https://thomasgredig.github.io/nanoscopeAFM/
 License: GPL-3
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 RoxygenNote: 7.1.2
 Imports:
     tools,
     plyr,
-    stringr,
     ggplot2,
     methods,
-    scales,
-    cowplot,
     purrr
 Suggests: 
+    cowplot,
+    scales,
     rmarkdown,
     knitr,
     testthat (>= 2.1.0)

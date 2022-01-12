@@ -50,7 +50,7 @@ read.NanoSurf_file<- function(filename, imageNo=1) {
 
     if (sum(bin.ID) == sum(c(35,33))) {
       if(length(q)>0) {
-        for(i in 1:length(q)) {
+        for(i in seq_len(length(q))) {
           bin.data <- readBin(con, integer(),  n = q[i]*q[i], size=2, endian = "little")
           r[[i]] = bin.data
         }

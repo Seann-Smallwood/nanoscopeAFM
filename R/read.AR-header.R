@@ -90,8 +90,8 @@ read.ibw.image<-function(wavefile,Verbose=FALSE,HeaderOnly=FALSE){
   # so have to do it myself
   if(WaveHeader$typeBits[7]) { what="integer"; WaveHeader$signAdjustment=2^(size*8)}
 
-  WaveHeader$what=what;
-  WaveHeader$size=size;
+  WaveHeader$what=what
+  WaveHeader$size=size
   return(WaveHeader)
 }
 

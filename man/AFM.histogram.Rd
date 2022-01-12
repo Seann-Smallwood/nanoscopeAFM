@@ -11,7 +11,8 @@ AFM.histogram(obj, no = 1, dataOnly = FALSE)
 
 \item{no}{channel number of the image}
 
-\item{dataOnly}{if \code{TRUE} a data frame with the histogram data is returned}
+\item{dataOnly}{if \code{TRUE} a data frame with the histogram
+data is returned}
 }
 \value{
 data frame or ggplot

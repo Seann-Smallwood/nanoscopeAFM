@@ -12,8 +12,9 @@
 #' @return AFMdata object with line data
 #' @export
 AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
-  AFMcopy = obj
-  AFMcopy@history <- paste(AFMcopy@history,"AFM.lineProfile(",x1,",",y1,",",x2,",",y2,");")
+  AFMcopy <- obj
+  AFMcopy@history <- paste(AFMcopy@history,
+                           "AFM.lineProfile(",x1,",",y1,",",x2,",",y2,");")
   d = AFM.raster(AFMcopy)
   range.x = max(d$x) - min(d$x)
   range.y = max(d$y) - min(d$y)
@@ -42,7 +43,7 @@ AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
     lx = ly = 0
     if(er2 >= Dy) {
       er = er + Dy
-      x1.pixel = x1.pixel + sx;
+      x1.pixel = x1.pixel + sx
       lx = AFMcopy@x.conv
     }
     if(er2 <= Dx) {

@@ -7,7 +7,8 @@
 AFM.getSampleImages(type = "*")
 }
 \arguments{
-\item{type}{could be "ibw" for Asylum Research, "nid" for NanoSurf, "tiff" for Park, if empty or "*", all files will be returned}
+\item{type}{could be "ibw" for Asylum Research, "nid" for NanoSurf, "tiff" for Park,
+if empty or "*", all files will be returned}
 }
 \value{
 vector with path/filename to AFM sample images

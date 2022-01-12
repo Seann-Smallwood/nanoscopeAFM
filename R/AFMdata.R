@@ -234,7 +234,7 @@ summary.AFMdata <- function(object,...) {
     channel = paste(object@channel),
     history = paste(object@history)
   )
-  for(i in 1:length(r$channel)) {
+  for(i in seq_len(length(r$channel))) {
     d = AFM.raster(object,i)
     r$z.min[i]=min(d$z)
     r$z.max[i] = max(d$z)

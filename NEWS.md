@@ -1,5 +1,8 @@
 # nanoscopeAFM 2.0.5
 
+* run devtools::test_coverage()
+* run rhub::check_for_cran()
+* fix several variables to eliminate rchk warnings
 * allow `trimPeaks`, which removes extreme points for better contrast
 * fix graphing of channels > 1
 * add line profiles

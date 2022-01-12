@@ -1,8 +1,15 @@
 .Rproj.user
+.Rapp.history
 .Rhistory
 .RData
 .Ruserdata
 .DS_Store
 .Rbuildignore
+
+*-Ex.R
+/*.tar.gz
+/*.Rcheck/ 
+
 nanoscopeAFM.Rproj
 inst/doc
+_main.R

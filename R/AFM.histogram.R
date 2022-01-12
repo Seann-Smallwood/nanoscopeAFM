@@ -2,7 +2,8 @@
 #'
 #' @param obj AFMdata object
 #' @param no channel number of the image
-#' @param dataOnly if \code{TRUE} a data frame with the histogram data is returned
+#' @param dataOnly if \code{TRUE} a data frame with the histogram
+#' data is returned
 #' @return data frame or ggplot
 #' @author Thomas Gredig
 #' @examples

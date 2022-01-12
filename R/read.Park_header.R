@@ -25,7 +25,7 @@ tagReader <- function(fname) {
   tiffTags=data.frame()
   while (1==1) {
     newtiffTags = read.IFD(q,A)
-    if (nrow(newtiffTags)==0) break;
+    if (nrow(newtiffTags)==0) break
     tiffTags = rbind(tiffTags, newtiffTags)
     A = nrow(newtiffTags)*12+A+2
   }

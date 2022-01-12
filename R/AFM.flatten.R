@@ -15,8 +15,8 @@
 #' plot(d2,graphType=2)
 #' @export
 AFM.flatten <- function(obj,no=1,verbose=FALSE) {
-  AFMcopy = obj
-  if (purrr::is_empty(AFMcopy@history)) AFMcopy@history=""
+  AFMcopy <- obj
+  if (purrr::is_empty(AFMcopy@history)) AFMcopy@history <- ""
   AFMcopy@history = paste(AFMcopy@history,"AFM.flatten(",no,");")
 
   d = AFM.raster(AFMcopy,no)

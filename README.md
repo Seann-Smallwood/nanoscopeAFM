@@ -19,8 +19,8 @@ devtools::install_github("thomasgredig/nanoscopeAFM")
 Several new data structures (S3 and S4) are introduced:
 
 - `AFMdata` - S4 class that contains all AFM images from a file
-- `AFMinfo` - S3 class that contains all parameters of the AFM images, such as vibration frequnecy, etc.
-- `AFMmath` - S3 class that contains computed paramters, such as roughness, etc. about a particular AFM image
+- `AFMinfo` - S3 class that contains all parameters of the AFM images, such as vibration frequency, etc.
+- `AFMmath` - S3 class that contains computed parameters, such as roughness, etc. about a particular AFM image
 
 ## Usage
 

@@ -1,5 +1,6 @@
 # nanoscopeAFM 2.0.5
 
+* create sticker with hexSticker package
 * run devtools::test_coverage()
 * run rhub::check_for_cran()
 * fix several variables to eliminate rchk warnings

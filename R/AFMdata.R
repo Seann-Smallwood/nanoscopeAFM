@@ -307,6 +307,7 @@ plot.AFMdata <- function(x,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALSE,
   if (trimPeaks>0) {
     AFM.histogram(x, no, dataOnly = TRUE) -> qHist
     cumsum(qHist$zDensity) -> csHist
+    csHist / max(csHist) -> csHist
     lowerBound = qHist$mids[tail(which(csHist<(trimPeaks/2)),n=1)]
     upperBound = qHist$mids[head(which(csHist>(1-trimPeaks/2)),n=1)]
     d$z[which(d$z<lowerBound)] <- lowerBound

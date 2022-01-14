@@ -16,8 +16,8 @@
 AFM.histogram <- function(obj, no=1, dataOnly=FALSE) {
   dr = AFM.raster(obj,no)
   if (dataOnly) {
-    graphics::hist(dr$z, breaks=200, plot=FALSE) -> q
-    result = data.frame(mids = q$mids , zDensity = q$density)
+    graphics::hist(dr$z, breaks=10, plot=FALSE) -> q
+    result = data.frame(mids = q$mids , zDensity = q$density/sum(q$density))
   } else {
     result =
       ggplot(dr, aes(x=z)) +

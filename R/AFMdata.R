@@ -284,17 +284,19 @@ AFM.raster <- function(obj,no=1) {
 #' @param graphType 1 = graph with legend outside, 2 = square graph with line bar, 3 = plain graph
 #' @param trimPeaks value from 0 to 1, where 0=trim 0\% and 1=trim 100\% of data points, generally a value less than 0.01 is useful to elevate the contrast of the image
 #' @param addLines if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example
+#' @param redBlue if \code{TRUE} output red / blue color scheme
 #' @param verbose if \code{TRUE} it outputs additional information.
 #' @param ... other arguments
 #' @return ggplot graph
 #' @author Thomas Gredig
 #' @importFrom utils head tail
 #' @importFrom ggplot2 ggplot aes geom_raster geom_line theme_bw scale_fill_gradient2 xlab ylab labs scale_y_continuous scale_x_continuous coord_equal geom_text theme element_blank
+#' @importFrom ggplot2 scale_fill_viridis_c
 #' @examples
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)
 #' @export
-plot.AFMdata <- function(x,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALSE, verbose=FALSE, ...) {
+plot.AFMdata <- function(x, no=1, mpt=NA, graphType=1, trimPeaks=0, addLines=FALSE, redBlue = FALSE, verbose=FALSE, ...) {
   if (no>length(x@channel)) stop("imageNo out of bounds.")
   cat("Graphing:",x@channel[no])
   if (verbose) print(paste("History:",x@history))
@@ -328,11 +330,12 @@ plot.AFMdata <- function(x,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALSE,
   if (is.na(mpt)) mean(d$z) -> mpt
 
   if (verbose) print(paste("z range: ",min(d$z)," to ",max(d$z)," midpoint",mpt))
+  if (redBlue) sFill = scale_fill_gradient2(low='red', mid='white', high='blue', midpoint=mpt)
+  else sFill = scale_fill_viridis_c()
   if (graphType==1) {
     g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
       geom_raster() +
-      scale_fill_gradient2(low='red', mid='white', high='blue',
-                           midpoint=mpt) +
+      sFill +
       xlab(xlab) +
       ylab(expression(paste('y (',mu,'m)'))) +
       labs(fill=zLab) +
@@ -355,8 +358,7 @@ plot.AFMdata <- function(x,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALSE,
     zLab = x@z.units[no]
     g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
       geom_raster() +
-      scale_fill_gradient2(low='red', mid='white', high='blue',
-                           midpoint=mpt) +
+      sFill +
       xlab("") +
       ylab("") +
       labs(fill=zLab) +
@@ -377,8 +379,7 @@ plot.AFMdata <- function(x,no=1,mpt=NA,graphType=1, trimPeaks=0, addLines=FALSE,
     zLab = x@z.units[no]
     g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
       geom_raster() +
-      scale_fill_gradient2(low='red', mid='white', high='blue',
-                           midpoint=mpt) +
+      sFill +
       xlab("") +
       ylab("") +
       scale_y_continuous(expand=c(0,0))+

@@ -1,5 +1,6 @@
 # nanoscopeAFM 2.0.5
 
+* add viridis color palette by default, revert back with `redBlue=TRUE`
 * create sticker with hexSticker package
 * run devtools::test_coverage()
 * run rhub::check_for_cran()

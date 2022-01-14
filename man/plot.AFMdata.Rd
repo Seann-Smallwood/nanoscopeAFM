@@ -11,6 +11,7 @@
   graphType = 1,
   trimPeaks = 0,
   addLines = FALSE,
+  redBlue = FALSE,
   verbose = FALSE,
   ...
 )
@@ -27,6 +28,8 @@
 \item{trimPeaks}{value from 0 to 1, where 0=trim 0\% and 1=trim 100\% of data points, generally a value less than 0.01 is useful to elevate the contrast of the image}
 
 \item{addLines}{if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example}
+
+\item{redBlue}{if \code{TRUE} output red / blue color scheme}
 
 \item{verbose}{if \code{TRUE} it outputs additional information.}
 

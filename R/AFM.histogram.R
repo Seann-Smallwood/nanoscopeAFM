@@ -2,6 +2,7 @@
 #'
 #' @param obj AFMdata object
 #' @param no channel number of the image
+#' @param binNo number of bins in the histogram
 #' @param dataOnly if \code{TRUE} a data frame with the histogram
 #' data is returned
 #' @return data frame or ggplot
@@ -13,16 +14,16 @@
 #' @export
 #' @importFrom ggplot2 ggplot aes geom_histogram geom_density
 #' @importFrom graphics hist
-AFM.histogram <- function(obj, no=1, dataOnly=FALSE) {
+AFM.histogram <- function(obj, no=1, binNo = 200, dataOnly=FALSE) {
   dr = AFM.raster(obj,no)
   if (dataOnly) {
-    graphics::hist(dr$z, breaks=10, plot=FALSE) -> q
+    graphics::hist(dr$z, breaks=binNo, plot=FALSE) -> q
     result = data.frame(mids = q$mids , zDensity = q$density/sum(q$density))
   } else {
     result =
       ggplot(dr, aes(x=z)) +
       geom_histogram(aes(y=..density..),
-                     colour="black", fill="pink", bins=200)+
+                     colour="black", fill="pink", bins=binNo)+
       geom_density(alpha=0.2, fill='red') +
       theme_bw()
   }

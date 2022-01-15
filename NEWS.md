@@ -1,5 +1,6 @@
 # nanoscopeAFM 2.0.5
 
+* fix bin number in histogram
 * add viridis color palette by default, revert back with `redBlue=TRUE`
 * create sticker with hexSticker package
 * run devtools::test_coverage()
@@ -8,6 +9,7 @@
 * allow `trimPeaks`, which removes extreme points for better contrast
 * fix graphing of channels > 1
 * add line profiles
+
 
 # nanoscopeAFM 2.0.4
 

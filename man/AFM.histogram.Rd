@@ -4,12 +4,14 @@
 \alias{AFM.histogram}
 \title{Histogram of AFM image}
 \usage{
-AFM.histogram(obj, no = 1, dataOnly = FALSE)
+AFM.histogram(obj, no = 1, binNo = 200, dataOnly = FALSE)
 }
 \arguments{
 \item{obj}{AFMdata object}
 
 \item{no}{channel number of the image}
+
+\item{binNo}{number of bins in the histogram}
 
 \item{dataOnly}{if \code{TRUE} a data frame with the histogram
 data is returned}

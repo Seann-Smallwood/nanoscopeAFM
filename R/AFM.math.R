@@ -10,11 +10,13 @@
 AFM.math.params <- function(obj) {
   Ra = get.Ra(obj@data$z[[1]])
   Rq = get.Rq(obj@data$z[[1]])
+  Hsd = get.Hsd(obj@data$z[[1]])
   structure(
     list(
       basename = basename(obj@fullFilename),
       Ra = Ra,
-      Rq = Rq
+      Rq = Rq,
+      Hsd = Hsd
     ),
     class = 'AFMmath'
   )
@@ -33,6 +35,7 @@ summary.AFMmath <- function(object, ...) {
   cat("Basename:      ", object$basename,"\n")
   cat("Roughness Ra = ", object$Ra," nm \n")
   cat("Roughness Rq = ", object$Rq," nm \n")
+  cat("Standard Deviation of Height Hsd = ", object$Hsd," nm \n")
 }
 
 
@@ -43,3 +46,5 @@ NULL
 get.Ra <- function(z) { sum(abs(z-mean(z)))/length(z) }
 # computes the root mean square roughness Rq
 get.Rq <- function(z) { sqrt(sum((z-mean(z))^2)/length(z)) }
+# computes the standard deviation in height Hsd
+get.Hsd <- function(z) {sd(z)}

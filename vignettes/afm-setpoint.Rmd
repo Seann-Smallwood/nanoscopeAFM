@@ -1,8 +1,8 @@
 ---
-title: "afm-setpoint"
+title: "Setpoint"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{afm-setpoint}
+  %\VignetteIndexEntry{Setpoint}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -1,8 +1,8 @@
 ---
-title: "AFM-graphTypes"
+title: "Plot Graph Types"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{AFM-graphTypes}
+  %\VignetteIndexEntry{Plot Graph Types}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -34,7 +34,7 @@ The AFM image can be displayed using graphTypes:
 This is the basic and default graph for an AFM image:
 
 ```{r}
-plot(afmd, graphType=1)
+plot(afmd, graphType=1, trimPeaks=0.01)
 ```
 
 ## graphType 2
@@ -42,13 +42,13 @@ plot(afmd, graphType=1)
 This graph has a square shape and adds a bar of length 20%; it places the scale inside the graph.
 
 ```{r}
-plot(afmd, graphType=2)
+plot(afmd, graphType=2,trimPeaks=0.01)
 ```
 
 The image can be saved with `ggsave` as it is graphed with ggplot.
 
 ```{r}
-g1 = plot(afmd, graphType=2)
+g1 = plot(afmd, graphType=2, trimPeaks=0.01)
 ggsave(tempfile(pattern = "", fileext = ".png"), plot=g1, dpi=300)
 ```
 
@@ -57,12 +57,22 @@ ggsave(tempfile(pattern = "", fileext = ".png"), plot=g1, dpi=300)
 This graph type is bare and has neither length scales nor legend.
 
 ```{r}
-plot(afmd, graphType=3)
+plot(afmd, graphType=3, trimPeaks=0.01)
 summary(afmd)
 ```
 
 
-## graphing 2 plots side by side
+## Red Blue Color Scheme
+
+This graph type is bare and has neither length scales nor legend.
+
+```{r}
+plot(afmd, graphType=1, trimPeaks=0.01, redBlue = TRUE)
+```
+
+
+
+## Graphing 2 plots side by side
 
 Use the package `cowplot` to create a graph with two plots. Use `save_plot` to save the graph.
 
@@ -71,11 +81,12 @@ library(cowplot)
 fname2 = AFM.getSampleImages(type='ibw')[1]
 afmd2 = AFM.import(fname2)
 summary(afmd2)
-g1 = plot(afmd, trimPeaks=0.01, graphType = 3)
-g2 = plot(afmd2, no=2, trimPeaks=0.01, graphType = 3, mpt=29.6)
-g3 = plot(afmd, no=3, trimPeaks=0.01, graphType = 3, mpt=65.5)
-g4 = plot(afmd, no=4, trimPeaks=0.01, graphType = 3)
-plot_grid(g1, g2, g3, g4,
-          labels=c('A','B','C','D'))
+g1 = plot(afmd, trimPeaks=0.01, graphType = 1)
+g2 = plot(afmd2, no=2, trimPeaks=0.01, graphType = 1, mpt=29.6)
+g3 = plot(afmd, no=3, trimPeaks=0.01, graphType = 1, mpt=65.5)
+g4 = plot(afmd, no=4, trimPeaks=0.01, graphType = 1)
+gAll = plot_grid(g1, g2, g3, g4,
+          labels=c('a','b','c','d'))
+ggdraw(add_sub(gAll, "(a) height, (b) amplitude, (c) phase, (d) z sensor",x=0.1, hjust=0))
 ```
 

@@ -33,16 +33,19 @@ Igor Wavefile, Nanoscope Veeco file, Park AFM file, or Nanosurf file"><meta prop
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/AFM-graphTypes.html">AFM-graphTypes</a>
+      <a href="../articles/AFM-Setpoint.html">Setpoint</a>
     </li>
     <li>
-      <a href="../articles/AFM-image-summaries.html">AFM-image-summaries</a>
+      <a href="../articles/AFM-graphTypes.html">Plot Graph Types</a>
     </li>
     <li>
-      <a href="../articles/afm-setpoint.html">afm-setpoint</a>
+      <a href="../articles/AFM-imageSummary.html">AFM Image Summary</a>
     </li>
     <li>
-      <a href="../articles/graphAFMimage.html">graphAFMimage</a>
+      <a href="../articles/LineProfiles.html">Line Profiles</a>
+    </li>
+    <li>
+      <a href="../articles/advancedAFM-Graph.html">Advanced AFM Image Graphing</a>
     </li>
   </ul></li>
 <li>
@@ -87,9 +90,8 @@ Igor Wavefile, Nanoscope Veeco file, Park AFM file, or Nanosurf file</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">AFM.isFileValid</span><span class="op">(</span><span class="fu"><a href="AFM.getSampleImages.html">AFM.getSampleImages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>the condition has length &gt; 1 and only the first element will be used</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE TRUE TRUE TRUE</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">AFM.isFileValid</span><span class="op">(</span><span class="fu"><a href="AFM.getSampleImages.html">AFM.getSampleImages</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
     </div>
   </div>

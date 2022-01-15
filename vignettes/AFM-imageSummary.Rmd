@@ -1,8 +1,8 @@
 ---
-title: "AFM-image-summaries"
+title: "AFM Image Summary"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{AFM-image-summaries}
+  %\VignetteIndexEntry{AFM Image Summary}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,6 +27,7 @@ for(filename in file.list) {
 }
 ```
 
+# AFMinfo class
 
 Additional information can be found using the `AFMinfo` object:
 

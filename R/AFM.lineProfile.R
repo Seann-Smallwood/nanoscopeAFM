@@ -52,8 +52,8 @@ AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
       ly = AFMcopy@y.conv
     }
     # add data point
-    q1 = x1.pixel*width.x+y1.pixel
-    q2 = q2+sqrt(lx^2+ly^2)
+    q1 = x1.pixel + y1.pixel * width.y
+    q2 = q2+sqrt(lx^2 + ly^2)
     r=c(r, q1)
     r2 = c(r2, q2)
   }

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AFM-image-summaries • nanoscopeAFM</title>
+<title>AFM Image Summary • nanoscopeAFM</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="AFM-image-summaries">
+<script src="../pkgdown.js"></script><meta property="og:title" content="AFM Image Summary">
 <meta property="og:description" content="nanoscopeAFM">
 <meta property="og:image" content="https://thomasgredig.github.io/nanoscopeAFM/reference/figures/logo.png">
 <meta property="og:image:alt" content="nanoscopeAFM - AFM analysis tool in R">
@@ -61,16 +61,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/AFM-Setpoint.html">Setpoint</a>
+    </li>
+    <li>
       <a href="../articles/AFM-graphTypes.html">Plot Graph Types</a>
     </li>
     <li>
-      <a href="../articles/AFM-image-summaries.html">AFM-image-summaries</a>
+      <a href="../articles/AFM-imageSummary.html">AFM Image Summary</a>
     </li>
     <li>
-      <a href="../articles/afm-setpoint.html">afm-setpoint</a>
+      <a href="../articles/LineProfiles.html">Line Profiles</a>
     </li>
     <li>
-      <a href="../articles/graphAFMimage.html">graphAFMimage</a>
+      <a href="../articles/advancedAFM-Graph.html">Advanced AFM Image Graphing</a>
     </li>
   </ul>
 </li>
@@ -91,11 +94,11 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>AFM-image-summaries</h1>
+      <h1 data-toc-skip>AFM Image Summary</h1>
             
       
       
-      <div class="hidden name"><code>AFM-image-summaries.Rmd</code></div>
+      <div class="hidden name"><code>AFM-imageSummary.Rmd</code></div>
 
     </div>
 
@@ -138,6 +141,10 @@
 <span class="co">#&gt; 1 Veeco Image              512 x 512 1769 x 1769 nm  Height         -145.6084</span>
 <span class="co">#&gt;      z.max z.units</span>
 <span class="co">#&gt; 1 13.86895       m</span></code></pre></div>
+</div>
+<div class="section level1">
+<h1 id="afminfo-class">AFMinfo class<a class="anchor" aria-label="anchor" href="#afminfo-class"></a>
+</h1>
 <p>Additional information can be found using the <code>AFMinfo</code> object:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">for</span><span class="op">(</span><span class="va">filename</span> <span class="kw">in</span> <span class="va">file.list</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span> <span class="op">{</span>
@@ -860,7 +867,7 @@
 <span class="co">#&gt; [1] "Cypher"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $filename</span>
-<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmprfkwcU/temp_libpath5c4498b5f9a/nanoscopeAFM/extdata/AR_20211011.ibw"</span>
+<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmprfkwcU/temp_libpath5c427ee7070/nanoscopeAFM/extdata/AR_20211011.ibw"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $widthPixel</span>
 <span class="co">#&gt; [1] " 128"</span>
@@ -1456,7 +1463,7 @@
 <span class="co">#&gt; [1] "NanoSurf"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $filename</span>
-<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmprfkwcU/temp_libpath5c4498b5f9a/nanoscopeAFM/extdata/NanoSurf_20160301.nid"</span>
+<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmprfkwcU/temp_libpath5c427ee7070/nanoscopeAFM/extdata/NanoSurf_20160301.nid"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $widthPixel</span>
 <span class="co">#&gt; [1] "128 "</span>
@@ -1541,7 +1548,7 @@
 <span class="co">#&gt; [1] "Park"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $filename</span>
-<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmprfkwcU/temp_libpath5c4498b5f9a/nanoscopeAFM/extdata/Park_20210916_034.tiff"</span>
+<span class="co">#&gt; [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmprfkwcU/temp_libpath5c427ee7070/nanoscopeAFM/extdata/Park_20210916_034.tiff"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $widthPixel</span>
 <span class="co">#&gt; [1] "256"</span>

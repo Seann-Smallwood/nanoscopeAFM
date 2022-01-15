@@ -1,5 +1,7 @@
 # nanoscopeAFM 2.0.5
 
+* add vignette for Line Profile
+* fix x-y line profile directions
 * fix bin number in histogram
 * add viridis color palette by default, revert back with `redBlue=TRUE`
 * create sticker with hexSticker package

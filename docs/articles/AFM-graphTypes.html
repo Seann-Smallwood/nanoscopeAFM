@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AFM-graphTypes • nanoscopeAFM</title>
+<title>Plot Graph Types • nanoscopeAFM</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="AFM-graphTypes">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Plot Graph Types">
 <meta property="og:description" content="nanoscopeAFM">
 <meta property="og:image" content="https://thomasgredig.github.io/nanoscopeAFM/reference/figures/logo.png">
 <meta property="og:image:alt" content="nanoscopeAFM - AFM analysis tool in R">
@@ -61,16 +61,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/AFM-graphTypes.html">AFM-graphTypes</a>
+      <a href="../articles/AFM-Setpoint.html">Setpoint</a>
     </li>
     <li>
-      <a href="../articles/AFM-image-summaries.html">AFM-image-summaries</a>
+      <a href="../articles/AFM-graphTypes.html">Plot Graph Types</a>
     </li>
     <li>
-      <a href="../articles/afm-setpoint.html">afm-setpoint</a>
+      <a href="../articles/AFM-imageSummary.html">AFM Image Summary</a>
     </li>
     <li>
-      <a href="../articles/graphAFMimage.html">graphAFMimage</a>
+      <a href="../articles/LineProfiles.html">Line Profiles</a>
+    </li>
+    <li>
+      <a href="../articles/advancedAFM-Graph.html">Advanced AFM Image Graphing</a>
     </li>
   </ul>
 </li>
@@ -91,7 +94,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>AFM-graphTypes</h1>
+      <h1 data-toc-skip>Plot Graph Types</h1>
             
       
       
@@ -118,7 +121,7 @@
 </h2>
 <p>This is the basic and default graph for an AFM image:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, graphType<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, graphType<span class="op">=</span><span class="fl">1</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: HeightRetrace</span></code></pre></div>
 <p><img src="AFM-graphTypes_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
@@ -127,12 +130,12 @@
 </h2>
 <p>This graph has a square shape and adds a bar of length 20%; it places the scale inside the graph.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, graphType<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, graphType<span class="op">=</span><span class="fl">2</span>,trimPeaks<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: HeightRetrace</span></code></pre></div>
 <p><img src="AFM-graphTypes_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p>The image can be saved with <code>ggsave</code> as it is graphed with ggplot.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, graphType<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, graphType<span class="op">=</span><span class="fl">2</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: HeightRetrace</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">""</span>, fileext <span class="op">=</span> <span class="st">".png"</span><span class="op">)</span>, plot<span class="op">=</span><span class="va">g1</span>, dpi<span class="op">=</span><span class="fl">300</span><span class="op">)</span>
 <span class="co">#&gt; Saving 7.29 x 4.51 in image</span></code></pre></div>
@@ -142,7 +145,7 @@
 </h2>
 <p>This graph type is bare and has neither length scales nor legend.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, graphType<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, graphType<span class="op">=</span><span class="fl">3</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: HeightRetrace</span></code></pre></div>
 <p><img src="AFM-graphTypes_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -159,10 +162,19 @@
 <span class="co">#&gt; 4   ZSensorRetrace         -29.44336 48.16414      nm</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="graphing-2-plots-side-by-side">graphing 2 plots side by side<a class="anchor" aria-label="anchor" href="#graphing-2-plots-side-by-side"></a>
+<h2 id="red-blue-color-scheme">Red Blue Color Scheme<a class="anchor" aria-label="anchor" href="#red-blue-color-scheme"></a>
+</h2>
+<p>This graph type is bare and has neither length scales nor legend.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, graphType<span class="op">=</span><span class="fl">1</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, redBlue <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Graphing: HeightRetrace</span></code></pre></div>
+<p><img src="AFM-graphTypes_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+</div>
+<div class="section level2">
+<h2 id="graphing-2-plots-side-by-side">Graphing 2 plots side by side<a class="anchor" aria-label="anchor" href="#graphing-2-plots-side-by-side"></a>
 </h2>
 <p>Use the package <code>cowplot</code> to create a graph with two plots. Use <code>save_plot</code> to save the graph.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span>
 <span class="va">fname2</span> <span class="op">=</span> <span class="fu"><a href="../reference/AFM.getSampleImages.html">AFM.getSampleImages</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'ibw'</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
 <span class="va">afmd2</span> <span class="op">=</span> <span class="fu"><a href="../reference/AFM.import.html">AFM.import</a></span><span class="op">(</span><span class="va">fname2</span><span class="op">)</span>
@@ -177,17 +189,18 @@
 <span class="co">#&gt; 2 AmplitudeRetrace          29.00730 32.78488      nm</span>
 <span class="co">#&gt; 3     PhaseRetrace          63.92822 85.18923     deg</span>
 <span class="co">#&gt; 4   ZSensorRetrace         -29.44336 48.16414      nm</span>
-<span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: HeightRetrace</span>
-<span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd2</span>, no<span class="op">=</span><span class="fl">2</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">3</span>, mpt<span class="op">=</span><span class="fl">29.6</span><span class="op">)</span>
+<span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd2</span>, no<span class="op">=</span><span class="fl">2</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">1</span>, mpt<span class="op">=</span><span class="fl">29.6</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: AmplitudeRetrace</span>
-<span class="va">g3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, no<span class="op">=</span><span class="fl">3</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">3</span>, mpt<span class="op">=</span><span class="fl">65.5</span><span class="op">)</span>
+<span class="va">g3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, no<span class="op">=</span><span class="fl">3</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">1</span>, mpt<span class="op">=</span><span class="fl">65.5</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: PhaseRetrace</span>
-<span class="va">g4</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, no<span class="op">=</span><span class="fl">4</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="va">g4</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">afmd</span>, no<span class="op">=</span><span class="fl">4</span>, trimPeaks<span class="op">=</span><span class="fl">0.01</span>, graphType <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; Graphing: ZSensorRetrace</span>
-<span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span>, <span class="va">g3</span>, <span class="va">g4</span>,
-          labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'C'</span>,<span class="st">'D'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="AFM-graphTypes_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<span class="va">gAll</span> <span class="op">=</span> <span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html" class="external-link">plot_grid</a></span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span>, <span class="va">g3</span>, <span class="va">g4</span>,
+          labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>,<span class="st">'d'</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://wilkelab.org/cowplot/reference/ggdraw.html" class="external-link">ggdraw</a></span><span class="op">(</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/add_sub.html" class="external-link">add_sub</a></span><span class="op">(</span><span class="va">gAll</span>, <span class="st">"(a) height, (b) amplitude, (c) phase, (d) z sensor"</span>,x<span class="op">=</span><span class="fl">0.1</span>, hjust<span class="op">=</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="AFM-graphTypes_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
   </div>
 

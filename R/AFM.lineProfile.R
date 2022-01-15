@@ -9,6 +9,7 @@
 #' @param y1 start y position in AFM units from bottom right
 #' @param x2 end x position in AFM units from bottom right
 #' @param y2 end y position in AFM units from bottom right
+#' @author Thomas Gredig
 #' @return AFMdata object with line data
 #' @export
 AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
@@ -68,6 +69,7 @@ AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
 #'
 #' @param obj AFMdata object
 #' @param no channel number
+#' @author Thomas Gredig
 #' @param dataOnly if \code{TRUE} no graph is returned
 #' @importFrom ggplot2 ggplot geom_path scale_color_discrete xlab theme_bw theme
 #' @examples

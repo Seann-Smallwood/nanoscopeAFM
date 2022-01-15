@@ -27,8 +27,8 @@ test_that("AFM.getSampleImages: find sample files", {
 test_that("line Profile", {
   AFM.lineProfile(afmd, 0,0, 2000,2000) -> d1
   AFM.lineProfile(d1, 0,0, 100,2500) -> d2
-  q = AFM.linePlot(d2,dataOnly=TRUE)
-  expect_equal(sum(q$z), 128.764, tolerance = 1e-4)
+  q = AFM.linePlot(d2, dataOnly=TRUE)
+  expect_equal(sum(q$z), -103.9477, tolerance = 1e-4)
   expect_equal(nlevels(as.factor(q$type)), 2)
 })
 

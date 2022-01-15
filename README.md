@@ -84,6 +84,7 @@ Several functions are available for image analysis, including:
 * [Histogram](https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.histogram.html)
 * [Profile lines](https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.linePlot.html)
 * [Roughness analysis](https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.math.params.html)
+* [Height-height correlation function](https://thomasgredig.github.io/nanoscopeAFM/reference/AFM.hhcf.html)
 
 
 Example to extract image roughness for a series of images:

@@ -1,5 +1,6 @@
 # nanoscopeAFM 2.0.5
 
+* Height-height correlation function integration
 * add vignette for Line Profile
 * fix x-y line profile directions
 * fix bin number in histogram

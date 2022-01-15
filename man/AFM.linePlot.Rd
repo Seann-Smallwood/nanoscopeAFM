@@ -24,3 +24,6 @@ AFM.lineProfile(d1, 0,0, 100,2500) -> d2
 AFM.linePlot(d2)
 plot(d2,addLines=TRUE)
 }
+\author{
+Thomas Gredig
+}

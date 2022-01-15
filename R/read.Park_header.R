@@ -445,9 +445,11 @@ loadBinaryAFMDatafromTIFF <- function(fname, dataStart, dataLen, dataType) {
   if ((dataLen %% 4) != 0) { warning("Data Length not 32-bit multiple.") }
 
   to.read = file(fname, 'rb')
-  q1 <- readBin(to.read, raw(), n=dataStart, endian = "little")
+  # print(paste("start at", dataStart,"for length:",dataLen,"n=",(dataLen/4)))
+  #q1 <- readBin(to.read, raw(), n=dataStart, endian = "little")
+  seek(to.read, where=dataStart)
   # since double is 64bits, use size = 4 to load 32bits
-  q <- readBin(to.read, double(), size=4, n=(dataLen/4), endian = "little")
+  q <- readBin(to.read, double(), size=4, n=(dataLen/4) , endian = "little")
   close(to.read)
   q
 }

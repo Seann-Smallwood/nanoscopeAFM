@@ -414,3 +414,28 @@ AFM.isImage <- function(obj) {
   ((obj@x.pixels > 1) & (obj@y.pixels>1))
 }
 
+
+
+
+#' Valid AFM file
+#'
+#' Checks that filename is an AFM data file either Asylum Research
+#' Igor Wavefile, Nanoscope Veeco file, Park AFM file, or Nanosurf file
+#'
+#' @param filename filename with full path
+#' @return \code{TRUE} if filename is a supported AFM image
+#' @author Thomas Gredig
+#' @examples
+#' AFM.isFileValid(AFM.getSampleImages())
+#' @export
+AFM.isFileValid <- function(filename) {
+  validFile = FALSE
+  if (file.exists(filename)) {
+    validFile =  grepl('\\.ibw$',filename, ignore.case = TRUE) |
+      grepl('\\.tiff$',filename, ignore.case = TRUE) |
+      grepl('\\.nid$',filename, ignore.case = TRUE) |
+      grepl('\\.\\d{3}$',filename, ignore.case = TRUE)
+  }
+  validFile
+}
+

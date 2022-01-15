@@ -56,8 +56,20 @@ test_that("Graphing ggplot2 AFM image", {
 
 
 
+
 test_that("test histogram for image and data", {
   expect_equal( sum(AFM.histogram(afmd, dataOnly=TRUE)$zDensity), 1)
   p = AFM.histogram(afmd)
   expect_equal(class(p$layers[[1]]$geom), c("GeomBar", "GeomRect", "Geom","ggproto","gg"))
 })
+
+
+
+test_that("valid AFM files", {
+  file.list = AFM.getSampleImages()
+  for(filename in file.list) {
+    expect_true(AFM.isFileValid(filename))
+  }
+  expect_true(!AFM.isFileValid("random-nonexistant-file.txt"))
+})
+

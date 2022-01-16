@@ -17,9 +17,12 @@
 #' @param obj AFMdata object
 #' @param no Channel number
 #' @param degRes resolution of angle, the higher the more, should be >100, 1000 is also good
+#' @param addFit if \code{TRUE} a fit is added to the data
 #' @param numIterations Number of iterations (must be > 1000), but 1e6 recommended
 #' @param dataOnly if \code{TRUE} only return data frame, otherwise returns a graph
 #' @param verbose output time if \code{TRUE}
+#'
+#' @importFrom ggplot2 ggplot geom_point geom_path scale_x_log10 scale_y_log10 theme_bw geom_label theme
 #'
 #' @return graph or data frame with g(r) and $num indicating number of computations used for r
 #'
@@ -32,8 +35,12 @@
 #'
 ##################################################
 #' @export
-AFM.hhcf <- function(obj, no=1, degRes = 100,
-                     numIterations=1000, dataOnly = FALSE, verbose=FALSE) {
+AFM.hhcf <- function(obj, no=1,
+                     degRes = 100,
+                     numIterations=1000,
+                     addFit = TRUE,
+                     dataOnly = FALSE,
+                     verbose=FALSE) {
   if (!(class(obj)=="AFMdata")) return(NULL)
   if (obj@x.conv != obj@y.conv) warning('AFM image is distorted in x- and y-direction; HHCF is not correct.')
   dimx = obj@x.pixels
@@ -73,10 +80,58 @@ AFM.hhcf <- function(obj, no=1, degRes = 100,
     num = lq
   )
   if (dataOnly) return(r)
-  ggplot(r, aes(r.nm, g)) +
-    geom_path(col='lightblue') +
+
+  if (addFit) {
+    # starting fit parameters
+    AFM.math.params(obj) -> m1
+    m1$Rq^2*2 -> ss
+    xi = r$r.nm[min(which(r$g>0.7*ss))]
+
+    # fit the data using
+    # 2*sigma^2 = ss, sigma = roughness
+    # xi = correlation length
+    # H = 2*Hurst parameter
+    fit <- NULL
+    try({
+      nls(data=r,
+          g ~ ss * (1 - exp(-(r.nm/xi)^H)),
+          start = list(ss = ss, xi = xi,
+                       H=2)) -> fit
+    })
+
+    # fit was successful
+    if (!is.null(fit)) {
+      fitRnm = seq(from=round(min(r$r.nm)*0.9), to=max(r$r.nm), by=1)
+      dFit = data.frame(
+        r.nm = fitRnm,
+        g = predict(fit, list(r.nm=fitRnm))
+      )
+      fitNames = c('sigma', 'xi','H')
+      fitNamesUnits = c('nm','nm','')
+      fitParams = coef(fit)
+      fitParams[1]=sqrt(fitParams[1]/2)
+      fitParams[3]=fitParams[3]/2
+      dFitLabels = data.frame(
+        r.nm = r$r.nm[1:3],
+        g = r$g[1:3],
+        label = paste(fitNames,'=',signif(fitParams,4),fitNamesUnits)
+      )
+    }
+  }
+
+  g = ggplot(r, aes(r.nm, g)) +
     geom_point(col='blue', size=2) +
     scale_x_log10() +
     scale_y_log10() + ylab('g(r)') + xlab('r (nm)') +
     theme_bw()
+  if (addFit) g = g +
+    geom_path(data=dFit, col='red') +
+    geom_label(data = dFitLabels,
+               aes(fill = 'white',label=label), colour = "white",
+               fontface = "bold", hjust=-0.1) +
+    theme(legend.position = 'none')
+
+  g
 }
+
+

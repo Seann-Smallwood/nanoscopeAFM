@@ -88,6 +88,7 @@ Journal: J of Phys: Conf. Ser. Vol 417, p. 012069 (2013).</p>
   no <span class="op">=</span> <span class="fl">1</span>,
   degRes <span class="op">=</span> <span class="fl">100</span>,
   numIterations <span class="op">=</span> <span class="fl">1000</span>,
+  addFit <span class="op">=</span> <span class="cn">TRUE</span>,
   dataOnly <span class="op">=</span> <span class="cn">FALSE</span>,
   verbose <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
@@ -103,6 +104,8 @@ Journal: J of Phys: Conf. Ser. Vol 417, p. 012069 (2013).</p>
 <dd><p>resolution of angle, the higher the more, should be &gt;100, 1000 is also good</p></dd>
 <dt>numIterations</dt>
 <dd><p>Number of iterations (must be &gt; 1000), but 1e6 recommended</p></dd>
+<dt>addFit</dt>
+<dd><p>if <code>TRUE</code> a fit is added to the data</p></dd>
 <dt>dataOnly</dt>
 <dd><p>if <code>TRUE</code> only return data frame, otherwise returns a graph</p></dd>
 <dt>verbose</dt>
@@ -125,12 +128,12 @@ Journal: J of Phys: Conf. Ser. Vol 417, p. 012069 (2013).</p>
 <span class="r-in"><span class="va">r</span> <span class="op">=</span> <span class="fu">AFM.hhcf</span><span class="op">(</span><span class="va">a</span>, dataOnly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        r.nm          g num</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  9.803922 0.08146104 997</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 19.607843 0.21333122 994</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 29.411765 0.35636534 990</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 39.215686 0.48334005 985</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 49.019608 0.62954283 979</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 58.823529 0.68238274 978</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  9.803922 0.08001228 997</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 19.607843 0.20671739 994</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 29.411765 0.34655896 987</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 39.215686 0.48726005 982</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 49.019608 0.56626268 977</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 58.823529 0.63148223 971</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

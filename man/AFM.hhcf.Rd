@@ -9,6 +9,7 @@ AFM.hhcf(
   no = 1,
   degRes = 100,
   numIterations = 1000,
+  addFit = TRUE,
   dataOnly = FALSE,
   verbose = FALSE
 )
@@ -21,6 +22,8 @@ AFM.hhcf(
 \item{degRes}{resolution of angle, the higher the more, should be >100, 1000 is also good}
 
 \item{numIterations}{Number of iterations (must be > 1000), but 1e6 recommended}
+
+\item{addFit}{if \code{TRUE} a fit is added to the data}
 
 \item{dataOnly}{if \code{TRUE} only return data frame, otherwise returns a graph}
 

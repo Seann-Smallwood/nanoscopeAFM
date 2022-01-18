@@ -35,6 +35,6 @@ AFM.flatten <- function(obj,no=1,verbose=FALSE) {
 
   if (verbose) print(paste("Plane fit:", solvX))
 
-  AFMcopy@data$z[[no]] =  x*solvX[1] + y*solvX[2] + solvX[3] - z
+  AFMcopy@data$z[[no]] =  z - (x*solvX[1] + y*solvX[2] + solvX[3])
   AFMcopy
 }

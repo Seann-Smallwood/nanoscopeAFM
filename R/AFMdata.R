@@ -39,7 +39,7 @@ AFMdata<-setClass("AFMdata",
                     function(object) {
                       errors <- character()
 
-                      if (!(object@instrument %in% c('Cypher','Park','NanoSurf','Veeco'))) {
+                      if (!(object@instrument %in% c('Cypher','Park','NanoSurf','Veeco','artificial'))) {
                         msg <- paste('Object has invalid instrument:',object@instrument)
                         errors <- c(errors,msg)
                       }

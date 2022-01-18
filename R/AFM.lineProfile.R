@@ -9,10 +9,11 @@
 #' @param y1 start y position in AFM units from bottom right
 #' @param x2 end x position in AFM units from bottom right
 #' @param y2 end y position in AFM units from bottom right
+#' @param verbose if \code{TRUE}, output additional information
 #' @author Thomas Gredig
 #' @return AFMdata object with line data
 #' @export
-AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
+AFM.lineProfile <- function(obj,x1,y1,x2,y2, verbose=FALSE) {
   AFMcopy <- obj
   AFMcopy@history <- paste(AFMcopy@history,
                            "AFM.lineProfile(",x1,",",y1,",",x2,",",y2,");")
@@ -29,13 +30,14 @@ AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
   y1.pixel = round(y1/range.y*width.y)
   x2.pixel = round(x2/range.x*width.x)
   y2.pixel = round(y2/range.y*width.y)
+  if (verbose) print(paste("Pixels: (",x1.pixel,",",y1.pixel,") - (",x2.pixel,",",y2.pixel,")"))
 
   Dx = abs(x2.pixel - x1.pixel)
   sx = sign(x2.pixel - x1.pixel)
   Dy = - abs(y2.pixel - y1.pixel)
   sy = sign(y2.pixel - y1.pixel)
   er = Dx + Dy
-  r = c(x1.pixel*width.x+y1.pixel)
+  r = c(x1.pixel + y1.pixel * width.x)
   q2=0
   r2 = c(q2)
   # Bresenham's Line Algorithm
@@ -53,11 +55,14 @@ AFM.lineProfile <- function(obj,x1,y1,x2,y2) {
       ly = AFMcopy@y.conv
     }
     # add data point
-    q1 = x1.pixel + y1.pixel * width.y
+    q1 = x1.pixel + y1.pixel * width.x
     q2 = q2+sqrt(lx^2 + ly^2)
     r=c(r, q1)
     r2 = c(r2, q2)
   }
+  if (verbose) print(paste("delta Y:",signif(AFMcopy@y.conv,4),
+                           "nm/px and delta X:",signif(AFMcopy@x.conv,4),"nm/px"))
+
   if (is.null(AFMcopy@data$line)) AFMcopy@data$line = list()
   AFMcopy@data$line = append(AFMcopy@data$line,list(r))
   if (is.null(AFMcopy@data$line.nm)) AFMcopy@data$line.nm = list()

@@ -4,7 +4,7 @@
 \alias{AFM.lineProfile}
 \title{Line Profile}
 \usage{
-AFM.lineProfile(obj, x1, y1, x2, y2)
+AFM.lineProfile(obj, x1, y1, x2, y2, verbose = FALSE)
 }
 \arguments{
 \item{obj}{AFMdata object}
@@ -16,6 +16,8 @@ AFM.lineProfile(obj, x1, y1, x2, y2)
 \item{x2}{end x position in AFM units from bottom right}
 
 \item{y2}{end y position in AFM units from bottom right}
+
+\item{verbose}{if \code{TRUE}, output additional information}
 }
 \value{
 AFMdata object with line data

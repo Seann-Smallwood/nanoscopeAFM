@@ -1,5 +1,6 @@
 # nanoscopeAFM 2.0.5
 
+* fix profile for images that are not square
 * Height-height correlation function integration
 * add vignette for Line Profile
 * fix x-y line profile directions

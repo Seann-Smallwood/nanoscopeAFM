@@ -54,6 +54,7 @@ get.Hsd <- function(z) {sd(z)}
 # computes the ratio of pin hole area (height lower than 3 sigma) to total area through pixel counting
 get.AR <- function(z) {
   count <- 0
+  Hsd <- get.Hsd(z)
   for (val in z) {
     if(val <= -3*Hsd)  count = count+1
   }

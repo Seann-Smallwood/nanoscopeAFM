@@ -9,9 +9,9 @@ NULL
 
 tagReader <- function(fname) {
   # check if file exists
-  if (!file.exists(fname)) stop(paste("file",fname,"not found!"))
+  if (!file.exists(fname)) stop(paste("File",fname,"not found!"))
 
-  # load entire file
+  # load TIFF file portion
   q = loadBinaryDatafromTIFF(fname)
 
   # check whether it is a TIFF file

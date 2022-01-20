@@ -15,7 +15,7 @@ test_that("Flattening", {
 
 test_that("Check artificial AFM image", {
   a = AFM.artificialImage(height=256, width=256, verbose=FALSE, imageWidth = 1000, imageHeight = 500)
-  expect_equal(summary(a)$size[1], "1000 x 500 nm")
+  expect_equal(summary(a)$size[1], "996 x 498 nm")
 })
 
 test_that("Check flattening is not inverting the image", {

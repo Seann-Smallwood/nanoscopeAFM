@@ -50,7 +50,7 @@ read.Park_file.v2 <- function(filename) {
 
   # check that the file can be displayed
   if (!tiff.isPaletteColorImage(tiffTags)) stop("Not a palette color image.")
-  if (!tiff.getValue(tiffTags,'BitsPerSample') ==  8) stop("Not an 3 x 8-bit image.")
+  if (!tiff.getValue(tiffTags,'BitsPerSample') == 8) stop("Not an 3 x 8-bit image.")
 
   # read data
   dataStart = tiffTags[which(tiffTags$tag==50434),]$value

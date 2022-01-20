@@ -1,3 +1,8 @@
+# nanoscopeAFM 2.0.6
+
+* add cantilever and resonance frequency to AFMinfo
+
+
 # nanoscopeAFM 2.0.5
 
 * add artificial image generator

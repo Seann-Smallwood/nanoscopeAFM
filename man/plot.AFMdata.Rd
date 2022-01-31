@@ -13,6 +13,7 @@
   addLines = FALSE,
   redBlue = FALSE,
   verbose = FALSE,
+  quiet = FALSE,
   ...
 )
 }
@@ -32,6 +33,8 @@
 \item{redBlue}{if \code{TRUE} output red / blue color scheme}
 
 \item{verbose}{if \code{TRUE} it outputs additional information.}
+
+\item{quiet}{if \code{TRUE} then no output at all}
 
 \item{...}{other arguments}
 }

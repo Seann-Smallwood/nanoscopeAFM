@@ -286,6 +286,7 @@ AFM.raster <- function(obj,no=1) {
 #' @param addLines if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example
 #' @param redBlue if \code{TRUE} output red / blue color scheme
 #' @param verbose if \code{TRUE} it outputs additional information.
+#' @param quiet if \code{TRUE} then no output at all
 #' @param ... other arguments
 #' @return ggplot graph
 #' @author Thomas Gredig
@@ -296,9 +297,9 @@ AFM.raster <- function(obj,no=1) {
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)
 #' @export
-plot.AFMdata <- function(x, no=1, mpt=NA, graphType=1, trimPeaks=0, addLines=FALSE, redBlue = FALSE, verbose=FALSE, ...) {
+plot.AFMdata <- function(x, no=1, mpt=NA, graphType=1, trimPeaks=0, addLines=FALSE, redBlue = FALSE, verbose=FALSE, quiet=FALSE, ...) {
   if (no>length(x@channel)) stop("imageNo out of bounds.")
-  cat("Graphing:",x@channel[no])
+  if (!quiet) cat("Graphing:",x@channel[no])
   if (verbose) print(paste("History:",x@history))
   d = AFM.raster(x,no)
   zLab = paste0(x@channel[no],' (',x@z.units[no],')')

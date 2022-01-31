@@ -1,4 +1,4 @@
-context("general AFM test")
+
 
 filename = AFM.getSampleImages(type='ibw')
 afmd = AFM.import(filename)
@@ -46,11 +46,11 @@ test_that("summary AFMinfo", {
 
 
 test_that("Graphing ggplot2 AFM image", {
-  p = plot(afmd)
+  p = plot(afmd, quiet = TRUE)
   expect_equal(class(p$layers[[1]]$geom), c("GeomRaster", "Geom","ggproto","gg"))
-  p = plot(afmd, graphType = 2)
+  p = plot(afmd, graphType = 2, quiet = TRUE)
   expect_equal(class(p$layers[[1]]$geom), c("GeomRaster", "Geom","ggproto","gg"))
-  p = plot(afmd, graphType = 3)
+  p = plot(afmd, graphType = 3, quiet = TRUE)
   expect_equal(class(p$layers[[1]]$geom), c("GeomRaster", "Geom","ggproto","gg"))
 })
 

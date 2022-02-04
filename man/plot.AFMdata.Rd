@@ -9,7 +9,7 @@
   no = 1,
   mpt = NA,
   graphType = 1,
-  trimPeaks = 0,
+  trimPeaks = 0.01,
   addLines = FALSE,
   redBlue = FALSE,
   verbose = FALSE,
@@ -42,7 +42,7 @@
 ggplot graph
 }
 \description{
-Graph of AFMdata object
+By default, trims 1 percent of the outliers in height data
 }
 \examples{
 d = AFM.import(AFM.getSampleImages(type='ibw')[1])

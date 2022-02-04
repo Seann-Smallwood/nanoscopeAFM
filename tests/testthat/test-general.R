@@ -32,6 +32,15 @@ test_that("line Profile", {
   expect_equal(nlevels(as.factor(q$type)), 2)
 })
 
+test_that("getLine for particular pixel", {
+  # choose a random line
+  selLine = floor(runif(1,min=1,max=afmd@y.pixels))
+  afmd2 = AFM.getLine(afmd, selLine)
+  q = AFM.linePlot(afmd2, dataOnly = TRUE)
+  expect_equal(nrow(q), afmd2@x.pixels)
+})
+
+
 test_that("print AFMdata", {
   expect_output(print(afmd), "Cypher AFM Image")
   expect_output(print(afmd), "HeightRetrace")

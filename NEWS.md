@@ -1,5 +1,7 @@
 # nanoscopeAFM 2.0.6
 
+* add function `AFM.getLine()` to pick one particular image line
+* make trimPeak=0.01 the default for displaying images
 * add cantilever and resonance frequency to AFMinfo
 
 

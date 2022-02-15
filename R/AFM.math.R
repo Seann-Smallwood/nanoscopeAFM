@@ -50,6 +50,11 @@ get.Ra <- function(z) { sum(abs(z-mean(z)))/length(z) }
 # computes the root mean square roughness Rq
 get.Rq <- function(z) { sqrt(sum((z-mean(z))^2)/length(z)) }
 # computes the standard deviation in height Hsd
+
+
+#' 
+#' @importFrom stats sd
+#' 
 get.Hsd <- function(z) {sd(z)}
 # computes the ratio of pin hole area (height lower than 3 sigma) to total area through pixel counting
 get.AR <- function(z) {

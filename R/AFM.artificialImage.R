@@ -4,17 +4,21 @@
 #' generates an artificially made AFM object, which is sometimes
 #' useful for testing algorithms or models
 #'
-#' @param obj AFMdata object
 #' @param width width in pixels
 #' @param height height in pixels
 #' @param minZ minimum z height
 #' @param maxZ maximum z height
 #' @param imageWidth width of image in nm
-#' @param imageHeigth height of image in nm
-#' @param verbose if \code{TRUE}, output additional information
+#' @param imageHeight height of image in nm
+#' @param type can be random gradient calibration
 #' @param addNoise if \code{TRUE}, add a bit of noise to the data
+#' @param verbose if \code{TRUE}, output additional information
+#' 
 #' @author Thomas Gredig
 #' @return AFMdata object
+#' 
+#' @importFrom stats runif
+#' 
 #' @examples
 #' a = AFM.artificialImage(type='calibration')
 #' plot(a)

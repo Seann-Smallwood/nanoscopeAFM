@@ -27,13 +27,13 @@ AFM.artificialImage(
 
 \item{imageWidth}{width of image in nm}
 
+\item{imageHeight}{height of image in nm}
+
+\item{type}{can be random gradient calibration}
+
 \item{addNoise}{if \code{TRUE}, add a bit of noise to the data}
 
 \item{verbose}{if \code{TRUE}, output additional information}
-
-\item{obj}{AFMdata object}
-
-\item{imageHeigth}{height of image in nm}
 }
 \value{
 AFMdata object

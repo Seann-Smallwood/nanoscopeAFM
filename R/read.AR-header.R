@@ -139,20 +139,6 @@ igor_date_origin<-as.numeric(ISOdate(1904,1,1,hour=0,tz=""))
 
 
 
-.ReadDataFolderStartRecord<-function(con,endian){
-  folderName=.readNullTermString(con,32)
-  #cat("Start of Data Folder",folderName,"\n")
-  folderName
-}
-.ReadDataFolderEndRecord<-function(con,endian){
-  #cat("End of Data Folder")
-}
-.ReadWaveRecord<-function(con,endian,Verbose=FALSE,...){
-  x=read.ibw(con,Verbose=Verbose,...)
-  #cat("Wave Record", attr(x,"WaveHeader")$WaveName,"\n")
-  x
-}
-
 .ReadPackedFile<-function(con, recordSize, encoding, Verbose){
 
   # discard first header part

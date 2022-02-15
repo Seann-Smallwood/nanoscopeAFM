@@ -5,7 +5,7 @@
 #' tbrough all lines for example
 #'
 #' @param obj AFMdata object
-#' @param yLine line number from 1 to max yPixel
+#' @param yPixel line number from 1 to max yPixel
 #' @param dataOnly if \code{TRUE}, returns data instead of AFMdata object
 #' @param verbose if \code{TRUE}, output additional information
 #' @author Thomas Gredig

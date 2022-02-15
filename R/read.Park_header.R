@@ -187,6 +187,7 @@ identifyTIFFtags <- function(tagID) {
 # converts the number to a readable string according to the
 # conventions https://www.adobe.io/content/dam/udp/en/open/standards/tiff/TIFF6.pdf
 # and https://www.loc.gov/preservation/digital/formats/content/tiff_tags.shtml
+#' @importFrom plyr mapvalues
 identifyTIFFtypes <- function(tagsType) {
   plyr::mapvalues(tagsType,
             from = 1:12,

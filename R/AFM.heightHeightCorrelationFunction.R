@@ -22,8 +22,9 @@
 #' @param dataOnly if \code{TRUE} only return data frame, otherwise returns a graph
 #' @param verbose output time if \code{TRUE}
 #'
-#' @importFrom ggplot2 ggplot geom_point geom_path scale_x_log10 scale_y_log10 theme_bw geom_label theme
-#'
+#' @importFrom ggplot2 ggplot aes geom_point geom_path scale_x_log10 scale_y_log10 theme_bw geom_label theme
+#' @importFrom stats runif nls predict coef
+#' 
 #' @return graph or data frame with g(r) and $num indicating number of computations used for r
 #'
 #' @examples
@@ -114,7 +115,7 @@ AFM.hhcf <- function(obj, no=1,
       dFitLabels = data.frame(
         r.nm = r$r.nm[1:3],
         g = r$g[1:3],
-        label = paste(fitNames,'=',signif(fitParams,4),fitNamesUnits)
+        myLabel = paste(fitNames,'=',signif(fitParams,4),fitNamesUnits)
       )
     }
   }
@@ -127,7 +128,8 @@ AFM.hhcf <- function(obj, no=1,
   if (addFit) g = g +
     geom_path(data=dFit, col='red') +
     geom_label(data = dFitLabels,
-               aes(fill = 'white',label=label), colour = "white",
+               aes(fill = 'white',label=myLabel), 
+               colour = "white",
                fontface = "bold", hjust=-0.1) +
     theme(legend.position = 'none')
 

@@ -14,10 +14,14 @@ License: GPL-3
 URL: https://thomasgredig.github.io/nanoscopeAFM/
 Imports:
     ggplot2,
+    hexSticker,
     methods,
     plyr,
     purrr,
-    tools
+    stats,
+    showtext,
+    tools,
+    utils
 Suggests: 
     cowplot,
     knitr,

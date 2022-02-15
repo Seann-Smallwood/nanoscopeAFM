@@ -9,11 +9,11 @@ AFM.getLine(obj, yPixel = 1, dataOnly = FALSE, verbose = FALSE)
 \arguments{
 \item{obj}{AFMdata object}
 
+\item{yPixel}{line number from 1 to max yPixel}
+
 \item{dataOnly}{if \code{TRUE}, returns data instead of AFMdata object}
 
 \item{verbose}{if \code{TRUE}, output additional information}
-
-\item{yLine}{line number from 1 to max yPixel}
 }
 \value{
 AFMdata object with line data or data frame with data

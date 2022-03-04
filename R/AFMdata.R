@@ -448,5 +448,5 @@ AFM.isFileValid <- function(filename) {
 }
 
 .onAttach <- function(libname, pkgname) {
-  packageStartupMessage(paste("Please cite", pkgname,',see https://doi.org/10.5281/zenodo.5770772'))
+  if (runif(1) > 0.7) packageStartupMessage(paste("Please cite", pkgname,',see https://doi.org/10.5281/zenodo.5770772'))
 }

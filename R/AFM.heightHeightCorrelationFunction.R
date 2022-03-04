@@ -19,12 +19,15 @@
 #' @param degRes resolution of angle, the higher the more, should be >100, 1000 is also good
 #' @param addFit if \code{TRUE} a fit is added to the data
 #' @param numIterations Number of iterations (must be > 1000), but 1e6 recommended
+#' @param r.percentage a number from 10 to 100 representing the distance to compute, since the image is
+#'    square, there are not as many points that are separate by the full lenght, 80 is a good value, if there
+#'    is no fit, the value can be reduced to 70 or 60.
 #' @param dataOnly if \code{TRUE} only return data frame, otherwise returns a graph
 #' @param verbose output time if \code{TRUE}
 #'
 #' @importFrom ggplot2 ggplot aes geom_point geom_path scale_x_log10 scale_y_log10 theme_bw geom_label theme
 #' @importFrom stats runif nls predict coef
-#' 
+#'
 #' @return graph or data frame with g(r) and $num indicating number of computations used for r
 #'
 #' @examples
@@ -41,6 +44,7 @@ AFM.hhcf <- function(obj, no=1,
                      numIterations=1000,
                      addFit = TRUE,
                      dataOnly = FALSE,
+                     r.percentage = 80,
                      verbose=FALSE) {
   if (!(class(obj)=="AFMdata")) return(NULL)
   if (obj@x.conv != obj@y.conv) warning('AFM image is distorted in x- and y-direction; HHCF is not correct.')
@@ -57,7 +61,7 @@ AFM.hhcf <- function(obj, no=1,
   lg = c()
   lq = c()
   t.start = as.numeric(Sys.time())
-  maxR = round(dimx*0.8)
+  maxR = round(dimx*r.percentage/100)
   for(r in 1:maxR) {
     # compute second point
     px2 = round(px1+r*cos(theta))
@@ -117,6 +121,9 @@ AFM.hhcf <- function(obj, no=1,
         g = r$g[1:3],
         myLabel = paste(fitNames,'=',signif(fitParams,4),fitNamesUnits)
       )
+    } else {
+      if (verbose) print("Cannot fit data => setting addFit=FALSE")
+      addFit = FALSE
     }
   }
 
@@ -125,10 +132,11 @@ AFM.hhcf <- function(obj, no=1,
     scale_x_log10() +
     scale_y_log10() + ylab('g(r)') + xlab('r (nm)') +
     theme_bw()
+
   if (addFit) g = g +
     geom_path(data=dFit, col='red') +
     geom_label(data = dFitLabels,
-               aes(fill = 'white',label=myLabel), 
+               aes(fill = 'white',label=myLabel),
                colour = "white",
                fontface = "bold", hjust=-0.1) +
     theme(legend.position = 'none')

@@ -277,7 +277,7 @@ AFM.raster <- function(obj,no=1) {
 }
 
 #' Graph of AFMdata object
-#' 
+#'
 #' By default, trims 1 percent of the outliers in height data
 #'
 #' @param x AFMdata object
@@ -285,16 +285,21 @@ AFM.raster <- function(obj,no=1) {
 #' @param mpt midpoint for coloring
 #' @param graphType 1 = graph with legend outside, 2 = square graph with line bar, 3 = plain graph
 #' @param trimPeaks value from 0 to 1, where 0=trim 0\% and 1=trim 100\% of data points, generally a value less than 0.01 is useful to elevate the contrast of the image
-#' @param addLines if \code{TRUE} lines from obj are added to graph, lines can be added with \code{AFM.lineProfile()} for example
+#' @param addLines if \code{TRUE} lines from obj are added to graph, lines can be added with \code{\link{AFM.lineProfile}} for example
 #' @param redBlue if \code{TRUE} output red / blue color scheme
 #' @param verbose if \code{TRUE} it outputs additional information.
 #' @param quiet if \code{TRUE} then no output at all
 #' @param ... other arguments
+#'
 #' @return ggplot graph
+#'
 #' @author Thomas Gredig
+#'
 #' @importFrom utils head tail
 #' @importFrom ggplot2 ggplot aes geom_raster geom_line theme_bw scale_fill_gradient2 xlab ylab labs scale_y_continuous scale_x_continuous coord_equal geom_text theme element_blank
 #' @importFrom ggplot2 scale_fill_viridis_c
+#' @seealso \code{\link{AFM.lineProfile}}
+#'
 #' @examples
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)

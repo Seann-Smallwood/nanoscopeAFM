@@ -1,3 +1,8 @@
+# nanoscopeAFM 2.0.7
+
+* functionality to crop images
+
+
 # nanoscopeAFM 2.0.6
 
 * add function `AFM.getLine()` to pick one particular image line

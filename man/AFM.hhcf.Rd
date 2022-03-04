@@ -12,6 +12,7 @@ AFM.hhcf(
   addFit = TRUE,
   dataOnly = FALSE,
   r.percentage = 80,
+  xi.percentage = 70,
   verbose = FALSE
 )
 }
@@ -31,6 +32,8 @@ AFM.hhcf(
 \item{r.percentage}{a number from 10 to 100 representing the distance to compute, since the image is
 square, there are not as many points that are separate by the full lenght, 80 is a good value, if there
 is no fit, the value can be reduced to 70 or 60.}
+
+\item{xi.percentage}{a number from 10 to 100 representing where correlation length could be found from maximum (used for fitting)}
 
 \item{verbose}{output time if \code{TRUE}}
 }

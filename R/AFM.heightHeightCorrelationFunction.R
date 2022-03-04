@@ -22,6 +22,7 @@
 #' @param r.percentage a number from 10 to 100 representing the distance to compute, since the image is
 #'    square, there are not as many points that are separate by the full lenght, 80 is a good value, if there
 #'    is no fit, the value can be reduced to 70 or 60.
+#' @param xi.percentage a number from 10 to 100 representing where correlation length could be found from maximum (used for fitting)
 #' @param dataOnly if \code{TRUE} only return data frame, otherwise returns a graph
 #' @param verbose output time if \code{TRUE}
 #'
@@ -45,6 +46,7 @@ AFM.hhcf <- function(obj, no=1,
                      addFit = TRUE,
                      dataOnly = FALSE,
                      r.percentage = 80,
+                     xi.percentage = 70,
                      verbose=FALSE) {
   if (!(class(obj)=="AFMdata")) return(NULL)
   if (obj@x.conv != obj@y.conv) warning('AFM image is distorted in x- and y-direction; HHCF is not correct.')
@@ -90,7 +92,7 @@ AFM.hhcf <- function(obj, no=1,
     # starting fit parameters
     AFM.math.params(obj) -> m1
     m1$Rq^2*2 -> ss
-    xi = r$r.nm[min(which(r$g>0.7*ss))]
+    xi = r$r.nm[min(which(r$g > (xi.percentage*ss)/100))]
 
     # fit the data using
     # 2*sigma^2 = ss, sigma = roughness
@@ -102,7 +104,7 @@ AFM.hhcf <- function(obj, no=1,
           g ~ ss * (1 - exp(-(r.nm/xi)^H)),
           start = list(ss = ss, xi = xi,
                        H=2)) -> fit
-    })
+    });
 
     # fit was successful
     if (!is.null(fit)) {

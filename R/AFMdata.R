@@ -304,7 +304,7 @@ AFM.raster <- function(obj,no=1) {
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)
 #' @export
-plot.AFMdata <- function(x, no=1, mpt=NA, graphType=1, trimPeaks=0.01, addLines=FALSE, redBlue = FALSE, verbose=FALSE, quiet=FALSE, fillOption='viridis'...) {
+plot.AFMdata <- function(x, no=1, mpt=NA, graphType=1, trimPeaks=0.01, fillOption='viridis', addLines=FALSE, redBlue = FALSE, verbose=FALSE, quiet=FALSE, ...) {
   if (no>length(x@channel)) stop("imageNo out of bounds.")
   if (!quiet) cat("Graphing:",x@channel[no])
   if (verbose) print(paste("History:",x@history))

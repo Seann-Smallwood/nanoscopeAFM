@@ -304,7 +304,7 @@ AFM.raster <- function(obj,no=1) {
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' plot(d, graphType=2)
 #' @export
-plot.AFMdata <- function(x, no=1, mpt=NA, graphType=1, trimPeaks=0.01, addLines=FALSE, redBlue = FALSE, verbose=FALSE, quiet=FALSE, ...) {
+plot.AFMdata <- function(x, no=1, mpt=NA, graphType=1, trimPeaks=0.01, addLines=FALSE, redBlue = FALSE, verbose=FALSE, quiet=FALSE, fillOption='viridis'...) {
   if (no>length(x@channel)) stop("imageNo out of bounds.")
   if (!quiet) cat("Graphing:",x@channel[no])
   if (verbose) print(paste("History:",x@history))
@@ -339,7 +339,8 @@ plot.AFMdata <- function(x, no=1, mpt=NA, graphType=1, trimPeaks=0.01, addLines=
 
   if (verbose) print(paste("z range: ",min(d$z)," to ",max(d$z)," midpoint",mpt))
   if (redBlue) sFill = scale_fill_gradient2(low='red', mid='white', high='blue', midpoint=mpt)
-  else sFill = scale_fill_viridis_c()
+  else sFill = scale_fill_viridis(option=fillOption)
+  
   if (graphType==1) {
     g1 = ggplot(d, aes(x/1000, y/1000, fill = z)) +
       geom_raster() +

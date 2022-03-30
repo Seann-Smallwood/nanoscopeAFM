@@ -24,7 +24,7 @@ Journal: J of Phys: Conf. Ser. Vol 417, p. 012069 (2013)."><meta property="og:im
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nanoscopeAFM</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.6</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">2.0.7</span>
       </span>
     </div>
 
@@ -90,6 +90,8 @@ Journal: J of Phys: Conf. Ser. Vol 417, p. 012069 (2013).</p>
   numIterations <span class="op">=</span> <span class="fl">1000</span>,
   addFit <span class="op">=</span> <span class="cn">TRUE</span>,
   dataOnly <span class="op">=</span> <span class="cn">FALSE</span>,
+  r.percentage <span class="op">=</span> <span class="fl">80</span>,
+  xi.percentage <span class="op">=</span> <span class="fl">70</span>,
   verbose <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -108,6 +110,12 @@ Journal: J of Phys: Conf. Ser. Vol 417, p. 012069 (2013).</p>
 <dd><p>if <code>TRUE</code> a fit is added to the data</p></dd>
 <dt>dataOnly</dt>
 <dd><p>if <code>TRUE</code> only return data frame, otherwise returns a graph</p></dd>
+<dt>r.percentage</dt>
+<dd><p>a number from 10 to 100 representing the distance to compute, since the image is
+square, there are not as many points that are separate by the full lenght, 80 is a good value, if there
+is no fit, the value can be reduced to 70 or 60.</p></dd>
+<dt>xi.percentage</dt>
+<dd><p>a number from 10 to 100 representing where correlation length could be found from maximum (used for fitting)</p></dd>
 <dt>verbose</dt>
 <dd><p>output time if <code>TRUE</code></p></dd>
 </dl></div>
@@ -128,12 +136,12 @@ Journal: J of Phys: Conf. Ser. Vol 417, p. 012069 (2013).</p>
 <span class="r-in"><span class="va">r</span> <span class="op">=</span> <span class="fu">AFM.hhcf</span><span class="op">(</span><span class="va">a</span>, dataOnly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        r.nm          g num</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  9.803922 0.08157939 996</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 19.607843 0.20567278 990</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 29.411765 0.34681745 981</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 39.215686 0.45733548 971</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 49.019608 0.55691612 968</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 58.823529 0.60002875 961</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  9.803922 0.08883411 998</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 19.607843 0.21919080 996</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 29.411765 0.36936237 993</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 39.215686 0.47572459 985</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 49.019608 0.56649596 977</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 58.823529 0.63815281 971</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

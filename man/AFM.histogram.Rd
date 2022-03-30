@@ -13,7 +13,7 @@ AFM.histogram(obj, no = 1, binNo = 200, dataOnly = FALSE)
 
 \item{binNo}{number of bins in the histogram}
 
-\item{dataOnly}{if \code{TRUE} a data frame with the histogram
+\item{dataOnly}{logical, if \code{TRUE} a data frame with the histogram
 data is returned}
 }
 \value{
@@ -26,6 +26,7 @@ Histogram of AFM image
 d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 head(AFM.histogram(d, dataOnly=TRUE),n=20)
 AFM.histogram(d)
+
 }
 \seealso{
 \code{\link{plot.AFMdata}}

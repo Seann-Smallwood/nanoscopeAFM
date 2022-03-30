@@ -2,16 +2,25 @@
 #'
 #' create a profile data line across an image (d), providing
 #'   the starting point (x1,y1) and end point (x2,y2). The start and end
-#'   points are provided in length units of the images (such as micrometers)
+#'   points are provided in units of nanometers
 #'
 #' @param obj AFMdata object
-#' @param x1 start x position in AFM units from bottom right
-#' @param y1 start y position in AFM units from bottom right
-#' @param x2 end x position in AFM units from bottom right
-#' @param y2 end y position in AFM units from bottom right
-#' @param verbose if \code{TRUE}, output additional information
+#' @param x1 start x position in  units of nm from bottom left
+#' @param y1 start y position in  units of nm from bottom left
+#' @param x2 end x position in  units of nm from bottom left
+#' @param y2 end y position in  units of nm from bottom left
+#' @param verbose logical, if \code{TRUE}, output additional information
+#' @returns AFMdata object with line data
+#' 
 #' @author Thomas Gredig
-#' @return AFMdata object with line data
+#' 
+#' @examples 
+#' afmd = AFM.artificialImage(width=128, height=128, type='calibration', verbose=FALSE)
+#' AFM.lineProfile(afmd, 100, 500, 900, 500) -> afmd2
+#' AFM.linePlot(afmd2)
+#' 
+#' @seealso \code{\link{AFM.getLine}}, \code{\link{AFM.linePlot}}
+#' 
 #' @export
 AFM.lineProfile <- function(obj,x1,y1,x2,y2, verbose=FALSE) {
   AFMcopy <- obj

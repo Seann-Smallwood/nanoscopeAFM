@@ -20,8 +20,8 @@ AFMdata object with line data or data frame with data
 }
 \description{
 create a profile data line for a particular
-line, given in pixels; easy way to reiterate
-tbrough all lines for example
+position given in pixels; easy way to reiterate
+through all lines in an image
 }
 \examples{
 filename = AFM.getSampleImages()[1]
@@ -29,6 +29,11 @@ afmd = AFM.import(filename)
 afmd2 = AFM.getLine(afmd, 50)
 plot(afmd2, addLines = TRUE)
 head(AFM.linePlot(afmd2, dataOnly = TRUE))
+
+
+}
+\seealso{
+\code{\link{AFM.lineProfile}}
 }
 \author{
 Thomas Gredig

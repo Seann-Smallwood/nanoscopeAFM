@@ -298,6 +298,7 @@ AFM.raster <- function(obj,no=1) {
 #' @importFrom utils head tail
 #' @importFrom ggplot2 ggplot aes geom_raster geom_line theme_bw scale_fill_gradient2 xlab ylab labs scale_y_continuous scale_x_continuous coord_equal geom_text theme element_blank
 #' @importFrom ggplot2 scale_fill_viridis_c
+#' @importFrom viridis scale_fill_viridis
 #' @seealso \code{\link{AFM.lineProfile}}
 #'
 #' @examples

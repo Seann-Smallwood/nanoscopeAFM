@@ -1,5 +1,6 @@
 # nanoscopeAFM 2.0.7
 
+* update documentation
 * functionality to crop images
 
 

@@ -10,6 +10,7 @@
   mpt = NA,
   graphType = 1,
   trimPeaks = 0.01,
+  fillOption = "viridis",
   addLines = FALSE,
   redBlue = FALSE,
   verbose = FALSE,

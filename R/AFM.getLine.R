@@ -1,21 +1,26 @@
 #' AFM line
 #'
 #' create a profile data line for a particular
-#' line, given in pixels; easy way to reiterate
-#' tbrough all lines for example
+#' position given in pixels; easy way to reiterate
+#' through all lines in an image
 #'
 #' @param obj AFMdata object
 #' @param yPixel line number from 1 to max yPixel
 #' @param dataOnly if \code{TRUE}, returns data instead of AFMdata object
 #' @param verbose if \code{TRUE}, output additional information
+#' @returns AFMdata object with line data or data frame with data
+#' 
 #' @author Thomas Gredig
-#' @return AFMdata object with line data or data frame with data
+#' @seealso \code{\link{AFM.lineProfile}}
+#' 
 #' @examples
 #' filename = AFM.getSampleImages()[1]
 #' afmd = AFM.import(filename)
 #' afmd2 = AFM.getLine(afmd, 50)
 #' plot(afmd2, addLines = TRUE)
 #' head(AFM.linePlot(afmd2, dataOnly = TRUE))
+#' 
+#' 
 #' @export
 AFM.getLine <- function(obj,
                         yPixel =1, 

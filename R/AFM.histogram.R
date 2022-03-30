@@ -3,7 +3,7 @@
 #' @param obj AFMdata object
 #' @param no channel number of the image
 #' @param binNo number of bins in the histogram
-#' @param dataOnly if \code{TRUE} a data frame with the histogram
+#' @param dataOnly logical, if \code{TRUE} a data frame with the histogram
 #' data is returned
 #' @return data frame or ggplot
 #'
@@ -13,11 +13,13 @@
 #' d = AFM.import(AFM.getSampleImages(type='ibw')[1])
 #' head(AFM.histogram(d, dataOnly=TRUE),n=20)
 #' AFM.histogram(d)
-#' @export
+#'
 #' @seealso \code{\link{plot.AFMdata}}
 #'
 #' @importFrom ggplot2 ggplot aes geom_histogram geom_density
 #' @importFrom graphics hist
+#' 
+#' @export
 AFM.histogram <- function(obj, no=1, binNo = 200, dataOnly=FALSE) {
   dr = AFM.raster(obj,no)
   if (dataOnly) {

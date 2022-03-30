@@ -21,7 +21,8 @@ Imports:
     stats,
     showtext,
     tools,
-    utils
+    utils,
+    viridis
 Suggests: 
     cowplot,
     knitr,

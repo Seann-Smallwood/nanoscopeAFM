@@ -1,7 +1,7 @@
 Type: Package
 Package: nanoscopeAFM
 Title: Load Atomic Force Microscopy Data Files
-Version: 2.0.7
+Version: 2.0.8
 Authors@R: 
     person("Thomas", "Gredig", , "thomas.gredig@csulb.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-5824-7626"))

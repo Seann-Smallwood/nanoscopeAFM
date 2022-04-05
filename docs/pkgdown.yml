@@ -1,13 +1,13 @@
-pandoc: 2.14.0.3
-pkgdown: 2.0.1
+pandoc: 2.16.2
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
+  AFM-Setpoint: AFM-Setpoint.html
   AFM-graphTypes: AFM-graphTypes.html
   AFM-imageSummary: AFM-imageSummary.html
   LineProfiles: LineProfiles.html
   advancedAFM-Graph: advancedAFM-Graph.html
-  afm-setpoint: afm-setpoint.html
-last_built: 2022-03-30T04:52Z
+last_built: 2022-04-05T21:44Z
 urls:
   reference: https://thomasgredig.github.io/nanoscopeAFM/reference
   article: https://thomasgredig.github.io/nanoscopeAFM/articles

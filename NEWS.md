@@ -1,3 +1,8 @@
+# nanoscopeAFM 2.0.9
+
+* Allow to extract different channels using `AFM.getLine`
+
+
 # nanoscopeAFM 2.0.8
 
 * to save space, AFMdata object can drop certain images using `AFM.selectChannel`

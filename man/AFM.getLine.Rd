@@ -4,12 +4,14 @@
 \alias{AFM.getLine}
 \title{AFM line}
 \usage{
-AFM.getLine(obj, yPixel = 1, dataOnly = FALSE, verbose = FALSE)
+AFM.getLine(obj, yPixel = 1, no = 1, dataOnly = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{obj}{AFMdata object}
 
 \item{yPixel}{line number from 1 to max yPixel}
+
+\item{no}{channel number}
 
 \item{dataOnly}{if \code{TRUE}, returns data instead of AFMdata object}
 
